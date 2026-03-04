@@ -1,0 +1,21 @@
+{
+  "name": "salessidekick",
+  "owner": {
+    "name": "Pipeline Rebel (Latif Horst)"
+  },
+  "metadata": {
+    "description": "Self-personalizing AI sales operating system for Claude"
+  },
+  "plugins": [
+    {
+      "name": "salessidekick",
+      "source": ".",
+      "version": "2.0.0",
+      "description": "AI Chief of Staff for enterprise sales. 22 commands, 11 skills, 6 Notion databases. Run /salessidekick:setup after installing.",
+      "author": {
+        "name": "Pipeline Rebel (Latif Horst)"
+      },
+      "category": "productivity"
+    }
+  ]
+}

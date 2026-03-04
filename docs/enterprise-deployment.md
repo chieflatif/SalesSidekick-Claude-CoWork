@@ -14,7 +14,9 @@ SalesSidekick is designed for individual AE use, but it deploys cleanly across t
 
 ## Step 1: Admin Preparation
 
-### 1.1 Clone the Repository
+### 1.1 Get the Plugin Files
+
+Download the `.zip` from the [releases page](https://github.com/chieflatif/SalesSidekick-Claude-CoWork/releases) and unzip it, or clone the repository:
 
 ```bash
 git clone https://github.com/chieflatif/SalesSidekick-Claude-CoWork.git
@@ -63,15 +65,22 @@ Leave **brand-voice** and **profile** empty — these must be individual per AE.
 - Distribute the API key separately (not in the plugin files)
 - Each AE still gets their own databases within the shared workspace
 
-### 1.5 Publish to Private Marketplace
+### 1.5 Package and Publish
 
-Upload the configured plugin folder to your organization's Claude Cowork private marketplace:
+**Package as ZIP:**
 
-1. Go to Admin Console > Plugin Marketplace
-2. Click "Publish Plugin"
-3. Upload the `SalesSidekick-Claude-CoWork` folder
+```bash
+cd SalesSidekick-Claude-CoWork
+zip -r SalesSidekick.zip . -x ".git/*" ".gitignore"
+```
+
+**Upload to organization marketplace:**
+
+1. Open Claude Desktop > **Organization settings** > **Plugins**
+2. Click **Add plugins** > **Upload a file**
+3. Upload the `SalesSidekick.zip` file
 4. Set visibility to your sales team or organization
-5. Add installation notes (e.g., "Run /setup after installing — takes ~45 minutes")
+5. Add installation notes (e.g., "Run /salessidekick:setup after installing — takes ~45 minutes")
 
 ---
 
@@ -83,14 +92,15 @@ Send this to each AE:
 
 **Getting Started with SalesSidekick**
 
-1. Install SalesSidekick from [your marketplace / shared folder]
+1. Install SalesSidekick from your organization's plugin marketplace in Claude Desktop
 2. Create a Notion integration at [notion.so/my-integrations](https://www.notion.so/my-integrations):
    - Name it "SalesSidekick"
    - Select your workspace
    - Copy the API key (starts with `ntn_`)
-3. Run `/setup` in Claude
-4. The setup wizard will guide you through 7 phases (~45 minutes, but some company info may be pre-filled)
-5. After setup, try `/today` for your first morning briefing
+3. Replace `{{NOTION_API_KEY}}` in the plugin's `.mcp.json` with your key
+4. Run `/salessidekick:setup` in a Cowork conversation
+5. The setup wizard will guide you through 7 phases (~45 minutes, but some company info may be pre-filled)
+6. After setup, try `/salessidekick:today` for your first morning briefing
 
 ---
 
@@ -127,9 +137,9 @@ This is intentional. SalesSidekick is an AE productivity tool, not a management 
 
 When a new version is available:
 
-1. Admin pulls the latest version from GitHub
+1. Admin downloads the latest version from GitHub
 2. Re-applies any pre-configured settings (company name, competitors, etc.)
-3. Publishes the updated version to the private marketplace
+3. Re-packages as `.zip` and uploads to the organization marketplace
 4. AEs update through their normal plugin management flow
 
 **What updates preserve:**
