@@ -1,6 +1,6 @@
-# SalesSidekick — Quick Start (5 Minutes)
+# SalesSidekick — Quick Start
 
-You've installed SalesSidekick. Here's how to get value in 5 minutes.
+You've installed SalesSidekick. Here's how to get started.
 
 ---
 

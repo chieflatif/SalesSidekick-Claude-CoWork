@@ -1,6 +1,9 @@
 ---
+name: deal-strategy
+description: Strategic frameworks including the Five-Lens Prism, Three Paths, and 5-Component POV Model for deal analysis
 tier: 1 (universal)
 auto-fire: /strategy, /pov, /battle
+user-invocable: false
 ---
 
 # Deal Strategy — Strategic Frameworks Skill

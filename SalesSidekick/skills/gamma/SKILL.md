@@ -1,6 +1,9 @@
 ---
+name: gamma
+description: Alternative presentation generation path via Gamma MCP with prompt templates and decision tree for Gamma vs PPTX
 tier: 1 (universal)
 auto-fire: /deck (gamma path)
+user-invocable: false
 ---
 
 # Gamma — Alternative Presentation Path Skill

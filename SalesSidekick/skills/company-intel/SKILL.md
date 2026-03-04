@@ -1,6 +1,9 @@
 ---
+name: company-intel
+description: Company knowledge base with product portfolio, competitive positioning, case studies, and key metrics
 tier: 3 (regenerated)
 auto-fire: /prep, /strategy, /outreach, /research, /deck, /pov
+user-invocable: false
 ---
 
 # Company Intel — Product & Competitive Positioning Skill

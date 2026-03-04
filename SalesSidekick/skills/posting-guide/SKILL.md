@@ -1,6 +1,9 @@
 ---
+name: posting-guide
+description: LinkedIn content framework with 3-Type post structure, hook formulas, cadence goals, and 6-point pre-publish checklist
 tier: 2 (template)
 auto-fire: /draft-post
+user-invocable: false
 ---
 
 # Posting Guide — LinkedIn Content Framework Skill

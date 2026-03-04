@@ -24,17 +24,17 @@ git clone https://github.com/chieflatif/SalesSidekick-Claude-CoWork.git
 
 Open `CLAUDE.md` and pre-fill company-wide settings. This saves each AE from entering the same information during `/setup`:
 
-**Section 3 (Identity) — shared fields:**
+**Section 1 (Identity) — shared fields:**
 - `{{COMPANY}}` — Your company name
 - `{{COMPANY_URL}}` — Company website
 - `{{PRODUCT_DESCRIPTION}}` — What you sell
 - `{{PRIMARY_PRODUCT}}` — Main product name
 - `{{SECONDARY_PRODUCTS}}` — Additional products
 
-**Section 3 — competition (if standardized across team):**
+**Section 1 — competition (if standardized across team):**
 - `{{TOP_COMPETITOR_1}}`, `{{TOP_COMPETITOR_2}}`, `{{TOP_COMPETITOR_3}}`
 
-**Section 3 — sales process:**
+**Section 13 (Personalization Variables) — sales process:**
 - `{{CRM_SYSTEM}}` — Salesforce, HubSpot, etc.
 - `{{DEAL_STAGES}}` — Your standard stage names
 - `{{FISCAL_YEAR_START}}` — Month fiscal year begins

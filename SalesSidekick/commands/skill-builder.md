@@ -1,5 +1,6 @@
 ---
 description: Custom command creation — 5-phase scaffold with Commandment validation and audit
+argument-hint: "[description of command to create]"
 ---
 
 # /skill-builder — Custom Command Creation

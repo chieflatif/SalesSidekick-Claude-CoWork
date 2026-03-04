@@ -102,9 +102,9 @@ Commands that use web search: `/research` (primary), `/add-company` (supplementa
 
 Only Notion uses a custom MCP server configuration (defined in `.mcp.json`). Other connectors (Gmail, Calendar, Drive, Gamma) are managed through the Claude Cowork platform UI and do not require `.mcp.json` entries.
 
-The `.mcp.json` file contains `{{NOTION_API_KEY}}` as a placeholder. During `/setup`, the Notion API key is configured through the MCP server's environment variables. **The API key is never written into CLAUDE.md or any other markdown file** — it lives only in the MCP configuration layer.
+The `.mcp.json` file contains `{{NOTION_API_KEY}}` as a placeholder. **You must replace this placeholder with your actual Notion API key before running `/setup`.** Open `.mcp.json` in a text editor, find `{{NOTION_API_KEY}}`, and replace it with your integration secret (starts with `ntn_`). The API key is never written into CLAUDE.md or any other markdown file — it lives only in the MCP configuration layer.
 
-For Claude Code CLI users: configure the Notion API key in your environment variables or by updating `.mcp.json` directly. If you update `.mcp.json` with your real key, do not commit it to version control.
+If you update `.mcp.json` with your real key, do not commit it to version control.
 
 ---
 

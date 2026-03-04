@@ -1,6 +1,9 @@
 ---
+name: brand-voice
+description: Defines the AE's personal communication voice, email formatting, vocabulary substitutions, and the 7-point voice check
 tier: 3 (regenerated)
 auto-fire: Any communication output — /email, /outreach, /draft-post, /closeout (follow-up email)
+user-invocable: false
 ---
 
 # Brand Voice — Communication Style Skill
