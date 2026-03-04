@@ -1,5 +1,6 @@
 ---
 description: LinkedIn post — 3-Type Framework, brand voice, 6-point pre-publish checklist
+argument-hint: "[optional: topic or post type]"
 ---
 
 # /draft-post — LinkedIn Post

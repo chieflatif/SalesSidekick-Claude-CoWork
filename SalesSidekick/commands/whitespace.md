@@ -1,5 +1,6 @@
 ---
 description: Territory expansion analysis — product gaps, upsell opportunities, underserved segments
+argument-hint: "(no arguments)"
 ---
 
 # /whitespace — Territory Whitespace Analysis

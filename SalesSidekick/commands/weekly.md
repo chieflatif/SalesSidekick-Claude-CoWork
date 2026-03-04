@@ -1,5 +1,6 @@
 ---
 description: Weekly pipeline summary — deal movement, MEDDPICC changes, manager 1:1 format
+argument-hint: "(no arguments)"
 ---
 
 # /weekly — Weekly Pipeline Summary
