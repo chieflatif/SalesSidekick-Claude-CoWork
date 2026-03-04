@@ -482,9 +482,9 @@ Skills auto-fire based on relevance. When a command or topic triggers a skill, C
 |-------|-----------|------|-------------------|
 | **Profile** | skills/profile/ | 3 (regenerated) | Fires on nearly every session. AE identity, territory context, qualification gates, operating rhythm. |
 | **Brand Voice** | skills/brand-voice/ | 3 (regenerated) | Fires on any communication output. Voice rules, email formatting, vocabulary substitutions, banned phrases. |
-| **Company Intel** | skills/company-intel/ | 3 (regenerated) | Fires on /prep, /strategy, /outreach, /research. Company overview, product portfolio, competitive positioning, case studies. |
+| **Company Intel** | skills/company-intel/ | 3 (regenerated) | Fires on /prep, /strategy, /outreach, /research, /deck, /pov. Company overview, product portfolio, competitive positioning, case studies. |
 | **Battlecards** | skills/battlecards/ | 3 (regenerated) | Fires on /battle, /strategy (competitive lens). Per-competitor displacement playbooks with talk tracks. |
-| **MEDDPICC** | skills/meddpicc/ | 1 (universal) | Fires on /closeout, /strategy, /prep, /pipeline. 8-element scoring rubric with R/Y/G definitions. |
+| **MEDDPICC** | skills/meddpicc/ | 1 (universal) | Fires on /closeout, /strategy, /prep, /pipeline, /add-deal. 8-element scoring rubric with R/Y/G definitions. |
 | **Deal Strategy** | skills/deal-strategy/ | 1 (universal) | Fires on /strategy, /pov, /battle. Five-Lens Prism, Three Paths, 5-Component POV Model. |
 | **Call Processing** | skills/call-processing/ | 1 (universal) | Fires on /closeout. 6-Output Framework, coaching dimensions, risk signal categories. |
 | **Notion** | skills/notion/ | 1 (universal) | Fires on any database read/write. 6 database schemas (70 fields), read/write patterns, account resolution logic. |
