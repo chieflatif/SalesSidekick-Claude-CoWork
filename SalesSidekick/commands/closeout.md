@@ -32,6 +32,10 @@ Alias: `/call`
 
 ## Execution Steps
 
+### First-Use Calibration (runs once, first time /closeout is used)
+0. If this is the first time the user runs /closeout, ask: "What call elements matter most to you? For example: MEDDPICC scoring, coaching feedback, follow-up email, risk signals?" Use the response to weight the 6-Output Framework priority in the call-processing skill. This runs once and is remembered for all future /closeout calls.
+
+### Standard Execution
 1. If transcript not provided and Drive connected, check for recent recordings. Otherwise ask user to paste transcript.
 2. Identify the company and match to Notion Companies record. If no match, suggest `/add-company` first.
 3. Identify participants and match to Notion Contacts.

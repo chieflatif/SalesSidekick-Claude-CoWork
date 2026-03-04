@@ -31,6 +31,10 @@ Generates a tailored prospecting email for cold or warm outreach. Reads account 
 
 ## Execution Steps
 
+### First-Use Calibration (runs once, first time /outreach is used)
+0. If this is the first time the user runs /outreach, ask: "What is your typical email tone? Paste a sample email if you have one." Use the response to calibrate email voice in the brand-voice skill. This runs once and is remembered for all future /outreach calls.
+
+### Standard Execution
 1. Load company record from Notion (if exists)
 2. Check for recent /research brief in company Notes — if none exists, suggest: "No research brief found. Want me to run `/research [Company]` first for a stronger outreach?"
 3. Identify the best outreach angle:

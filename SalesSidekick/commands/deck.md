@@ -39,6 +39,10 @@ Examples:
 
 ## Execution Steps
 
+### First-Use Calibration (runs once, first time /deck is used)
+0. If this is the first time the user runs /deck, ask: "How do you prefer presentations? Data-heavy, narrative, or visual?" Use the response to set deck template preference in the profile skill. This runs once and is remembered for all future /deck calls.
+
+### Standard Execution
 1. Load company and deal context from Notion
 2. Determine the template — auto-select based on deal stage or use user preference:
 

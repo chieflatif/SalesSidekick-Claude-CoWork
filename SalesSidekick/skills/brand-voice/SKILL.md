@@ -128,3 +128,12 @@ LinkedIn voice differs from email voice:
 - Voice rules are built from actual writing samples the AE provides during /setup
 - Vocabulary substitutions list grows over time as the AE identifies more words they don't use
 - The 7-point voice check is structurally universal but the specific checks reference personalized content
+
+### First-Use Calibration Storage (/outreach)
+
+On the first run of `/outreach`, the user is asked for their typical email tone and optionally provides a sample email. The calibration response is stored here as supplemental voice data:
+
+- **Outreach tone notes:** [Populated on first /outreach run — natural email tone observations, sample email analysis]
+- **Outreach-specific adjustments:** [Any voice rules specific to prospecting emails vs. internal/existing-relationship emails]
+
+This supplements the /setup voice profile. If /outreach runs before /setup, calibration data is stored here and merged into the full voice profile when /setup completes.

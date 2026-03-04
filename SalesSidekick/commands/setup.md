@@ -39,7 +39,7 @@ Run this once. After setup, every command knows who you are, what you sell, who 
 1. Greet the user and explain the setup process (7 phases, ~45 minutes total)
 2. Ask Layer 1 questions (items 1-9 above) conversationally — not as a form
 3. Write answers to CLAUDE.md Section 1 (identity), Section 9 (operating rhythm), Section 10 (system config)
-4. Populate all Tier 2 template variables: {{AE_NAME}}, {{AE_TITLE}}, {{COMPANY}}, {{COMPANY_URL}}, {{PRODUCT_DESCRIPTION}}, {{TERRITORY_SIZE}}, {{TERRITORY_TYPE}}, {{ICP_INDUSTRY}}, {{ICP_SIZE}}, {{ICP_USE_CASE}}, {{CRM_SYSTEM}}, {{QUOTA_AMOUNT}}, {{FISCAL_YEAR_START}}, {{AVERAGE_DEAL_SIZE}}, {{SALES_CYCLE_LENGTH}}, {{MANAGER_NAME}}, {{TEAM_NAME}}, {{REGION}}, {{PRIMARY_PRODUCT}}, {{SECONDARY_PRODUCTS}}
+4. Populate all Tier 2 template variables: {{AE_NAME}}, {{AE_TITLE}}, {{COMPANY}}, {{COMPANY_URL}}, {{PRODUCT_DESCRIPTION}}, {{TERRITORY_SIZE}}, {{TERRITORY_TYPE}}, {{ICP_INDUSTRY}}, {{ICP_SIZE}}, {{ICP_USE_CASE}}, {{CRM_SYSTEM}}, {{QUOTA_AMOUNT}}, {{FISCAL_YEAR_START}}, {{AVERAGE_DEAL_SIZE}}, {{SALES_CYCLE_LENGTH}}, {{MANAGER_NAME}}, {{TEAM_NAME}}, {{REGION}}, {{PRIMARY_PRODUCT}}, {{SECONDARY_PRODUCTS}}, {{DEAL_STAGES}}
 
 ### Phase 2: Company Intelligence (~10-15 min, AI-assisted)
 5. Using the company URL and product description, research the company via web search
@@ -59,30 +59,32 @@ Run this once. After setup, every command knows who you are, what you sell, who 
 15. Optionally ask user to paste 2-3 sample emails for voice extraction
 16. Generate `skills/brand-voice/SKILL.md` with: vocabulary rules, email formatting preferences, banned phrases, 7-point voice check
 17. Populate {{COMMUNICATION_STYLE}}, {{EMAIL_SIGN_OFF}}
+18. Ask about LinkedIn posting goals: topics they post about, target audience
+19. Populate {{LINKEDIN_TOPICS}}, {{LINKEDIN_AUDIENCE}}
 
 ### Phase 5: Presentation Brand (~5 min)
-18. Ask user for a screenshot of existing presentation or marketing material, OR company website URL
-19. Extract brand tokens: primary colors, font families, layout patterns
-20. Generate `brand-tokens.json` with hex codes, font specs, logo placement rules
-21. Generate one sample slide for user verification
-22. Adjust tokens based on feedback
+20. Ask user for a screenshot of existing presentation or marketing material, OR company website URL
+21. Extract brand tokens: primary colors, font families, layout patterns
+22. Generate `brand-tokens.json` with hex codes, font specs, logo placement rules
+23. Generate one sample slide for user verification
+24. Adjust tokens based on feedback
 
 ### Phase 6: Connector Setup (~5-10 min)
-23. Create 6 Notion databases with exact schemas (Companies 12 fields, Contacts 9, Deals 22, Tasks 9, Call Notes 10, LinkedIn Posts 8)
-24. Share databases with the Notion integration
-25. Store all 6 database IDs in CLAUDE.md Section 10
-26. Auto-detect available connectors (Gmail, Calendar, Drive, Gamma)
-27. For each detected connector, verify access and record status
-28. Set connector status variables: {{NOTION_CONNECTED}}, {{GMAIL_CONNECTED}}, {{CALENDAR_CONNECTED}}, {{DRIVE_CONNECTED}}, {{GAMMA_CONNECTED}}
-29. Confirm graceful degradation rules for any missing connectors
+25. Create 6 Notion databases with exact schemas (Companies 12 fields, Contacts 9, Deals 22, Tasks 9, Call Notes 10, LinkedIn Posts 8)
+26. Share databases with the Notion integration
+27. Store all 6 database IDs in CLAUDE.md Section 10
+28. Auto-detect available connectors (Gmail, Calendar, Drive, Gamma)
+29. For each detected connector, verify access and record status
+30. Set connector status variables: {{NOTION_CONNECTED}}, {{GMAIL_CONNECTED}}, {{CALENDAR_CONNECTED}}, {{DRIVE_CONNECTED}}, {{GAMMA_CONNECTED}}
+31. Confirm graceful degradation rules for any missing connectors
 
 ### Phase 7: Verification + Mandatory Audit (~5 min)
-30. Run smoke test: create a test company record, write and read back, then delete
-31. Regenerate `skills/profile/SKILL.md` with full AE identity and context
-32. Run mandatory `/audit` on the entire configuration
-33. Fix any issues found during audit
-34. Produce "System Ready" confirmation summary showing: identity configured, databases created, connectors active, skills regenerated, all commands available
-35. Set {{SETUP_COMPLETE}} to true
+32. Run smoke test: create a test company record, write and read back, then delete
+33. Regenerate `skills/profile/SKILL.md` with full AE identity and context
+34. Run mandatory `/audit` on the entire configuration
+35. Fix any issues found during audit
+36. Produce "System Ready" confirmation summary showing: identity configured, databases created, connectors active, skills regenerated, all commands available
+37. Set {{SETUP_COMPLETE}} to true
 
 ## Output Format
 

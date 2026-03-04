@@ -32,6 +32,10 @@ This is the thinking command — when a deal is complex, stuck, or at a crossroa
 
 ## Execution Steps
 
+### First-Use Calibration (runs once, first time /strategy is used)
+0. If this is the first time the user runs /strategy, ask: "Do you prefer aggressive or conservative deal strategy? When deals are stuck, do you tend to push or pull back?" Use the response to calibrate Three Paths threshold in the deal-strategy skill. This runs once and is remembered for all future /strategy calls.
+
+### Standard Execution
 1. Load full account and deal context from Notion
 2. Apply the **Five-Lens Prism** — analyze the deal through each lens:
 
