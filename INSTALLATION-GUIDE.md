@@ -35,7 +35,9 @@ Or download the ZIP from the [releases page](https://github.com/chieflatif/Sales
 3. Name it "SalesSidekick"
 4. Select your workspace
 5. Copy the Internal Integration Secret (starts with `ntn_`)
-6. Update the `.mcp.json` file with your Notion API key (replace `{{NOTION_API_KEY}}`)
+6. Open the `.mcp.json` file in any text editor (it may be hidden — enable "show hidden files" in your file browser)
+7. Find `{{NOTION_API_KEY}}` and replace it with your actual key, keeping the surrounding quotes intact. The line should look like: `"Bearer ntn_your_actual_key_here"`
+8. Save the file
 
 **Step 4: Run /setup**
 
@@ -60,8 +62,7 @@ claude plugin install chieflatif/SalesSidekick-Claude-CoWork
 
 Then configure Notion:
 1. Create a Notion integration (see Method 1, Step 3)
-2. Set the API key in your environment: `export NOTION_API_KEY=ntn_your_key_here`
-3. Or update `.mcp.json` directly (do NOT commit your real key to version control)
+2. Open `.mcp.json` and replace `{{NOTION_API_KEY}}` with your actual key (do NOT commit your real key to version control)
 
 Run `/setup` to personalize.
 

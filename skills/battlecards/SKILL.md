@@ -1,6 +1,9 @@
 ---
+name: battlecards
+description: Detailed competitive displacement playbooks with talk tracks, proof points, trap questions, and landmine responses
 tier: 3 (regenerated)
 auto-fire: /battle, /strategy (competitive dynamics lens)
+user-invocable: false
 ---
 
 # Battlecards — Competitive Displacement Playbooks Skill

@@ -1,6 +1,9 @@
 ---
+name: notion
+description: Central reference for all Notion database schemas, read/write patterns, account resolution logic, and write failure handling
 tier: 1 (universal)
 auto-fire: Any database read/write operation
+user-invocable: false
 ---
 
 # Notion — Database Operations Skill

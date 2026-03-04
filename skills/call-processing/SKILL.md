@@ -1,6 +1,9 @@
 ---
+name: call-processing
+description: 6-Output Framework for post-call processing including MEDDPICC scoring, task extraction, coaching, and risk signals
 tier: 1 (universal)
 auto-fire: /closeout
+user-invocable: false
 ---
 
 # Call Processing — 6-Output Framework Skill

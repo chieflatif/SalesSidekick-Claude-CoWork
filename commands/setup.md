@@ -17,6 +17,7 @@ Run this once. After setup, every command knows who you are, what you sell, who 
 - After changing companies, products, or territory
 - To add or update connectors
 - To regenerate competitive battlecards with new competitors
+- To resume if a previous `/setup` was interrupted (re-running is safe — it detects which phases are already complete by checking existing variables and databases, and offers to resume from the incomplete phase)
 
 ## Inputs
 
@@ -65,7 +66,7 @@ Run this once. After setup, every command knows who you are, what you sell, who 
 ### Phase 5: Presentation Brand (~5 min)
 20. Ask user for a screenshot of existing presentation or marketing material, OR company website URL
 21. Extract brand tokens: primary colors, font families, layout patterns
-22. Generate `brand-tokens.json` with hex codes, font specs, logo placement rules
+22. Store brand tokens in `skills/pptx/SKILL.md` Brand Configuration section (hex codes, font specs, logo placement rules)
 23. Generate one sample slide for user verification
 24. Adjust tokens based on feedback
 

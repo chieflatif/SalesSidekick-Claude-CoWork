@@ -40,7 +40,7 @@ Not another AI template collection. Not a prompt library. A fully operational sy
 5. Try /closeout after your next call
 ```
 
-See [QUICK-START.md](QUICK-START.md) for a 5-minute onboarding guide.
+See [QUICK-START.md](QUICK-START.md) for the onboarding guide.
 
 ---
 

@@ -1,6 +1,9 @@
 ---
+name: meddpicc
+description: 8-element MEDDPICC qualification scoring rubric with Red/Yellow/Green definitions and discovery questions
 tier: 1 (universal)
 auto-fire: /closeout, /strategy, /prep, /pipeline, /add-deal
+user-invocable: false
 ---
 
 # MEDDPICC — Qualification Scoring Skill

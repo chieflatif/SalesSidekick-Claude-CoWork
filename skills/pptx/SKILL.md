@@ -1,6 +1,9 @@
 ---
+name: pptx
+description: PptxGenJS pipeline for generating native .pptx presentations with brand tokens, 5 deck templates, and visual QA
 tier: 1 (universal)
 auto-fire: /deck (pptx path)
+user-invocable: false
 ---
 
 # PPTX — Presentation Generation Skill

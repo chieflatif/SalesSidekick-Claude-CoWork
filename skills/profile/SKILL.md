@@ -1,6 +1,9 @@
 ---
+name: profile
+description: AE professional identity and context used for personalized output across all commands
 tier: 3 (regenerated)
 auto-fire: Nearly every session — AE identity, territory context, qualification gates
+user-invocable: false
 ---
 
 # Profile — AE Identity Skill
