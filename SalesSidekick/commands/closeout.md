@@ -61,25 +61,25 @@ Alias: `/call`
     - Objection Handling: Were objections addressed with evidence and empathy?
     - Rapport Building: Was the conversation natural and trust-building?
     - Next Steps: Were concrete next steps established with dates?
-    - Talk Ratio: Did the AE listen more than talk? (Target: 30-40% AE talk time)
+    - Talk Ratio: Did the AE listen more than talk? (Exceptional: AE <40%, Solid: ~50/50, Needs Work: AE >70%)
 12. For each dimension, provide specific examples from the transcript
 
 ### Output 4: Follow-Up Email
-13. Draft a follow-up email in 3 tone options:
-    - **Direct:** Straight to business, action-focused
-    - **Warm:** Relationship-forward, personal touch
-    - **Urgent:** Time-sensitive, creates momentum
+13. Draft a follow-up email in 3 tone options per call-processing skill:
+    - **Professional:** Formal, appropriate for economic buyers
+    - **Warm:** Friendly, appropriate for champions
+    - **Concise:** Minimal, appropriate for technical evaluators
 14. Email must be under 200 words, use brand voice, include one clear ask
 15. If Gmail connected, offer to send. Otherwise, present as copy-paste text.
 
 ### Output 5: Risk Signals
-16. Assess 6 risk categories (High / Medium / Low):
-    - Timeline Risk: Is the timeline slipping or unrealistic?
-    - Competitive Risk: Is a competitor gaining ground?
-    - Budget Risk: Is budget uncertain, frozen, or contested?
-    - Stakeholder Risk: Are key stakeholders disengaged or hostile?
-    - Technical Risk: Are there integration, security, or compliance blockers?
-    - Relationship Risk: Is the champion weakening or the AE losing access?
+16. Assess 6 risk categories (High / Medium / Low) per call-processing skill:
+    - Champion Health: Is the champion engaged, weakening, or silent?
+    - Timeline Pressure: Is the timeline holding, slipping, or nonexistent?
+    - Competitive Threat: Is a competitor gaining ground?
+    - Budget Concerns: Is budget confirmed, uncertain, or frozen?
+    - Stakeholder Shifts: Are key stakeholders stable, changing, or disengaged?
+    - Engagement Quality: Is the prospect deeply engaged or going through the motions?
 17. For each risk flagged Medium or High, provide a specific mitigation action
 
 ### Output 6: Competitive Intel
