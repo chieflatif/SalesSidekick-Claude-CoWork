@@ -108,3 +108,12 @@ Default (pre-/setup):
 - Qualification gates (Hell Yes/Hell No) are customized based on user's ICP and market
 - Cognitive profile is built from /setup interview responses
 - Operating rhythm is universal structure but specific commands may be adjusted based on user preferences
+
+### First-Use Calibration Storage (/deck)
+
+On the first run of `/deck`, the user is asked how they prefer presentations (data-heavy, narrative, or visual). The preference is stored here:
+
+- **Deck style preference:** [Populated on first /deck run — data-heavy / narrative / visual]
+- **Slide density notes:** [Any additional preferences about content density, chart usage, or layout]
+
+This preference informs template selection and slide content density for all future /deck calls.

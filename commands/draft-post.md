@@ -33,6 +33,10 @@ Examples:
 
 ## Execution Steps
 
+### First-Use Calibration (runs once, first time /draft-post is used)
+0. If this is the first time the user runs /draft-post, ask: "What LinkedIn topics resonate with your audience? And who is your target audience on LinkedIn?" Use the response to refine {{LINKEDIN_TOPICS}} and {{LINKEDIN_AUDIENCE}} in the posting-guide skill. This runs once and is remembered for all future /draft-post calls.
+
+### Standard Execution
 1. Parse the user's topic and determine the best post type:
    - **Personal:** Story → Lesson → Takeaway. First-person, vulnerable, relatable. Hook: personal experience.
    - **Business:** Insight → Proof → Application. Data-driven, authoritative. Hook: contrarian take or surprising stat.

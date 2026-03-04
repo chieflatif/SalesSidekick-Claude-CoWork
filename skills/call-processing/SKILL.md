@@ -201,6 +201,15 @@ COMPETITIVE INTEL:
 
 - Follow-up email applies brand-voice skill (Tier 3 — regenerated during /setup)
 - Email sign-off uses {{EMAIL_SIGN_OFF}}
-- Coaching dimensions are universal — no personalization needed
-- Risk signal categories are universal — no personalization needed
+- Coaching dimensions are universal — scoring scales are not personalized
+- Risk signal categories are universal — definitions are not personalized
 - MEDDPICC scoring references meddpicc/SKILL.md (universal)
+
+### First-Use Calibration Storage (/closeout)
+
+On the first run of `/closeout`, the user is asked which call elements matter most to them. The 6-Output Framework structure is universal, but the **presentation order and emphasis** are personalized:
+
+- **Output priority weighting:** [Populated on first /closeout run — ordered list of which outputs the AE values most, e.g., "MEDDPICC scoring > follow-up email > risk signals > tasks > coaching > competitive intel"]
+- **Emphasis notes:** [Any specific preferences, e.g., "Always show risk signals first" or "I care most about the follow-up email"]
+
+This does not change the framework itself — all 6 outputs are always generated. It changes which outputs are presented first and given the most detail.

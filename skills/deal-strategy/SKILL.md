@@ -216,7 +216,16 @@ All strategic analysis must be evidence-graded:
 
 ## Personalization Notes
 
-- Strategic frameworks are universal — no personalization needed
+- Strategic frameworks (Five-Lens Prism, Three Paths) are universal — framework structure is not personalized
 - Proof points and case studies come from company-intel skill (Tier 3 — regenerated during /setup)
 - Competitive analysis references battlecards skill (Tier 3 — regenerated during /setup)
 - POV angle selection (Financial/Technical/Strategic) uses {{PRODUCT_DESCRIPTION}} context
+
+### First-Use Calibration Storage (/strategy)
+
+On the first run of `/strategy`, the user is asked whether they prefer aggressive or conservative deal strategy. The Three Paths framework is universal, but the **recommendation bias** is personalized:
+
+- **Strategy posture:** [Populated on first /strategy run — aggressive / balanced / conservative]
+- **Posture notes:** [Any additional context, e.g., "I push hard when I see champion engagement" or "I prefer to slow down and gather more intel"]
+
+This does not change the Three Paths framework itself — all three paths are always presented. It influences which path the RECOMMENDATION line suggests when signals are mixed.

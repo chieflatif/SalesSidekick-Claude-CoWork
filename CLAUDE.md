@@ -392,11 +392,11 @@ These are set the first time a specific command is used, not during /setup:
 
 | Command | Calibration Question | Variable Set |
 |---------|---------------------|-------------|
-| /outreach | "What is your typical email tone? Paste a sample email." | Email voice calibration in brand-voice skill |
-| /draft-post | "What LinkedIn topics resonate with your audience?" | {{LINKEDIN_TOPICS}}, {{LINKEDIN_AUDIENCE}} refinement |
+| /outreach | "What is your typical email tone? Paste a sample email if you have one." | Email voice calibration in brand-voice skill |
+| /draft-post | "What LinkedIn topics resonate with your audience? And who is your target audience on LinkedIn?" | {{LINKEDIN_TOPICS}}, {{LINKEDIN_AUDIENCE}} refinement in posting-guide skill |
 | /deck | "How do you prefer presentations? Data-heavy, narrative, or visual?" | Deck template preference in profile skill |
-| /closeout | "What call elements matter most to you?" | 6-Output Framework weighting in call-processing skill |
-| /strategy | "Do you prefer aggressive or conservative deal strategy?" | Three Paths threshold calibration in deal-strategy skill |
+| /closeout | "What call elements matter most to you? For example: MEDDPICC scoring, coaching feedback, follow-up email, risk signals?" | 6-Output Framework weighting in call-processing skill |
+| /strategy | "Do you prefer aggressive or conservative deal strategy? When deals are stuck, do you tend to push or pull back?" | Three Paths recommendation bias in deal-strategy skill |
 
 ---
 
