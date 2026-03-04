@@ -49,5 +49,5 @@ All notable changes to SalesSidekick are documented here.
 - 104 personalization elements across 7 categories
 
 **Distribution**
-- README, Installation Guide, Quick Start, License (MIT), Changelog
+- README, Installation Guide, Quick Start, License (Personal Use), Changelog
 - Supports: GitHub download, Claude Code CLI, Cowork upload, enterprise marketplace
