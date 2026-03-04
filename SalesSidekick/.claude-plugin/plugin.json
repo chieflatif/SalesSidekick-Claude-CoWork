@@ -1,14 +1,15 @@
 {
   "name": "salessidekick",
   "version": "2.0.0",
-  "description": "Your AI-powered Chief of Staff for enterprise sales. Self-personalizing — run /setup once and it becomes YOUR sales AI. 22 commands, 11 skills, 6 Notion databases. Processes call transcripts, generates competitive strategies, manages territory pipelines, and crafts context-aware outreach.",
+  "description": "Your AI-powered Chief of Staff for enterprise sales. Self-personalizing — run /salessidekick:setup after installing to personalize (~45 min, one time). Then try /salessidekick:today for your first morning briefing. 22 commands, 11 skills, 6 Notion databases.",
   "author": {
     "name": "Pipeline Rebel (Latif Horst)",
     "url": "https://github.com/chieflatif"
   },
+  "homepage": "https://github.com/chieflatif/SalesSidekick-Claude-CoWork",
   "repository": "https://github.com/chieflatif/SalesSidekick-Claude-CoWork",
   "license": "SEE LICENSE IN LICENSE",
-  "tags": [
+  "keywords": [
     "sales",
     "enterprise",
     "account-executive",
@@ -17,33 +18,6 @@
     "MEDDPICC",
     "competitive-intelligence",
     "call-processing",
-    "territory-management",
-    "AI-sales-assistant"
-  ],
-  "category": "productivity",
-  "platforms": ["cowork", "claude-code"],
-  "requires": {
-    "connectors": {
-      "notion": {
-        "required": true,
-        "description": "Single source of truth — 6 databases for companies, contacts, deals, tasks, call notes, and LinkedIn posts"
-      },
-      "gmail": {
-        "required": false,
-        "description": "Email sending and thread reading"
-      },
-      "google-calendar": {
-        "required": false,
-        "description": "Meeting context for daily briefings and prep"
-      },
-      "google-drive": {
-        "required": false,
-        "description": "Document storage and transcript access"
-      },
-      "gamma": {
-        "required": false,
-        "description": "Alternative presentation generation path"
-      }
-    }
-  }
+    "territory-management"
+  ]
 }

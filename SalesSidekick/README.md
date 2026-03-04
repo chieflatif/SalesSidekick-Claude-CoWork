@@ -33,11 +33,12 @@ Not another AI template collection. Not a prompt library. A fully operational sy
 ## Quick Start
 
 ```
-1. Install SalesSidekick (see Installation below)
-2. Run /setup — the personalization wizard (~45 min, one time)
-3. Try /today for your morning briefing
-4. Try /prep [Company] before your next meeting
-5. Try /closeout after your next call
+1. Download the .zip from GitHub releases
+2. Upload to Claude Cowork (Customize > Plugins > Add personal plugin)
+3. Configure your Notion API key in .mcp.json
+4. Create a ~/Documents/SalesSidekick/ folder for file output
+5. Start a Cowork conversation, select that folder, run /salessidekick:setup (~45 min, one time)
+6. Try /salessidekick:today for your morning briefing
 ```
 
 See [QUICK-START.md](QUICK-START.md) for the onboarding guide.
@@ -46,27 +47,24 @@ See [QUICK-START.md](QUICK-START.md) for the onboarding guide.
 
 ## Installation
 
-### Option 1: GitHub Download + Claude Cowork Upload
+### Option 1: Download ZIP + Upload to Cowork (Recommended)
 
-```bash
-git clone https://github.com/chieflatif/SalesSidekick-Claude-CoWork.git
-```
-
-Then upload the folder to Claude Cowork:
-1. Open Claude Cowork
-2. Go to Settings > Plugins
-3. Upload the `SalesSidekick-Claude-CoWork` folder
-4. Run `/setup` to personalize
+1. Download `SalesSidekick.zip` from the [releases page](https://github.com/chieflatif/SalesSidekick-Claude-CoWork/releases)
+2. Open Claude Desktop > **Cowork** > **Customize** > **Plugins**
+3. Click **+** > **Add personal plugin** > select the `.zip` file
+4. Configure your Notion API key (see [INSTALLATION-GUIDE.md](INSTALLATION-GUIDE.md))
+5. Run `/salessidekick:setup` to personalize
 
 ### Option 2: Claude Code CLI
 
 ```bash
-claude plugin install chieflatif/SalesSidekick-Claude-CoWork
+/plugin marketplace add chieflatif/SalesSidekick-Claude-CoWork
+/plugin install salessidekick@chieflatif-SalesSidekick-Claude-CoWork
 ```
 
 ### Option 3: Enterprise Deployment
 
-See [INSTALLATION-GUIDE.md](INSTALLATION-GUIDE.md) for enterprise private marketplace deployment and team-wide configuration.
+See [INSTALLATION-GUIDE.md](INSTALLATION-GUIDE.md) for organization-managed marketplace deployment and team-wide configuration.
 
 ---
 
@@ -170,12 +168,13 @@ SalesSidekick/
 ├── CONNECTORS.md          # Connector setup and degradation reference
 ├── README.md              # This file
 ├── INSTALLATION-GUIDE.md  # Detailed setup for all installation methods
-├── QUICK-START.md         # 5-minute onboarding guide
+├── QUICK-START.md         # Onboarding guide
 ├── CHANGELOG.md           # Version history
 ├── LICENSE                # Personal Use License
 ├── .mcp.json              # Notion MCP server configuration
 ├── .claude-plugin/
-│   └── plugin.json        # Plugin manifest and metadata
+│   ├── plugin.json        # Plugin manifest and metadata
+│   └── marketplace.json   # Marketplace catalog for CLI install
 ├── commands/              # 22 command files (.md)
 │   ├── today.md
 │   ├── closeout.md

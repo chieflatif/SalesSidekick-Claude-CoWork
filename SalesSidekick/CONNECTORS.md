@@ -29,17 +29,21 @@ Notion is the backbone. Without it, SalesSidekick operates in "offline mode" —
 2. Click "New Integration"
 3. Name it "SalesSidekick"
 4. Select your workspace
-5. Copy the Internal Integration Secret (starts with `ntn_`)
+5. Under "Capabilities", ensure "Read content" and "Insert content" are enabled
+6. Copy the Internal Integration Secret (starts with `ntn_`)
 
-**Step 2: Run /setup**
-The `/setup` command will:
+**Step 2: Configure the API Key**
+The plugin's `.mcp.json` file contains a `{{NOTION_API_KEY}}` placeholder. **You must replace this placeholder with your actual Notion API key before running /setup.** Open `.mcp.json` in a text editor, find `{{NOTION_API_KEY}}`, and replace it with your key. The line should look like: `"Bearer ntn_your_actual_key_here"` (keep the surrounding quotes intact).
+
+**Step 3: Run /setup**
+The `/salessidekick:setup` command will:
 - Create all 6 databases in your Notion workspace
 - Share them with your integration automatically
 - Store the database IDs in CLAUDE.md Section 10
 - Verify read/write access
 
-**Step 3: Verify**
-After `/setup`, run `/today` — if it reads your tasks and deals, Notion is working.
+**Step 4: Verify**
+After `/salessidekick:setup`, run `/salessidekick:today` — if it reads your tasks and deals, Notion is working.
 
 ### Gmail (Optional — P1)
 
