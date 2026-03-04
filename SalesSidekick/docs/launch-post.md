@@ -20,7 +20,7 @@ What makes it different:
 
 The daily flow: /today in the morning. /prep before meetings. /closeout after calls — MEDDPICC scoring, tasks, coaching, follow-up email, risk signals, and competitive intel from one transcript. /strategy for deals. /pipeline for the big picture.
 
-Works with just Notion. Missing connectors change behavior, never break it. Free and open source (MIT).
+Works with just Notion. Missing connectors change behavior, never break it.
 
 If you're an enterprise AE tired of losing post-call intelligence, spending 30 min on CRM updates, or flying blind into deals — this is for you.
 

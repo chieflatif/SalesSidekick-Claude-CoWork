@@ -500,7 +500,7 @@ Skills auto-fire based on relevance. When a command or topic triggers a skill, C
 **Build:** SalesSidekick for Claude Cowork
 **Author:** Pipeline Rebel (Latif Horst)
 **Repository:** https://github.com/chieflatif/SalesSidekick-Claude-CoWork
-**License:** MIT
+**License:** Personal Use (see LICENSE)
 
 **Compatibility:**
 - Primary: Claude Cowork (guided UI, visual plugin management)

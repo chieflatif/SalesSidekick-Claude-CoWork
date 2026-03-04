@@ -172,7 +172,7 @@ SalesSidekick/
 ├── INSTALLATION-GUIDE.md  # Detailed setup for all installation methods
 ├── QUICK-START.md         # 5-minute onboarding guide
 ├── CHANGELOG.md           # Version history
-├── LICENSE                # MIT
+├── LICENSE                # Personal Use License
 ├── .mcp.json              # Notion MCP server configuration
 ├── .claude-plugin/
 │   └── plugin.json        # Plugin manifest and metadata
@@ -192,7 +192,7 @@ SalesSidekick/
 
 ## License
 
-MIT — see [LICENSE](LICENSE)
+Personal Use License — you may use and modify for personal/internal business use. You may not distribute or sell. See [LICENSE](LICENSE) for full terms.
 
 ---
 
