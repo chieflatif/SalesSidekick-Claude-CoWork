@@ -108,6 +108,6 @@ N/A — this command does not generate quantitative claims. It reads and display
 | Missing Connector | Impact on /end-of-day |
 |-------------------|-----------------------|
 | No Notion | Cannot read tasks or deals. Asks: "Walk me through what you accomplished today and what's still open. I'll help you organize for tomorrow." Produces a manually-built wrap. |
-| No Calendar | Tomorrow preview section omitted. All other sections work normally. |
+| No Calendar | Asks: "Any meetings tomorrow I should know about?" Tomorrow preview built from user response instead of calendar data. All other sections work normally. |
 | No Gmail | No impact. |
 | No Drive | No impact. |
