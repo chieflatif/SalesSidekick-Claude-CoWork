@@ -1,5 +1,6 @@
 ---
 description: Call pattern analysis — 5 dimensions scored 1-5 across logged calls
+argument-hint: "(no arguments)"
 ---
 
 # /coaching — Call Pattern Analysis

@@ -1,5 +1,6 @@
 ---
 description: Morning briefing — account-grouped tasks and deals needing attention
+argument-hint: "(no arguments)"
 ---
 
 # /today — Morning Briefing

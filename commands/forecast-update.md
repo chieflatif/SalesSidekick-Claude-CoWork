@@ -1,5 +1,6 @@
 ---
 description: CRM-ready forecast — weighted pipeline math, commit/upside/best-case breakdown
+argument-hint: "(no arguments)"
 ---
 
 # /forecast-update — CRM-Ready Forecast

@@ -1,5 +1,6 @@
 ---
 description: Full territory pipeline view — MEDDPICC scoring, risk flags, prioritized action plan
+argument-hint: "(no arguments)"
 ---
 
 # /pipeline — Pipeline Health Analysis
