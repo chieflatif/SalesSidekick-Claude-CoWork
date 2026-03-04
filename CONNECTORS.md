@@ -12,7 +12,7 @@ SalesSidekick uses MCP (Model Context Protocol) connectors to read and write ext
 |------|-----------|---------|-----------|
 | P0 | **Notion** | Single source of truth. 6 databases (Companies, Contacts, Deals, Tasks, Call Notes, LinkedIn Posts). All persistent data lives here. | **Yes** |
 | P1 | Gmail | Email sending from /outreach, /email, /closeout follow-ups. Thread reading for context. | No |
-| P1 | Google Calendar | Meeting schedule for /today and /prep. Provides time-aware context. | No |
+| P1 | Google Calendar | Meeting schedule for /today, /end-of-day, and /prep. Provides time-aware context. | No |
 | P1 | Google Drive | Document storage. Transcript auto-discovery for /closeout. | No |
 | P2 | Gamma | Alternative presentation generation path for /deck. | No |
 
