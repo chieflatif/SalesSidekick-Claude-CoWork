@@ -123,7 +123,7 @@ Evidence: [Verified] scores from logged calls | [Estimated] pattern analysis and
 
 | Missing Connector | Impact on /coaching |
 |-------------------|--------------------|
-| No Notion | Cannot load call data. Asks: "I need logged calls to analyze patterns. Start logging calls with /closeout, then come back for coaching analysis." |
+| No Notion | Cannot load call data. Asks: "Walk me through your last 3-5 sales calls — who did you meet, what went well, what was challenging?" Produces coaching analysis from user-provided descriptions. Notes that accuracy improves significantly with logged call data from /closeout. |
 | Fewer than 3 calls | Warns about limited data. Provides analysis with low-confidence caveat. |
 | No coaching scores in call notes | If calls logged without coaching dimension (pre-/closeout or manually added), offers to retroactively assess from call summaries if available. |
 | All other connectors | No impact. |

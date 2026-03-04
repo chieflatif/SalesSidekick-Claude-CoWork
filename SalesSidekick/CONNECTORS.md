@@ -82,17 +82,19 @@ Every command in SalesSidekick specifies its behavior with and without each rele
 | Missing Connector | Commands Affected | What Changes | Fallback |
 |-------------------|-------------------|-------------|----------|
 | No Notion | All commands | No persistent data. Session-only intelligence. | Commands still generate output but nothing saves between sessions. User works from manual context. |
-| No Calendar | /today, /prep | No meeting schedule awareness | Asks "What meetings do you have today?" or "Who is the meeting with?" |
+| No Calendar | /today, /end-of-day, /prep | No meeting schedule awareness | Asks "What meetings do you have today/tomorrow?" or "Who is the meeting with?" |
 | No Gmail | /outreach, /email, /closeout | Cannot send emails directly | Generates copy-paste formatted text with subject line and body |
 | No Drive | /closeout | Cannot auto-discover transcripts | Asks user to paste the transcript directly |
 | No Gamma | /deck | Cannot use Gamma presentation path | Generates native .pptx via PptxGenJS (default) |
+| No web search | /research, /add-company, /setup, /pov | Cannot conduct web research | Relies on user-provided information only. Briefs and skills are thinner. |
+
 **Note on CRM:** SalesSidekick uses an export-first CRM strategy. There is no CRM connector. `/forecast-update` generates CRM paste-ready formatted output by default — this is normal behavior, not degradation.
 
 ---
 
 ## Web Search
 
-Commands like `/research` use Claude's built-in web search capability. This is a native platform feature available in Claude Cowork and Claude Code — not a connector. No additional setup is required.
+Commands that use web search: `/research` (primary), `/add-company` (supplemental company info), `/setup` (company intel and competitor research). The `/pov` command may also use web search as a fallback when the company-intel skill is not yet generated. Web search is a native platform feature available in Claude Cowork and Claude Code — not a connector. No additional setup is required.
 
 ---
 
