@@ -31,12 +31,12 @@ Central reference for all Notion database operations. Contains the complete sche
 |---|-------|------|---------------|
 | 1 | Company Name | Title | — |
 | 2 | Territory Status | Select | Active, Prospect, Inactive, Former Customer |
-| 3 | Industry | Select | Options populated during /setup per user's market |
+| 3 | Industry | Select | Options populated during deep personalization per user's market |
 | 4 | Account Size | Select | Enterprise, Mid-Market, SMB |
 | 5 | Hell Yes/Hell No | Select | Hell Yes, Evaluating, Hell No |
 | 6 | Primary Contact | Relation | →Contacts |
 | 7 | Tech Stack | Multi-select | Populated per account |
-| 8 | Current Products | Multi-select | User's product line, set during /setup |
+| 8 | Current Products | Multi-select | User's product line, set during deep personalization |
 | 9 | Annual Revenue | Number | — |
 | 10 | Last Activity | Date | Auto-updated on any interaction |
 | 11 | Notes | Text | Research briefs, general context |
@@ -60,12 +60,12 @@ Central reference for all Notion database operations. Contains the complete sche
 |---|-------|------|---------------|
 | 1 | Deal Name | Title | — |
 | 2 | Company | Relation | →Companies |
-| 3 | Contacts | Relation | →Contacts (linked during /add-deal) |
+| 3 | Contacts | Relation | →Contacts (linked during add deal) |
 | 4 | Stage | Select | Prospecting, Discovery, Qualification, Proposal, Negotiation, Closed Won, Closed Lost |
 | 5 | Deal Value | Number | — |
 | 6 | Close Date | Date | — |
 | 7 | Forecast Category | Select | Commit, Best Case, Pipeline, Omitted |
-| 8 | Primary Competitor | Select | Options populated during /setup Phase 3 |
+| 8 | Primary Competitor | Select | Options populated during deep personalization Phase 3 |
 | 9 | Next Step | Text | — |
 | 10 | Deal Risk | Select | High, Medium, Low |
 | 11 | MEDDPICC Confidence | Select | High, Medium, Low |
@@ -81,7 +81,7 @@ Central reference for all Notion database operations. Contains the complete sche
 | 21 | Last Activity | Date | Auto-updated on any interaction |
 | 22 | Notes | Text | — |
 
-**Default Stage Probability Weights** (used by /forecast-update):
+**Default Stage Probability Weights** (used by forecast update):
 | Stage | Default Probability |
 |-------|-------------------|
 | Prospecting | 10% |
@@ -92,7 +92,7 @@ Central reference for all Notion database operations. Contains the complete sche
 | Closed Won | 100% |
 | Closed Lost | 0% |
 
-These are defaults. /setup asks if the user's org uses different stage names or probabilities, and stores customized values in {{DEAL_STAGES}}.
+These are defaults. Deep personalization asks if the user's org uses different stage names or probabilities, and stores customized values in {{DEAL_STAGES}}.
 
 #### Tasks (9 fields)
 | # | Field | Type | Options/Notes |
@@ -143,37 +143,37 @@ When a user references a company by name, resolve using this priority order:
 2. **Starts-with match** if no exact match (e.g., "Acme" matches "Acme Corporation")
 3. **Contains match** as fallback (e.g., "Acme" matches "The Acme Group")
 4. **Multiple matches** → ask user to clarify: "I found multiple matches: [list]. Which one?"
-5. **No match** → "I don't have [Company] in Notion. Want me to run `/add-company [Company]`?"
+5. **No match** → "I don't have [Company] in Notion. Want me to add [Company] to your pipeline?"
 
-When resolving for deal-specific commands (/strategy, /battle, /prep):
+When resolving for deal-specific capabilities (deal strategy, competitive analysis, meeting prep):
 - After finding the company, look for active deals (Stage ≠ Closed Won, Closed Lost)
 - If multiple active deals → ask: "You have [X] active deals at [Company]: [list]. Which one?"
 - If one active deal → use it automatically
-- If no active deals → "No active deal at [Company]. Want to run `/add-deal [Company]`?"
+- If no active deals → "No active deal at [Company]. Want to add a deal for [Company]?"
 
 ### Read/Write Patterns by Command
 
-| Command | Reads | Writes |
-|---------|-------|--------|
-| /today | Tasks (due/overdue), Deals (needing attention) | — |
-| /end-of-day | Tasks (today's), Deals (movement) | — |
-| /weekly | Deals (all active), Tasks (week), Call Notes (week) | — |
-| /closeout | Companies, Contacts, Deals, Call Notes (history) | Call Notes (new), Tasks (new), Deals (MEDDPICC update), Companies (Last Activity) |
-| /prep | Companies, Contacts, Deals, Call Notes (recent), Tasks | — |
-| /strategy | Companies, Deals, Contacts, Call Notes, Tasks | — |
-| /battle | Companies, Deals, Call Notes, Contacts | — |
-| /pov | Companies, Deals, Call Notes | — |
-| /pipeline | Deals (all active), Companies | — |
-| /whitespace | Companies, Deals | — |
-| /forecast-update | Deals (by period) | — |
-| /research | Companies (if exists), Deals, Call Notes | Companies (Notes, Tech Stack, Industry, Account Size) |
-| /outreach | Companies, Contacts, Deals | — |
-| /email | Companies, Contacts, Deals, Call Notes | — |
-| /draft-post | LinkedIn Posts (recent) | LinkedIn Posts (new draft, on confirm) |
-| /deck | Companies, Deals, Contacts, Call Notes | — |
-| /add-company | Companies (duplicate check) | Companies (new record) |
-| /add-deal | Companies, Contacts, Deals (duplicate check) | Deals (new record) |
-| /coaching | Call Notes, Deals | — |
+| Capability | Reads | Writes |
+|------------|-------|--------|
+| Morning Briefing | Tasks (due/overdue), Deals (needing attention) | — |
+| Evening Wrap | Tasks (today's), Deals (movement) | — |
+| Weekly Summary | Deals (all active), Tasks (week), Call Notes (week) | — |
+| Call Processing | Companies, Contacts, Deals, Call Notes (history) | Call Notes (new), Tasks (new), Deals (MEDDPICC update), Companies (Last Activity) |
+| Meeting Prep | Companies, Contacts, Deals, Call Notes (recent), Tasks | — |
+| Deal Strategy | Companies, Deals, Contacts, Call Notes, Tasks | — |
+| Competitive Analysis | Companies, Deals, Call Notes, Contacts | — |
+| Business Case | Companies, Deals, Call Notes | — |
+| Pipeline Review | Deals (all active), Companies | — |
+| Whitespace Analysis | Companies, Deals | — |
+| Forecast Update | Deals (by period) | — |
+| Account Research | Companies (if exists), Deals, Call Notes | Companies (Notes, Tech Stack, Industry, Account Size) |
+| Outreach | Companies, Contacts, Deals | — |
+| Contextual Email | Companies, Contacts, Deals, Call Notes | — |
+| LinkedIn Post | LinkedIn Posts (recent) | LinkedIn Posts (new draft, on confirm) |
+| Presentation | Companies, Deals, Contacts, Call Notes | — |
+| Add Company | Companies (duplicate check) | Companies (new record) |
+| Add Deal | Companies, Contacts, Deals (duplicate check) | Deals (new record) |
+| Call Coaching | Call Notes, Deals | — |
 
 ### Write Failure Handling
 
@@ -182,16 +182,16 @@ When a Notion write fails:
 1. **Never silently drop data.** Always inform the user what failed to save.
 2. **Present the data that would have been written** in a formatted block the user can manually enter.
 3. **Diagnose the likely cause:**
-   - "Database not found" → Database ID may be wrong. Suggest: "Check that your Notion databases are set up. Run `/setup` to reconfigure."
+   - "Database not found" → Database ID may be wrong. Suggest: "Check that your Notion databases are set up. Try a deep personalization session to reconfigure."
    - "Permission denied" → API key may lack write access. Suggest: "Check your Notion integration permissions — it needs read AND write access to the databases."
    - "Validation error" → Field type mismatch. Suggest: "The [field] in your [database] may have different options than expected. Check the field configuration in Notion."
    - "Rate limited" → Too many requests. Suggest: "Notion is rate-limiting requests. I'll try again in a moment."
 4. **Retry once** on transient errors (rate limit, timeout). If retry fails, fall back to manual mode.
-5. **Log the failure context** so /audit can check for patterns.
+5. **Log the failure context** so self-audit can check for patterns.
 
-### Database Creation (used by /setup Phase 6)
+### Database Creation (used by deep personalization Phase 6)
 
-When creating databases during /setup:
+When creating databases during deep personalization:
 1. Create databases in dependency order: Companies → Contacts → Deals → Tasks → Call Notes → LinkedIn Posts
 2. Companies and Contacts must exist before Deals (for relations)
 3. Set up all relations after databases exist
@@ -201,7 +201,7 @@ When creating databases during /setup:
 
 ## Personalization Notes
 
-- Select field options for Industry, Primary Competitor, and Current Products are customized during /setup
+- Select field options for Industry, Primary Competitor, and Current Products are customized during deep personalization
 - Stage names and probability weights may be customized (stored in {{DEAL_STAGES}})
-- Database IDs are populated during /setup and stored as Tier 2 variables
+- Database IDs are populated during deep personalization and stored as Tier 2 variables
 - Account resolution logic is universal — no personalization needed

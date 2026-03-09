@@ -10,7 +10,7 @@ user-invocable: false
 
 # Profile — AE Identity Skill
 
-> **Tier 3 — This entire file is regenerated during /setup Phase 1-2 based on the AE's identity, company, and territory context.**
+> **Tier 3 — This entire file is regenerated during deep personalization Phase 1-2 based on the AE's identity, company, and territory context.**
 
 ## Purpose
 
@@ -59,9 +59,9 @@ Contains the AE's complete professional identity: who they are, what they sell, 
 ### Qualification Gates
 
 #### Hell Yes Signals
-*After /setup, these are customized to your specific market and selling motion.*
+*After deep personalization, these are customized to your specific market and selling motion.*
 
-Default signals (pre-/setup):
+Default signals (before deep personalization):
 - Decision maker identified and engaged
 - Clear, quantified pain with budget allocated
 - Timeline pressure exists (contract renewal, mandate, or initiative deadline)
@@ -70,9 +70,9 @@ Default signals (pre-/setup):
 - Competitive landscape known and favorable
 
 #### Hell No Signals
-*After /setup, these are customized to your specific disqualification patterns.*
+*After deep personalization, these are customized to your specific disqualification patterns.*
 
-Default signals (pre-/setup):
+Default signals (before deep personalization):
 - No identifiable pain or vague "exploring options" with no urgency
 - Budget not allocated and no path to allocation
 - Decision timeline is "someday" with no triggering event
@@ -83,24 +83,24 @@ Default signals (pre-/setup):
 ### Operating Rhythm
 
 **Daily:**
-1. Morning: `/today` — tasks + deals needing attention
-2. Before meetings: `/prep [Company]` — intel brief
-3. After calls: `/closeout` — 6-Output Framework processing
-4. End of day: `/end-of-day` — review and preview
+1. Morning: morning briefing — tasks + deals needing attention
+2. Before meetings: meeting prep — intel brief
+3. After calls: call processing — 6-Output Framework processing
+4. End of day: evening wrap — review and preview
 
 **Weekly:**
-1. Monday: `/weekly` — territory pipeline summary
-2. Friday: `/forecast-update` — CRM forecast
+1. Monday: weekly summary — territory pipeline summary
+2. Friday: forecast update — CRM forecast
 
 **As needed:**
-- `/strategy`, `/battle`, `/pov` for deal strategy
-- `/pipeline`, `/whitespace` for territory management
-- `/research`, `/outreach`, `/email` for account engagement
+- deal strategy, competitive analysis, business case for deal strategy
+- pipeline review, whitespace analysis for territory management
+- account research, outreach, contextual email for account engagement
 
 ### Cognitive Profile
-*After /setup, this section captures how the AE thinks, processes information, and makes decisions.*
+*After deep personalization, this section captures how the AE thinks, processes information, and makes decisions.*
 
-Default (pre-/setup):
+Default (before deep personalization):
 - **Communication style:** {{COMMUNICATION_STYLE}}
 - **Decision-making approach:** Data-informed but relationship-driven
 - **Preferred feedback style:** Direct, specific, actionable
@@ -108,17 +108,17 @@ Default (pre-/setup):
 
 ## Personalization Notes
 
-- **This entire file is Tier 3** — fully regenerated during /setup Phase 1 (Identity) and Phase 2 (Company Intel)
-- All {{TEMPLATE_VARIABLES}} are populated during /setup
+- **This entire file is Tier 3** — fully regenerated during deep personalization Phase 1 (Identity) and Phase 2 (Company Intel)
+- All {{TEMPLATE_VARIABLES}} are populated during deep personalization
 - Qualification gates (Hell Yes/Hell No) are customized based on user's ICP and market
-- Cognitive profile is built from /setup interview responses
+- Cognitive profile is built from deep personalization interview responses
 - Operating rhythm is universal structure but specific commands may be adjusted based on user preferences
 
-### First-Use Calibration Storage (/deck)
+### First-Use Calibration Storage (Presentation)
 
-On the first run of `/deck`, the user is asked how they prefer presentations (data-heavy, narrative, or visual). The preference is stored here:
+On the first run of the presentation capability, the user is asked how they prefer presentations (data-heavy, narrative, or visual). The preference is stored here:
 
-- **Deck style preference:** [Populated on first /deck run — data-heavy / narrative / visual]
+- **Deck style preference:** [Populated on first presentation run — data-heavy / narrative / visual]
 - **Slide density notes:** [Any additional preferences about content density, chart usage, or layout]
 
-This preference informs template selection and slide content density for all future /deck calls.
+This preference informs template selection and slide content density for all future presentation requests.

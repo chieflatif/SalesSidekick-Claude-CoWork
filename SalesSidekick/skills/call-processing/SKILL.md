@@ -12,7 +12,7 @@ user-invocable: false
 
 ## Purpose
 
-Defines the 6-Output Framework used by /closeout to process call transcripts. Contains detailed formats for each output: MEDDPICC scoring, task extraction, coaching feedback, follow-up email, risk signals, and competitive intelligence. Also defines the 5 coaching dimensions and 6 risk signal categories.
+Defines the 6-Output Framework used by call processing to process call transcripts. Contains detailed formats for each output: MEDDPICC scoring, task extraction, coaching feedback, follow-up email, risk signals, and competitive intelligence. Also defines the 5 coaching dimensions and 6 risk signal categories.
 
 ## When Referenced
 
@@ -23,7 +23,7 @@ Defines the 6-Output Framework used by /closeout to process call transcripts. Co
 
 ### The 6-Output Framework
 
-Every call processed by /closeout produces exactly 6 outputs. This is non-negotiable — every call gets the full framework, even if some outputs are thin.
+Every call processed through call processing produces exactly 6 outputs. This is non-negotiable — every call gets the full framework, even if some outputs are thin.
 
 #### Output 1: MEDDPICC Scoring
 
@@ -168,7 +168,7 @@ RISK SIGNALS:
 | Engagement Quality | [H/M/L] | [specific evidence] |
 
 Overall Deal Risk: [High/Medium/Low]
-[If High]: ⚠️ Recommend running /strategy [Company] for deeper analysis.
+[If High]: ⚠️ Recommend running deal strategy for [Company] for deeper analysis.
 ```
 
 #### Output 6: Competitive Intelligence
@@ -184,7 +184,7 @@ COMPETITIVE INTEL:
 - Our vulnerability: [where they're strong or we're weak]
 - Win probability: [0.0-1.0] — [brief rationale]
 
-[If competitor identified]: 💡 Run /battle [Company] for full displacement analysis.
+[If competitor identified]: 💡 Run competitive analysis for [Company] for full displacement analysis.
 ```
 
 **Rules:**
@@ -195,7 +195,7 @@ COMPETITIVE INTEL:
 
 ### Notion Write Mapping
 
-/closeout writes to 4 databases:
+Call processing writes to 4 databases:
 
 1. **Call Notes** — new record with all 10 fields
 2. **Tasks** — new records for each extracted task
@@ -204,17 +204,17 @@ COMPETITIVE INTEL:
 
 ## Personalization Notes
 
-- Follow-up email applies brand-voice skill (Tier 3 — regenerated during /setup)
+- Follow-up email applies brand-voice skill (Tier 3 — regenerated during deep personalization)
 - Email sign-off uses {{EMAIL_SIGN_OFF}}
 - Coaching dimensions are universal — scoring scales are not personalized
 - Risk signal categories are universal — definitions are not personalized
 - MEDDPICC scoring references meddpicc/SKILL.md (universal)
 
-### First-Use Calibration Storage (/closeout)
+### First-Use Calibration Storage (Call Processing)
 
-On the first run of `/closeout`, the user is asked which call elements matter most to them. The 6-Output Framework structure is universal, but the **presentation order and emphasis** are personalized:
+On the first run of call processing, the user is asked which call elements matter most to them. The 6-Output Framework structure is universal, but the **presentation order and emphasis** are personalized:
 
-- **Output priority weighting:** [Populated on first /closeout run — ordered list of which outputs the AE values most, e.g., "MEDDPICC scoring > follow-up email > risk signals > tasks > coaching > competitive intel"]
+- **Output priority weighting:** [Populated on first call processing run — ordered list of which outputs the AE values most, e.g., "MEDDPICC scoring > follow-up email > risk signals > tasks > coaching > competitive intel"]
 - **Emphasis notes:** [Any specific preferences, e.g., "Always show risk signals first" or "I care most about the follow-up email"]
 
 This does not change the framework itself — all 6 outputs are always generated. It changes which outputs are presented first and given the most detail.

@@ -174,7 +174,7 @@ Aggregate MEDDPICC scores into a deal-level confidence:
 
 ### MEDDPICC Element Change Tracking
 
-When /closeout scores MEDDPICC elements:
+When call processing scores MEDDPICC elements:
 1. Compare new scores against existing scores in Notion
 2. Document every change with evidence quotes from the call
 3. Write changes to MEDDPICC Changes field in Call Notes
@@ -188,7 +188,7 @@ Format for MEDDPICC Changes field:
 
 ## Personalization Notes
 
-- Discovery questions are refined during /setup with {{PRODUCT_DESCRIPTION}} context and {{ICP_INDUSTRY}} language
+- Discovery questions are refined during deep personalization with {{PRODUCT_DESCRIPTION}} context and {{ICP_INDUSTRY}} language
 - Gap flag thresholds are universal — no personalization needed
 - Stage-to-MEDDPICC mapping is universal
 - Confidence scoring criteria are universal

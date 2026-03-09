@@ -119,7 +119,7 @@ Every post must pass all 6 checks before publishing:
 
 ### Content Topics
 
-Focus areas for {{AE_NAME}}'s LinkedIn content (customized during /setup):
+Focus areas for {{AE_NAME}}'s LinkedIn content (customized during deep personalization):
 
 **Topics:** {{LINKEDIN_TOPICS}}
 **Target audience:** {{LINKEDIN_AUDIENCE}}
@@ -135,7 +135,7 @@ Focus areas for {{AE_NAME}}'s LinkedIn content (customized during /setup):
 
 ## Personalization Notes
 
-- {{LINKEDIN_TOPICS}} and {{LINKEDIN_AUDIENCE}} are Tier 2 variables set during /setup
+- {{LINKEDIN_TOPICS}} and {{LINKEDIN_AUDIENCE}} are Tier 2 variables set during deep personalization
 - The 3-Type Framework structure is universal (Tier 2 template)
 - Hook formulas are universal
 - Voice check (#3 in pre-publish) references brand-voice skill (Tier 3)

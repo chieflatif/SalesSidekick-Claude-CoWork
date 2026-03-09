@@ -121,7 +121,7 @@ Focus on approach differences, not feature checklists. Include a transition plan
 
 For Gamma to work:
 1. Gamma MCP server must be configured and accessible
-2. {{GAMMA_CONNECTED}} must be set to `true` during /setup
+2. {{GAMMA_CONNECTED}} must be set to `true` during deep personalization
 3. User must have a Gamma account
 
 ### Known Limitations
@@ -149,7 +149,7 @@ Is speed more important than layout control? → YES → Use Gamma
 
 ## Personalization Notes
 
-- {{GAMMA_CONNECTED}} is a connector status variable set during /setup
+- {{GAMMA_CONNECTED}} is a connector status variable set during deep personalization
 - Gamma themes are selected by the user in Gamma's interface — not controlled by SalesSidekick
 - Content inputs (company data, case studies, competitive info) come from the same sources as PPTX
 - Prompt templates reference {{COMPANY}} and {{PRODUCT_DESCRIPTION}} (Tier 2 variables)

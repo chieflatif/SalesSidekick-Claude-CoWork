@@ -10,7 +10,7 @@ user-invocable: false
 
 # Battlecards — Competitive Displacement Playbooks Skill
 
-> **Tier 3 — This entire file is regenerated during /setup Phase 3 (Competitive Landscape) with per-competitor displacement playbooks.**
+> **Tier 3 — This entire file is regenerated during deep personalization Phase 3 (Competitive Landscape) with per-competitor displacement playbooks.**
 
 ## Purpose
 
@@ -27,7 +27,7 @@ Contains detailed competitive battlecards for each of the AE's top competitors. 
 
 ### Battlecard Structure
 
-Each competitor gets a full battlecard with 8 sections. During /setup Phase 3, SalesSidekick researches each competitor via web search and builds these playbooks.
+Each competitor gets a full battlecard with 8 sections. During deep personalization Phase 3, SalesSidekick researches each competitor via web search and builds these playbooks.
 
 ---
 
@@ -35,14 +35,14 @@ Each competitor gets a full battlecard with 8 sections. During /setup Phase 3, S
 
 #### Overview
 - **Company:** {{TOP_COMPETITOR_1}}
-- **Website:** [Populated during /setup]
-- **Founded:** [Populated during /setup]
-- **Size:** [Populated during /setup]
-- **Market position:** [Leader/Challenger/Niche — populated during /setup]
-- **Primary pitch:** [What they lead with — populated during /setup]
+- **Website:** [Populated during deep personalization]
+- **Founded:** [Populated during deep personalization]
+- **Size:** [Populated during deep personalization]
+- **Market position:** [Leader/Challenger/Niche — populated during deep personalization]
+- **Primary pitch:** [What they lead with — populated during deep personalization]
 
 #### Strengths (Where They Win)
-*Populated during /setup via web research — what they're genuinely good at.*
+*Populated during deep personalization via web research — what they're genuinely good at.*
 
 1. [Strength 1 — specific and honest. Don't dismiss real advantages.]
 2. [Strength 2]
@@ -51,7 +51,7 @@ Each competitor gets a full battlecard with 8 sections. During /setup Phase 3, S
 **When they're strongest:** [Specific scenarios where they have a genuine advantage]
 
 #### Weaknesses (Where They Lose)
-*Populated during /setup via web research — genuine gaps, not FUD.*
+*Populated during deep personalization via web research — genuine gaps, not FUD.*
 
 1. [Weakness 1 — specific and verifiable]
 2. [Weakness 2]
@@ -104,61 +104,61 @@ Each competitor gets a full battlecard with 8 sections. During /setup Phase 3, S
 
 ### Competitor 2: {{TOP_COMPETITOR_2}}
 
-*Same 8-section structure. Populated during /setup Phase 3.*
+*Same 8-section structure. Populated during deep personalization Phase 3.*
 
 #### Overview
-[Populated during /setup]
+[Populated during deep personalization]
 
 #### Strengths
-[Populated during /setup]
+[Populated during deep personalization]
 
 #### Weaknesses
-[Populated during /setup]
+[Populated during deep personalization]
 
 #### Displacement Strategy
-[Populated during /setup]
+[Populated during deep personalization]
 
 #### Talk Tracks
-[Populated during /setup]
+[Populated during deep personalization]
 
 #### Proof Points
-[Populated during /setup]
+[Populated during deep personalization]
 
 #### Trap Questions
-[Populated during /setup]
+[Populated during deep personalization]
 
 #### Landmine Responses
-[Populated during /setup]
+[Populated during deep personalization]
 
 ---
 
 ### Competitor 3: {{TOP_COMPETITOR_3}}
 
-*Same 8-section structure. Populated during /setup Phase 3.*
+*Same 8-section structure. Populated during deep personalization Phase 3.*
 
 #### Overview
-[Populated during /setup]
+[Populated during deep personalization]
 
 #### Strengths
-[Populated during /setup]
+[Populated during deep personalization]
 
 #### Weaknesses
-[Populated during /setup]
+[Populated during deep personalization]
 
 #### Displacement Strategy
-[Populated during /setup]
+[Populated during deep personalization]
 
 #### Talk Tracks
-[Populated during /setup]
+[Populated during deep personalization]
 
 #### Proof Points
-[Populated during /setup]
+[Populated during deep personalization]
 
 #### Trap Questions
-[Populated during /setup]
+[Populated during deep personalization]
 
 #### Landmine Responses
-[Populated during /setup]
+[Populated during deep personalization]
 
 ---
 
@@ -171,7 +171,7 @@ Each competitor gets a full battlecard with 8 sections. During /setup Phase 3, S
    - Competitor features from public sources (website, docs) → Verified
    - Competitive positioning based on call mentions or analyst reports → Estimated
    - Win probability and displacement predictions → Hypothesis
-5. **Update battlecards** when new competitive intelligence emerges from calls (/closeout captures this in Output 6).
+5. **Update battlecards** when new competitive intelligence emerges from calls (call processing captures this in Output 6).
 
 ### Win Probability Framework
 
@@ -192,9 +192,9 @@ When assessing competitive win probability:
 
 ## Personalization Notes
 
-- **This entire file is Tier 3** — fully regenerated during /setup Phase 3 (Competitive Landscape)
-- /setup researches each competitor via web search and builds detailed battlecards
+- **This entire file is Tier 3** — fully regenerated during deep personalization Phase 3 (Competitive Landscape)
+- Deep personalization researches each competitor via web search and builds detailed battlecards
 - Competitor names come from {{TOP_COMPETITOR_1}}, {{TOP_COMPETITOR_2}}, {{TOP_COMPETITOR_3}} (Tier 2 variables)
-- Battlecards are updated when /closeout captures new competitive intelligence
+- Battlecards are updated when call processing captures new competitive intelligence
 - Talk tracks and landmine responses are crafted based on public competitive positioning
 - Win probability framework is universal — no personalization needed

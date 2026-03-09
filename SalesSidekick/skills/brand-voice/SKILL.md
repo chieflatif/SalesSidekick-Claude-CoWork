@@ -10,7 +10,7 @@ user-invocable: false
 
 # Brand Voice — Communication Style Skill
 
-> **Tier 3 — This entire file is regenerated during /setup Phase 4 based on the AE's communication preferences and writing samples.**
+> **Tier 3 — This entire file is regenerated during deep personalization Phase 4 based on the AE's communication preferences and writing samples.**
 
 ## Purpose
 
@@ -30,13 +30,13 @@ Defines the AE's personal communication voice for all written outputs. Contains 
 
 **Communication style:** {{COMMUNICATION_STYLE}}
 
-**Default voice (pre-/setup):**
+**Default voice (before deep personalization):**
 - Direct and professional. No corporate fluff.
 - Short sentences. Active voice. Say what you mean.
 - Confident but not arrogant. Helpful but not subservient.
 - Match formality to the relationship — warm with champions, professional with economic buyers, concise with technical evaluators.
 
-*After /setup, these rules are rewritten based on the AE's actual communication preferences and writing samples.*
+*After deep personalization, these rules are rewritten based on the AE's actual communication preferences and writing samples.*
 
 ### Email Formatting
 
@@ -63,9 +63,9 @@ Match communication tone to the recipient's role and relationship:
 
 ### Vocabulary Substitutions (10+ required)
 
-*After /setup, this section contains the AE's specific vocabulary preferences.*
+*After deep personalization, this section contains the AE's specific vocabulary preferences.*
 
-**Default substitutions (pre-/setup):**
+**Default substitutions (before deep personalization):**
 
 | Instead of | Use |
 |-----------|-----|
@@ -86,7 +86,7 @@ Match communication tone to the recipient's role and relationship:
 
 These phrases are NEVER used in any communication, regardless of context:
 
-**Default banned list (pre-/setup):**
+**Default banned list (before deep personalization):**
 - "Just checking in"
 - "Per my last email"
 - "Hope you're doing well"
@@ -98,7 +98,7 @@ These phrases are NEVER used in any communication, regardless of context:
 - "I wanted to reach out"
 - "As per our conversation"
 
-*After /setup, this list is customized with the AE's personal banned phrases and may add phrases they never want AI to generate.*
+*After deep personalization, this list is customized with the AE's personal banned phrases and may add phrases they never want AI to generate.*
 
 ### 7-Point Voice Check
 
@@ -128,17 +128,17 @@ LinkedIn voice differs from email voice:
 
 ## Personalization Notes
 
-- **This entire file is Tier 3** — fully regenerated during /setup Phase 4 (Brand Voice)
-- /setup captures: communication samples, vocabulary preferences, banned phrases, sign-off, and style preferences
-- Voice rules are built from actual writing samples the AE provides during /setup
+- **This entire file is Tier 3** — fully regenerated during deep personalization Phase 4 (Brand Voice)
+- Deep personalization captures: communication samples, vocabulary preferences, banned phrases, sign-off, and style preferences
+- Voice rules are built from actual writing samples the AE provides during deep personalization
 - Vocabulary substitutions list grows over time as the AE identifies more words they don't use
 - The 7-point voice check is structurally universal but the specific checks reference personalized content
 
-### First-Use Calibration Storage (/outreach)
+### First-Use Calibration Storage (Outreach)
 
-On the first run of `/outreach`, the user is asked for their typical email tone and optionally provides a sample email. The calibration response is stored here as supplemental voice data:
+On the first run of outreach, the user is asked for their typical email tone and optionally provides a sample email. The calibration response is stored here as supplemental voice data:
 
-- **Outreach tone notes:** [Populated on first /outreach run — natural email tone observations, sample email analysis]
+- **Outreach tone notes:** [Populated on first outreach run — natural email tone observations, sample email analysis]
 - **Outreach-specific adjustments:** [Any voice rules specific to prospecting emails vs. internal/existing-relationship emails]
 
-This supplements the /setup voice profile. If /outreach runs before /setup, calibration data is stored here and merged into the full voice profile when /setup completes.
+This supplements the deep personalization voice profile. If outreach runs before deep personalization, calibration data is stored here and merged into the full voice profile when deep personalization completes.

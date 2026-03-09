@@ -12,7 +12,7 @@ user-invocable: false
 
 ## Purpose
 
-Contains the three major strategic frameworks used by deal analysis commands: the Five-Lens Prism (used by /strategy), the Three Paths Framework (used by /strategy), and the 5-Component POV Model (used by /pov). Also includes the evidence grading reference for strategic analysis.
+Contains the three major strategic frameworks used by deal analysis commands: the Five-Lens Prism (used by deal strategy), the Three Paths Framework (used by deal strategy), and the 5-Component POV Model (used by the business case capability). Also includes the evidence grading reference for strategic analysis.
 
 ## When Referenced
 
@@ -132,7 +132,7 @@ After Five-Lens analysis, synthesize into three distinct paths forward. The AE a
 **Actions to recommend:**
 - Schedule discovery call focused on specific gaps
 - Request meetings with additional stakeholders
-- Run /research for deeper account intelligence
+- Run account research for deeper account intelligence
 - Ask champion for honest deal assessment
 - Map the complete decision process before proposing
 
@@ -149,12 +149,12 @@ After Five-Lens analysis, synthesize into three distinct paths forward. The AE a
 - Shift to value-add mode (share insights without asking for anything)
 - Identify new stakeholder entry points
 - Wait for a triggering event to re-engage
-- Run /battle if competitive threat is the issue
+- Run competitive analysis if competitive threat is the issue
 - Consider disqualification if Hell No signals are strong
 
 ### 5-Component POV Model
 
-Used by /pov to build a Point of View document. A POV is NOT a pitch — it's a perspective on the prospect's business that demonstrates deep understanding.
+Used by the business case capability to build a Point of View document. A POV is NOT a pitch — it's a perspective on the prospect's business that demonstrates deep understanding.
 
 #### Component 1: Executive Anchor
 *A 2-sentence opening that speaks to what the executive cares about.*
@@ -217,20 +217,20 @@ All strategic analysis must be evidence-graded:
 | Strategic projections (win probability, path outcomes) | Hypothesis |
 | Future-state assumptions | Hypothesis |
 
-**The 50% Rule:** If more than 50% of the strategic analysis is hypothesis-grade, flag it: "This strategy is heavy on assumptions. Consider running `/research [Company]` to gather more verified intel before acting."
+**The 50% Rule:** If more than 50% of the strategic analysis is hypothesis-grade, flag it: "This strategy is heavy on assumptions. Consider running account research on [Company] to gather more verified intel before acting."
 
 ## Personalization Notes
 
 - Strategic frameworks (Five-Lens Prism, Three Paths) are universal — framework structure is not personalized
-- Proof points and case studies come from company-intel skill (Tier 3 — regenerated during /setup)
-- Competitive analysis references battlecards skill (Tier 3 — regenerated during /setup)
+- Proof points and case studies come from company-intel skill (Tier 3 — regenerated during deep personalization)
+- Competitive analysis references battlecards skill (Tier 3 — regenerated during deep personalization)
 - POV angle selection (Financial/Technical/Strategic) uses {{PRODUCT_DESCRIPTION}} context
 
-### First-Use Calibration Storage (/strategy)
+### First-Use Calibration Storage (deal strategy)
 
-On the first run of `/strategy`, the user is asked whether they prefer aggressive or conservative deal strategy. The Three Paths framework is universal, but the **recommendation bias** is personalized:
+On the first run of deal strategy, the user is asked whether they prefer aggressive or conservative deal strategy. The Three Paths framework is universal, but the **recommendation bias** is personalized:
 
-- **Strategy posture:** [Populated on first /strategy run — aggressive / balanced / conservative]
+- **Strategy posture:** [Populated on first deal strategy run — aggressive / balanced / conservative]
 - **Posture notes:** [Any additional context, e.g., "I push hard when I see champion engagement" or "I prefer to slow down and gather more intel"]
 
 This does not change the Three Paths framework itself — all three paths are always presented. It influences which path the RECOMMENDATION line suggests when signals are mixed.

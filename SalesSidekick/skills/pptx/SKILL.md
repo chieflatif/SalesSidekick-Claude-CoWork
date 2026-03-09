@@ -26,7 +26,7 @@ Defines the PptxGenJS pipeline for generating native .pptx presentations. Contai
 SalesSidekick generates presentations using PptxGenJS, a JavaScript library for creating PowerPoint files programmatically.
 
 **Generation flow:**
-1. Load brand tokens (logo, colors, fonts) from /setup configuration
+1. Load brand tokens (logo, colors, fonts) from deep personalization configuration
 2. Select template based on deal stage or user preference
 3. Populate 8 slides with account-specific content
 4. Apply brand styling throughout
@@ -36,7 +36,7 @@ SalesSidekick generates presentations using PptxGenJS, a JavaScript library for 
 
 ### Brand Tokens
 
-Captured during /setup Phase 5 (Presentation Brand):
+Captured during deep personalization Phase 5 (Presentation Brand):
 
 | Token | Description | Default |
 |-------|-------------|---------|
@@ -147,7 +147,7 @@ When LibreOffice is available on the system:
 
 ## Personalization Notes
 
-- Brand tokens captured during /setup Phase 5 (Tier 2 variables)
+- Brand tokens captured during deep personalization Phase 5 (Tier 2 variables)
 - Case studies and proof points come from company-intel skill (Tier 3 — regenerated)
 - Competitive positioning comes from battlecards skill (Tier 3 — regenerated)
 - Template selection is universal logic — no personalization needed

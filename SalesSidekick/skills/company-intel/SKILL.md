@@ -10,7 +10,7 @@ user-invocable: false
 
 # Company Intel — Product & Competitive Positioning Skill
 
-> **Tier 3 — This entire file is regenerated during /setup Phase 2 (Company Intel) via web research on {{COMPANY}}.**
+> **Tier 3 — This entire file is regenerated during deep personalization Phase 2 (Company Intel) via web research on {{COMPANY}}.**
 
 ## Purpose
 
@@ -31,12 +31,12 @@ Contains the AE's company overview, product portfolio, competitive positioning, 
 
 **Company:** {{COMPANY}}
 **Website:** {{COMPANY_URL}}
-**Industry:** [Populated during /setup via web research]
-**Founded:** [Populated during /setup]
-**HQ:** [Populated during /setup]
-**Size:** [Populated during /setup — employees, revenue if public]
+**Industry:** [Populated during deep personalization via web research]
+**Founded:** [Populated during deep personalization]
+**HQ:** [Populated during deep personalization]
+**Size:** [Populated during deep personalization — employees, revenue if public]
 
-**Mission/positioning:** [1-2 sentences from company website — populated during /setup]
+**Mission/positioning:** [1-2 sentences from company website — populated during deep personalization]
 
 ### Product Portfolio
 
@@ -44,7 +44,7 @@ Contains the AE's company overview, product portfolio, competitive positioning, 
 **Additional Products:** {{SECONDARY_PRODUCTS}}
 **Description:** {{PRODUCT_DESCRIPTION}}
 
-**Product overview** (populated during /setup):
+**Product overview** (populated during deep personalization):
 - What it does: [Core capabilities]
 - Who it's for: [Target personas]
 - Key differentiators: [What makes it unique]
@@ -57,7 +57,7 @@ Contains the AE's company overview, product portfolio, competitive positioning, 
 2. {{TOP_COMPETITOR_2}}
 3. {{TOP_COMPETITOR_3}}
 
-**Our positioning vs. each competitor** (populated during /setup via web research):
+**Our positioning vs. each competitor** (populated during deep personalization via web research):
 
 *Competitor 1: {{TOP_COMPETITOR_1}}*
 - Their strength: [What they're known for]
@@ -78,14 +78,14 @@ Contains the AE's company overview, product portfolio, competitive positioning, 
 
 *Not detailed pricing — just enough context for strategic conversations.*
 
-- **Pricing model:** [Subscription/Usage/License/Hybrid — populated during /setup]
+- **Pricing model:** [Subscription/Usage/License/Hybrid — populated during deep personalization]
 - **Typical deal range:** {{AVERAGE_DEAL_SIZE}}
-- **Pricing relative to market:** [Premium/Mid-market/Value — populated during /setup]
-- **Key pricing conversations:** [Common objections and responses — populated during /setup]
+- **Pricing relative to market:** [Premium/Mid-market/Value — populated during deep personalization]
+- **Key pricing conversations:** [Common objections and responses — populated during deep personalization]
 
 ### Case Studies by Vertical
 
-*Populated during /setup via web research on {{COMPANY}}'s published case studies.*
+*Populated during deep personalization via web research on {{COMPANY}}'s published case studies.*
 
 **Format per case study:**
 
@@ -99,7 +99,7 @@ Contains the AE's company overview, product portfolio, competitive positioning, 
 | **Results** | [Quantified outcomes — evidence-graded] |
 | **Quote** | [Customer quote if available] |
 
-*Default (pre-/setup):* No case studies available. Run /setup Phase 2 to populate from {{COMPANY}}'s published materials.
+*Default (before deep personalization):* No case studies available. Run deep personalization Phase 2 to populate from {{COMPANY}}'s published materials.
 
 **Usage rules:**
 - Only reference case studies when the prospect matches the vertical or challenge
@@ -110,11 +110,11 @@ Contains the AE's company overview, product portfolio, competitive positioning, 
 
 *Company-level metrics for use in proposals, POVs, and presentations.*
 
-- **Customers served:** [Number — populated during /setup]
-- **Key industries:** [Verticals — populated during /setup]
-- **Notable logos:** [Reference customers — populated during /setup]
-- **Growth metrics:** [If public — populated during /setup]
-- **Awards/recognition:** [If relevant — populated during /setup]
+- **Customers served:** [Number — populated during deep personalization]
+- **Key industries:** [Verticals — populated during deep personalization]
+- **Notable logos:** [Reference customers — populated during deep personalization]
+- **Growth metrics:** [If public — populated during deep personalization]
+- **Awards/recognition:** [If relevant — populated during deep personalization]
 
 **Evidence grading for metrics:**
 - Published on company website or press releases → Verified
@@ -136,9 +136,9 @@ Three angles for positioning (Commandment 9: Don't Pitch Features, Pitch Angles)
 
 ## Personalization Notes
 
-- **This entire file is Tier 3** — fully regenerated during /setup Phase 2 (Company Intel)
-- /setup uses web search to research {{COMPANY}} and populate all sections
-- Case studies are sourced from the company's public materials during /setup
+- **This entire file is Tier 3** — fully regenerated during deep personalization Phase 2 (Company Intel)
+- Deep personalization uses web search to research {{COMPANY}} and populate all sections
+- Case studies are sourced from the company's public materials during deep personalization
 - Competitive positioning is cross-referenced with battlecards skill
 - Pitch angle templates use Tier 2 variables ({{PRIMARY_PRODUCT}}, {{PRODUCT_DESCRIPTION}})
 - This file is the most frequently updated Tier 3 skill — refreshed whenever significant company changes occur
