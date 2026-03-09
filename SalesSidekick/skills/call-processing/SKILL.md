@@ -2,7 +2,9 @@
 name: call-processing
 description: 6-Output Framework for post-call processing including MEDDPICC scoring, task extraction, coaching, and risk signals
 tier: 1 (universal)
-auto-fire: /closeout
+auto-fire:
+  intents: [process-call]
+  context: "When processing a call transcript or reviewing call patterns and coaching feedback"
 user-invocable: false
 ---
 
@@ -14,8 +16,8 @@ Defines the 6-Output Framework used by /closeout to process call transcripts. Co
 
 ## When Referenced
 
-- **/closeout** — the primary consumer. Processes every call through this framework.
-- **/coaching** — uses the 5 coaching dimensions for pattern analysis across calls
+- **Processing a call** (process-call intent) — the primary consumer. Fires whenever a call transcript is provided or discussed, processing every call through the full 6-Output Framework.
+- **Reviewing coaching patterns** (improve-skills intent) — uses the 5 coaching dimensions for pattern analysis across multiple calls
 
 ## Core Framework
 

@@ -1,6 +1,13 @@
 ---
 description: Point of View document — 5-Component Model with evidence-graded claims
 argument-hint: "[Company name]"
+intent-triggers:
+  - intent: build-case
+    phrases:
+      - "I need a business case"
+      - "build a POV"
+      - "executive justification"
+      - "value story"
 ---
 
 # /pov — Point of View Document
@@ -129,3 +136,14 @@ Every quantitative claim MUST be tagged:
 | No Notion | Cannot load account-specific data. Asks user to describe the company, deal, and pain points. Produces a POV based on user input, but notes that evidence grading will be weaker. |
 | No company-intel skill | If company-intel hasn't been generated (pre-/setup), POV relies on user-provided context and web search. Notes that running /setup will enable richer POVs. |
 | All other connectors | No impact. |
+
+## Proactive Data Capture
+
+After execution, offer to persist (batched, one confirmation):
+
+| Data | Database | Condition |
+|------|----------|-----------|
+| POV document | Google Drive (working folder) | If Drive connected — save as shareable document |
+| POV summary | Companies (Notes field) | Always — append POV summary to company notes for reference |
+
+If database doesn't exist yet, offer to create it first (see CLAUDE.md Section 14.4).

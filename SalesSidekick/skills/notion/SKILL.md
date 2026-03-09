@@ -2,7 +2,9 @@
 name: notion
 description: Central reference for all Notion database schemas, read/write patterns, account resolution logic, and write failure handling
 tier: 1 (universal)
-auto-fire: Any database read/write operation
+auto-fire:
+  intents: [all data operations]
+  context: "When any interaction requires reading from or writing to Notion databases"
 user-invocable: false
 ---
 
@@ -14,11 +16,11 @@ Central reference for all Notion database operations. Contains the complete sche
 
 ## When Referenced
 
-- **Every command that reads from Notion** — schema lookup, field validation
-- **Every command that writes to Notion** — field mapping, write patterns
-- **/setup** — creates all 6 databases with these schemas
-- **/add-company, /add-deal** — record creation patterns
-- **/closeout** — writes to 4 databases simultaneously
+- **Any interaction reading from Notion** (all data operations) — schema lookup, field validation, and account resolution logic for database queries
+- **Any interaction writing to Notion** (all data operations) — field mapping, write patterns, and write failure handling for database updates
+- **Deep personalization sessions** (customize-system intent) — creates all 6 databases with these schemas during initial configuration
+- **Adding new accounts and deals** (add-account intent) — record creation patterns for Companies, Contacts, and Deals databases
+- **Processing calls** (process-call intent) — writes to 4 databases simultaneously (Call Notes, Tasks, Deals, Companies)
 
 ## Core Framework
 

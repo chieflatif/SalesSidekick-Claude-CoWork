@@ -1,6 +1,13 @@
 ---
 description: Post-call processing — 6-Output Framework (MEDDPICC, tasks, coaching, email, risks, competitive intel)
 argument-hint: "[paste call transcript or describe the call]"
+intent-triggers:
+  - intent: process-call
+    phrases:
+      - "just got off a call"
+      - "debrief this call"
+      - "here's my transcript"
+      - "wrap up my call"
 ---
 
 # /closeout — Post-Call Processing
@@ -185,3 +192,18 @@ Competitor: [Name] | Win Probability: [0.X]
 | No Drive | Cannot auto-discover transcripts. Asks user to paste transcript directly. All processing works normally after that. |
 | No Gmail | Follow-up email generated as copy-paste text instead of offering to send directly. |
 | No Calendar | No impact. /closeout doesn't use Calendar. |
+
+## Proactive Data Capture
+
+After execution, offer to persist (batched, one confirmation):
+
+| Data | Database | Condition |
+|------|----------|-----------|
+| Company record | Companies | If company not already in Notion |
+| Contacts mentioned | Contacts | If new names/titles identified in transcript |
+| Action items extracted | Tasks | Always — one record per task from Output 2 |
+| Deal stage update | Deals | If MEDDPICC changes or risk signals warrant stage movement |
+| Call notes | Call Notes | Always — full 6-Output summary as structured record |
+| Competitive intel | Deals / Battlecards | If competitor mentioned in transcript |
+
+If database doesn't exist yet, offer to create it first (see CLAUDE.md Section 14.4).

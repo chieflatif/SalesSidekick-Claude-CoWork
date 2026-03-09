@@ -1,6 +1,13 @@
 ---
 description: Full territory pipeline view — MEDDPICC scoring, risk flags, prioritized action plan
 argument-hint: "(no arguments)"
+intent-triggers:
+  - intent: check-pipeline
+    phrases:
+      - "how's my pipeline"
+      - "which deals need attention"
+      - "territory health"
+      - "deal status"
 ---
 
 # /pipeline — Pipeline Health Analysis

@@ -2,7 +2,9 @@
 name: pptx
 description: PptxGenJS pipeline for generating native .pptx presentations with brand tokens, 5 deck templates, and visual QA
 tier: 1 (universal)
-auto-fire: /deck (pptx path)
+auto-fire:
+  intents: [create-deck]
+  context: "When building a presentation via native pptx generation"
 user-invocable: false
 ---
 
@@ -14,8 +16,8 @@ Defines the PptxGenJS pipeline for generating native .pptx presentations. Contai
 
 ## When Referenced
 
-- **/deck** — uses this skill for .pptx generation (default path)
-- **/setup** — captures brand tokens (logo, colors, fonts) for presentation branding
+- **Creating presentations** (create-deck intent, pptx path) — uses this skill for native .pptx generation as the default presentation path. Fires when the user requests a deck and pptx is the selected output format.
+- **Deep personalization sessions** (customize-system intent) — captures brand tokens (logo, colors, fonts) for presentation branding during setup
 
 ## Core Framework
 

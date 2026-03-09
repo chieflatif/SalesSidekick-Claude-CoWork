@@ -1,6 +1,14 @@
 ---
 description: Quick contextual email — existing relationships, no puffing, reads like AE wrote it
 argument-hint: "[Company name] about [topic]"
+intent-triggers:
+  - intent: write-email
+    context: existing relationship
+    phrases:
+      - "send a follow-up"
+      - "email to"
+      - "write a reply"
+      - "follow up with"
 ---
 
 # /email — Quick Contextual Email
@@ -105,3 +113,13 @@ Evidence: [Verified] contact and deal data from Notion | [Estimated] tone and fr
 | No Gmail | Default behavior — generates copy-paste text with subject and body. No degradation. |
 | No brand-voice skill | Uses generic professional tone. Notes: "Run /setup to personalize your email voice." |
 | All other connectors | No impact. |
+
+## Proactive Data Capture
+
+After execution, offer to persist (batched, one confirmation):
+
+| Data | Database | Condition |
+|------|----------|-----------|
+| Email draft | Companies (Notes field) | If user wants to save the email for reference |
+
+If database doesn't exist yet, offer to create it first (see CLAUDE.md Section 14.4).

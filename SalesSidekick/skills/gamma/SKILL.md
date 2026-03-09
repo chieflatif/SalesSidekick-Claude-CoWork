@@ -2,7 +2,9 @@
 name: gamma
 description: Alternative presentation generation path via Gamma MCP with prompt templates and decision tree for Gamma vs PPTX
 tier: 1 (universal)
-auto-fire: /deck (gamma path)
+auto-fire:
+  intents: [create-deck]
+  context: "When building a presentation via Gamma integration"
 user-invocable: false
 ---
 
@@ -14,8 +16,8 @@ Defines the Gamma presentation generation path as an alternative to native .pptx
 
 ## When Referenced
 
-- **/deck** — offers Gamma as an alternative when available
-- **/setup** — configures Gamma connector status ({{GAMMA_CONNECTED}})
+- **Creating presentations** (create-deck intent, gamma path) — offers Gamma as an alternative presentation path when the Gamma connector is available. Fires when the user requests a deck and Gamma is the selected output format.
+- **Deep personalization sessions** (customize-system intent) — configures Gamma connector status ({{GAMMA_CONNECTED}}) during setup
 
 ## Core Framework
 

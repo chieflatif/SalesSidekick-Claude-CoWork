@@ -2,7 +2,9 @@
 name: profile
 description: AE professional identity and context used for personalized output across all commands
 tier: 3 (regenerated)
-auto-fire: Nearly every session — AE identity, territory context, qualification gates
+auto-fire:
+  intents: [all]
+  context: "Fires on nearly every interaction — provides AE identity, territory context, qualification gates, and operating rhythm"
 user-invocable: false
 ---
 
@@ -16,10 +18,10 @@ Contains the AE's complete professional identity: who they are, what they sell, 
 
 ## When Referenced
 
-- **Nearly every command** — provides AE identity context
-- **/setup** — fully regenerates this file from user inputs
-- **/today, /end-of-day** — uses operating rhythm for daily briefings
-- **/add-company** — uses qualification gates (Hell Yes / Hell No)
+- **Nearly every interaction** (all intents) — provides AE identity context, territory parameters, and operating rhythm as foundational context for all outputs
+- **Deep personalization sessions** (customize-system intent) — fully regenerates this file from user inputs during calibration
+- **Morning briefings and evening wrap-ups** (start-my-day, end-my-day intents) — uses operating rhythm for daily planning and review
+- **Adding new accounts** (add-account intent) — uses qualification gates (Hell Yes / Hell No) to assess fit
 
 ## Core Framework
 

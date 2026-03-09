@@ -1,6 +1,13 @@
 ---
 description: Presentation generation — 5 templates, auto-selects by stage, .pptx or Gamma
 argument-hint: "[Company name]"
+intent-triggers:
+  - intent: create-deck
+    phrases:
+      - "build a deck"
+      - "I need slides"
+      - "presentation for"
+      - "make a deck"
 ---
 
 # /deck — Presentation Generation
@@ -142,3 +149,14 @@ If >50% of deck content is hypothesis-grade, warn: "This deck is heavy on assump
 | No brand tokens (pre-/setup) | Uses default styling. Notes: "Run /setup to apply your brand colors, logo, and fonts." |
 | No company-intel skill | Uses generic proof points. Notes: "Run /setup to generate company-specific case studies and positioning." |
 | All other connectors | No impact. |
+
+## Proactive Data Capture
+
+After execution, offer to persist (batched, one confirmation):
+
+| Data | Database | Condition |
+|------|----------|-----------|
+| Presentation file | Google Drive (working folder) | If Drive connected — save .pptx or Gamma link |
+| Deck summary | Companies (Notes field) | Always — append deck type and date to company notes |
+
+If database doesn't exist yet, offer to create it first (see CLAUDE.md Section 14.4).

@@ -1,7 +1,7 @@
 {
   "name": "salessidekick",
-  "version": "2.0.0",
-  "description": "Your AI-powered Chief of Staff for enterprise sales. Self-personalizing — run /salessidekick:setup after installing to personalize (~45 min, one time). Then try /salessidekick:today for your first morning briefing. 22 commands, 11 skills, 6 Notion databases.",
+  "version": "3.0.0",
+  "description": "Your AI sales partner. Process calls, prep for meetings, research accounts, manage your pipeline, write outreach — just tell it what you need. Gets smarter the more you use it.",
   "author": {
     "name": "Pipeline Rebel (Latif Horst)",
     "url": "https://github.com/chieflatif"

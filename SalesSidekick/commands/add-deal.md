@@ -1,6 +1,14 @@
 ---
 description: Guided deal record creation — links company + contacts, MEDDPICC defaults to Red
 argument-hint: "[Company name]"
+intent-triggers:
+  - intent: add-account
+    context: with deal context
+    phrases:
+      - "add to my pipeline"
+      - "new deal"
+      - "new opportunity"
+      - "log this deal"
 ---
 
 # /add-deal — Add Deal Record

@@ -4,14 +4,14 @@
     "name": "Pipeline Rebel (Latif Horst)"
   },
   "metadata": {
-    "description": "Self-personalizing AI sales operating system for Claude"
+    "description": "Your AI sales partner — process calls, prep for meetings, manage your pipeline. Just tell it what you need."
   },
   "plugins": [
     {
       "name": "salessidekick",
       "source": ".",
-      "version": "2.0.0",
-      "description": "AI Chief of Staff for enterprise sales. 22 commands, 11 skills, 6 Notion databases. Run /salessidekick:setup after installing.",
+      "version": "3.0.0",
+      "description": "Your AI sales partner. Process calls, prep for meetings, research accounts, manage your pipeline, write outreach — just tell it what you need. Gets smarter the more you use it.",
       "author": {
         "name": "Pipeline Rebel (Latif Horst)"
       },

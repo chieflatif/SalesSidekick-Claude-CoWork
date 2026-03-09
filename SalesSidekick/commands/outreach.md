@@ -1,6 +1,14 @@
 ---
 description: Prospecting email — account intel, Financial/Technical/Strategic angle, sub-200 words
 argument-hint: "[Company name]"
+intent-triggers:
+  - intent: write-email
+    context: new relationship
+    phrases:
+      - "cold email to"
+      - "outreach to"
+      - "prospecting email"
+      - "reach out to"
 ---
 
 # /outreach — Prospecting Email
@@ -117,3 +125,13 @@ If the outreach is primarily hypothesis-grade (no research, no Notion data), war
 | No Gmail | Default behavior — generates copy-paste email text. No degradation. |
 | No brand-voice skill | Uses generic professional tone. Notes: "Run /setup to personalize your email voice." |
 | All other connectors | No impact. |
+
+## Proactive Data Capture
+
+After execution, offer to persist (batched, one confirmation):
+
+| Data | Database | Condition |
+|------|----------|-----------|
+| Email draft | Companies (Notes field) | If user wants to save the outreach for reference |
+
+If database doesn't exist yet, offer to create it first (see CLAUDE.md Section 14.4).

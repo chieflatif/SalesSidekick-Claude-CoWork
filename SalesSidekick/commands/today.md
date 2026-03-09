@@ -1,6 +1,13 @@
 ---
 description: Morning briefing — account-grouped tasks and deals needing attention
 argument-hint: "(no arguments)"
+intent-triggers:
+  - intent: start-my-day
+    phrases:
+      - "what's on my plate"
+      - "morning briefing"
+      - "what should I focus on"
+      - "start my day"
 ---
 
 # /today — Morning Briefing

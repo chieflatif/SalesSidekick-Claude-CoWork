@@ -3,8 +3,7 @@
 ## Prerequisites
 
 - Claude Desktop with Cowork enabled
-- A Notion account (free or paid) for database creation
-- ~45 minutes for initial `/setup` personalization
+- A Notion account (free or paid)
 
 ---
 
@@ -41,7 +40,7 @@ zip -r SalesSidekick.zip . -x ".git/*" ".gitignore"
 5. Under "Capabilities", ensure "Read content" and "Insert content" are enabled
 6. Copy the Internal Integration Secret (starts with `ntn_`)
 
-> **Important:** SalesSidekick's `.mcp.json` contains a `{{NOTION_API_KEY}}` placeholder. You need to replace this with your actual key before `/setup` can connect to Notion. After uploading the plugin, locate the `.mcp.json` file in the plugin's directory, open it in a text editor, find `{{NOTION_API_KEY}}`, and replace it with your key. The line should look like: `"Bearer ntn_your_actual_key_here"` (keep the surrounding quotes intact).
+> **Important:** SalesSidekick's `.mcp.json` contains a `{{NOTION_API_KEY}}` placeholder. You need to replace this with your actual key. After uploading the plugin, locate the `.mcp.json` file in the plugin's directory, open it in a text editor, find `{{NOTION_API_KEY}}`, and replace it with your key. The line should look like: `"Bearer ntn_your_actual_key_here"` (keep the surrounding quotes intact).
 
 **Step 4: Create a working folder**
 
@@ -51,22 +50,41 @@ Create a folder on your machine for SalesSidekick output (presentations, documen
 ~/Documents/SalesSidekick/
 ```
 
-When you start a Cowork conversation, click **"Work in a folder"** at the bottom left and select this folder. Commands like `/deck` (presentations) and `/pov` (documents) will save generated files here. Your persistent data (deals, contacts, tasks) still lives in Notion.
+When you start a Cowork conversation, click **"Work in a folder"** at the bottom left and select this folder. Your persistent data (deals, contacts, tasks) lives in Notion — this folder is for file output like presentations and documents.
 
-**Step 5: Run /setup**
+**Step 5: Configure Cowork Global Settings (recommended)**
 
-Start a new conversation in Cowork, select your SalesSidekick folder, and type `/salessidekick:setup`. The personalization wizard will guide you through 7 phases (~45 minutes total):
-1. Identity Setup
-2. Company Intelligence (AI-assisted research)
-3. Competitive Landscape (AI-assisted battlecard generation)
-4. Brand Voice (communication calibration)
-5. Presentation Brand (brand token capture)
-6. Connector Setup (database creation + connector detection)
-7. Verification + Audit
+Go to **Settings > Cowork** and paste the following into the instructions field, replacing the bracketed placeholders with your info:
 
-After setup, you're ready. Try `/salessidekick:today` for your first morning briefing.
+```
+I am [Your Name], a [Your Title] at [Your Company].
+Communication style: [formal / casual / mixed]. Sign-off: [e.g., "Best," or "Cheers,"].
+I use voice-to-text — interpret my intent, not my grammar.
 
-> **Note on command names:** Plugin commands are namespaced. All SalesSidekick commands are prefixed with `salessidekick:` (e.g., `/salessidekick:today`, `/salessidekick:prep`). Claude may also invoke them automatically based on context.
+QUALITY RULES — apply to everything you produce:
+
+No hallucination. If you don't have a verified source, say "I don't know" or "I'd need to verify." Never state made-up information as fact. Never invent statistics, quotes, company details, or technical claims. When you cite a number, name where it came from. Grade every factual claim: Verified (sourced), Estimated (calculated with stated assumptions), or Hypothesis (pattern-based guess). If I catch you making something up, that's a failure.
+
+No slop. Do not produce generic, templated, filler-heavy output. Every sentence must earn its place. If you catch yourself writing "In today's fast-paced business environment" or "It's important to note that" or any variant of AI-sounding padding — delete it and write something a human would actually say. Match MY voice, not a corporate template. Before delivering any written content, re-read it and ask: "Would this person actually write this? Or does this sound like AI wrote it?"
+
+Check your work. Your first draft is not your final answer. Before presenting any output: (1) re-read it for accuracy, (2) verify any claims against available data, (3) check that it actually answers what I asked, (4) remove anything generic or redundant. If I ask for an email, re-read it as if you're the recipient — is it compelling or is it forgettable? If I ask for analysis, stress-test your own logic — where are the holes?
+
+Do the research first. Before generating content about a company, person, deal, or topic — look it up. Check Notion. Search the web. Read the actual data. Do not guess when you can look. Notion is my single source of truth for deal and account data — always check it before generating answers. Never create duplicate records.
+
+Give me options, not decisions. When presenting strategy or recommendations, give me at least 2-3 distinct paths with trade-offs. Never prescribe a single answer. Illuminate the landscape so I can decide.
+
+Respect my time. Be direct — lead with the answer, not the reasoning. No filler, no preamble. Break complex work into chunks I can finish in under 10 minutes each.
+```
+
+This field applies to **all** Cowork sessions — not just SalesSidekick. These rules address the most common AI failure modes (hallucination, generic output, lazy first drafts, no self-review) and establish a quality floor that every plugin and conversation inherits.
+
+**Step 6: Start a conversation**
+
+Open a new Cowork conversation, select your SalesSidekick folder, and just start talking. SalesSidekick will introduce itself, ask for the basics (name, company, what you sell), and offer to research your company right away.
+
+From there, just tell it what you need — morning briefing, call processing, deal strategy, whatever. It works immediately and gets sharper the more you use it.
+
+> **Why global settings matter:** The Cowork global settings field (Step 5) loads into every session before any plugin. Think of it as Layer 1 of a cascading architecture: Global Settings → Plugin CLAUDE.md → Skills → Capabilities. By establishing evidence integrity, Notion-first behavior, and communication style at the global level, every SalesSidekick interaction inherits those rules automatically.
 
 ---
 
@@ -83,7 +101,7 @@ Then configure Notion:
 1. Create a Notion integration (see Method 1, Step 3)
 2. Open `.mcp.json` and replace `{{NOTION_API_KEY}}` with your actual key (do NOT commit your real key to version control)
 
-Run `/salessidekick:setup` to personalize.
+Start a conversation and SalesSidekick handles the rest.
 
 ---
 
@@ -96,45 +114,45 @@ For team-wide deployment, admins can upload the plugin ZIP to an organization-ma
 3. Upload the `SalesSidekick.zip` file
 4. Set visibility to your sales team or organization
 
-Each AE then installs from the org marketplace and runs `/salessidekick:setup` to personalize.
+Each AE then installs from the org marketplace and starts a conversation to personalize.
 
 See [enterprise-deployment.md](docs/enterprise-deployment.md) for detailed team configuration, pre-configured settings, and onboarding workflows.
 
 ---
 
-## Optional Connectors
+## Optional Integrations
 
-After initial setup with Notion, you can add optional connectors for additional capabilities:
+After connecting Notion, you can add optional integrations for additional convenience:
 
-| Connector | How to Connect | What It Adds |
-|-----------|---------------|-------------|
-| Gmail | Claude Cowork > Customize > Connectors > Gmail | Direct email sending from /outreach, /email, /closeout |
-| Google Calendar | Claude Cowork > Customize > Connectors > Calendar | Meeting-aware context in /today, /end-of-day, /prep |
-| Google Drive | Claude Cowork > Customize > Connectors > Drive | Auto-discovery of call transcripts for /closeout |
+| Integration | How to Connect | What It Adds |
+|-------------|---------------|-------------|
+| Gmail | Claude Cowork > Customize > Connectors > Gmail | Send emails directly instead of copy-paste |
+| Google Calendar | Claude Cowork > Customize > Connectors > Calendar | Meeting-aware briefings and automatic meeting prep |
+| Google Drive | Claude Cowork > Customize > Connectors > Drive | Auto-discover call transcripts and store documents |
 | Gamma | Claude Cowork > Customize > Connectors > Gamma | Web-based presentations as alternative to .pptx |
 
-All connectors are optional. Missing connectors change behavior, never break it. See [CONNECTORS.md](CONNECTORS.md) for details.
+All integrations are optional. Missing one changes behavior, never breaks it. See [CONNECTORS.md](CONNECTORS.md) for details.
 
 ---
 
 ## Verifying Your Installation
 
-After `/salessidekick:setup` completes, verify everything works:
+After your first few conversations, verify everything works:
 
-| Test | Command | Expected Result |
-|------|---------|----------------|
-| Notion read | `/salessidekick:today` | Shows your tasks and deals |
-| Notion write | `/salessidekick:add-company` | Creates a test company record |
-| Full pipeline | `/salessidekick:closeout` | Processes a call and writes to 4 databases |
-| Strategy | `/salessidekick:strategy [Company]` | Produces Five-Lens analysis |
+| Test | What to Say | Expected Result |
+|------|-------------|----------------|
+| Basic function | "What's on my plate today?" | Shows your tasks and deals |
+| Data persistence | "Tell me about [company you've discussed]" | Recalls company context from Notion |
+| Call processing | "Here's a call transcript..." | Processes it, offers to save to databases |
+| Strategy | "How should I approach [deal]?" | Five-Lens analysis with three paths |
 
-If any test fails, check [CONNECTORS.md](CONNECTORS.md) troubleshooting section.
+If something isn't working, check [CONNECTORS.md](CONNECTORS.md) troubleshooting section.
 
 ---
 
 ## Updating
 
-**Download a new version** of the `.zip` from the releases page and re-upload it through Cowork > Customize > Plugins. Your Notion databases and data are preserved — only command and skill definitions update.
+**Download a new version** of the `.zip` from the releases page and re-upload it through Cowork > Customize > Plugins. Your Notion databases and data are preserved — only capability and skill definitions update.
 
 **Enterprise users:** Admin uploads the new `.zip` to the organization marketplace. AEs update through their normal plugin management flow.
 

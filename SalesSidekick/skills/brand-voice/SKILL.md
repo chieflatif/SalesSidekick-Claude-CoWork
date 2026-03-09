@@ -2,7 +2,9 @@
 name: brand-voice
 description: Defines the AE's personal communication voice, email formatting, vocabulary substitutions, and the 7-point voice check
 tier: 3 (regenerated)
-auto-fire: Any communication output — /email, /outreach, /draft-post, /closeout (follow-up email)
+auto-fire:
+  intents: [write-email, create-deck, write-post, process-call, build-case]
+  context: "When producing any written content — emails, presentations, posts, follow-ups, or business cases"
 user-invocable: false
 ---
 
@@ -16,11 +18,11 @@ Defines the AE's personal communication voice for all written outputs. Contains 
 
 ## When Referenced
 
-- **/email** — applies voice rules to contextual emails
-- **/outreach** — applies voice rules to prospecting emails
-- **/draft-post** — applies voice rules to LinkedIn posts
-- **/closeout** — applies voice rules to follow-up emails (Output 4)
-- **/pov** — applies voice tone to POV documents
+- **Writing emails to existing contacts** (write-email intent) — applies voice rules to contextual emails and follow-ups
+- **Drafting prospecting outreach** (write-email intent, new relationship) — applies voice rules to cold and warm outreach emails
+- **Creating LinkedIn content** (write-post intent) — applies voice rules to posts and thought leadership
+- **Processing calls** (process-call intent) — applies voice rules to the follow-up email generated in Output 4
+- **Building executive business cases** (build-case intent) — applies voice tone to POV documents and presentations
 
 ## Core Framework
 

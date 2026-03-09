@@ -2,7 +2,9 @@
 name: meddpicc
 description: 8-element MEDDPICC qualification scoring rubric with Red/Yellow/Green definitions and discovery questions
 tier: 1 (universal)
-auto-fire: /closeout, /strategy, /prep, /pipeline, /add-deal
+auto-fire:
+  intents: [process-call, think-about-deal, prepare-meeting, check-pipeline, add-account]
+  context: "When evaluating deal health, qualification status, or processing call insights"
 user-invocable: false
 ---
 
@@ -14,11 +16,11 @@ Defines the 8-element MEDDPICC scoring rubric used across SalesSidekick. Each el
 
 ## When Referenced
 
-- **/closeout** — scores MEDDPICC elements from call transcripts with evidence quotes
-- **/strategy** — assesses MEDDPICC gaps as part of Five-Lens Prism analysis
-- **/prep** — identifies MEDDPICC gaps to probe during upcoming meetings
-- **/pipeline** — calculates deal health scores using MEDDPICC confidence
-- **/add-deal** — initializes all 8 elements to Red (nothing assumed)
+- **Processing a call** (process-call intent) — scores MEDDPICC elements from call transcripts with evidence quotes. Fires whenever a call transcript is provided or discussed.
+- **Analyzing deal strategy** (think-about-deal intent) — assesses MEDDPICC gaps as part of Five-Lens Prism analysis and Three Paths recommendation
+- **Preparing for meetings** (prepare-meeting intent) — identifies MEDDPICC gaps to probe during upcoming meetings and suggests discovery questions
+- **Reviewing pipeline health** (check-pipeline intent) — calculates deal health scores using MEDDPICC confidence and flags critical gaps by stage
+- **Adding new deals** (add-account intent) — initializes all 8 elements to Red (nothing assumed) when creating a new deal record
 
 ## Core Framework
 

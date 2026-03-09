@@ -1,6 +1,13 @@
 ---
 description: LinkedIn post — 3-Type Framework, brand voice, 6-point pre-publish checklist
 argument-hint: "[optional: topic or post type]"
+intent-triggers:
+  - intent: write-post
+    phrases:
+      - "LinkedIn post about"
+      - "draft a post"
+      - "write something for LinkedIn"
+      - "social media post"
 ---
 
 # /draft-post — LinkedIn Post
@@ -122,3 +129,13 @@ POSTING CONTEXT:
 | No posting-guide skill | Uses generic LinkedIn best practices. Notes: "Run /setup to personalize your posting framework." |
 | No brand-voice skill | Uses generic professional tone. Notes: "Run /setup to personalize your voice." |
 | All other connectors | No impact. |
+
+## Proactive Data Capture
+
+After execution, offer to persist (batched, one confirmation):
+
+| Data | Database | Condition |
+|------|----------|-----------|
+| Post draft | LinkedIn Posts | Always — save as draft with post type, hook, and content |
+
+If database doesn't exist yet, offer to create it first (see CLAUDE.md Section 14.4).

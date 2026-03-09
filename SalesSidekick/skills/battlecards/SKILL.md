@@ -2,7 +2,9 @@
 name: battlecards
 description: Detailed competitive displacement playbooks with talk tracks, proof points, trap questions, and landmine responses
 tier: 3 (regenerated)
-auto-fire: /battle, /strategy (competitive dynamics lens)
+auto-fire:
+  intents: [handle-competition, think-about-deal]
+  context: "When a competitor is mentioned or competitive dynamics are relevant to deal strategy"
 user-invocable: false
 ---
 
@@ -16,10 +18,10 @@ Contains detailed competitive battlecards for each of the AE's top competitors. 
 
 ## When Referenced
 
-- **/battle** — loads the relevant battlecard and applies it to a specific deal
-- **/strategy** — Competitive Dynamics lens references competitor positioning
-- **/prep** — includes competitive context when a deal has a known competitor
-- **/deck** — Competitive Displacement template uses battlecard content
+- **Competitive displacement situations** (handle-competition intent) — loads the relevant battlecard and applies it to a specific deal with talk tracks and proof points
+- **Deal strategy analysis** (think-about-deal intent) — Competitive Dynamics lens of the Five-Lens Prism references competitor positioning and win probability
+- **Meeting preparation with known competitor** (prepare-meeting intent) — includes competitive context, trap questions, and landmine responses when a deal has a known competitor
+- **Competitive displacement presentations** (create-deck intent) — Competitive Displacement template uses battlecard content for slides
 
 ## Core Framework
 

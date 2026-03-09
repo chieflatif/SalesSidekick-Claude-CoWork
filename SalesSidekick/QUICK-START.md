@@ -1,99 +1,59 @@
 # SalesSidekick — Quick Start
 
-You've installed SalesSidekick. Here's how to get started.
+Get up and running in under 2 minutes.
 
 ---
 
-## Step 1: Configure Notion (required)
+## Step 1: Install the Plugin
 
-If you haven't already:
+1. Download `SalesSidekick.zip` from the [releases page](https://github.com/chieflatif/SalesSidekick-Claude-CoWork/releases)
+2. Open Claude Desktop > **Cowork** > **Customize** > **Plugins**
+3. Click **+** > **Add personal plugin** > select the `.zip` file
+
+---
+
+## Step 2: Connect Notion
+
 1. Create a Notion integration at [notion.so/my-integrations](https://www.notion.so/my-integrations)
 2. Copy your API key (starts with `ntn_`)
 3. Replace `{{NOTION_API_KEY}}` in the plugin's `.mcp.json` file with your actual key
 
 ---
 
-## Step 2: Create a working folder
+## Step 3: Start Talking
 
-Create a folder for SalesSidekick output (presentations, documents, exports):
+Open a Cowork conversation and just say hi. SalesSidekick will introduce itself, ask for the basics (your name, company, and what you sell), and offer to research your company right away.
 
+From there, just tell it what you need:
+
+- **"What's on my plate today?"** — morning briefing with tasks, deals, and meetings
+- **"I just got off a call with Acme"** — processes your call through MEDDPICC, extracts tasks, writes a follow-up
+- **"Get me ready for my Globex meeting"** — intel brief with talking points and gaps to probe
+- **"How should I approach the Initech deal?"** — strategic analysis with three paths forward
+- **"Write a follow-up to Sarah at Acme"** — contextual email in your voice
+- **"How's my pipeline?"** — territory health check with deal confidence scoring
+
+---
+
+## Tips
+
+**Create a working folder** for file output (presentations, documents):
 ```
 ~/Documents/SalesSidekick/
 ```
+When starting a conversation, click **"Work in a folder"** at the bottom left and select this folder.
 
-When starting a Cowork conversation, click **"Work in a folder"** at the bottom left and select this folder. Your database data lives in Notion — this folder is for file output like decks and POVs.
+**Global settings** for quality rules: Go to **Settings > Cowork** and paste the quality rules from [INSTALLATION-GUIDE.md](INSTALLATION-GUIDE.md). This sets a quality floor across all your AI interactions — anti-hallucination, anti-slop, evidence grading.
 
----
+**Go deeper when you're ready:** After a few sessions, ask "let's do a deep personalization" to build competitive battlecards, calibrate your brand voice, and capture territory details (~15 minutes). This is optional — the system already learns through use.
 
-## Step 3: Run /setup (required, one-time)
-
-```
-/salessidekick:setup
-```
-
-This is the most important command. It personalizes everything — your identity, company intel, competitive battlecards, brand voice, databases, and connectors. Takes ~45 minutes the first time. After that, every command knows who you are.
-
----
-
-## Step 4: Try These 5 Commands
-
-Once `/salessidekick:setup` is complete, try these in order:
-
-### Morning Briefing
-
-```
-/salessidekick:today
-```
-
-See your tasks, deals needing attention, and meeting prep for the day.
-
-### Before a Meeting
-
-```
-/salessidekick:prep Acme Corp
-```
-
-Get an intelligence brief with talking points, MEDDPICC gaps to probe, and stakeholder context.
-
-### After a Call
-
-```
-/salessidekick:closeout
-```
-
-Paste your call transcript. Get MEDDPICC scoring, action items, coaching feedback, a follow-up email, risk signals, and competitive intel — all written to Notion automatically.
-
-### Check Your Pipeline
-
-```
-/salessidekick:pipeline
-```
-
-See your full territory pipeline with deal health, MEDDPICC confidence, and weighted values.
-
-### Plan Your Strategy
-
-```
-/salessidekick:strategy Acme Corp
-```
-
-Deep strategic analysis through five lenses with three recommended paths forward.
-
----
-
-## What's Next?
-
-- `/salessidekick:outreach [Company]` — Write a prospecting email backed by intelligence
-- `/salessidekick:draft-post` — Create a LinkedIn post using the 3-Type Framework
-- `/salessidekick:deck [Company]` — Generate a presentation (auto-selects template by deal stage)
-- `/salessidekick:weekly` — Prepare your weekly pipeline summary for your manager 1:1
-- `/salessidekick:research [Company]` — Deep company research before reaching out
+**Optional integrations:** Add Gmail (send emails directly), Calendar (meeting-aware briefings), Drive (auto-discover transcripts), or Gamma (web presentations). See [CONNECTORS.md](CONNECTORS.md) for setup.
 
 ---
 
 ## Need Help?
 
-- Run `/salessidekick:audit` to check your configuration integrity
-- See [CONNECTORS.md](CONNECTORS.md) for connector setup and troubleshooting
-- See [INSTALLATION-GUIDE.md](INSTALLATION-GUIDE.md) for detailed setup instructions
-- Full command reference in [README.md](README.md)
+- Say **"what can you do?"** and SalesSidekick will describe its capabilities conversationally
+- See [CONNECTORS.md](CONNECTORS.md) for integration setup and troubleshooting
+- See [INSTALLATION-GUIDE.md](INSTALLATION-GUIDE.md) for detailed setup instructions and enterprise deployment
+- Full details in [README.md](README.md)

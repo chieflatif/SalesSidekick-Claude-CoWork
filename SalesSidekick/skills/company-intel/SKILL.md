@@ -2,7 +2,9 @@
 name: company-intel
 description: Company knowledge base with product portfolio, competitive positioning, case studies, and key metrics
 tier: 3 (regenerated)
-auto-fire: /prep, /strategy, /outreach, /research, /deck, /pov
+auto-fire:
+  intents: [prepare-meeting, think-about-deal, write-email, research-company, create-deck, build-case]
+  context: "When discussing or working on a specific company — meetings, strategy, outreach, research, or presentations"
 user-invocable: false
 ---
 
@@ -16,12 +18,12 @@ Contains the AE's company overview, product portfolio, competitive positioning, 
 
 ## When Referenced
 
-- **/prep** — provides product context for meeting preparation
-- **/strategy** — informs competitive dynamics lens and hidden leverage analysis
-- **/outreach** — provides proof points and positioning for prospecting emails
-- **/research** — compares prospect's situation against our capabilities
-- **/deck** — populates proof points, case studies, and positioning slides
-- **/pov** — informs Math of Pain and Mechanism components
+- **Meeting preparation** (prepare-meeting intent) — provides product context, proof points, and positioning for pre-meeting intelligence briefs
+- **Deal strategy analysis** (think-about-deal intent) — informs competitive dynamics lens and hidden leverage analysis
+- **Prospecting outreach** (write-email intent, new relationship) — provides proof points and positioning for cold and warm outreach emails
+- **Company research** (research-company intent) — compares prospect's situation against our capabilities and market positioning
+- **Presentation creation** (create-deck intent) — populates proof points, case studies, and positioning slides across all deck templates
+- **Executive business cases** (build-case intent) — informs Math of Pain and Mechanism components of POV documents
 
 ## Core Framework
 

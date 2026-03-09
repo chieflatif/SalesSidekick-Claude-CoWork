@@ -1,171 +1,119 @@
-# SalesSidekick — Your AI Chief of Staff for Enterprise Sales
+# SalesSidekick — Your AI Sales Partner
 
-**SalesSidekick is a self-personalizing AI sales operating system for Claude.** Run `/setup` once and it becomes YOUR sales AI — it knows what you sell, who you compete with, how you communicate, and where every deal stands.
+**SalesSidekick is an AI sales partner that learns how you sell and gets better the more you use it.** Process your calls, prep for meetings, manage your pipeline, build competitive playbooks, write outreach — just tell it what you need in plain language.
 
-Not another AI template collection. Not a prompt library. A fully operational system that processes your calls, manages your pipeline, generates your decks, and drives your deals forward while you focus on building relationships.
-
----
-
-## Why SalesSidekick?
-
-| Problem | SalesSidekick Solution |
-|---------|----------------------|
-| Post-call intelligence gets lost in notes | `/closeout` processes every call through a 6-Output Framework — MEDDPICC scoring, tasks, coaching, follow-up email, risk signals, competitive intel |
-| Deal strategy is gut-feel | `/strategy` analyzes deals through a Five-Lens Prism with evidence-graded Three Paths recommendations |
-| CRM updates take 30+ minutes | `/forecast-update` generates paste-ready CRM output in seconds |
-| Outreach emails sound generic | `/outreach` uses your brand voice, account intelligence, and Financial/Technical/Strategic angles |
-| Presentation prep takes hours | `/deck` auto-selects from 5 templates (8 slides each) based on deal stage |
-| Pipeline reviews are chaos | `/pipeline` produces a weighted health view with MEDDPICC confidence scores |
+It's not a prompt library or a template collection. It's a working system that thinks about your deals, remembers your conversations, and drives your territory forward while you focus on building relationships.
 
 ---
 
-## What You Get
+## What It Feels Like
 
-- **22 Commands** — Daily ops, call processing, deal strategy, territory management, communication, account management, system utilities
-- **11 Skills** — Reference frameworks that fire automatically (MEDDPICC, deal strategy, call processing, brand voice, competitive battlecards, and more)
-- **6 Notion Databases** — Companies, Contacts, Deals, Tasks, Call Notes, LinkedIn Posts (70 fields total, auto-created during setup)
-- **Evidence Grading** — Every claim tagged Verified, Estimated, or Hypothesis. If >50% is unverified, you get warned.
-- **Graceful Degradation** — Works with zero optional connectors. Missing connectors change behavior, never break it.
-- **Self-Personalization** — `/setup` captures your identity, researches your company, builds competitive battlecards, calibrates your voice, and configures your databases in ~45 minutes
+You talk to it like a colleague who's always on top of your book of business.
 
----
+**Start your day:**
+> "What's on my plate today?"
+>
+> SalesSidekick shows your tasks grouped by account, deals needing attention, and meetings to prep for.
 
-## Quick Start
+**After a call:**
+> "Just got off a call with Acme. Here's the transcript."
+>
+> It scores the deal on MEDDPICC, extracts action items, writes a follow-up email, flags competitive intel, and offers to save everything to your pipeline.
 
-```
-1. Download the .zip from GitHub releases
-2. Upload to Claude Cowork (Customize > Plugins > Add personal plugin)
-3. Configure your Notion API key in .mcp.json
-4. Create a ~/Documents/SalesSidekick/ folder for file output
-5. Start a Cowork conversation, select that folder, run /salessidekick:setup (~45 min, one time)
-6. Try /salessidekick:today for your morning briefing
-```
+**Before a meeting:**
+> "Get me ready for my Globex meeting at 2pm."
+>
+> You get an intelligence brief with talking points, MEDDPICC gaps to probe, and stakeholder context.
 
-See [QUICK-START.md](QUICK-START.md) for the onboarding guide.
-
----
-
-## Installation
-
-### Option 1: Download ZIP + Upload to Cowork (Recommended)
-
-1. Download `SalesSidekick.zip` from the [releases page](https://github.com/chieflatif/SalesSidekick-Claude-CoWork/releases)
-2. Open Claude Desktop > **Cowork** > **Customize** > **Plugins**
-3. Click **+** > **Add personal plugin** > select the `.zip` file
-4. Configure your Notion API key (see [INSTALLATION-GUIDE.md](INSTALLATION-GUIDE.md))
-5. Run `/salessidekick:setup` to personalize
-
-### Option 2: Claude Code CLI
-
-```bash
-/plugin marketplace add chieflatif/SalesSidekick-Claude-CoWork
-/plugin install salessidekick@chieflatif-SalesSidekick-Claude-CoWork
-```
-
-### Option 3: Enterprise Deployment
-
-See [INSTALLATION-GUIDE.md](INSTALLATION-GUIDE.md) for organization-managed marketplace deployment and team-wide configuration.
+**When you're stuck:**
+> "This deal is stalling. How should I approach it?"
+>
+> Five-lens strategic analysis with three distinct paths forward — each evidence-graded so you know what's fact and what's assumption.
 
 ---
 
-## The 22 Commands
+## What It Does
 
-### Daily Ops
-| Command | What It Does |
-|---------|-------------|
-| `/today` | Morning briefing — tasks, deals needing attention, meeting prep |
-| `/end-of-day` | Evening wrap — completed tasks, overdue flags, tomorrow preview |
-| `/weekly` | Pipeline movement, MEDDPICC changes, manager 1:1 format |
+**Daily operations** — Morning briefings, end-of-day wrap-ups, weekly pipeline reviews. Everything organized by account so nothing falls through.
 
-### Call Processing
-| Command | What It Does |
-|---------|-------------|
-| `/closeout` | 6-Output Framework: MEDDPICC, tasks, coaching, email, risks, competitive intel |
+**Call processing** — Paste a transcript and get MEDDPICC scoring, tasks, coaching feedback, a follow-up email, risk signals, and competitive intel. All written to your pipeline automatically.
 
-### Meeting Prep
-| Command | What It Does |
-|---------|-------------|
-| `/prep [Company]` | Pre-meeting intelligence brief with talking points and gaps to probe |
+**Deal strategy** — Five-Lens Prism analysis, competitive displacement playbooks, business cases. Real frameworks, not generic advice.
 
-### Deal Strategy
-| Command | What It Does |
-|---------|-------------|
-| `/strategy [Company]` | Five-Lens Prism analysis with Three Paths recommendation |
-| `/battle [Company]` | Competitive displacement analysis with win probability |
-| `/pov [Company]` | Point of View document — 5-Component Model |
+**Pipeline management** — Territory health checks, forecast updates, whitespace analysis. MEDDPICC confidence scoring across your entire book.
 
-### Territory Management
-| Command | What It Does |
-|---------|-------------|
-| `/pipeline` | Weighted pipeline health with MEDDPICC confidence |
-| `/forecast-update` | CRM paste-ready forecast output |
-| `/whitespace` | Product penetration analysis across territory |
+**Content creation** — Prospecting emails, follow-ups, LinkedIn posts, presentations. All in your voice, backed by account intelligence.
 
-### Intelligence
-| Command | What It Does |
-|---------|-------------|
-| `/research [Company]` | Deep company research — financials, tech stack, leadership, ICP fit |
+**Account research** — Deep company research with structured intel briefs. Evidence-graded so you know what's verified and what's estimated.
 
-### Communication
-| Command | What It Does |
-|---------|-------------|
-| `/outreach [Company]` | Prospecting email — Financial/Technical/Strategic angles |
-| `/email` | Quick contextual email for existing relationships |
-| `/draft-post` | LinkedIn post — 3-Type Framework with pre-publish checklist |
-| `/deck [Company]` | Presentation — 5 templates, .pptx or Gamma |
-
-### Account Management
-| Command | What It Does |
-|---------|-------------|
-| `/add-company` | Guided company record creation with qualification |
-| `/add-deal` | Deal record creation linked to company + contacts |
-| `/coaching` | Call pattern analysis across logged calls |
-
-### System
-| Command | What It Does |
-|---------|-------------|
-| `/setup` | First-run personalization wizard |
-| `/audit` | 7-question adversarial integrity check |
-| `/skill-builder` | Create custom commands that follow the 10 Commandments |
+**Progressive personalization** — It starts working immediately. The more you use it, the sharper it gets — it learns your competitors, your communication style, your deal patterns, and your territory dynamics through natural use.
 
 ---
 
-## How It's Different
+## Getting Started
 
-SalesSidekick is NOT a generic AI sales assistant. Here's what makes it different:
+1. **Install** — Download the `.zip` from [GitHub releases](https://github.com/chieflatif/SalesSidekick-Claude-CoWork/releases), upload to Claude Cowork (Customize > Plugins > Add personal plugin)
+2. **Connect Notion** — Create a [Notion integration](https://www.notion.so/my-integrations), add your API key to `.mcp.json`
+3. **Start talking** — Open a conversation and say hi. SalesSidekick introduces itself, asks for the basics (name, company, what you sell), and offers to research your company immediately.
 
-**Self-Personalizing.** It doesn't just use templates — it rewrites itself for you. After `/setup`, four skill files are regenerated with YOUR company intel, YOUR competitive landscape, YOUR brand voice, and YOUR professional profile.
+That's it. You're working in under 2 minutes.
 
-**Evidence-Graded.** Every output tags claims as Verified, Estimated, or Hypothesis. The 50% Rule warns you when outputs are assumption-heavy. No AI hallucination disguised as fact.
-
-**Framework-Driven.** MEDDPICC qualification, Five-Lens Prism strategy, Three Paths recommendations, Context Wedge positioning, 6-Output Framework call processing. Real methodologies, not prompt tricks.
-
-**Notion-Native.** 6 databases, 70 fields, full read/write. Your data lives in Notion where you control it. CRM integration is export-first — no permission dependencies.
-
-**Graceful Degradation.** Works with just Notion. Works with zero connectors. Every command adapts to what's available.
+See [QUICK-START.md](QUICK-START.md) for the full onboarding guide.
 
 ---
 
-## Connectors
+## How It Learns
 
-| Connector | Required? | What It Enables |
-|-----------|-----------|----------------|
-| **Notion** | Yes | 6 databases — your single source of truth |
-| Gmail | No | Direct email sending from /outreach, /email, /closeout |
-| Google Calendar | No | Meeting-aware context in /today, /end-of-day, and /prep |
-| Google Drive | No | Document storage and auto-discovery of call transcripts for /closeout |
-| Gamma | No | Alternative web-based presentation path for /deck |
+SalesSidekick uses progressive personalization — it gets smarter through use, not through a long configuration process.
 
-See [CONNECTORS.md](CONNECTORS.md) for setup instructions and graceful degradation details.
+**First conversation:** It asks for three things (name, company, what you sell) and starts working.
+
+**Through use:** It picks up your competitors from call transcripts, learns your communication style from email edits, infers your ICP from the companies you work with, and builds context from every interaction.
+
+**Databases on demand:** The first time you process a call, it offers to create a Call Notes database. The first time you research a company, it offers to save it. Each database is created when you first need it — one confirmation, takes seconds.
+
+**Optional deep personalization:** When you're ready to go all-in, ask for a deep personalization session (~15 minutes). It captures the things organic use can't easily infer — structured competitive battlecards, calibrated brand voice from writing samples, explicit quota and territory numbers.
 
 ---
 
-## Architecture
+## Integrations
 
+| Integration | Required? | What It Enables |
+|-------------|-----------|----------------|
+| **Notion** | Yes | Your single source of truth — 6 databases for companies, contacts, deals, tasks, call notes, and LinkedIn posts |
+| Gmail | No | Send emails directly instead of copy-paste |
+| Google Calendar | No | Meeting-aware briefings and automatic prep triggers |
+| Google Drive | No | Auto-discover call transcripts and store documents |
+| Gamma | No | Web-based presentations as alternative to .pptx |
+
+All optional integrations enhance convenience. Missing one changes behavior, never breaks it. See [CONNECTORS.md](CONNECTORS.md) for setup details.
+
+---
+
+## Key Frameworks
+
+SalesSidekick isn't prompt tricks — it's built on real sales methodologies:
+
+- **MEDDPICC** — 8-element qualification scoring (Red/Yellow/Green) with discovery questions
+- **Five-Lens Prism** — Deal analysis through Stakeholder Psychology, Political Capital, Competitive Dynamics, Hidden Leverage, and Temporal Dynamics
+- **Three Paths** — Every strategy offers Velocity (Strike), Diagnostic (Go Deep), and Protective (Pause) options
+- **Evidence Grading** — Every claim tagged Verified, Estimated, or Hypothesis. The 50% Rule warns you when outputs are assumption-heavy.
+- **6-Output Framework** — Call processing that produces MEDDPICC scoring, tasks, coaching, follow-up email, risk signals, and competitive intel in one pass
+
+---
+
+<details>
+<summary><strong>Architecture (for technical browsers)</strong></summary>
+
+### How It Works
+
+SalesSidekick is a Claude Cowork plugin — an all-markdown system that gives Claude deep sales domain knowledge and structured workflows.
+
+**File structure:**
 ```
 SalesSidekick/
-├── CLAUDE.md              # Brain — identity, commandments, frameworks, config
-├── CONNECTORS.md          # Connector setup and degradation reference
+├── CLAUDE.md              # Brain — identity, intent engine, frameworks, state machine
+├── CONNECTORS.md          # Integration setup and degradation reference
 ├── README.md              # This file
 ├── INSTALLATION-GUIDE.md  # Detailed setup for all installation methods
 ├── QUICK-START.md         # Onboarding guide
@@ -175,17 +123,25 @@ SalesSidekick/
 ├── .claude-plugin/
 │   ├── plugin.json        # Plugin manifest and metadata
 │   └── marketplace.json   # Marketplace catalog for CLI install
-├── commands/              # 22 command files (.md)
-│   ├── today.md
-│   ├── closeout.md
-│   ├── strategy.md
+├── commands/              # 22 capability files (.md)
+│   ├── today.md           # Morning briefing
+│   ├── closeout.md        # Call processing
+│   ├── strategy.md        # Deal strategy
 │   └── ... (19 more)
-└── skills/                # 11 skill directories
+└── skills/                # 11 reference knowledge directories
     ├── meddpicc/SKILL.md
     ├── deal-strategy/SKILL.md
     ├── brand-voice/SKILL.md
     └── ... (8 more)
 ```
+
+**Intent Engine:** Natural language input is classified into intent categories (start-my-day, process-call, prepare-meeting, etc.) and routed to the appropriate capabilities and skills automatically. No slash commands needed — though power users can use them if they prefer.
+
+**Personalization State Machine:** The system tracks its own knowledge state (FRESH → BASICS → LEARNING → CALIBRATED) and adjusts behavior accordingly. Variables are captured progressively through use — explicit questions for things that must be asked, organic capture from conversations, and inference from patterns.
+
+**Skill System:** 11 reference knowledge packages (MEDDPICC rubrics, deal strategy frameworks, brand voice rules, Notion schemas, etc.) load automatically based on intent classification. Three tiers: universal (always available), template (user-configurable), and regenerated (rebuilt during personalization with user-specific content).
+
+</details>
 
 ---
 

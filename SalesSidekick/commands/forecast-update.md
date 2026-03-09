@@ -1,6 +1,13 @@
 ---
 description: CRM-ready forecast — weighted pipeline math, commit/upside/best-case breakdown
 argument-hint: "(no arguments)"
+intent-triggers:
+  - intent: forecast
+    phrases:
+      - "what's my forecast"
+      - "numbers for my manager"
+      - "commit upside best case"
+      - "forecast update"
 ---
 
 # /forecast-update — CRM-Ready Forecast
@@ -124,3 +131,13 @@ Evidence: Deal values [Verified] from Notion | Stage probabilities [Estimated] s
 | No Notion | Cannot read deals. Asks: "List your deals with stage, value, close date, and forecast category. I'll build the forecast." Produces manually-built forecast. |
 | No CRM connector | Default behavior — generates paste-ready text. No degradation. |
 | All other connectors | No impact. |
+
+## Proactive Data Capture
+
+After execution, offer to persist (batched, one confirmation):
+
+| Data | Database | Condition |
+|------|----------|-----------|
+| Forecast snapshot | Companies (Notes field) | If user wants to save the forecast for historical tracking |
+
+If database doesn't exist yet, offer to create it first (see CLAUDE.md Section 14.4).

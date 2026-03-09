@@ -1,6 +1,13 @@
 ---
 description: Deep account research — web search, structured intel brief, evidence-graded
 argument-hint: "[Company name]"
+intent-triggers:
+  - intent: research-company
+    phrases:
+      - "tell me about"
+      - "what do we know about"
+      - "dig into"
+      - "research [company]"
 ---
 
 # /research — Deep Account Research
@@ -121,3 +128,14 @@ RECOMMENDED NEXT STEP:
 | No Notion | Research still works via web search. Results displayed but not saved to any database. Warns: "Connect Notion to save this research." |
 | No web search | Cannot conduct research. Asks user to provide company information manually. Structures whatever the user provides into the brief format. |
 | All other connectors | No impact. /research uses web search + Notion only. |
+
+## Proactive Data Capture
+
+After execution, offer to persist (batched, one confirmation):
+
+| Data | Database | Condition |
+|------|----------|-----------|
+| Company record | Companies | If company not already in Notion |
+| Key contacts found | Contacts | If key personnel identified during research |
+
+If database doesn't exist yet, offer to create it first (see CLAUDE.md Section 14.4).

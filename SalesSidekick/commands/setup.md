@@ -1,107 +1,160 @@
 ---
-description: First-run personalization wizard — transforms SalesSidekick into YOUR sales AI
-argument-hint: "(no arguments — interactive wizard)"
+description: Optional deep personalization — sharpen SalesSidekick beyond what organic use captures
+argument-hint: "(optional: phase name — 'battlecards', 'brand voice', 'connectors', etc.)"
+intent-triggers:
+  - intent: customize-system
+    phrases:
+      - "let's personalize"
+      - "configure my settings"
+      - "deep setup"
+      - "set me up"
 ---
 
-# /setup — Personalization Wizard
+# Deep Personalization Session
 
 ## Purpose
 
-The most important command in SalesSidekick. Transforms a generic plugin into a fully personalized sales operating system by collecting your context, researching your company and competitors, configuring your databases, and calibrating your communication style.
+An optional deep personalization session that captures context the system can't easily learn organically — competitive battlecards from structured research, calibrated brand voice from writing samples, explicit territory numbers, and bulk database creation.
 
-Run this once. After setup, every command knows who you are, what you sell, who you compete with, and how you communicate.
+**This is not required.** SalesSidekick works from the first conversation (see CLAUDE.md Section 14.2). Deep personalization sharpens output for users who want to go all-in. Most users reach this naturally after a few sessions, when the system nudges them (see Section 14.5).
 
 ## When to Use
 
-- First time installing SalesSidekick (mandatory)
+- When the system suggests it ("Want to spend 15 minutes sharpening things up?")
+- When the user explicitly asks to personalize or calibrate
+- To build structured competitive battlecards (vs. one-off competitor notes)
+- To calibrate brand voice from writing samples (vs. gradually learning from edits)
+- To capture explicit-only variables (quota, fiscal year, deal stages) that can't be inferred
+- To set up connectors or create databases in bulk
 - After changing companies, products, or territory
-- To add or update connectors
-- To regenerate competitive battlecards with new competitors
-- To resume if a previous `/setup` was interrupted (re-running is safe — it detects which phases are already complete by checking existing variables and databases, and offers to resume from the incomplete phase)
+
+**Not needed for:**
+- First-time use (the getting-started conversation in Section 14.2 handles that)
+- Users who are happy with progressive personalization through organic capture
 
 ## Inputs
 
-**User provides (conversational):**
-1. Name and title
-2. Company name (triggers web research)
-3. Product/service description
-4. Ideal Customer Profile (industry, size, use case)
-5. Top 3-5 competitors (triggers battlecard generation)
-6. Communication style preference (casual to enterprise-formal)
-7. CRM system (Salesforce, HubSpot, other, none)
-8. Territory size and type (account count, named vs geographic vs vertical)
-9. Connector availability (auto-detected + confirmed)
+**System reads first:** Before asking anything, check all existing Tier 2 variables and databases. Skip anything already known. Acknowledge what you already have: "I already know you're [name] at [company] selling [product] — let's focus on what I don't have yet."
 
-**System reads:** Web search results for company intel and competitor research.
+**User provides (conversational — not a form):**
+1. Identity details not yet captured (title, territory size, quota, fiscal year, deal stages, CRM)
+2. Competitor names for structured battlecard generation (3-5)
+3. Communication style preference + optional writing samples (2-3 emails)
+4. Presentation brand tokens (screenshot or URL for extraction)
+5. Connector availability (auto-detected + confirmed)
 
 ## Execution Steps
 
-### Phase 1: Identity Setup (~5 min)
-1. Greet the user and explain the setup process (7 phases, ~45 minutes total)
-2. Ask Layer 1 questions (items 1-9 above) conversationally — not as a form
-3. Write answers to CLAUDE.md Section 1 (identity), Section 9 (operating rhythm), Section 10 (system config)
-4. Populate all Tier 2 template variables: {{AE_NAME}}, {{AE_TITLE}}, {{COMPANY}}, {{COMPANY_URL}}, {{PRODUCT_DESCRIPTION}}, {{TERRITORY_SIZE}}, {{TERRITORY_TYPE}}, {{ICP_INDUSTRY}}, {{ICP_SIZE}}, {{ICP_USE_CASE}}, {{CRM_SYSTEM}}, {{QUOTA_AMOUNT}}, {{FISCAL_YEAR_START}}, {{AVERAGE_DEAL_SIZE}}, {{SALES_CYCLE_LENGTH}}, {{MANAGER_NAME}}, {{TEAM_NAME}}, {{REGION}}, {{PRIMARY_PRODUCT}}, {{SECONDARY_PRODUCTS}}, {{DEAL_STAGES}}
+> **Key rule:** Every phase detects what's already known and skips redundant questions. Each phase can run independently — the user can say "just do battlecards" or "calibrate my brand voice" and skip everything else.
 
-### Phase 2: Company Intelligence (~10-15 min, AI-assisted)
-5. Using the company URL and product description, research the company via web search
-6. Generate draft `skills/company-intel/SKILL.md` with: company overview, product portfolio, market position, key differentiators, pricing context, case studies by vertical, key metrics
-7. Present the draft to the user for review and refinement
-8. Finalize and save the company-intel skill file
+### Phase 1: Identity & Territory (~3 min)
 
-### Phase 3: Competitive Landscape (~10-15 min, AI-assisted)
-9. For each competitor identified (3-7), research via web search
-10. Generate draft `skills/battlecards/SKILL.md` with per-competitor sections: overview, strengths, weaknesses, displacement strategy, talk tracks, proof points, trap questions, landmine responses
-11. Present battlecards to user for validation — competitors know things AI doesn't
-12. Finalize and save the battlecards skill file
-13. Populate {{TOP_COMPETITOR_1}}, {{TOP_COMPETITOR_2}}, {{TOP_COMPETITOR_3}}
+**Skip if:** All explicit variables already populated.
 
-### Phase 4: Brand Voice (~5 min)
-14. Present voice dimension options: formal↔casual, data-driven↔narrative, concise↔detailed
-15. Optionally ask user to paste 2-3 sample emails for voice extraction
-16. Generate `skills/brand-voice/SKILL.md` with: vocabulary rules, email formatting preferences, banned phrases, 7-point voice check
-17. Populate {{COMMUNICATION_STYLE}}, {{EMAIL_SIGN_OFF}}
-18. Ask about LinkedIn posting goals: topics they post about, target audience
-19. Populate {{LINKEDIN_TOPICS}}, {{LINKEDIN_AUDIENCE}}
+1. Check existing Tier 2 variables against CLAUDE.md Section 13
+2. For each unpopulated **explicit** variable, ask conversationally — batch related questions together
+3. Key explicit variables to capture if missing:
+   - {{AE_TITLE}} — title/role
+   - {{TERRITORY_SIZE}}, {{TERRITORY_TYPE}} — territory details
+   - {{QUOTA_AMOUNT}}, {{FISCAL_YEAR_START}} — quota and fiscal timing
+   - {{AVERAGE_DEAL_SIZE}}, {{SALES_CYCLE_LENGTH}} — deal economics
+   - {{CRM_SYSTEM}} — CRM platform
+   - {{MANAGER_NAME}}, {{TEAM_NAME}}, {{REGION}} — organizational context
+   - {{DEAL_STAGES}} — pipeline stage names
+4. If already inferred from organic use, confirm rather than re-ask:
+   - {{ICP_INDUSTRY}}, {{ICP_SIZE}}, {{ICP_USE_CASE}} — these are normally inferred from deal patterns, but deep personalization can capture them directly if not yet available
+5. Write answers to CLAUDE.md Section 1, Section 9, Section 10
+6. Confirm: "Identity locked in. [summary of what was captured]."
 
-### Phase 5: Presentation Brand (~5 min)
-20. Ask user for a screenshot of existing presentation or marketing material, OR company website URL
-21. Extract brand tokens: primary colors, font families, layout patterns
-22. Store brand tokens in `skills/pptx/SKILL.md` Brand Configuration section (hex codes, font specs, logo placement rules)
-23. Generate one sample slide for user verification
-24. Adjust tokens based on feedback
+### Phase 2: Company Intelligence (~5-10 min, AI-assisted)
 
-### Phase 6: Connector Setup (~5-10 min)
-25. Create 6 Notion databases with exact schemas (Companies 12 fields, Contacts 9, Deals 22, Tasks 9, Call Notes 10, LinkedIn Posts 8)
-26. Share databases with the Notion integration
-27. Store all 6 database IDs in CLAUDE.md Section 10
-28. Auto-detect available connectors (Gmail, Calendar, Drive, Gamma)
-29. For each detected connector, verify access and record status
-30. Set connector status variables: {{NOTION_CONNECTED}}, {{GMAIL_CONNECTED}}, {{CALENDAR_CONNECTED}}, {{DRIVE_CONNECTED}}, {{GAMMA_CONNECTED}}
-31. Confirm graceful degradation rules for any missing connectors
+**Skip if:** `skills/company-intel/SKILL.md` has already been regenerated with rich content.
 
-### Phase 7: Verification + Mandatory Audit (~5 min)
-32. Run smoke test: create a test company record, write and read back, then delete
-33. Regenerate `skills/profile/SKILL.md` with full AE identity and context
-34. Run mandatory `/audit` on the entire configuration
-35. Fix any issues found during audit
-36. Produce "System Ready" confirmation summary showing: identity configured, databases created, connectors active, skills regenerated, all commands available
-37. Set {{SETUP_COMPLETE}} to true
+6. Using {{COMPANY_URL}} and {{PRODUCT_DESCRIPTION}}, research the company via web search
+7. Generate draft `skills/company-intel/SKILL.md` with: company overview, product portfolio, market position, key differentiators, pricing context, case studies by vertical, key metrics
+8. Present the draft to the user for review and refinement
+9. Finalize and save the company-intel skill file
+
+**Value beyond organic capture:** Structured, comprehensive company profile vs. fragments gathered across individual interactions.
+
+### Phase 3: Competitive Landscape (~5-10 min, AI-assisted)
+
+**Skip if:** Battlecards already exist for 3+ competitors.
+
+10. Check existing competitor variables — use competitors already captured organically
+11. Ask if there are additional competitors to add (up to 5 total)
+12. For each competitor, research via web search
+13. Generate draft `skills/battlecards/SKILL.md` with per-competitor sections: overview, strengths, weaknesses, displacement strategy, talk tracks, proof points, trap questions, landmine responses
+14. Present battlecards to user for validation — competitors know things AI doesn't
+15. Finalize and save the battlecards skill file
+16. Populate any missing {{TOP_COMPETITOR_N}} variables
+
+**Value beyond organic capture:** Systematic displacement playbooks for each competitor vs. ad-hoc competitive notes from individual calls.
+
+### Phase 4: Brand Voice (~3-5 min)
+
+**Skip if:** `skills/brand-voice/SKILL.md` has been calibrated from writing samples.
+
+17. Present voice dimension options: formal↔casual, data-driven↔narrative, concise↔detailed
+18. Optionally ask user to paste 2-3 sample emails for voice extraction
+19. Generate `skills/brand-voice/SKILL.md` with: vocabulary rules, email formatting preferences, banned phrases, 7-point voice check
+20. Populate {{COMMUNICATION_STYLE}}, {{EMAIL_SIGN_OFF}}
+21. If not yet captured: ask about LinkedIn posting goals (topics, target audience)
+22. Populate {{LINKEDIN_TOPICS}}, {{LINKEDIN_AUDIENCE}}
+
+**Value beyond organic capture:** Calibrated from actual writing samples vs. gradually learned from corrections over 5-10 emails.
+
+### Phase 5: Presentation Brand (~3-5 min)
+
+**Skip if:** Brand tokens already exist in `skills/pptx/SKILL.md`.
+
+23. Ask user for a screenshot of existing presentation or marketing material, OR company website URL
+24. Extract brand tokens: primary colors, font families, layout patterns
+25. Store brand tokens in `skills/pptx/SKILL.md` Brand Configuration section
+26. Generate one sample slide for user verification
+27. Adjust tokens based on feedback
+
+**Value beyond organic capture:** Explicit brand token extraction vs. best-effort from company website.
+
+### Phase 6: Connectors & Databases (~3-5 min)
+
+**Skip if:** All 6 databases exist and connectors are verified.
+
+28. Check which of the 6 Notion databases exist (some may have been created on-demand)
+29. For any missing databases, create with exact schemas (Companies 12 fields, Contacts 9, Deals 22, Tasks 9, Call Notes 10, LinkedIn Posts 8)
+30. Store all database IDs in CLAUDE.md Section 10
+31. Auto-detect available connectors (Gmail, Calendar, Drive, Gamma)
+32. For each detected connector, verify access and record status
+33. Set connector status variables: {{NOTION_CONNECTED}}, {{GMAIL_CONNECTED}}, {{CALENDAR_CONNECTED}}, {{DRIVE_CONNECTED}}, {{GAMMA_CONNECTED}}
+34. Confirm graceful degradation rules for any missing connectors
+
+**Value beyond organic capture:** Bulk database creation and connector verification vs. one-at-a-time on-demand creation.
+
+### Phase 7: Verification (~2 min)
+
+35. Run smoke test: create a test company record, write and read back, then delete
+36. Regenerate `skills/profile/SKILL.md` with full AE identity and context
+37. Run `/audit` on the configuration
+38. Fix any issues found during audit
+39. Produce "Personalization Complete" confirmation summary
 
 ## Output Format
 
-**Per phase:** Conversational progress updates with user confirmation before advancing.
+**Per phase:** Conversational progress updates. User confirms before advancing to the next phase.
 
-**Final output — System Ready confirmation:**
+**If running a single phase:** Just run that phase and confirm.
+
+**Final output — Personalization Complete confirmation:**
 ```
-✅ SalesSidekick Configured for {{AE_NAME}}
+✅ Deep Personalization Complete for {{AE_NAME}}
 
 Identity: {{AE_NAME}}, {{AE_TITLE}} at {{COMPANY}}
 Territory: {{TERRITORY_SIZE}} accounts ({{TERRITORY_TYPE}})
 Product: {{PRIMARY_PRODUCT}}
 CRM: {{CRM_SYSTEM}}
 
-Databases: 6 created (Companies, Contacts, Deals, Tasks, Call Notes, LinkedIn Posts)
-Skills regenerated: profile, brand-voice, company-intel, battlecards
+Databases: [N] active (Companies, Contacts, Deals, Tasks, Call Notes, LinkedIn Posts)
+Skills calibrated: profile, brand-voice, company-intel, battlecards
 Competitors mapped: {{TOP_COMPETITOR_1}}, {{TOP_COMPETITOR_2}}, {{TOP_COMPETITOR_3}}
 
 Connectors:
@@ -111,33 +164,34 @@ Connectors:
 - Drive: [✅/❌]
 - Gamma: [✅/❌]
 
-Audit: Passed
-Status: Ready
-
-Try /today for your morning briefing, or /prep [Company] before your next meeting.
+Personalization state: CALIBRATED
+Estimated time saved: [X] variables and [Y] databases were already in place from organic use.
 ```
 
 ## Database Read/Write
 
 **Writes:**
-- Creates all 6 Notion databases (Companies, Contacts, Deals, Tasks, Call Notes, LinkedIn Posts)
+- Creates Notion databases (only those not already created on-demand)
 - Writes database IDs to CLAUDE.md Section 10
-- Writes all Tier 2 variables to CLAUDE.md
-- Regenerates 4 Tier 3 skill files (profile, brand-voice, company-intel, battlecards)
+- Writes all captured Tier 2 variables to CLAUDE.md
+- Regenerates Tier 3 skill files (profile, brand-voice, company-intel, battlecards)
 
 **Reads:**
+- All existing Tier 2 variables (to skip redundant questions)
+- Existing Notion databases (to skip creation)
 - Web search for company intel and competitor research
 - Existing CLAUDE.md for current configuration state
 
 ## Commandment Alignment
 
-| Commandment | How /setup Serves It |
-|-------------|---------------------|
+| Commandment | How Deep Personalization Serves It |
+|-------------|-----------------------------------|
+| #1 Speed is Life | 15 minutes, not 45 — skips what's already known from organic use |
 | #2 Stop Digging, Start Orchestrating | AI researches company and competitors — user validates |
-| #4 Context is King | Ensures every future command has full context loaded |
-| #7 One Source of Truth | Creates the Notion backbone that all commands use |
+| #4 Context is King | Captures explicit-only variables that organic use can't infer |
+| #7 One Source of Truth | Creates/completes the Notion backbone that all capabilities use |
 | #8 Laws of Karma | Mandatory audit at end catches fabrication in generated content |
-| #10 Be the Chief of Staff | After setup, AE never needs to configure anything again |
+| #10 Be the Chief of Staff | After deep personalization, system operates at maximum intelligence |
 
 ## Evidence Grading
 
@@ -146,15 +200,15 @@ During Phase 2 (Company Intelligence) and Phase 3 (Competitive Landscape), all g
 - Calculated metrics or market estimates → Estimated
 - Industry pattern assumptions → Hypothesis
 
-The mandatory audit in Phase 7 checks evidence grading compliance.
+The audit in Phase 7 checks evidence grading compliance.
 
 ## Graceful Degradation
 
-| Missing Connector | Impact on /setup |
-|-------------------|-----------------|
-| No Notion | **Critical.** Cannot create databases. Setup completes identity and skill generation only. Prompt user to configure Notion and re-run /setup. |
-| No Gmail | Setup skips Gmail verification. {{GMAIL_CONNECTED}} set to false. Commands will generate copy-paste email text. |
-| No Calendar | Setup skips Calendar verification. {{CALENDAR_CONNECTED}} set to false. /today and /prep will ask about meetings. |
-| No Drive | Setup skips Drive verification. {{DRIVE_CONNECTED}} set to false. /closeout will ask for transcript paste. |
-| No Gamma | Setup skips Gamma. {{GAMMA_CONNECTED}} set to false. /deck uses native .pptx path. |
+| Missing Connector | Impact on Deep Personalization |
+|-------------------|-------------------------------|
+| No Notion | Cannot create databases. Session completes identity capture and skill generation only. Offer to connect Notion and resume later. |
+| No Gmail | Skips Gmail verification. {{GMAIL_CONNECTED}} set to false. Capabilities will generate copy-paste email text. |
+| No Calendar | Skips Calendar verification. {{CALENDAR_CONNECTED}} set to false. Morning briefing will ask about meetings. |
+| No Drive | Skips Drive verification. {{DRIVE_CONNECTED}} set to false. Call processing will ask for transcript paste. |
+| No Gamma | Skips Gamma. {{GAMMA_CONNECTED}} set to false. Presentations use native .pptx path. |
 | No web search | Company intel and battlecard generation degrade to user-provided information only. Skills are created but thinner. |

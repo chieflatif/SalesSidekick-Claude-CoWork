@@ -1,6 +1,13 @@
 ---
 description: Competitive displacement analysis — win probability, talk tracks, and proof points
 argument-hint: "[Company name]"
+intent-triggers:
+  - intent: handle-competition
+    phrases:
+      - "competitor showed up"
+      - "how do we beat"
+      - "competitive displacement"
+      - "they're evaluating [competitor]"
 ---
 
 # /battle — Competitive Displacement
@@ -127,3 +134,14 @@ RECOMMENDED NEXT MOVE:
 | No Notion | Cannot load deal context or competitive history. Asks user to describe the competitive situation. Loads battlecard from skills/battlecards/ and applies generically. |
 | No battlecards skill | If battlecards haven't been generated (pre-/setup), provides generic competitive analysis framework based on available information. Notes that running /setup will generate detailed battlecards. |
 | All other connectors | No impact. |
+
+## Proactive Data Capture
+
+After execution, offer to persist (batched, one confirmation):
+
+| Data | Database | Condition |
+|------|----------|-----------|
+| Competitive intel updates | Deals (Primary Competitor field) | If competitor identified or changed |
+| Battlecard refinements | skills/battlecards/SKILL.md | If new displacement tactics or talk tracks discovered |
+
+If database doesn't exist yet, offer to create it first (see CLAUDE.md Section 14.4).

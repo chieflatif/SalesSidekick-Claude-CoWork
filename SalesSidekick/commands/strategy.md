@@ -1,6 +1,13 @@
 ---
 description: Five-Lens Prism deal strategy with Three Paths recommendation — evidence-graded
 argument-hint: "[Company name]"
+intent-triggers:
+  - intent: think-about-deal
+    phrases:
+      - "how should I approach"
+      - "this deal is stalling"
+      - "I'm stuck on"
+      - "deal strategy"
 ---
 
 # /strategy — Deal Strategy Analysis
@@ -150,3 +157,14 @@ If >50% of the analysis is hypothesis-grade, flag it: "This strategy is heavy on
 | No Calendar | No impact. /strategy doesn't use Calendar. |
 | No Gmail | No impact. /strategy doesn't use email. |
 | No Drive | No impact. /strategy doesn't use Drive. |
+
+## Proactive Data Capture
+
+After execution, offer to persist (batched, one confirmation):
+
+| Data | Database | Condition |
+|------|----------|-----------|
+| Deal stage update | Deals | If Five-Lens analysis reveals stage should change |
+| MEDDPICC score updates | Deals | If analysis surfaces new evidence changing element scores |
+
+If database doesn't exist yet, offer to create it first (see CLAUDE.md Section 14.4).

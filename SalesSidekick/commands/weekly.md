@@ -1,6 +1,13 @@
 ---
 description: Weekly pipeline summary — deal movement, MEDDPICC changes, manager 1:1 format
 argument-hint: "(no arguments)"
+intent-triggers:
+  - intent: weekly-review
+    phrases:
+      - "weekly summary"
+      - "pipeline review"
+      - "prep for my 1:1"
+      - "how was my week"
 ---
 
 # /weekly — Weekly Pipeline Summary

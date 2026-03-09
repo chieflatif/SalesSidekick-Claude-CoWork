@@ -1,6 +1,13 @@
 ---
 description: Evening wrap — reviews completed tasks, flags overdue, previews tomorrow
 argument-hint: "(no arguments)"
+intent-triggers:
+  - intent: end-my-day
+    phrases:
+      - "I'm done for today"
+      - "wrap up my day"
+      - "anything I missed"
+      - "end of day"
 ---
 
 # /end-of-day — Evening Wrap

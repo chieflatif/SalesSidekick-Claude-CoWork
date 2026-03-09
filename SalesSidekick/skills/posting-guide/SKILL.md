@@ -2,7 +2,9 @@
 name: posting-guide
 description: LinkedIn content framework with 3-Type post structure, hook formulas, cadence goals, and 6-point pre-publish checklist
 tier: 2 (template)
-auto-fire: /draft-post
+auto-fire:
+  intents: [write-post]
+  context: "When creating LinkedIn or social media content"
 user-invocable: false
 ---
 
@@ -14,8 +16,8 @@ Defines the 3-Type Framework for LinkedIn posts, structure templates for each ty
 
 ## When Referenced
 
-- **/draft-post** — uses the 3-Type Framework, structure templates, and pre-publish checklist
-- **/coaching** — could reference posting cadence for performance tracking (stretch)
+- **Creating LinkedIn content** (write-post intent) — uses the 3-Type Framework, structure templates, hook formulas, and 6-point pre-publish checklist. Fires whenever the user wants to write a post or social media content.
+- **Reviewing performance patterns** (improve-skills intent) — could reference posting cadence and content mix for performance tracking (stretch)
 
 ## Core Framework
 
