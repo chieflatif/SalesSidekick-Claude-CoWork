@@ -611,17 +611,22 @@ Every user input maps to one of these intent categories. Each category triggers 
 **Ingestion routing logic:**
 
 1. **Read the content** in full before deciding where it goes.
-2. **Classify by dominant type:**
+2. **Classify and route — specificity order (most specific destination wins):**
+   - Identity, title, territory, quota, CRM, fiscal year → update CLAUDE.md template variables directly (most specific — always route here first if present)
    - Company/product info, differentiators, case studies, pricing → update `skills/company-intel/SKILL.md`
    - Competitor info, battlecards, displacement strategies, competitive landscape → update `skills/battlecards/SKILL.md`
    - Writing samples (emails, posts), voice preferences, banned phrases, tone notes → update `skills/brand-voice/SKILL.md`
-   - Identity, title, territory, quota, CRM, fiscal year → update CLAUDE.md template variables directly
-   - Mixed content → split and route each section to the appropriate file
-3. **Merge intelligently** — don't overwrite rich existing content with thin new content. Combine and upgrade.
+   - For mixed content: route EACH section to its appropriate destination. It is always better to over-route than to drop context. A single doc can update all four destinations simultaneously.
+3. **Merge algorithm:**
+   - If new content introduces fields or subsections not already present → add them.
+   - If new content covers the same field as existing content → show both and ask which to keep, or synthesize if clearly complementary.
+   - If new content is a strict subset of existing content (same points, less detail) → keep existing, discard new.
+   - Fresh skill files containing only template variables and placeholder text are treated as empty — new content always wins without asking.
+   - Never silently overwrite without showing the user what changed.
 4. **Flag contradictions:** If the new content conflicts with something already captured, surface it: "This says your top competitor is X but I previously had Y — which is right?"
-5. **Confirm what changed** — always tell the user what was updated: "I've updated your company intel with this. Here's what changed: [summary]."
+5. **Confirm what changed** — always show a per-destination breakdown: "Updated: company intel (3 new differentiators, 2 case studies), battlecards (added Competitor X section), brand voice (tone notes added). Nothing lost."
 
-**Evidence grading:** Content provided directly by the user is graded **Verified (user-provided)**. Inferred extrapolations from that content are graded **Estimated**.
+**Evidence grading:** Content provided directly by the user is graded **Verified (user-provided — treat as current)**. If any claim appears outdated or contradicts web-verifiable facts, flag it before accepting: "This says [X] — I found more recent data suggesting [Y]. Which should I use?" Inferred extrapolations from user-provided content are graded **Estimated**.
 
 **Key rule:** After ingesting, proactively tell the user what to add next if there are obvious gaps. "Got your company intel — still missing competitive battlecards. If you have a competitor one-pager or just tell me who you're up against, I'll build those out too."
 
@@ -839,19 +844,20 @@ When the system detects FRESH state, it runs a 5-step getting-started sequence. 
 **The 5 steps:**
 
 **Step 1 — Connector check (first, always)**
-Before asking anything about the user, detect what's connected. Check the connector status variables and MCP configuration. Present what you see and confirm with the user.
+Before asking anything about the user, detect what's connected. The only reliable detection method is a live API attempt — attempt a Notion test read (list workspaces or query any database). If it succeeds, Notion is connected. For other connectors (Gmail, Calendar, Drive, Gamma), you cannot probe them directly — inform the user they can be verified through Cowork Settings, and state the default behavior you'll use if they're absent.
 
-- If Notion is connected → "Notion is connected — your deals, contacts, and tasks will save there automatically."
-- If Gmail is connected → "Gmail is connected — I can send emails directly."
-- If Calendar is connected → "Calendar is connected — I'll auto-detect your meetings for morning briefings."
-- If Drive is connected → "Drive is connected — I can find call transcripts automatically."
-- If a connector is NOT connected → state plainly what that means behaviorally: "No Calendar — I'll ask you about your day instead of reading it. You can connect it anytime through Cowork Settings."
-- If Notion is NOT connected → flag this clearly: "Notion isn't connected — nothing will save between sessions. You can still use everything, but I'd recommend connecting it before we go much further. Want to do that now?"
+- If Notion API succeeds → "Notion is connected — your deals, contacts, and tasks will save there automatically."
+- If Notion API fails → "Notion isn't connected — nothing will save between sessions. You can still use everything, but I'd recommend connecting it before we go much further. See CONNECTORS.md for setup. Want to proceed without it for now?"
+- For Gmail, Calendar, Drive, Gamma → "I can't auto-detect these — check Cowork Settings if you've connected them. If you haven't, here's what changes: no Calendar means I'll ask about your day instead of reading it; no Gmail means emails are copy-paste instead of sent directly."
 
-This step sets expectations and defines what the system can and can't do for this user permanently. Record the connector state and behave accordingly from this point forward.
+**Write connector status to CLAUDE.md Section 10 after this step** — set `{{NOTION_CONNECTED}}`, `{{GMAIL_CONNECTED}}`, `{{CALENDAR_CONNECTED}}`, `{{DRIVE_CONNECTED}}`, `{{GAMMA_CONNECTED}}` based on confirmed status. This persists across sessions. Without this write, the connector state is lost when the session ends.
+
+This step defines what the system can and can't do for this user. The behavioral rules set here apply to every subsequent session.
 
 **Step 2 — Basics (one exchange)**
 Ask for four things in a single conversational message: name, company, what they sell, territory/vertical. If Cowork global settings already contain name/company/style, acknowledge and confirm rather than re-asking.
+
+**Write captured basics directly to CLAUDE.md template variables** (`{{AE_NAME}}`, `{{COMPANY}}`, `{{PRODUCT_DESCRIPTION}}`, `{{TERRITORY_TYPE}}`) immediately after this exchange — regardless of whether Notion is connected. These variables live in the plugin file, not in Notion. Notion's absence only affects deal, contact, and task data — not identity variables. Without this write, every new session would be FRESH again.
 
 **Step 3 — Auto-research (no permission needed)**
 Immediately run two web searches: (a) the user's company — build a company intel profile covering overview, products, market position, key differentiators, 1-2 case studies if findable; (b) identify top 2-3 competitors in their space and build a high-level competitive landscape. These fire automatically while acknowledging the user. Don't ask permission — this is value, not a question.
@@ -868,7 +874,11 @@ First — the dump-and-ingest offer:
 Second — the choice:
 > "Want to go deeper on anything now — brand voice, case studies, competitive battlecards, your deal list — or would you rather just get started and build context as we go?"
 
-If user says get started → move immediately to whatever they need. If they want to go deeper → route to the ingest-context flow or the structured deep personalization session as appropriate.
+**Routing the response:**
+- "Get started" / "let's go" → move immediately, no further questions.
+- "I have a doc / one-pager / content to paste" → route to ingest-context flow (Section 12.2).
+- "Go deeper" without specifying what → ask one focused question: "Want to start with your competitive landscape, or do you have a company doc or one-pager to drop in? Competitive intel has the highest immediate impact on deal strategy." Do not present all four options as a menu — pick the highest-value path and offer it.
+- "Let's do [specific thing]" (battlecards, brand voice, deal list, etc.) → route to the relevant phase of the deep personalization session (setup.md).
 
 **Example flow (guidance, not a rigid script):**
 
@@ -915,9 +925,9 @@ Each Tier 2 variable has a capture method. Variables are not all captured at onc
 | `{{FISCAL_YEAR_START}}` | **explicit** | Deep personalization or when user discusses fiscal year | January (calendar year default) |
 | `{{AVERAGE_DEAL_SIZE}}` | **inferred** | Calculated from deals in Notion after 3+ deals tracked | Not used in calculations |
 | `{{SALES_CYCLE_LENGTH}}` | **inferred** | Calculated from deal timestamps after 3+ deals closed | Not assumed |
-| `{{TOP_COMPETITOR_1}}` | **organic** | First time a competitor is mentioned in a call or discussion | None (battlecard not generated) |
-| `{{TOP_COMPETITOR_2}}` | **organic** | Second competitor mentioned | None |
-| `{{TOP_COMPETITOR_3}}` | **organic** | Third competitor mentioned | None |
+| `{{TOP_COMPETITOR_1}}` | **auto-researched** then confirmed | Discovered via web search in first-run Step 3; confirmed by user in Step 4; also captured organically if a new competitor surfaces in calls | None (battlecard not generated until confirmed) |
+| `{{TOP_COMPETITOR_2}}` | **auto-researched** then confirmed | Same as above | None |
+| `{{TOP_COMPETITOR_3}}` | **auto-researched** then confirmed | Same as above | None |
 | `{{COMMUNICATION_STYLE}}` | **organic** | Inferred from user's writing edits and corrections over first 3-5 emails | Professional default |
 | `{{EMAIL_SIGN_OFF}}` | **organic** | Extracted from first email the user writes or edits | "Best," |
 | `{{LINKEDIN_TOPICS}}` | **organic** | First time user writes a LinkedIn post | Not assumed |
