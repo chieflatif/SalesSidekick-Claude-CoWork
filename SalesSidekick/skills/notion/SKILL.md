@@ -189,19 +189,79 @@ When a Notion write fails:
 4. **Retry once** on transient errors (rate limit, timeout). If retry fails, fall back to manual mode.
 5. **Log the failure context** so self-audit can check for patterns.
 
+### Config Page (7th persistence target — created first, always)
+
+The Config page is a single Notion page (not a database) that stores all identity and personalization variables. It is the persistent replacement for CLAUDE.md template variables, which are read-only in Cowork and cannot be written back by the plugin.
+
+**Why this exists:** Plugin files (including CLAUDE.md) are read-only in Claude Cowork. Variables like `{{AE_NAME}}`, `{{COMPANY}}` etc. cannot be written at runtime. Without the Config page, every session would restart as FRESH with no memory of identity or personalization. The Config page solves this — it's the live source of truth for all Tier 2 variables.
+
+**Page title:** `SalesSidekick — Config`
+
+**Structure:** A Notion page with a two-column table of variable names and values:
+
+```
+| Variable | Value |
+|----------|-------|
+| AE_NAME | [name] |
+| AE_TITLE | [title] |
+| COMPANY | [company] |
+| COMPANY_URL | [url] |
+| PRODUCT_DESCRIPTION | [description] |
+| PRIMARY_PRODUCT | [product] |
+| SECONDARY_PRODUCTS | [products] |
+| ICP_INDUSTRY | [industry] |
+| ICP_SIZE | [size] |
+| ICP_USE_CASE | [use case] |
+| TERRITORY_SIZE | [count] |
+| TERRITORY_TYPE | [type] |
+| REGION | [region] |
+| QUOTA_AMOUNT | [quota] |
+| FISCAL_YEAR_START | [month] |
+| AVERAGE_DEAL_SIZE | [amount] |
+| SALES_CYCLE_LENGTH | [duration] |
+| TOP_COMPETITOR_1 | [competitor] |
+| TOP_COMPETITOR_2 | [competitor] |
+| TOP_COMPETITOR_3 | [competitor] |
+| COMMUNICATION_STYLE | [style] |
+| EMAIL_SIGN_OFF | [sign-off] |
+| LINKEDIN_TOPICS | [topics] |
+| LINKEDIN_AUDIENCE | [audience] |
+| CRM_SYSTEM | [crm] |
+| DEAL_STAGES | [stages] |
+| MANAGER_NAME | [name] |
+| TEAM_NAME | [name] |
+| NOTION_CONNECTED | true |
+| GMAIL_CONNECTED | [true/false] |
+| CALENDAR_CONNECTED | [true/false] |
+| DRIVE_CONNECTED | [true/false] |
+| GAMMA_CONNECTED | [true/false] |
+| NOTION_COMPANIES_DB_ID | [id] |
+| NOTION_CONTACTS_DB_ID | [id] |
+| NOTION_DEALS_DB_ID | [id] |
+| NOTION_TASKS_DB_ID | [id] |
+| NOTION_CALL_NOTES_DB_ID | [id] |
+| NOTION_LINKEDIN_POSTS_DB_ID | [id] |
+```
+
+**Session start behavior:** At the beginning of every session, read the Config page from Notion and load all populated values as the active variable set for the session. This replaces checking CLAUDE.md template variables. If the Config page doesn't exist → FRESH state. If it exists → check populated fields to determine BASICS / LEARNING / CALIBRATED state.
+
+**Write behavior:** Any variable captured during the session (name, company, territory, competitor, connector status) is written to the Config page immediately. Never silently drop a variable — if the Notion write fails, present the value in a copy-paste block.
+
 ### Database Creation (used by deep personalization Phase 6)
 
 When creating databases during deep personalization:
-1. Create databases in dependency order: Companies → Contacts → Deals → Tasks → Call Notes → LinkedIn Posts
-2. Companies and Contacts must exist before Deals (for relations)
-3. Set up all relations after databases exist
-4. Populate Select field options with defaults listed above
-5. Store resulting database IDs in CLAUDE.md Section 10 ({{NOTION_*_DB_ID}} variables)
-6. Verify creation by reading back each database
+1. Create Config page first — this is required before anything else persists
+2. Create databases in dependency order: Companies → Contacts → Deals → Tasks → Call Notes → LinkedIn Posts
+3. Companies and Contacts must exist before Deals (for relations)
+4. Set up all relations after databases exist
+5. Populate Select field options with defaults listed above
+6. Store resulting database IDs in the Config page (not in CLAUDE.md — plugin files are read-only in Cowork)
+7. Verify creation by reading back each database
 
 ## Personalization Notes
 
 - Select field options for Industry, Primary Competitor, and Current Products are customized during deep personalization
-- Stage names and probability weights may be customized (stored in {{DEAL_STAGES}})
-- Database IDs are populated during deep personalization and stored as Tier 2 variables
+- Stage names and probability weights may be customized (stored as DEAL_STAGES in Config page)
+- Database IDs are stored in the Config page after creation
 - Account resolution logic is universal — no personalization needed
+- CLAUDE.md template variables ({{AE_NAME}}, etc.) are read-only defaults — the Config page overrides them at session start

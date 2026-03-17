@@ -245,7 +245,9 @@ A structured approach to uncovering the real buying situation. Every discovery c
 
 ## 10. System Configuration
 
-**Notion Database IDs** (created on demand when first needed — see Section 14.4):
+**Important: These template variables are read-only defaults.** In Claude Cowork, plugin files cannot be written back to at runtime. The live values for all variables are stored in the `SalesSidekick — Config` page in Notion and loaded at session start (see Section 14.1). The placeholders below exist as fallback defaults only — they are overridden by Notion Config values when available.
+
+**Notion Database IDs** (stored in Notion Config page after creation — see Section 14.4 and notion/SKILL.md):
 
 - Companies: {{NOTION_COMPANIES_DB_ID}}
 - Contacts: {{NOTION_CONTACTS_DB_ID}}
@@ -254,7 +256,7 @@ A structured approach to uncovering the real buying situation. Every discovery c
 - Call Notes: {{NOTION_CALL_NOTES_DB_ID}}
 - LinkedIn Posts: {{NOTION_LINKEDIN_POSTS_DB_ID}}
 
-**Connector Status:**
+**Connector Status** (stored in Notion Config page after first-run Step 1):
 - Notion: {{NOTION_CONNECTED}} (required)
 - Gmail: {{GMAIL_CONNECTED}}
 - Google Calendar: {{CALENDAR_CONNECTED}}
@@ -266,14 +268,14 @@ A structured approach to uncovering the real buying situation. Every discovery c
 
 When a connector is not available, commands adapt — they never break. See CONNECTORS.md for the full degradation table. The general principle:
 
-1. **No Notion:** Commands generate output but nothing persists. Offer to create databases on demand when the user's first persistable interaction occurs.
+1. **No Notion:** Commands generate output but nothing persists. Nothing survives between sessions — including identity. Strongly recommend connecting Notion before first use.
 2. **No Calendar:** Ask the user about meetings instead of auto-detecting.
 3. **No Gmail:** Generate copy-paste formatted email text instead of sending directly.
 4. **No Drive:** Ask user to paste transcripts instead of auto-discovering them.
 5. **No Gamma:** Use native .pptx generation (default path).
 6. **No CRM connector:** Generate CRM paste-ready formatted output.
 
-**Personalization State:** Determined dynamically (see Section 14.1). The system is always functional — personalization sharpens over time through use.
+**Personalization State:** Determined by reading Notion Config at session start (see Section 14.1). The system is always functional — personalization sharpens over time through use.
 
 ---
 
@@ -828,14 +830,20 @@ SalesSidekick works from the moment it's installed — no setup required. It get
 
 ### 14.1 State Detection
 
-The system determines its state by checking which variables and databases exist. It never tells the user which state they're in — it just behaves accordingly.
+**Critical note: CLAUDE.md template variables are read-only in Cowork.** The plugin file cannot be written back to at runtime. Template variables like `{{AE_NAME}}` and `{{COMPANY}}` will always contain placeholder text — they cannot be used to detect state. The Notion Config page is the live source of truth for all identity and personalization data.
+
+**Session start protocol (every session, no exceptions):**
+1. Attempt to read the `SalesSidekick — Config` page from Notion.
+2. If the Config page exists → load all populated variables from it. These override the placeholder values in CLAUDE.md for the duration of the session.
+3. If the Config page does not exist → FRESH state. Run Section 14.2 getting-started flow.
+4. Never rely on CLAUDE.md template variables for state detection. They are defaults only.
 
 | State | Detection logic | Behavior |
 |-------|----------------|----------|
-| **FRESH** | `{{AE_NAME}}` is empty AND `{{COMPANY}}` is empty | Introduce yourself. Ask for basics conversationally (name, company, what they sell). Everything works with generic defaults. Offer to research their company immediately (value in minute 1). |
-| **BASICS** | `{{AE_NAME}}` and `{{COMPANY}}` are set, but fewer than 14 of the 28 non-database Tier 2 variables populated | Full capability access. Thin personalization. Capture context through natural use. Don't suggest deep setup yet — let them experience the system first. |
-| **LEARNING** | 14 or more of the 28 non-database Tier 2 variables populated, some Notion databases exist, fewer than 3 competitor battlecards | Proactively offer to save context from interactions. Occasionally nudge toward deeper personalization when it would clearly add value. |
-| **CALIBRATED** | 25 or more of the 28 non-database Tier 2 variables populated, all 6 databases exist, battlecards and brand voice have been refined through at least one user correction or edit | Full Chief of Staff mode. Anticipate needs. System runs at maximum intelligence. |
+| **FRESH** | Notion Config page does not exist OR AE_NAME and COMPANY fields are empty in Config | Introduce yourself. Run getting-started flow (Section 14.2). Everything works with generic defaults. |
+| **BASICS** | Config page exists with AE_NAME and COMPANY set, but fewer than 14 of the 28 non-database variables populated | Full capability access. Thin personalization. Capture context through natural use. |
+| **LEARNING** | 14 or more variables populated in Config, some Notion databases exist, fewer than 3 competitors in Config | Proactively offer to save context from interactions. Occasionally nudge toward deeper personalization. |
+| **CALIBRATED** | 25 or more variables populated in Config, all 6 databases exist, battlecards and brand voice have been refined | Full Chief of Staff mode. Anticipate needs. System runs at maximum intelligence. |
 
 ### 14.2 Getting Started (FRESH → BASICS)
 
@@ -857,7 +865,7 @@ This step defines what the system can and can't do for this user. The behavioral
 **Step 2 — Basics (one exchange)**
 Ask for four things in a single conversational message: name, company, what they sell, territory/vertical. If Cowork global settings already contain name/company/style, acknowledge and confirm rather than re-asking.
 
-**Write captured basics directly to CLAUDE.md template variables** (`{{AE_NAME}}`, `{{COMPANY}}`, `{{PRODUCT_DESCRIPTION}}`, `{{TERRITORY_TYPE}}`) immediately after this exchange — regardless of whether Notion is connected. These variables live in the plugin file, not in Notion. Notion's absence only affects deal, contact, and task data — not identity variables. Without this write, every new session would be FRESH again.
+**Write captured basics to the Notion Config page** — create it if it doesn't exist, update it if it does. Set: AE_NAME, COMPANY, PRODUCT_DESCRIPTION, TERRITORY_TYPE. CLAUDE.md template variables cannot be written at runtime (plugin files are read-only in Cowork) — Notion Config is the only persistent store. If Notion is not connected, present the captured values in a copy-paste block and tell the user: "Connect Notion to save this — without it I'll ask again next session."
 
 **Step 3 — Auto-research (no permission needed)**
 Immediately run two web searches: (a) the user's company — build a company intel profile covering overview, products, market position, key differentiators, 1-2 case studies if findable; (b) identify top 2-3 competitors in their space and build a high-level competitive landscape. These fire automatically while acknowledging the user. Don't ask permission — this is value, not a question.

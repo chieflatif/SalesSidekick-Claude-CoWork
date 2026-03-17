@@ -66,7 +66,7 @@ An optional deep personalization session that captures context the system can't 
    - {{DEAL_STAGES}} — pipeline stage names
 4. If already inferred from organic use, confirm rather than re-ask:
    - {{ICP_INDUSTRY}}, {{ICP_SIZE}}, {{ICP_USE_CASE}} — these are normally inferred from deal patterns, but deep personalization can capture them directly if not yet available
-5. Write answers to CLAUDE.md Section 1, Section 9, Section 10
+5. Write all captured values to the Notion Config page (`SalesSidekick — Config`). Create it if it doesn't exist. **Do not attempt to write to CLAUDE.md — plugin files are read-only in Cowork.**
 6. Confirm: "Identity locked in. [summary of what was captured]."
 
 ### Phase 2: Company Intelligence (~5-10 min, AI-assisted)
@@ -76,7 +76,7 @@ An optional deep personalization session that captures context the system can't 
 6. Using {{COMPANY_URL}} and {{PRODUCT_DESCRIPTION}}, research the company via web search
 7. Generate draft `skills/company-intel/SKILL.md` with: company overview, product portfolio, market position, key differentiators, pricing context, case studies by vertical, key metrics
 8. Present the draft to the user for review and refinement
-9. Finalize and save the company-intel skill file
+9. Finalize and save the company-intel skill file. Note: if skill files are read-only (Cowork mode), present the finalized content and instruct the user to paste it into `skills/company-intel/SKILL.md` manually, or store key facts in the Notion Config page under a "Company Intel" section.
 
 **Value beyond organic capture:** Structured, comprehensive company profile vs. fragments gathered across individual interactions.
 
@@ -125,7 +125,7 @@ An optional deep personalization session that captures context the system can't 
 
 28. Check which of the 6 Notion databases exist (some may have been created on-demand)
 29. For any missing databases, create with exact schemas (Companies 12 fields, Contacts 9, Deals 22, Tasks 9, Call Notes 10, LinkedIn Posts 8)
-30. Store all database IDs in CLAUDE.md Section 10
+30. Store all database IDs in the Notion Config page (`SalesSidekick — Config`). **Do not attempt to write to CLAUDE.md — plugin files are read-only in Cowork.**
 31. Auto-detect available connectors (Gmail, Calendar, Drive, Gamma)
 32. For each detected connector, verify access and record status
 33. Set connector status variables: {{NOTION_CONNECTED}}, {{GMAIL_CONNECTED}}, {{CALENDAR_CONNECTED}}, {{DRIVE_CONNECTED}}, {{GAMMA_CONNECTED}}
