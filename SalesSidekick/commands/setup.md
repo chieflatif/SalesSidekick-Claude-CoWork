@@ -8,6 +8,9 @@ intent-triggers:
       - "configure my settings"
       - "deep setup"
       - "set me up"
+      - "let's go deep"
+      - "full personalization"
+      - "set everything up"
 ---
 
 # Deep Personalization Session
