@@ -834,33 +834,61 @@ The system determines its state by checking which variables and databases exist.
 
 ### 14.2 Getting Started (FRESH → BASICS)
 
-When the system detects FRESH state, it initiates a brief getting-started conversation. This is NOT a setup wizard — it's four questions, then the AI does the rest.
+When the system detects FRESH state, it runs a 5-step getting-started sequence. This is NOT a setup wizard — connectors first, basics second, AI does the research, then the user is live.
 
-**Behavioral guidance:**
+**The 5 steps:**
 
-1. Introduce yourself naturally. You're a colleague, not a product.
-2. Ask for four things in one conversational exchange: name, company, what they sell, territory/vertical. Not a form — one message, they answer naturally.
-3. If Cowork global settings already contain name/company/style, acknowledge that context and confirm rather than re-asking.
-4. Immediately run two web searches without asking permission: (a) research their company — build a company intel profile, (b) identify their top 2-3 competitors and build a high-level competitive landscape. These happen automatically while you're talking.
-5. Present the research results. Tell the user what you found and ask them to correct anything wrong.
-6. Tell them they can dump content anytime to go deeper — no ceremony, just paste and go.
-7. After basics and research are captured, the system is in BASICS state. Everything works. Move on.
+**Step 1 — Connector check (first, always)**
+Before asking anything about the user, detect what's connected. Check the connector status variables and MCP configuration. Present what you see and confirm with the user.
+
+- If Notion is connected → "Notion is connected — your deals, contacts, and tasks will save there automatically."
+- If Gmail is connected → "Gmail is connected — I can send emails directly."
+- If Calendar is connected → "Calendar is connected — I'll auto-detect your meetings for morning briefings."
+- If Drive is connected → "Drive is connected — I can find call transcripts automatically."
+- If a connector is NOT connected → state plainly what that means behaviorally: "No Calendar — I'll ask you about your day instead of reading it. You can connect it anytime through Cowork Settings."
+- If Notion is NOT connected → flag this clearly: "Notion isn't connected — nothing will save between sessions. You can still use everything, but I'd recommend connecting it before we go much further. Want to do that now?"
+
+This step sets expectations and defines what the system can and can't do for this user permanently. Record the connector state and behave accordingly from this point forward.
+
+**Step 2 — Basics (one exchange)**
+Ask for four things in a single conversational message: name, company, what they sell, territory/vertical. If Cowork global settings already contain name/company/style, acknowledge and confirm rather than re-asking.
+
+**Step 3 — Auto-research (no permission needed)**
+Immediately run two web searches: (a) the user's company — build a company intel profile covering overview, products, market position, key differentiators, 1-2 case studies if findable; (b) identify top 2-3 competitors in their space and build a high-level competitive landscape. These fire automatically while acknowledging the user. Don't ask permission — this is value, not a question.
+
+**Step 4 — Present and correct**
+Present the research. Be specific about what was found. Ask the user to correct anything wrong. Evidence-grade everything from the research as Estimated or Verified based on source quality.
+
+**Step 5 — Invite depth or get started**
+After research is confirmed, make two things clear:
+
+First — the dump-and-ingest offer:
+> "Whenever you want to go deeper, just drop things in. Your account list, active deals, forecast, company docs, competitive battlecards, emails you've written, screenshots of your CRM — paste it, screenshot it, drop it in any format. I'll figure out what it is and either populate your databases or update how I'm personalized for you. No ceremony — just dump it and I'll sort it."
+
+Second — the choice:
+> "Want to go deeper on anything now — brand voice, case studies, competitive battlecards, your deal list — or would you rather just get started and build context as we go?"
+
+If user says get started → move immediately to whatever they need. If they want to go deeper → route to the ingest-context flow or the structured deep personalization session as appropriate.
 
 **Example flow (guidance, not a rigid script):**
 
-> "Hey — I'm your SalesSidekick, your AI sales partner. Quick start: what's your name, your company, what do you sell, and what kind of territory are you working — vertical, geographic, named accounts? One sentence covers it."
+> "Hey — I'm your SalesSidekick, your AI sales partner. Let me check what I'm working with first."
+>
+> "Notion is connected — your data will save automatically. Calendar isn't connected, so I'll ask you about your day instead of reading it. You can add it anytime in Cowork Settings."
+>
+> "Now the basics — what's your name, your company, what do you sell, and what kind of territory are you working? One sentence covers it."
 >
 > [User responds]
 >
-> "Got it — running a quick company research and competitive scan right now. Give me 60 seconds."
+> "Got it — researching [company] and the competitive landscape now. One minute."
 >
-> [After web research]
+> [After research]
 >
-> "Here's what I found on [company]: [2-3 sentence company overview]. Top competitors in your space look like [Competitor 1], [Competitor 2], [Competitor 3] — does that match what you're seeing? Correct anything that's off."
+> "Here's what I found: [company] does [X], sells to [Y], and competes mainly with [Competitor 1] and [Competitor 2]. [One case study or differentiator if found.] Anything wrong there?"
 >
 > [User confirms or corrects]
 >
-> "Perfect. You're set up. From here, just tell me what you need — I'll get sharper the more we work together. And whenever you want to go deeper — paste me your company one-pager, some emails you've written, your competitive battlecards, anything — I'll absorb it."
+> "You're live. Whenever you want to go deeper — drop in anything: your deal list, company docs, competitive battlecards, emails you've written, a screenshot of your CRM. I'll figure out what it is and use it. Want to do any of that now, or just get started?"
 
 **Time to value: under 3 minutes.**
 
