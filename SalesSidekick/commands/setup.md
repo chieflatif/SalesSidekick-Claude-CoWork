@@ -54,7 +54,7 @@ An optional deep personalization session that captures context the system can't 
 
 **Skip if:** All explicit variables already populated.
 
-1. Check existing Tier 2 variables against CLAUDE.md Section 13
+1. Check the Notion Config page (`SalesSidekick — Config`) for already-populated variables. CLAUDE.md Section 13 documents the full list of variables — use it as a reference, not as the state source. CLAUDE.md template variables are read-only defaults and always show placeholder text; only the Notion Config page shows real values.
 2. For each unpopulated **explicit** variable, ask conversationally — batch related questions together
 3. Key explicit variables to capture if missing:
    - {{AE_TITLE}} — title/role
@@ -73,10 +73,10 @@ An optional deep personalization session that captures context the system can't 
 
 **Skip if:** `skills/company-intel/SKILL.md` has already been regenerated with rich content.
 
-6. Using {{COMPANY_URL}} and {{PRODUCT_DESCRIPTION}}, research the company via web search
-7. Generate draft `skills/company-intel/SKILL.md` with: company overview, product portfolio, market position, key differentiators, pricing context, case studies by vertical, key metrics
-8. Present the draft to the user for review and refinement
-9. Finalize and save the company-intel skill file. Note: if skill files are read-only (Cowork mode), present the finalized content and instruct the user to paste it into `skills/company-intel/SKILL.md` manually, or store key facts in the Notion Config page under a "Company Intel" section.
+7. Using {{COMPANY_URL}} and {{PRODUCT_DESCRIPTION}}, research the company via web search
+8. Generate draft `skills/company-intel/SKILL.md` with: company overview, product portfolio, market position, key differentiators, pricing context, case studies by vertical, key metrics
+9. Present the draft to the user for review and refinement
+10. Finalize and save the company-intel skill file. Note: if skill files are read-only (Cowork mode), present the finalized content and instruct the user to paste it into `skills/company-intel/SKILL.md` manually, or store key facts in the Notion Config page under a "Company Intel" section.
 
 **Value beyond organic capture:** Structured, comprehensive company profile vs. fragments gathered across individual interactions.
 
@@ -84,13 +84,13 @@ An optional deep personalization session that captures context the system can't 
 
 **Skip if:** Battlecards already exist for 3+ competitors.
 
-10. Check existing competitor variables — use competitors already captured organically
-11. Ask if there are additional competitors to add (up to 5 total)
-12. For each competitor, research via web search
-13. Generate draft `skills/battlecards/SKILL.md` with per-competitor sections: overview, strengths, weaknesses, displacement strategy, talk tracks, proof points, trap questions, landmine responses
-14. Present battlecards to user for validation — competitors know things AI doesn't
-15. Finalize and save the battlecards skill file
-16. Populate any missing {{TOP_COMPETITOR_N}} variables
+11. Check existing competitor variables — use competitors already captured organically
+12. Ask if there are additional competitors to add (up to 5 total)
+13. For each competitor, research via web search
+14. Generate draft `skills/battlecards/SKILL.md` with per-competitor sections: overview, strengths, weaknesses, displacement strategy, talk tracks, proof points, trap questions, landmine responses
+15. Present battlecards to user for validation — competitors know things AI doesn't
+16. Finalize and save the battlecards skill file
+17. Populate any missing {{TOP_COMPETITOR_N}} variables
 
 **Value beyond organic capture:** Systematic displacement playbooks for each competitor vs. ad-hoc competitive notes from individual calls.
 
@@ -98,12 +98,12 @@ An optional deep personalization session that captures context the system can't 
 
 **Skip if:** `skills/brand-voice/SKILL.md` has been calibrated from writing samples.
 
-17. Present voice dimension options: formal↔casual, data-driven↔narrative, concise↔detailed
-18. Optionally ask user to paste 2-3 sample emails for voice extraction
-19. Generate `skills/brand-voice/SKILL.md` with: vocabulary rules, email formatting preferences, banned phrases, 7-point voice check
-20. Populate {{COMMUNICATION_STYLE}}, {{EMAIL_SIGN_OFF}}
-21. If not yet captured: ask about LinkedIn posting goals (topics, target audience)
-22. Populate {{LINKEDIN_TOPICS}}, {{LINKEDIN_AUDIENCE}}
+18. Present voice dimension options: formal↔casual, data-driven↔narrative, concise↔detailed
+19. Optionally ask user to paste 2-3 sample emails for voice extraction
+20. Generate `skills/brand-voice/SKILL.md` with: vocabulary rules, email formatting preferences, banned phrases, 7-point voice check
+21. Populate {{COMMUNICATION_STYLE}}, {{EMAIL_SIGN_OFF}}
+22. If not yet captured: ask about LinkedIn posting goals (topics, target audience)
+23. Populate {{LINKEDIN_TOPICS}}, {{LINKEDIN_AUDIENCE}}
 
 **Value beyond organic capture:** Calibrated from actual writing samples vs. gradually learned from corrections over 5-10 emails.
 
@@ -111,35 +111,77 @@ An optional deep personalization session that captures context the system can't 
 
 **Skip if:** Brand tokens already exist in `skills/pptx/SKILL.md`.
 
-23. Ask user for a screenshot of existing presentation or marketing material, OR company website URL
-24. Extract brand tokens: primary colors, font families, layout patterns
-25. Store brand tokens in `skills/pptx/SKILL.md` Brand Configuration section
-26. Generate one sample slide for user verification
-27. Adjust tokens based on feedback
+24. Ask user for a screenshot of existing presentation or marketing material, OR company website URL
+25. Extract brand tokens: primary colors, font families, layout patterns
+26. Store brand tokens in `skills/pptx/SKILL.md` Brand Configuration section
+27. Generate one sample slide for user verification
+28. Adjust tokens based on feedback
 
 **Value beyond organic capture:** Explicit brand token extraction vs. best-effort from company website.
 
 ### Phase 6: Connectors & Databases (~3-5 min)
 
-**Skip if:** All 6 databases exist and connectors are verified.
+**Skip if:** All 6 databases exist (verified by Notion search) and connectors are verified.
 
-28. Check which of the 6 Notion databases exist (some may have been created on-demand)
-29. For any missing databases, create with exact schemas (Companies 12 fields, Contacts 9, Deals 22, Tasks 9, Call Notes 10, LinkedIn Posts 8)
-30. Store all database IDs in the Notion Config page (`SalesSidekick — Config`). **Do not attempt to write to CLAUDE.md — plugin files are read-only in Cowork.**
-31. Auto-detect available connectors (Gmail, Calendar, Drive, Gamma)
-32. For each detected connector, verify access and record status
-33. Set connector status variables: {{NOTION_CONNECTED}}, {{GMAIL_CONNECTED}}, {{CALENDAR_CONNECTED}}, {{DRIVE_CONNECTED}}, {{GAMMA_CONNECTED}}
-34. Confirm graceful degradation rules for any missing connectors
+29. **Search Notion for each database by name** — use the Notion search API to search for: "Companies", "Contacts", "Deals", "Tasks", "Call Notes", "LinkedIn Posts". Do this regardless of whether a Config page exists. **Absence of a Config page does NOT mean databases don't exist** — the user may have databases from a previous session, a prior install, or a partial setup. Never assume FRESH = no databases.
+   - For each database found by name: show the user what was found and confirm — "I found a database called [name] — is that your SalesSidekick one?" Record its ID only after confirmation. Do not silently adopt unrelated databases.
+   - For databases genuinely not found after searching: create them with exact schemas (see skills/notion/SKILL.md — Companies 12 fields, Contacts 9, Deals 22, Tasks 9, Call Notes 10, LinkedIn Posts 8).
+30. Create any missing databases in dependency order: Companies → Contacts → Deals → Tasks → Call Notes → LinkedIn Posts.
+31. Wire cross-relations after all databases exist (Companies↔Contacts, Deals→Companies, Deals→Contacts, Tasks→Companies, Tasks→Deals, Call Notes→Companies, Call Notes→Deals, LinkedIn Posts→Companies).
+32. Store all 6 database IDs in the Notion Config page (`SalesSidekick — Config`). **Do not attempt to write to CLAUDE.md — plugin files are read-only in Cowork.**
+33. Auto-detect available connectors (Gmail, Calendar, Drive, Gamma)
+34. For each detected connector, verify access and record status
+35. Set connector status variables: {{NOTION_CONNECTED}}, {{GMAIL_CONNECTED}}, {{CALENDAR_CONNECTED}}, {{DRIVE_CONNECTED}}, {{GAMMA_CONNECTED}} — write to Notion Config page
+36. Confirm graceful degradation rules for any missing connectors
 
 **Value beyond organic capture:** Bulk database creation and connector verification vs. one-at-a-time on-demand creation.
 
 ### Phase 7: Verification (~2 min)
 
-35. Run smoke test: create a test company record, write and read back, then delete
-36. Regenerate `skills/profile/SKILL.md` with full AE identity and context
-37. Run `/audit` on the configuration
-38. Fix any issues found during audit
-39. Produce "Personalization Complete" confirmation summary
+37. Run smoke test: create a test company record, write and read back, then delete
+38. Regenerate `skills/profile/SKILL.md` with full AE identity and context (note: if skill files are read-only in Cowork, write full profile content to a Notion page titled "SalesSidekick — Profile" instead)
+39. Run the self-audit capability on the configuration
+40. Fix any issues found during audit
+41. **Generate personalized global settings block** — this is mandatory, not optional. Using all captured identity, product, ICP, competitive, and communication data, generate the block and present it as a copy-paste artifact. Say:
+
+> "Before we wrap — here's your global settings block. Paste this into **Claude Desktop > Settings > Cowork** (the custom instructions field). This is the stable identity layer. Every session loads it before anything else — no API call, no Notion read. It tells every future session who you are, what you sell, and how to beat your competitors from message one. Update it only when something fundamental changes: new company, new product, new primary competitors."
+
+**Format of the generated block:**
+```
+I am [AE_NAME], [AE_TITLE] at [COMPANY] ([COMPANY_URL]).
+
+What I sell: [PRODUCT_DESCRIPTION]
+Primary product: [PRIMARY_PRODUCT]
+I sell to: [ICP_INDUSTRY] companies, [ICP_SIZE], focused on [ICP_USE_CASE]
+Territory: [TERRITORY_TYPE]
+Communication style: [COMMUNICATION_STYLE]. Sign-off: "[EMAIL_SIGN_OFF]"
+
+Top competitors and how I beat them:
+- [TOP_COMPETITOR_1]: [1-line displacement angle from research]
+- [TOP_COMPETITOR_2]: [1-line displacement angle from research]
+- [TOP_COMPETITOR_3]: [1-line displacement angle from research]
+
+Key differentiation angles:
+- Financial: [from research — cost savings, ROI, risk reduction]
+- Technical: [from research — integration advantages, architecture, security]
+- Strategic: [from research — market position, partnerships, roadmap]
+
+I use voice-to-text — interpret my intent, not my grammar.
+
+QUALITY RULES — apply to everything you produce:
+
+No hallucination. If you don't have a verified source, say "I don't know" or "I'd need to verify." Grade every factual claim: Verified (sourced), Estimated (calculated with stated assumptions), or Hypothesis (pattern-based guess).
+
+No slop. Every sentence must earn its place. Match MY voice, not a corporate template. Before delivering any written content, ask: "Would this person actually write this?"
+
+Do the research first. Before generating content about a company, person, deal, or topic — look it up. Check Notion. Search the web. Notion is my single source of truth for deal and account data.
+
+Give me options, not decisions. Always present 2-3 paths with trade-offs. Never prescribe a single answer.
+
+Respect my time. Lead with the answer, not the reasoning. Break complex work into 10-minute chunks.
+```
+
+42. After user confirms they've saved the global settings block (or acknowledges it), produce "Personalization Complete" confirmation summary
 
 ## Output Format
 
@@ -157,6 +199,7 @@ Product: {{PRIMARY_PRODUCT}}
 CRM: {{CRM_SYSTEM}}
 
 Databases: [N] active (Companies, Contacts, Deals, Tasks, Call Notes, LinkedIn Posts)
+  — [X] existing (found by search), [Y] newly created
 Skills calibrated: profile, brand-voice, company-intel, battlecards
 Competitors mapped: {{TOP_COMPETITOR_1}}, {{TOP_COMPETITOR_2}}, {{TOP_COMPETITOR_3}}
 
@@ -168,22 +211,23 @@ Connectors:
 - Gamma: [✅/❌]
 
 Personalization state: CALIBRATED
-Estimated time saved: [X] variables and [Y] databases were already in place from organic use.
+
+⬆️ Global settings block generated above — paste it into Claude Desktop > Settings > Cowork to complete setup. Every future session will know who you are from message one.
 ```
 
 ## Database Read/Write
 
 **Writes:**
-- Creates Notion databases (only those not already created on-demand)
-- Writes database IDs to CLAUDE.md Section 10
-- Writes all captured Tier 2 variables to CLAUDE.md
-- Regenerates Tier 3 skill files (profile, brand-voice, company-intel, battlecards)
+- Creates Notion databases (only those not found by name search — never duplicate)
+- Writes all database IDs to the Notion Config page (`SalesSidekick — Config`)
+- Writes all captured Tier 2 variables to the Notion Config page
+- Generates personalized global settings block for user to paste into Cowork global settings
+- Writes PLUGIN_VERSION to Notion Config page
 
 **Reads:**
-- All existing Tier 2 variables (to skip redundant questions)
-- Existing Notion databases (to skip creation)
+- Notion Config page for existing Tier 2 variables (to skip redundant questions)
+- Notion search for each database by name (to skip creation of existing databases)
 - Web search for company intel and competitor research
-- Existing CLAUDE.md for current configuration state
 
 ## Commandment Alignment
 

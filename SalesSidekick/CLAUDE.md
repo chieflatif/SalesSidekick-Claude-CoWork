@@ -867,7 +867,7 @@ Before asking anything about the user, detect what's connected. The only reliabl
 - If Notion API fails → "Notion isn't connected — nothing will save between sessions. You can still use everything, but I'd recommend connecting it before we go much further. See CONNECTORS.md for setup. Want to proceed without it for now?"
 - For Gmail, Calendar, Drive, Gamma → "I can't auto-detect these — check Cowork Settings if you've connected them. If you haven't, here's what changes: no Calendar means I'll ask about your day instead of reading it; no Gmail means emails are copy-paste instead of sent directly."
 
-**Write connector status to CLAUDE.md Section 10 after this step** — set `{{NOTION_CONNECTED}}`, `{{GMAIL_CONNECTED}}`, `{{CALENDAR_CONNECTED}}`, `{{DRIVE_CONNECTED}}`, `{{GAMMA_CONNECTED}}` based on confirmed status. This persists across sessions. Without this write, the connector state is lost when the session ends.
+**Write connector status to the Notion Config page after this step** — set `{{NOTION_CONNECTED}}`, `{{GMAIL_CONNECTED}}`, `{{CALENDAR_CONNECTED}}`, `{{DRIVE_CONNECTED}}`, `{{GAMMA_CONNECTED}}` based on confirmed status. Create the Config page if it doesn't exist yet. This persists across sessions. CLAUDE.md is read-only in Cowork — connector state must go to Notion Config or it is lost when the session ends.
 
 This step defines what the system can and can't do for this user. The behavioral rules set here apply to every subsequent session.
 
@@ -1023,7 +1023,8 @@ Notion databases are created when first needed, not upfront. Each database has a
 | **LinkedIn Posts** | First LinkedIn post drafted | "Want me to save this draft so I can track your posting? I'll set up a LinkedIn Posts database." | Post shown for copy-paste only. |
 
 **Rules:**
-- One confirmation per database, ever. Once created, all future writes happen automatically.
+- **Search before create.** Before offering to create a database, search Notion for it by name. If a database with that name already exists, store its ID in the Config page and use it — do not offer to create a duplicate. If the match is ambiguous (a "Companies" database exists but might not be the SalesSidekick one), ask: "I found a database called [name] in Notion — is that your SalesSidekick one, or a different one?"
+- One confirmation per database, ever. Once created (or adopted from an existing database), all future writes happen automatically.
 - If the user declines, the capability still works — output is generated, just not persisted.
 - If the user declines, offer again on the NEXT relevant interaction (not the same session).
 - Database creation takes seconds — frame it that way. Don't make it sound like a big deal.
