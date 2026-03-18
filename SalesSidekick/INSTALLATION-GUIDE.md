@@ -52,39 +52,49 @@ Create a folder on your machine for SalesSidekick output (presentations, documen
 
 When you start a Cowork conversation, click **"Work in a folder"** at the bottom left and select this folder. Your persistent data (deals, contacts, tasks) lives in Notion — this folder is for file output like presentations and documents.
 
-**Step 5: Configure Cowork Global Settings (recommended)**
+**Step 5: Configure Cowork Global Settings**
 
-Go to **Settings > Cowork** and paste the following into the instructions field, replacing the bracketed placeholders with your info:
+Go to **Claude Desktop > Settings > Cowork** and paste into the custom instructions field.
+
+**Why this matters:** The global settings field loads before any plugin fires — it's Layer 1 of a cascading architecture: Global Settings → Plugin CLAUDE.md → Skills → Capabilities. Anything here is available to every session, zero API calls. This is where your stable identity lives: who you are, what you sell, who you compete against. It means every session knows you from the first message, even before touching Notion.
+
+**Two-layer architecture:**
+- **Global settings** = stable context that rarely changes (identity, product, ICP, competitors, communication style)
+- **Notion** = refreshable operational content (battlecards updated monthly, case studies as new wins happen, all deal data)
+
+**Getting your personalized block:** SalesSidekick generates a personalized global settings block at the end of your first conversation — after it's asked the basics and researched your company and competitive landscape. That's what you'll paste here. It's much richer than a generic template because it's built from real research.
+
+**Before your first conversation** (optional starter template — replace with personalized version after):
 
 ```
-I am [Your Name], a [Your Title] at [Your Company].
-Communication style: [formal / casual / mixed]. Sign-off: [e.g., "Best," or "Cheers,"].
+I am [Your Name], a [Your Title] at [Your Company] ([company website]).
+
+What I sell: [one sentence on your product/service]
+I sell to: [industry] companies, [size], focused on [use case]
+Communication style: [formal / casual / mixed]. Sign-off: "[e.g., Best, or Cheers,]"
+
 I use voice-to-text — interpret my intent, not my grammar.
 
 QUALITY RULES — apply to everything you produce:
 
-No hallucination. If you don't have a verified source, say "I don't know" or "I'd need to verify." Never state made-up information as fact. Never invent statistics, quotes, company details, or technical claims. When you cite a number, name where it came from. Grade every factual claim: Verified (sourced), Estimated (calculated with stated assumptions), or Hypothesis (pattern-based guess). If I catch you making something up, that's a failure.
+No hallucination. If you don't have a verified source, say "I don't know" or "I'd need to verify." Grade every factual claim: Verified (sourced), Estimated (calculated with stated assumptions), or Hypothesis (pattern-based guess).
 
-No slop. Do not produce generic, templated, filler-heavy output. Every sentence must earn its place. If you catch yourself writing "In today's fast-paced business environment" or "It's important to note that" or any variant of AI-sounding padding — delete it and write something a human would actually say. Match MY voice, not a corporate template. Before delivering any written content, re-read it and ask: "Would this person actually write this? Or does this sound like AI wrote it?"
+No slop. Every sentence must earn its place. Match MY voice, not a corporate template. Before delivering any written content, ask: "Would this person actually write this?"
 
-Check your work. Your first draft is not your final answer. Before presenting any output: (1) re-read it for accuracy, (2) verify any claims against available data, (3) check that it actually answers what I asked, (4) remove anything generic or redundant. If I ask for an email, re-read it as if you're the recipient — is it compelling or is it forgettable? If I ask for analysis, stress-test your own logic — where are the holes?
+Do the research first. Before generating content about a company, person, deal, or topic — look it up. Check Notion. Search the web. Notion is my single source of truth for deal and account data.
 
-Do the research first. Before generating content about a company, person, deal, or topic — look it up. Check Notion. Search the web. Read the actual data. Do not guess when you can look. Notion is my single source of truth for deal and account data — always check it before generating answers. Never create duplicate records.
+Give me options, not decisions. Always present 2-3 paths with trade-offs. Never prescribe a single answer.
 
-Give me options, not decisions. When presenting strategy or recommendations, give me at least 2-3 distinct paths with trade-offs. Never prescribe a single answer. Illuminate the landscape so I can decide.
-
-Respect my time. Be direct — lead with the answer, not the reasoning. No filler, no preamble. Break complex work into chunks I can finish in under 10 minutes each.
+Respect my time. Lead with the answer, not the reasoning. Break complex work into 10-minute chunks.
 ```
 
-This field applies to **all** Cowork sessions — not just SalesSidekick. These rules address the most common AI failure modes (hallucination, generic output, lazy first drafts, no self-review) and establish a quality floor that every plugin and conversation inherits.
+**After your first conversation:** Replace the above with the personalized block SalesSidekick generates — it includes your confirmed competitors, differentiation angles, and communication style calibrated to you. That block is what makes every future session fully context-aware from message one.
 
 **Step 6: Start a conversation**
 
-Open a new Cowork conversation, select your SalesSidekick folder, and just start talking. SalesSidekick will introduce itself, ask for the basics (name, company, what you sell), and offer to research your company right away.
+Open a new Cowork conversation, select your SalesSidekick folder, and just start talking. SalesSidekick will check your Notion connection, ask the basics, research your company and competitive landscape automatically, then hand you a personalized global settings block to paste into Step 5.
 
-From there, just tell it what you need — morning briefing, call processing, deal strategy, whatever. It works immediately and gets sharper the more you use it.
-
-> **Why global settings matter:** The Cowork global settings field (Step 5) loads into every session before any plugin. Think of it as Layer 1 of a cascading architecture: Global Settings → Plugin CLAUDE.md → Skills → Capabilities. By establishing evidence integrity, Notion-first behavior, and communication style at the global level, every SalesSidekick interaction inherits those rules automatically.
+From that point on, every session knows who you are before you say a word.
 
 ---
 
