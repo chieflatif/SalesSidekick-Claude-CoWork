@@ -80,7 +80,7 @@ zip -r SalesSidekick.zip . -x ".git/*" ".gitignore"
 2. Click **Add plugins** > **Upload a file**
 3. Upload the `SalesSidekick.zip` file
 4. Set visibility to your sales team or organization
-5. Add installation notes (e.g., "Run /salessidekick:setup after installing — takes ~45 minutes")
+5. Add installation notes (e.g., "After installing, open a Cowork conversation and just start talking — the system works immediately and personalizes as you use it")
 
 ---
 
@@ -98,9 +98,9 @@ Send this to each AE:
    - Select your workspace
    - Copy the API key (starts with `ntn_`)
 3. Replace `{{NOTION_API_KEY}}` in the plugin's `.mcp.json` with your key
-4. Run `/salessidekick:setup` in a Cowork conversation
-5. The setup wizard will guide you through 7 phases (~45 minutes, but some company info may be pre-filled)
-6. After setup, try `/salessidekick:today` for your first morning briefing
+4. Open a Cowork conversation and start talking — say "what's on my plate today?" or "I just finished a call with [Company]"
+5. The system asks for your name, company, and what you sell — one quick exchange, under 2 minutes
+6. Everything works immediately. It gets smarter the more you use it
 
 ---
 
