@@ -162,9 +162,50 @@ If something isn't working, check [CONNECTORS.md](CONNECTORS.md) troubleshooting
 
 ## Updating
 
-**Download a new version** of the `.zip` from the releases page and re-upload it through Cowork > Customize > Plugins. Your Notion databases and data are preserved — only capability and skill definitions update.
+### Why updates are safe
 
-**Enterprise users:** Admin uploads the new `.zip` to the organization marketplace. AEs update through their normal plugin management flow.
+All your data lives in Notion — databases, Config page, everything. Plugin files are pure logic (instructions for Claude). Replacing them has zero effect on your deals, contacts, tasks, or personalization. You can always re-upgrade if something goes wrong.
+
+### Standard update (3 steps)
+
+1. Download the new `.zip` from [releases page](https://github.com/chieflatif/SalesSidekick-Claude-CoWork/releases/latest/download/SalesSidekick.zip)
+2. Go to **Cowork > Customize > Plugins**, remove the old SalesSidekick, upload the new zip
+3. Open a new conversation — the system reads your existing Notion Config and continues where you left off
+
+**What's preserved:** All 6 databases, all your deal/contact/task data, your personalization Config page, your global settings block.
+
+**What updates:** Capability logic, skill frameworks, prompts, and any new features in the release.
+
+### After upgrading
+
+Open a conversation and the system will behave normally — it reads your existing Notion Config and picks up your current state (BASICS / LEARNING / CALIBRATED). No re-setup needed.
+
+If the update added new capabilities that need additional context, they'll ask for it naturally the first time you use them. If the update added new Config page variables, they'll fill in organically through use or in a focused deep personalization session.
+
+### Update types and what they mean for you
+
+| Update type | Example | What to do after upgrading |
+|-------------|---------|---------------------------|
+| **No action needed** | Bug fixes, better output quality, improved prompts | Nothing — just start using it |
+| **New capabilities** | New intent categories, new analysis frameworks | Nothing — new capabilities work immediately with existing context |
+| **New Config variables** | Additional personalization fields | Nothing — new fields fill in organically, or run a targeted deep personalization phase |
+| **Action required** | Schema changes, renamed databases | Release notes will say explicitly. Rare — we design to avoid these. |
+
+### Upgrading from v2.0 to v3.0
+
+v2 stored database IDs inside CLAUDE.md (which worked in the original architecture). v3 stores them in a Notion Config page. If you're upgrading from v2:
+
+1. Follow the standard update steps above
+2. Open a conversation — the system will run the getting-started flow (it won't find a Config page yet)
+3. When it asks basics: confirm your name, company, and what you sell
+4. When it offers to research: let it run — this populates the Config page
+5. **Database IDs:** Your existing v2 databases are still in Notion. After the getting-started flow creates the Config page, tell the system: "I have existing databases from a previous install" and paste your database IDs. It will write them to the Config page and use the existing databases rather than creating new ones.
+
+Alternatively: create the Config page manually in Notion (titled `SalesSidekick — Config`) with a table of your variable names and values, including your database IDs. The system will find it on first Notion operation.
+
+### Enterprise updates
+
+Admin uploads the new `.zip` to the organization marketplace. AEs update through their normal plugin management flow — same 3-step process, Notion data preserved for each AE.
 
 ---
 

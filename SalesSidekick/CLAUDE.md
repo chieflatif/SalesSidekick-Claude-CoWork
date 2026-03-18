@@ -1162,14 +1162,15 @@ Skills auto-fire based on intent classification. When the intent engine (Section
 
 ## 17. System Notes
 
-**Version:** 3.0.0
+**Version:** 3.0.1
 **Build:** SalesSidekick for Claude Cowork
 **Author:** Pipeline Rebel (Latif Horst)
 **Repository:** https://github.com/chieflatif/SalesSidekick-Claude-CoWork
 **License:** Personal Use (see LICENSE)
 
 **Version History:**
-- **v3.0.0** — Natural language architecture. Intent engine replaces slash-command-driven interface. Progressive personalization replaces setup gate. Database-on-demand creation. Proactive data capture with batch-and-review. All v2 capabilities preserved — invocation method changed from commands to conversational intent.
+- **v3.0.1** — Persistence architecture fix. Notion Config page as live persistence layer. Lazy Config loading. First-run generates personalized global settings block. Upgrade process documented.
+- **v3.0.0** — Natural language architecture. Intent engine replaces slash-command-driven interface. Progressive personalization replaces setup gate. Database-on-demand creation. Proactive data capture with batch-and-review. All v2 capabilities preserved.
 - **v2.0.0** — Full plugin build. 22 commands, 11 skills, 6 Notion databases. 10 Commandments framework. Evidence grading. MEDDPICC integration.
 
 **Compatibility:**
@@ -1177,6 +1178,3 @@ Skills auto-fire based on intent classification. When the intent engine (Section
 - Secondary: Claude Code (terminal-based, same file architecture)
 
 **Session behavior:** Claude has no persistent memory between sessions. ALL state lives in Notion. Every session starts fresh — basic identity comes from the global Cowork settings field (zero API overhead), and richer context (database IDs, deal stages, competitors) loads lazily from the Notion Config page on first database operation. Sessions that don't touch Notion data never trigger a Config read. This is why database schemas and read patterns are precisely defined.
-
-**Update history:**
-- v2.0.0 — Full productized rebuild. Self-personalizing. 22 commands, 11 skills, 6 databases.

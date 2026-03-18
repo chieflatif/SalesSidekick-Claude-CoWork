@@ -2,6 +2,36 @@
 
 All notable changes to SalesSidekick are documented here.
 
+Each release is marked: **✅ No action needed** or **⚠️ Action required** (with instructions).
+
+---
+
+## v3.0.1 — Persistence & Onboarding Fixes (2026-03-18)
+
+**✅ No action needed** — upgrade by re-uploading the zip. Existing Notion data and Config page are untouched.
+
+### Fixed
+
+**Persistence architecture**
+- Plugin files (CLAUDE.md, skill files) are read-only in Cowork and cannot be written at runtime. All Tier 2 variables are now stored in a Notion Config page (`SalesSidekick — Config`) as the live persistence layer. Previously, captured identity data was silently discarded each session.
+- State detection (FRESH / BASICS / LEARNING / CALIBRATED) now reads from the Notion Config page, not CLAUDE.md template placeholders.
+
+**Lazy Config loading**
+- Notion Config page now loads lazily on first database operation, not at session start. Sessions that don't touch Notion data have zero API overhead. Basic identity (name, company) comes from the Cowork global settings field — always available, no API call.
+
+**First-run onboarding**
+- Connector detection now uses a live Notion API test (attempt read, report result). Non-Notion connectors cannot be probed — users directed to Cowork Settings.
+- After research is confirmed, the system generates a personalized global settings block for the user to paste into Claude Desktop > Settings > Cowork. This is the stable identity layer — loads before every session without reading Notion.
+
+**Two-layer identity architecture**
+- Global settings = stable context (identity, product, ICP, competitors, communication style) — paste once, available every session
+- Notion Config = operational context (database IDs, deal stages, connector status, personalization state) — lazy loaded on first data operation
+- Notion databases = refreshable content (battlecards, case studies, deal data) — updated as things change
+
+### Added
+- `PLUGIN_VERSION` field in Notion Config page — enables "you just upgraded" detection for future releases
+- Upgrade documentation in INSTALLATION-GUIDE.md — full process, what's preserved, v2→v3 migration path
+
 ---
 
 ## v3.0.0 — Natural Language Architecture (2026-03-08)

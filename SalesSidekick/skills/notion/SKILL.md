@@ -241,7 +241,10 @@ The Config page is a single Notion page (not a database) that stores all identit
 | NOTION_TASKS_DB_ID | [id] |
 | NOTION_CALL_NOTES_DB_ID | [id] |
 | NOTION_LINKEDIN_POSTS_DB_ID | [id] |
+| PLUGIN_VERSION | [e.g. 3.0.0] |
 ```
+
+**Version tracking:** The `PLUGIN_VERSION` field stores the plugin version that last wrote to this Config page. On first Config read each session, compare PLUGIN_VERSION to the current plugin version (found in plugin.json). If they differ, the user has upgraded since their last session — surface a brief "what's new" note and update PLUGIN_VERSION to current. If the field is empty, write the current version on first save.
 
 **Config page access pattern:** Read the Config page lazily — not at session start, but on the first operation that requires stored data (database query, DB ID lookup, full personalization state check). This means:
 - Sessions that only use basic identity (name, company from Cowork global settings) have zero Notion API overhead
