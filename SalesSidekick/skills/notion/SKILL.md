@@ -243,7 +243,12 @@ The Config page is a single Notion page (not a database) that stores all identit
 | NOTION_LINKEDIN_POSTS_DB_ID | [id] |
 ```
 
-**Session start behavior:** At the beginning of every session, read the Config page from Notion and load all populated values as the active variable set for the session. This replaces checking CLAUDE.md template variables. If the Config page doesn't exist → FRESH state. If it exists → check populated fields to determine BASICS / LEARNING / CALIBRATED state.
+**Config page access pattern:** Read the Config page lazily — not at session start, but on the first operation that requires stored data (database query, DB ID lookup, full personalization state check). This means:
+- Sessions that only use basic identity (name, company from Cowork global settings) have zero Notion API overhead
+- Sessions that touch databases read Config once on first use, then cache all values for the rest of the session
+- If no Notion operation occurs in a session, Config is never read
+
+**State detection:** On first Config read, check populated fields to determine FRESH / BASICS / LEARNING / CALIBRATED. If the Config page does not exist → FRESH state.
 
 **Write behavior:** Any variable captured during the session (name, company, territory, competitor, connector status) is written to the Config page immediately. Never silently drop a variable — if the Notion write fails, present the value in a copy-paste block.
 
@@ -264,4 +269,4 @@ When creating databases during deep personalization:
 - Stage names and probability weights may be customized (stored as DEAL_STAGES in Config page)
 - Database IDs are stored in the Config page after creation
 - Account resolution logic is universal — no personalization needed
-- CLAUDE.md template variables ({{AE_NAME}}, etc.) are read-only defaults — the Config page overrides them at session start
+- CLAUDE.md template variables ({{AE_NAME}}, etc.) are read-only defaults — the Config page overrides them on first Config read

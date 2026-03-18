@@ -245,7 +245,7 @@ A structured approach to uncovering the real buying situation. Every discovery c
 
 ## 10. System Configuration
 
-**Important: These template variables are read-only defaults.** In Claude Cowork, plugin files cannot be written back to at runtime. The live values for all variables are stored in the `SalesSidekick — Config` page in Notion and loaded at session start (see Section 14.1). The placeholders below exist as fallback defaults only — they are overridden by Notion Config values when available.
+**Important: These template variables are read-only defaults.** In Claude Cowork, plugin files cannot be written back to at runtime. The live values for all variables are stored in the `SalesSidekick — Config` page in Notion and loaded lazily on first Notion operation (see Section 14.1). The placeholders below exist as fallback defaults only — they are overridden by Notion Config values when available.
 
 **Notion Database IDs** (stored in Notion Config page after creation — see Section 14.4 and notion/SKILL.md):
 
@@ -275,7 +275,7 @@ When a connector is not available, commands adapt — they never break. See CONN
 5. **No Gamma:** Use native .pptx generation (default path).
 6. **No CRM connector:** Generate CRM paste-ready formatted output.
 
-**Personalization State:** Determined by reading Notion Config at session start (see Section 14.1). The system is always functional — personalization sharpens over time through use.
+**Personalization State:** Determined from Notion Config on first Notion operation (see Section 14.1). The system is always functional — personalization sharpens over time through use.
 
 ---
 
@@ -832,11 +832,20 @@ SalesSidekick works from the moment it's installed — no setup required. It get
 
 **Critical note: CLAUDE.md template variables are read-only in Cowork.** The plugin file cannot be written back to at runtime. Template variables like `{{AE_NAME}}` and `{{COMPANY}}` will always contain placeholder text — they cannot be used to detect state. The Notion Config page is the live source of truth for all identity and personalization data.
 
-**Session start protocol (every session, no exceptions):**
-1. Attempt to read the `SalesSidekick — Config` page from Notion.
-2. If the Config page exists → load all populated variables from it. These override the placeholder values in CLAUDE.md for the duration of the session.
-3. If the Config page does not exist → FRESH state. Run Section 14.2 getting-started flow.
-4. Never rely on CLAUDE.md template variables for state detection. They are defaults only.
+**Identity sources (in priority order):**
+1. **Global Cowork settings** — Name, company, title, and communication style from the user's Cowork global settings field load automatically before any plugin fires. Use these for basic identity. No API call needed.
+2. **Notion Config page** — Richer context: database IDs, deal stages, competitors, connector status, full personalization state. Read lazily on first Notion operation.
+
+**Config page access pattern:**
+- Do NOT read the Config page at session start.
+- Read it on the first operation that requires stored Notion data (database query, DB ID lookup, state check for context-dependent output).
+- Once read, cache all values for the rest of the session.
+- If no Notion operation occurs, Config is never read. A session drafting an email or discussing strategy has zero Notion API overhead.
+
+**State detection (on first Config read):**
+- Config page exists and has populated fields → determine FRESH / BASICS / LEARNING / CALIBRATED from field completeness
+- Config page does not exist → FRESH state. Run Section 14.2 getting-started flow if this is a new user.
+- Never rely on CLAUDE.md template variables for state detection. They are read-only defaults.
 
 | State | Detection logic | Behavior |
 |-------|----------------|----------|
@@ -1119,7 +1128,7 @@ Skills auto-fire based on intent classification. When the intent engine (Section
 - Primary: Claude Cowork (guided UI, visual plugin management)
 - Secondary: Claude Code (terminal-based, same file architecture)
 
-**Session behavior:** Claude has no persistent memory between sessions. ALL state lives in Notion. Every session starts fresh but instantly recovers full context by reading the databases. This is why database schemas and read patterns are precisely defined.
+**Session behavior:** Claude has no persistent memory between sessions. ALL state lives in Notion. Every session starts fresh — basic identity comes from the global Cowork settings field (zero API overhead), and richer context (database IDs, deal stages, competitors) loads lazily from the Notion Config page on first database operation. Sessions that don't touch Notion data never trigger a Config read. This is why database schemas and read patterns are precisely defined.
 
 **Update history:**
 - v2.0.0 — Full productized rebuild. Self-personalizing. 22 commands, 11 skills, 6 databases.
