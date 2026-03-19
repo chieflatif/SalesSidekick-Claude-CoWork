@@ -189,6 +189,30 @@ When a Notion write fails:
 4. **Retry once** on transient errors (rate limit, timeout). If retry fails, fall back to manual mode.
 5. **Log the failure context** so self-audit can check for patterns.
 
+### Three-Tier Persistence Architecture
+
+SalesSidekick uses three distinct persistence layers. Understanding the hierarchy is critical for correct session behavior.
+
+| Tier | Where | What lives here | When it's read | API calls |
+|------|-------|----------------|----------------|-----------|
+| **Slow lane** | Cowork global settings field | Stable identity: name, company, product, ICP, competitors, communication style. Set once, rarely changes. | Automatically by Cowork before any plugin fires | Zero |
+| **Local fallback** | `sidekick-state.md` in SalesSidekick folder | Mirror of global settings block — written automatically after personalization. Used when global settings haven't been updated yet, or as a richer fallback. | On session start if folder is active and file exists | Zero |
+| **Operational** | Notion Config page + 6 databases | Dynamic data: deal status, contacts, tasks, DB IDs, full personalization variables, connector status, call notes | Lazily, on first operation requiring stored data | Per operation |
+
+**Why this matters for session startup:**
+- Basic identity (who the user is, what they sell) is available from tiers 1 and 2 with zero API overhead
+- Notion is only called when the session actually needs database data
+- A session spent drafting an email or discussing deal strategy may never call Notion at all
+- If Notion is unavailable, tiers 1 and 2 keep the system functional for non-database work
+
+**sidekick-state.md format:** Markdown file, same content as the global settings block — plain prose, not structured key:value data. **Read as freeform context, same as global settings text: parse for identity signals (name, company, product, competitors, communication style), no structured parsing required.** Written automatically to the active folder after any personalization session (deep personalization or first-run). Never needs to be manually created or edited by the user.
+
+**Staleness:** Tier 1 (global settings) always supersedes tier 2 (sidekick-state.md). A stale `sidekick-state.md` is harmless by design — the more current global settings win. The file updates whenever a new personalization session completes.
+
+**Missing file:** If the active folder has no `sidekick-state.md`, skip tier 2 silently and fall through to tier 3. Never error or warn the user about an absent file.
+
+**When to write sidekick-state.md:** At the end of any session that captures or updates identity data — both the first-run getting-started flow (CLAUDE.md Section 15.2) and deep personalization sessions (setup.md). The file should always reflect the most current personalization state.
+
 ### Config Page (7th persistence target — created first, always)
 
 The Config page is a single Notion page (not a database) that stores all identity and personalization variables. It is the persistent replacement for CLAUDE.md template variables, which are read-only in Cowork and cannot be written back by the plugin.

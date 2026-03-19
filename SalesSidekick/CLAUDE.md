@@ -868,7 +868,13 @@ SalesSidekick works from the moment it's installed — no setup required. It get
 
 **Identity sources (in priority order):**
 1. **Global Cowork settings** — Name, company, title, and communication style from the user's Cowork global settings field load automatically before any plugin fires. Use these for basic identity. No API call needed.
-2. **Notion Config page** — Richer context: database IDs, deal stages, competitors, connector status, full personalization state. Read lazily on first Notion operation.
+2. **Local sidekick-state.md** — If a SalesSidekick folder is active in Cowork ("Work in a folder") and the folder contains a `sidekick-state.md` file, read it. This file mirrors the global settings block and is written automatically after each personalization session. No API call needed. Covers sessions where global settings haven't been populated yet, and provides a richer fallback than generic defaults.
+3. **Notion Config page** — Richer context: database IDs, deal stages, competitors, connector status, full personalization state. Read lazily on first Notion operation.
+
+**Session startup sequence:**
+1. Global Cowork settings are loaded automatically by Cowork before any plugin fires — no action needed.
+2. If a SalesSidekick folder is active in this session ("Work in a folder"), attempt to read `sidekick-state.md` from that folder. If found, read it as freeform context (plain prose, same as global settings — extract identity signals from it, no structured parsing required). If not found, skip silently and continue.
+3. Proceed with the session. Do not read Notion Config at this point.
 
 **Config page access pattern:**
 - Do NOT read the Config page at session start.
@@ -985,6 +991,9 @@ Respect my time. Lead with the answer, not the reasoning. Break complex work int
 **What goes here vs Notion:** This block captures stable context only — identity, product, ICP, and top-line competitive positioning. Detailed battlecards, refreshed case studies, updated competitive intel, and all deal data live in Notion and get updated as things change. Think of it as: "what never changes" → global settings; "what gets refreshed monthly" → Notion.
 
 If Notion is not connected, this block is even more important — it's the only persistent context available.
+
+**Also write sidekick-state.md to the active folder:**
+If a SalesSidekick folder is active in this Cowork session, write a `sidekick-state.md` file to that folder with the same content as the global settings block above. This is the local fallback layer — future sessions opening the same folder will read this file instantly and know who you are without any API call. Write it silently (no user-facing message needed).
 
 **Step 5 — Invite depth or get started**
 After research is confirmed and the global settings block has been presented, make three things clear:

@@ -200,7 +200,9 @@ Give me options, not decisions. Always present 2-3 paths with trade-offs. Never 
 Respect my time. Lead with the answer, not the reasoning. Break complex work into 10-minute chunks.
 ```
 
-42. After user confirms they've saved the global settings block (or acknowledges it), produce the Personalization Complete summary.
+42. If a SalesSidekick folder is active in this Cowork session ("Work in a folder"), write a `sidekick-state.md` file to that folder. This is the local fallback — same content as the global settings block, stored as a markdown file. Future sessions that open with the same folder will read this file before touching Notion, providing rich identity context without any API call. Write it silently (no user-facing confirmation needed — it's automatic).
+
+43. After user confirms they've saved the global settings block (or acknowledges it), produce the Personalization Complete summary.
 
 ## Output Format
 
@@ -241,6 +243,7 @@ I'll take it from there.
 - Writes all database IDs to the Notion Config page (`SalesSidekick — Config`)
 - Writes all captured Tier 2 variables to the Notion Config page
 - Generates personalized global settings block for user to paste into Cowork global settings
+- Writes `sidekick-state.md` to the active Cowork folder (if a folder is active) — same content as the global settings block, local identity fallback requiring zero API calls
 - Writes PLUGIN_VERSION to Notion Config page
 
 **Reads:**

@@ -13,14 +13,7 @@
 
 **Step 1: Download the plugin**
 
-Download the `.zip` file from the [releases page](https://github.com/chieflatif/SalesSidekick-Claude-CoWork/releases).
-
-Or clone and zip manually:
-```bash
-git clone https://github.com/chieflatif/SalesSidekick-Claude-CoWork.git
-cd SalesSidekick-Claude-CoWork
-zip -r SalesSidekick.zip . -x ".git/*" ".gitignore"
-```
+Download `SalesSidekick.zip` from the [releases page](https://github.com/chieflatif/SalesSidekick-Claude-CoWork/releases/latest/download/SalesSidekick.zip). No account needed — just click and download.
 
 **Step 2: Upload to Claude Cowork**
 
@@ -42,15 +35,21 @@ zip -r SalesSidekick.zip . -x ".git/*" ".gitignore"
 
 > **Important:** SalesSidekick's `.mcp.json` contains a `{{NOTION_API_KEY}}` placeholder. You need to replace this with your actual key. After uploading the plugin, locate the `.mcp.json` file in the plugin's directory, open it in a text editor, find `{{NOTION_API_KEY}}`, and replace it with your key. The line should look like: `"Bearer ntn_your_actual_key_here"` (keep the surrounding quotes intact).
 
-**Step 4: Create a working folder**
+**Step 4: Create your SalesSidekick workspace folder**
 
-Create a folder on your machine for SalesSidekick output (presentations, documents, exports):
+Create a folder on your machine. Name it whatever you like — `SalesSidekick` works well:
 
 ```
 ~/Documents/SalesSidekick/
 ```
 
-When you start a Cowork conversation, click **"Work in a folder"** at the bottom left and select this folder. Your persistent data (deals, contacts, tasks) lives in Notion — this folder is for file output like presentations and documents.
+When you start a Cowork conversation, click **"Work in a folder"** at the bottom left and select this folder. **Always use the same folder.**
+
+**Why this folder matters — it does two things:**
+1. **Output storage** — presentations, documents, and exports you generate go here
+2. **Local identity fallback** — after your first personalization session, SalesSidekick writes a `sidekick-state.md` file here. Every future session that opens with this folder reads that file instantly and knows who you are — no API call, no wait. Even if Notion is slow or unavailable, your identity context loads immediately.
+
+This is your "always on" context layer. As long as you open Cowork in this folder, you're covered.
 
 **Step 5: Configure Cowork Global Settings**
 

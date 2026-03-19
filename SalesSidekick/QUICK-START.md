@@ -27,15 +27,15 @@ SalesSidekick saves your deals, contacts, tasks, and call notes to Notion automa
 
 ---
 
-## Step 3: Create a Working Folder
+## Step 3: Create Your Workspace Folder
 
-Create a folder on your machine for presentations and document output:
+Create a folder on your machine — name it `SalesSidekick` or whatever you like:
 
 ```
 ~/Documents/SalesSidekick/
 ```
 
-When you start a Cowork conversation, click **"Work in a folder"** at the bottom left and select this folder.
+When you start a Cowork conversation, click **"Work in a folder"** at the bottom left and select this folder. **Always use the same folder** — SalesSidekick writes a local state file here after your first session, so every future conversation loads your context instantly with zero API calls.
 
 ---
 
