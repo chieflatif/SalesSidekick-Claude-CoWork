@@ -19,7 +19,7 @@ intent-triggers:
 
 An optional deep personalization session that captures context the system can't easily learn organically — competitive battlecards from structured research, calibrated brand voice from writing samples, explicit territory numbers, and bulk database creation.
 
-**This is not required.** SalesSidekick works from the first conversation (see CLAUDE.md Section 14.2). Deep personalization sharpens output for users who want to go all-in. Most users reach this naturally after a few sessions, when the system nudges them (see Section 14.5).
+**This is not required.** SalesSidekick works from the first conversation (see CLAUDE.md Section 15.2). Deep personalization sharpens output for users who want to go all-in. Most users reach this naturally after a few sessions, when the system nudges them (see Section 15.5).
 
 ## When to Use
 
@@ -32,7 +32,7 @@ An optional deep personalization session that captures context the system can't 
 - After changing companies, products, or territory
 
 **Not needed for:**
-- First-time use (the getting-started conversation in Section 14.2 handles that)
+- First-time use (the getting-started conversation in Section 15.2 handles that)
 - Users who are happy with progressive personalization through organic capture
 
 ## Inputs
@@ -124,7 +124,9 @@ An optional deep personalization session that captures context the system can't 
 **Skip if:** All 6 databases exist (verified by Notion search) and connectors are verified.
 
 29. **Search Notion for each database by name** — use the Notion search API to search for: "Companies", "Contacts", "Deals", "Tasks", "Call Notes", "LinkedIn Posts". Do this regardless of whether a Config page exists. **Absence of a Config page does NOT mean databases don't exist** — the user may have databases from a previous session, a prior install, or a partial setup. Never assume FRESH = no databases.
-   - For each database found by name: show the user what was found and confirm — "I found a database called [name] — is that your SalesSidekick one?" Record its ID only after confirmation. Do not silently adopt unrelated databases.
+   - For each database found by name: confirm with the user — "I found a database called [name] in your Notion — is that your SalesSidekick one, or a different one?" Record its ID only after the user confirms it's the right one. Never silently adopt databases the user doesn't confirm.
+   - If the user says "that's not mine" or "that's a different one": skip that match and create a new database with a distinct name, e.g., "SalesSidekick — Companies".
+   - If the user says "I'm not sure" or "it might be": say "No problem — I'll create a fresh one to be safe. You can always delete the old one from Notion later." Then create.
    - For databases genuinely not found after searching: create them with exact schemas (see skills/notion/SKILL.md — Companies 12 fields, Contacts 9, Deals 22, Tasks 9, Call Notes 10, LinkedIn Posts 8).
 30. Create any missing databases in dependency order: Companies → Contacts → Deals → Tasks → Call Notes → LinkedIn Posts.
 31. Wire cross-relations after all databases exist (Companies↔Contacts, Deals→Companies, Deals→Contacts, Tasks→Companies, Tasks→Deals, Call Notes→Companies, Call Notes→Deals, LinkedIn Posts→Companies).
@@ -142,9 +144,26 @@ An optional deep personalization session that captures context the system can't 
 38. Regenerate `skills/profile/SKILL.md` with full AE identity and context (note: if skill files are read-only in Cowork, write full profile content to a Notion page titled "SalesSidekick — Profile" instead)
 39. Run the self-audit capability on the configuration
 40. Fix any issues found during audit
-41. **Generate personalized global settings block** — this is mandatory, not optional. Using all captured identity, product, ICP, competitive, and communication data, generate the block and present it as a copy-paste artifact. Say:
 
-> "Before we wrap — here's your global settings block. Paste this into **Claude Desktop > Settings > Cowork** (the custom instructions field). This is the stable identity layer. Every session loads it before anything else — no API call, no Notion read. It tells every future session who you are, what you sell, and how to beat your competitors from message one. Update it only when something fundamental changes: new company, new product, new primary competitors."
+---
+
+**⚠️ STOP — Step 41 is mandatory. Do not produce the completion summary until this step is done and the user has acknowledged it.**
+
+---
+
+41. **Generate personalized global settings block — REQUIRED, cannot be skipped.**
+
+This is the most important output of the entire deep personalization session. Without it, every future session restarts without knowing who the user is — no identity, no competitive context, no communication style. The global settings field is the 'slow lane' context layer that loads before any plugin fires, before any API call.
+
+Generate the block now using all captured identity, product, ICP, competitive, and communication data. Present it as the FIRST prominent item in your final output — before the completion summary. Label it clearly.
+
+Say:
+
+> "**Your Global Settings Block — paste this before anything else.**
+>
+> Go to **Claude Desktop > Settings > Cowork** (the custom instructions field) and paste this in now. This is the slow lane — the context that never changes and loads before every session, before any API call, before Notion. It means every future session knows who you are, what you sell, and how to beat your competitors from the very first message. No re-asking. No setup.
+>
+> Update it only when something fundamental changes: new company, new product, new primary competitors. Everything that refreshes regularly (battlecards, case studies, deal data) lives in Notion."
 
 **Format of the generated block:**
 ```
@@ -181,38 +200,38 @@ Give me options, not decisions. Always present 2-3 paths with trade-offs. Never 
 Respect my time. Lead with the answer, not the reasoning. Break complex work into 10-minute chunks.
 ```
 
-42. After user confirms they've saved the global settings block (or acknowledges it), produce "Personalization Complete" confirmation summary
+42. After user confirms they've saved the global settings block (or acknowledges it), produce the Personalization Complete summary.
 
 ## Output Format
 
-**Per phase:** Conversational progress updates. User confirms before advancing to the next phase.
+**Per phase:** Conversational progress updates. User confirms before advancing to the next phase. No command syntax, no technical jargon — speak like a senior colleague, not a setup wizard.
 
 **If running a single phase:** Just run that phase and confirm.
 
-**Final output — Personalization Complete confirmation:**
+**Final output structure — in this exact order:**
+
+1. **Global settings block first** (step 41 — mandatory, cannot be skipped)
+2. **Personalization Complete summary** (only after user acknowledges the global settings block)
+
+**Personalization Complete summary format:**
 ```
-✅ Deep Personalization Complete for {{AE_NAME}}
+You're all set, [name].
 
-Identity: {{AE_NAME}}, {{AE_TITLE}} at {{COMPANY}}
-Territory: {{TERRITORY_SIZE}} accounts ({{TERRITORY_TYPE}})
-Product: {{PRIMARY_PRODUCT}}
-CRM: {{CRM_SYSTEM}}
+Here's what I've got:
+- You: [AE_NAME], [AE_TITLE] at [COMPANY]
+- What you sell: [PRIMARY_PRODUCT] — [one-line description]
+- Your territory: [TERRITORY_TYPE]
+- Competitors I know: [TOP_COMPETITOR_1], [TOP_COMPETITOR_2], [TOP_COMPETITOR_3]
+- Your data lives in: 6 Notion databases ([X] existing, [Y] new)
+- Connectors: Notion ✅ | Gmail [✅/❌] | Calendar [✅/❌] | Drive [✅/❌] | Gamma [❌]
 
-Databases: [N] active (Companies, Contacts, Deals, Tasks, Call Notes, LinkedIn Posts)
-  — [X] existing (found by search), [Y] newly created
-Skills calibrated: profile, brand-voice, company-intel, battlecards
-Competitors mapped: {{TOP_COMPETITOR_1}}, {{TOP_COMPETITOR_2}}, {{TOP_COMPETITOR_3}}
+What's next? You can:
+- Share your top 3 active deals (paste a screenshot or just name them)
+- Drop in a recent call transcript to see what I do with it
+- Ask me to prep you for an upcoming meeting
+- Or just tell me what you're working on
 
-Connectors:
-- Notion: ✅
-- Gmail: [✅/❌]
-- Calendar: [✅/❌]
-- Drive: [✅/❌]
-- Gamma: [✅/❌]
-
-Personalization state: CALIBRATED
-
-⬆️ Global settings block generated above — paste it into Claude Desktop > Settings > Cowork to complete setup. Every future session will know who you are from message one.
+I'll take it from there.
 ```
 
 ## Database Read/Write

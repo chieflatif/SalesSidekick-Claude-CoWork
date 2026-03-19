@@ -6,6 +6,37 @@ Each release is marked: **✅ No action needed** or **⚠️ Action required** (
 
 ---
 
+## v3.0.2 — Onboarding, Global Settings, and Upgrade (2026-03-19)
+
+**✅ No action needed** — upgrade by re-uploading the zip. Existing Notion data and Config page are untouched.
+
+### Fixed
+
+**Global settings block — always complete, never partial**
+- System now always generates the COMPLETE replacement block when global settings need updating. Previously it could prompt "add X to your settings" — now it always provides the full copy-paste replacement block.
+- Global settings update triggers added: after new competitor discovered, after brand voice calibration, after deep personalization, after any identity change.
+- System now detects when global settings are empty or generic and guides the user to fix it — without saying "I don't know who you are."
+
+**Duplicate database creation**
+- Phase 6 now explicitly searches Notion by database name before creating anything. No assumption that FRESH state = no databases.
+- Added handling for ambiguous database matches: asks user to confirm each found database before adopting it.
+- If user says it's not theirs, creates a new one with a distinct name rather than guessing.
+
+**Onboarding experience**
+- First-run flow now opens with a warm, non-technical introduction before any logistics.
+- Two entry points offered immediately after setup: share top 3 deals (paste CRM screenshot) or drop in a call transcript.
+- Patience messaging added for first-time Notion database creation.
+- Setup completion summary rewritten in plain language — no commands, no technical jargon.
+
+**System self-explanation**
+- New Section 14 "How to Explain Yourself" — Claude now has explicit guidance on how to explain SalesSidekick to users in plain, conversational language when asked "what can you do?" or "how do I use this?"
+
+### Added
+- QUICK-START.md: full rewrite with voice-first entry points, Notion skip explanation, no-jargon instructions
+- INSTALLATION-GUIDE.md: global settings starter template annotated with what's missing and why; v2→v3 database ID recovery clarified
+
+---
+
 ## v3.0.1 — Persistence & Onboarding Fixes (2026-03-18)
 
 **✅ No action needed** — upgrade by re-uploading the zip. Existing Notion data and Config page are untouched.

@@ -64,7 +64,7 @@ Go to **Claude Desktop > Settings > Cowork** and paste into the custom instructi
 
 **Getting your personalized block:** SalesSidekick generates a personalized global settings block at the end of your first conversation — after it's asked the basics and researched your company and competitive landscape. That's what you'll paste here. It's much richer than a generic template because it's built from real research.
 
-**Before your first conversation** (optional starter template — replace with personalized version after):
+**Before your first conversation** — paste this starter template into the global settings field now. Replace the bracketed sections with your own info. It gives SalesSidekick basic context from day one, and you'll replace it with a richer personalized version after your first conversation.
 
 ```
 I am [Your Name], a [Your Title] at [Your Company] ([company website]).
@@ -88,7 +88,9 @@ Give me options, not decisions. Always present 2-3 paths with trade-offs. Never 
 Respect my time. Lead with the answer, not the reasoning. Break complex work into 10-minute chunks.
 ```
 
-**After your first conversation:** Replace the above with the personalized block SalesSidekick generates — it includes your confirmed competitors, differentiation angles, and communication style calibrated to you. That block is what makes every future session fully context-aware from message one.
+**Note:** This starter template is missing your competitive positioning and differentiation angles — the most important parts. SalesSidekick will research your company and top competitors automatically in your first conversation and generate a complete, personalized version for you to replace this with. That complete version is what makes every future session fully context-aware from message one.
+
+**After your first conversation:** Replace this starter template with the personalized block SalesSidekick generates. That's the version that includes your confirmed competitors, displacement angles, and communication style calibrated to how you actually write and speak.
 
 **Step 6: Start a conversation**
 
@@ -199,9 +201,9 @@ v2 stored database IDs inside CLAUDE.md (which worked in the original architectu
 2. Open a conversation — the system will run the getting-started flow (it won't find a Config page yet)
 3. When it asks basics: confirm your name, company, and what you sell
 4. When it offers to research: let it run — this populates the Config page
-5. **Database IDs:** Your existing v2 databases are still in Notion. After the getting-started flow creates the Config page, tell the system: "I have existing databases from a previous install" and paste your database IDs. It will write them to the Config page and use the existing databases rather than creating new ones.
+5. **Existing databases:** Your v2 databases are still in Notion. The system searches Notion by name when it first needs a database ("Companies", "Contacts", "Deals", etc.) — it should find your existing ones automatically. When it asks "I found a database called Companies — is that your SalesSidekick one?", say yes. It will adopt the existing database rather than creating a duplicate.
 
-Alternatively: create the Config page manually in Notion (titled `SalesSidekick — Config`) with a table of your variable names and values, including your database IDs. The system will find it on first Notion operation.
+If it can't find them by name, or if you want to be proactive: open each database in Notion, copy the ID from the URL (it's the long string after the last slash, before any `?`), and tell the system: "Here are my database IDs: Companies = [ID], Contacts = [ID]..." It will write them to the Config page and use your existing data.
 
 ### Enterprise updates
 
