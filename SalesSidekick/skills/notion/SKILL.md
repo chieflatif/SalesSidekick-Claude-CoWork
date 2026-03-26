@@ -1,10 +1,10 @@
 ---
 name: data-persistence
-description: Data operations reference — local file schemas, write protocol, account resolution, and optional Notion database schemas
+description: Data operations reference — local file schemas, write protocol, account resolution, and structured database schemas
 tier: 1 (universal)
 auto-fire:
   intents: [all data operations]
-  context: "When any interaction requires reading from or writing to data — local files or Notion databases"
+  context: "When any interaction requires reading from or writing to data"
 user-invocable: false
 ---
 
@@ -12,17 +12,15 @@ user-invocable: false
 
 ## Purpose
 
-Central reference for all data operations. In V4, the primary data layer is local workspace files (YAML frontmatter markdown). Notion databases are an optional enhancement for users who want structured views and cross-device access.
+Central reference for all data operations. The primary data layer is local workspace files with structured headers. Follow the write protocol in the Project CLAUDE.md (`.claude/CLAUDE.md`).
 
-**Primary path:** Read/write local files in the workspace `data/` directory. Follow the write protocol in the Project CLAUDE.md (`.claude/CLAUDE.md`).
-
-**Optional path:** If Notion is connected, data can also be written to Notion databases using the schemas below. Local files are always canonical.
+If a connected database service is available, data can also be synced to structured databases using the schemas below. Local files are always canonical.
 
 ## When Referenced
 
 - **Any interaction reading or writing data** — local file operations, schema validation, account resolution
-- **Deep personalization sessions** — creates local data structure and optionally Notion databases
-- **Adding accounts and deals** — record creation in local files (and Notion if connected)
+- **Deep personalization sessions** — creates local data structure and optionally syncs to connected databases
+- **Adding accounts and deals** — record creation in local files
 - **Processing calls** — writes to multiple local files simultaneously (call note, deal, contacts, tasks, index)
 
 ## Core Framework
@@ -180,15 +178,15 @@ When resolving for deal-specific capabilities (deal strategy, competitive analys
 
 ### Write Failure Handling
 
-When a Notion write fails:
+When a database write fails:
 
 1. **Never silently drop data.** Always inform the user what failed to save.
 2. **Present the data that would have been written** in a formatted block the user can manually enter.
 3. **Diagnose the likely cause:**
-   - "Database not found" → Database ID may be wrong. Suggest: "Check that your Notion databases are set up. Try a deep personalization session to reconfigure."
-   - "Permission denied" → API key may lack write access. Suggest: "Check your Notion integration permissions — it needs read AND write access to the databases."
-   - "Validation error" → Field type mismatch. Suggest: "The [field] in your [database] may have different options than expected. Check the field configuration in Notion."
-   - "Rate limited" → Too many requests. Suggest: "Notion is rate-limiting requests. I'll try again in a moment."
+   - "Database not found" → Database ID may be wrong. Suggest: "Check that your databases are set up. Try a deep personalization session to reconfigure."
+   - "Permission denied" → API key may lack write access. Suggest: "Check your integration permissions — it needs read AND write access."
+   - "Validation error" → Field type mismatch. Suggest: "The [field] in your [database] may have different options than expected."
+   - "Rate limited" → Too many requests. Suggest: "The service is rate-limiting requests. I'll try again in a moment."
 4. **Retry once** on transient errors (rate limit, timeout). If retry fails, fall back to manual mode.
 5. **Log the failure context** so self-audit can check for patterns.
 
@@ -200,29 +198,29 @@ SalesSidekick uses a three-tier persistence model. No external services required
 |------|-------|----------------|----------------|-----------|
 | **Slow lane** | Global CLAUDE.md (`/mnt/.claude/CLAUDE.md`) | Stable identity: name, company, product, ICP, competitors, selling style, quality rules. Written automatically during onboarding within `<!-- SALESSIDEKICK-IDENTITY-START/END -->` markers. | Automatically by Cowork before any plugin fires | Zero |
 | **Fast lane** | Local workspace files (`data/` in Project folder) | All operational data: deals, contacts, companies, call notes, tasks. Stored as structured markdown with YAML frontmatter. `data/index.md` is the flattened read cache. | On demand when capabilities need data | Zero |
-| **Optional** | Notion databases (if connected) | Structured database views of the same data. Cross-device access. | Only when user explicitly requests Notion features | Per operation |
+| **Optional** | Connected databases (if available) | Structured database views of the same data. Cross-device access. | Only when user explicitly requests database features | Per operation |
 
 **Data operations use the write protocol defined in the Project CLAUDE.md** (`.claude/CLAUDE.md` in the workspace). The full schemas, cross-reference rules, and ops.log format are there.
 
-**Local files are always canonical.** If local files and Notion disagree, local files win.
+**Local files are always canonical.** If local files and connected databases disagree, local files win.
 
-### Notion Database Creation (optional — deep personalization Phase 6)
+### Database Creation (optional — deep personalization Phase 6)
 
-Only if the user has Notion connected and wants database access:
+Only if the user has a database connector and wants structured views:
 
-1. Search Notion by name before creating — never duplicate
+1. Search by name before creating — never duplicate
 2. Create in dependency order: Companies → Contacts → Deals → Tasks → Call Notes → LinkedIn Posts
 3. Set up cross-relations after all databases exist
 4. Store database IDs in the Project CLAUDE.md
 5. Verify by reading back each database
 
-### Notion Database Schemas (for optional Notion sync)
+### Structured Database Schemas (for optional database sync)
 
-The schemas below define the Notion database structure. They are used ONLY when Notion is connected and the user has opted into database sync. The primary data model uses the YAML frontmatter schemas defined in the Project CLAUDE.md template.
+The schemas below define the structured database format. They are used ONLY when a database connector is active and the user has opted into database sync. The primary data model uses the local file schemas defined in the Project CLAUDE.md template.
 
 ## Personalization Notes
 
 - Select field options for Industry, Primary Competitor, and Current Products are customized during deep personalization
 - Stage names and probability weights may be customized
 - Account resolution logic is universal — no personalization needed
-- Identity and personalization variables live in Global CLAUDE.md — not in Notion
+- Identity and personalization variables live in Global CLAUDE.md — not in external databases

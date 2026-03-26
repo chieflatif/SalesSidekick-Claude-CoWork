@@ -1331,7 +1331,7 @@ Skills auto-fire based on intent classification. When the intent engine (Section
 | **MEDDPICC** | skills/meddpicc/ | 1 (universal) | Fires on: process-call, think-about-deal, prepare-meeting, check-pipeline, add-account intents. 8-element scoring rubric with R/Y/G definitions. |
 | **Deal Strategy** | skills/deal-strategy/ | 1 (universal) | Fires on: think-about-deal, build-case, handle-competition intents. Five-Lens Prism, Three Paths, 5-Component POV Model. |
 | **Call Processing** | skills/call-processing/ | 1 (universal) | Fires on: process-call intent. 6-Output Framework, coaching dimensions, risk signal categories. |
-| **Data Persistence** | skills/notion/ | 1 (universal) | Fires on any intent that reads from or writes to data. Local file schemas, write protocol, index management, account resolution logic. Notion support for legacy/power users. |
+| **Data Persistence** | skills/notion/ | 1 (universal) | Fires on any intent that reads from or writes to data. Local file schemas, write protocol, index management, account resolution logic. |
 | **PPTX** | skills/pptx/ | 1 (universal) | Fires on: create-deck intent (pptx path). PptxGenJS pipeline, brand tokens, 5 deck templates. |
 | **Gamma** | skills/gamma/ | 1 (universal) | Fires on: create-deck intent (gamma path). Alternative presentation path, prompt templates, limitations. |
 | **Posting Guide** | skills/posting-guide/ | 2 (template) | Fires on: write-post intent. 3-Type Framework, hook formulas, frequency goals, pre-publish checklist. |
