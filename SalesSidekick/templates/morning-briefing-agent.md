@@ -150,4 +150,12 @@ Combine everything into a briefing:
 ## Data Health
 [If health-check found issues: "Heads up — I found [N] small data issues. Say 'fix my data' in your next session."]
 [If clean: omit this section]
+
+## Tip of the Day
+[If tips_enabled = true in Project CLAUDE.md AND not all tips shown yet:
+  Pick the next unshown tip from templates/tips.md.
+  Include it as: "**Did you know?** [tip text]"
+  Add the tip number to tips_shown in Project CLAUDE.md.
+  If all 15 tips have been shown, set tips_enabled to false.]
+[If tips_enabled = false: omit this section]
 ```

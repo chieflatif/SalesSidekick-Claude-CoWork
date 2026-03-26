@@ -1002,6 +1002,8 @@ If the user is already in a project with a folder, skip this step entirely.
 > All I need from you is your work context — paste in a call transcript, share a screenshot of your CRM, tell me about a deal. The more I know about your world, the better I get.
 >
 > Let's get you set up. Takes about 5 minutes."
+>
+> "One quick note: SalesSidekick is licensed for your personal use — you're free to use and customize it for your work, but please don't distribute or resell it. Full details are in the LICENSE file."
 
 **Step 1 — Connector check**
 Check what connectors are available. Report in plain language:
