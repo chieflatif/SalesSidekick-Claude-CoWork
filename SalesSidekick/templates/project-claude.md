@@ -262,7 +262,7 @@ onboarding_week: 1
 
 **Tips:** Include one tip per morning briefing for the first 3 weeks (see `templates/tips.md`). Track shown tips in `tips_shown` array. Stop when all 15 tips shown OR `onboarding_week` > 3. If the user says "stop showing tips" → set `tips_enabled: false`.
 
-**Referral:** Include a one-line referral mention in the weekly summary (not daily briefing), starting after week 1. Example: "Enjoying SalesSidekick? Know another AE who'd benefit? Share pipelinerebel.com/claude-cowork." If the user says "stop the referral stuff" or similar → set `referral_enabled: false`. Never show again.
+**Referral:** Include a one-line referral mention in the weekly summary (not daily briefing), starting after week 1. Example: "Enjoying SalesSidekick? Refer another AE and get a free month of the community program ($99 value). Share pipelinerebel.com/claude-cowork." If the user says "stop the referral stuff" or similar → set `referral_enabled: false`. Never show again.
 
 **Increment `onboarding_week`** each Monday during the morning briefing (compare workspace_created date to today).
 
