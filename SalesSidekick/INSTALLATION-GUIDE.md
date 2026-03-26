@@ -67,6 +67,35 @@ If a service isn't connected, SalesSidekick adapts — it'll ask you to paste tr
 
 ---
 
+## Enterprise Installation (Restricted Plugin Access)
+
+If your company manages Claude Desktop and you can't upload personal plugins, there are two paths:
+
+### Option 1: Ask your admin (recommended)
+
+Ask your IT admin or Claude Desktop administrator to add SalesSidekick to your organization's plugin marketplace. Send them the zip file and the [enterprise deployment guide](docs/enterprise-deployment.md). Once they add it, you'll see it in your available plugins.
+
+### Option 2: Manual folder installation
+
+SalesSidekick is just a collection of text files — no executable code. If you can create a Cowork Project with a folder, you can install it manually:
+
+1. Unzip `SalesSidekick.zip` to a temporary location
+2. Create a folder called `SalesSidekick` in your Documents
+3. Inside that folder, create a `.claude` subfolder
+4. Copy these files from the unzipped plugin:
+   - Copy `CLAUDE.md` into the `.claude` folder (rename it or keep it — this is the brain)
+   - Copy the entire `skills` folder into `.claude/skills/`
+   - Copy the entire `commands` folder into `.claude/commands/`
+   - Copy the `templates` folder into the root of your SalesSidekick folder
+5. Create a Cowork Project in Claude Desktop pointing at your SalesSidekick folder
+6. Open a conversation in the project — Claude automatically reads the instructions and skills
+
+**What works:** All 22 capabilities, all 11 skills, the full intent engine, selling style assessment, signal intelligence, background agents.
+
+**What's different:** The plugin won't appear in your Plugins list, but it functions identically because Cowork reads project-level instructions and skills from the folder structure.
+
+---
+
 ## Upgrading
 
 When a new version is available:
