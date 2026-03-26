@@ -28,7 +28,7 @@ Drafts a quick, natural email for existing relationships. Not cold outreach (/ou
 
 **User provides:** Company name + topic (required). Example: `/email Acme Corp about the POC timeline` or `/email Sarah at TechCo re: contract renewal`
 
-**System reads from Notion:**
+**System reads:**
 - Companies: company profile, recent activity
 - Contacts: primary contact (or specified contact), email, title
 - Deals: current deal status, stage, next steps
@@ -40,11 +40,11 @@ Drafts a quick, natural email for existing relationships. Not cold outreach (/ou
 ## Execution Steps
 
 1. Parse the user's request to identify: company, contact (if specified), and topic
-2. Load company record from Notion
+2. Load company record from workspace data
 3. Load relevant contact(s) — if user specified a name, find that contact; otherwise use Primary Contact
 4. Load current deal status and recent call notes for context
 5. **Confidence check** (CRITICAL — Commandment 8):
-   - If company doesn't exist in Notion: "I don't have [Company] in Notion. Want me to draft a generic version, or do you want to give me context first?"
+   - If company doesn't exist in records: "I don't have [Company] in my records. Want me to draft a generic version, or do you want to give me context first?"
    - If no recent call notes: "I don't have recent call notes for [Company]. Want me to draft based on the deal record alone, or give me a quick update?"
    - If contact info missing: "I found [Company] but no contact on file. Who should this go to?"
 6. **Draft the email — NO PUFFING:**
@@ -76,7 +76,7 @@ CONTEXT USED (not included in email):
 - Open tasks: [relevant tasks if any]
 
 CONFIDENCE: [High/Medium/Low] — [what context was available vs missing]
-Evidence: [Verified] contact and deal data from Notion | [Estimated] tone and framing
+Evidence: [Verified] contact and deal data from workspace | [Estimated] tone and framing
 
 💡 Want me to adjust the tone or add anything?
 ```
@@ -96,12 +96,12 @@ Evidence: [Verified] contact and deal data from Notion | [Estimated] tone and fr
 | Commandment | How /email Serves It |
 |-------------|---------------------|
 | #1 Speed is Life | Draft in seconds, not minutes of composing |
-| #4 Context is King | Uses Notion context to inform (not pad) the email |
+| #4 Context is King | Uses workspace context to inform (not pad) the email |
 | #8 Laws of Karma | Confidence check — honest about what it knows and doesn't know. No puffing. |
 
 ## Evidence Grading
 
-- Contact details and deal data from Notion → Verified
+- Contact details and deal data from workspace data → Verified
 - Email tone and framing choices → Estimated
 - If drafted without full context (missing call notes, etc.) → flag as reduced confidence
 
@@ -109,7 +109,7 @@ Evidence: [Verified] contact and deal data from Notion | [Estimated] tone and fr
 
 | Missing Connector | Impact on /email |
 |-------------------|-----------------|
-| No Notion | Cannot load context. Asks: "Tell me about the situation — who's it to, what's the context, what do you need to say?" Drafts from user-provided context only. Notes reduced confidence. |
+| No workspace | Not in SalesSidekick project. Asks: "Tell me about the situation — who's it to, what's the context, what do you need to say?" Drafts from user-provided context only. Capability still works from conversation context but nothing saves between sessions. |
 | No Gmail | Default behavior — generates copy-paste text with subject and body. No degradation. |
 | No brand-voice skill | Uses generic professional tone. Notes: "Run /setup to personalize your email voice." |
 | All other connectors | No impact. |

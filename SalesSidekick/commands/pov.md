@@ -29,7 +29,7 @@ This is the most hypothesis-prone command in the system. Evidence grading is cri
 
 **User provides:** Company name (required). Optionally, a specific angle or topic.
 
-**System reads from Notion:**
+**System reads:**
 - Companies: full company profile
 - Deals: deal context, MEDDPICC scores
 - Call Notes: conversation insights
@@ -41,7 +41,7 @@ This is the most hypothesis-prone command in the system. Evidence grading is cri
 
 ## Execution Steps
 
-1. Load full account context from Notion
+1. Load full account context from workspace data
 2. Load company-intel skill for product positioning and case studies
 3. Load deal-strategy skill for the 5-Component Model framework
 4. Build the POV using the **5-Component Model**:
@@ -133,7 +133,7 @@ Every quantitative claim MUST be tagged:
 
 | Missing Connector | Impact on /pov |
 |-------------------|----------------|
-| No Notion | Cannot load account-specific data. Asks user to describe the company, deal, and pain points. Produces a POV based on user input, but notes that evidence grading will be weaker. |
+| No workspace | Not in SalesSidekick project. Asks user to describe the company, deal, and pain points. Produces a POV based on user input, but notes that evidence grading will be weaker. Capability still works from conversation context but nothing saves between sessions. |
 | No company-intel skill | If company-intel hasn't been generated (pre-/setup), POV relies on user-provided context and web search. Notes that running /setup will enable richer POVs. |
 | All other connectors | No impact. |
 

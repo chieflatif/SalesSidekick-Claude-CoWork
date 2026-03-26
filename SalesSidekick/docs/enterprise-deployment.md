@@ -6,85 +6,49 @@ Instructions for sales team leads and admins deploying SalesSidekick across a te
 
 ## Overview
 
-SalesSidekick is designed for individual AE use, but it deploys cleanly across teams. Each AE gets their own personalized instance with their own Notion databases. No shared data, no permission conflicts, no admin bottleneck after initial setup.
+SalesSidekick is designed for individual AE use, but it deploys cleanly across teams. Each AE gets their own workspace with their own data. No shared databases, no permission conflicts, no admin bottleneck after initial setup.
 
-**Deployment model:** Admin prepares and distributes the plugin. Each AE personalizes independently.
+**Deployment model:** Admin distributes the plugin. Each AE sets up their own workspace and personalizes independently.
 
 ---
 
 ## Step 1: Admin Preparation
 
-### 1.1 Get the Plugin Files
+### 1.1 Get the Plugin
 
-Download the `.zip` from the [releases page](https://github.com/chieflatif/SalesSidekick-Claude-CoWork/releases) and unzip it, or clone the repository:
-
-```bash
-git clone https://github.com/chieflatif/SalesSidekick-Claude-CoWork.git
-```
+Download `SalesSidekick.zip` from the [releases page](https://github.com/chieflatif/SalesSidekick-Claude-CoWork/releases).
 
 ### 1.2 Pre-Configure Shared Settings (Optional)
 
-Open `CLAUDE.md` and pre-fill company-wide settings. This saves each AE from entering the same information during `/setup`:
+You can pre-fill company-wide information in the plugin's `CLAUDE.md` before distributing. This saves each AE from entering the same basics:
 
-**Section 1 (Identity) — shared fields:**
-- `{{COMPANY}}` — Your company name
-- `{{COMPANY_URL}}` — Company website
-- `{{PRODUCT_DESCRIPTION}}` — What you sell
-- `{{PRIMARY_PRODUCT}}` — Main product name
-- `{{SECONDARY_PRODUCTS}}` — Additional products
+- Company name, website, product description
+- Top competitors (if standardized across the team)
+- CRM system and deal stage names
+- Fiscal year start
 
-**Section 1 — competition (if standardized across team):**
-- `{{TOP_COMPETITOR_1}}`, `{{TOP_COMPETITOR_2}}`, `{{TOP_COMPETITOR_3}}`
+Leave AE-specific fields empty: name, title, territory, quota, communication style. These are captured per-AE during their first conversation.
 
-**Section 13 (Personalization Variables) — sales process:**
-- `{{CRM_SYSTEM}}` — Salesforce, HubSpot, etc.
-- `{{DEAL_STAGES}}` — Your standard stage names
-- `{{FISCAL_YEAR_START}}` — Month fiscal year begins
+### 1.3 Pre-Build Shared Knowledge Bases (Optional)
 
-Leave AE-specific fields empty (name, title, territory, quota, communication style). These are collected per-AE during `/setup`.
+For consistency across the team, you can include pre-built knowledge bases in the plugin's `templates/` directory:
 
-### 1.3 Pre-Generate Shared Skills (Optional)
+- **Company intel** — run a deep personalization session once, then distribute the generated `knowledge-bases/company-intel.md`
+- **Battlecards** — generate competitive battlecards once, distribute as `knowledge-bases/battlecards.md`
 
-For consistency across the team, you can pre-generate Tier 3 skills:
+These give every AE the same competitive positioning baseline from day one.
 
-- **company-intel** — Run `/setup` through Phase 2 (Company Intelligence) once and copy the generated `skills/company-intel/SKILL.md` into the distribution package. Every AE gets the same company research baseline.
-- **battlecards** — Run `/setup` through Phase 3 (Competitive Landscape) and copy `skills/battlecards/SKILL.md`. Standardizes competitive positioning.
-
-Leave **brand-voice** and **profile** empty — these must be individual per AE.
-
-### 1.4 Configure Notion API Key Handling
-
-**Option A: Each AE manages their own key**
-- Leave `.mcp.json` with the `{{NOTION_API_KEY}}` placeholder
-- Each AE creates their own Notion integration during `/setup`
-- Simplest approach, recommended for most teams
-
-**Option B: Admin-provisioned Notion workspace**
-- Create a shared Notion workspace for the sales team
-- Create one integration with access to the workspace
-- Distribute the API key separately (not in the plugin files)
-- Each AE still gets their own databases within the shared workspace
-
-### 1.5 Package and Publish
-
-**Package as ZIP:**
-
-```bash
-cd SalesSidekick-Claude-CoWork
-zip -r SalesSidekick.zip . -x ".git/*" ".gitignore"
-```
-
-**Upload to organization marketplace:**
+### 1.4 Publish to Organization Marketplace
 
 1. Open Claude Desktop > **Organization settings** > **Plugins**
 2. Click **Add plugins** > **Upload a file**
 3. Upload the `SalesSidekick.zip` file
-4. Set visibility to your sales team or organization
-5. Add installation notes (e.g., "After installing, open a Cowork conversation and just start talking — the system works immediately and personalizes as you use it")
+4. Set visibility to your sales team
+5. Add installation notes: "After installing, create a SalesSidekick folder in your Documents, set up a Project in Claude Desktop pointing at it, and start talking. Takes 5 minutes."
 
 ---
 
-## Step 2: AE Installation and Setup
+## Step 2: AE Installation
 
 Send this to each AE:
 
@@ -93,41 +57,38 @@ Send this to each AE:
 **Getting Started with SalesSidekick**
 
 1. Install SalesSidekick from your organization's plugin marketplace in Claude Desktop
-2. Create a Notion integration at [notion.so/my-integrations](https://www.notion.so/my-integrations):
-   - Name it "SalesSidekick"
-   - Select your workspace
-   - Copy the API key (starts with `ntn_`)
-3. Replace `{{NOTION_API_KEY}}` in the plugin's `.mcp.json` with your key
-4. Open a Cowork conversation and start talking — say "what's on my plate today?" or "I just finished a call with [Company]"
-5. The system asks for your name, company, and what you sell — one quick exchange, under 2 minutes
+2. Create a folder called `SalesSidekick` in your Documents folder
+3. In Claude Desktop, click the + next to Projects, name it "SalesSidekick", and point it at your new folder
+4. Open a conversation in your project and say hello
+5. SalesSidekick will ask for your name and a few basics — takes about 5 minutes
 6. Everything works immediately. It gets smarter the more you use it
+
+**Optional:** Connect Gmail (send emails directly), Google Calendar (meeting-aware briefings), or Google Drive (auto-find transcripts) in Claude Desktop Settings > Connectors.
 
 ---
 
-## Step 3: Team Configuration Patterns
+## Step 3: Team Configuration
 
-### Standard Team Setup
-
-| Setting | Pre-Configured by Admin | Set by Each AE |
+| Setting | Pre-configured by admin | Set by each AE |
 |---------|------------------------|----------------|
 | Company name, URL, product | Yes | No |
 | Competitors | Yes (if standardized) | Override if needed |
 | CRM system, deal stages | Yes | No |
 | AE name, title, territory | No | Yes |
 | Quota, region | No | Yes |
+| Selling style (7 questions) | No | Yes |
 | Communication style, email sign-off | No | Yes |
-| Brand voice calibration | No | Yes |
-| Notion databases | No | Yes (auto-created) |
+| Workspace data (deals, contacts) | No | Yes (builds through use) |
 
 ### Manager Visibility
 
-SalesSidekick does not provide cross-AE dashboards. Each AE's data lives in their own Notion databases. For manager visibility:
+SalesSidekick is an AE productivity tool, not a management surveillance tool. Each AE's data lives in their own local workspace. For manager visibility:
 
-- **Weekly roll-ups:** Each AE runs `/weekly` and shares the output in your team channel or 1:1 doc
-- **Pipeline reviews:** Each AE runs `/pipeline` and screen-shares or pastes the output
-- **Forecast updates:** Each AE runs `/forecast-update` and pastes into CRM — manager sees CRM as usual
+- **Weekly updates:** Each AE asks "give me my weekly summary" and shares the output
+- **Pipeline reviews:** Each AE asks "show me my pipeline" and screen-shares or pastes
+- **Forecast:** Each AE asks "what's my forecast" and pastes into CRM — manager sees CRM as usual
 
-This is intentional. SalesSidekick is an AE productivity tool, not a management surveillance tool. Trust your reps.
+**Future:** Enterprise signal export — each AE's system generates a weekly signal summary file that can be shared to a team folder for manager aggregation. Architecture is designed but not yet implemented.
 
 ---
 
@@ -135,63 +96,49 @@ This is intentional. SalesSidekick is an AE productivity tool, not a management 
 
 ### Plugin Updates
 
-When a new version is available:
-
 1. Admin downloads the latest version from GitHub
-2. Re-applies any pre-configured settings (company name, competitors, etc.)
-3. Re-packages as `.zip` and uploads to the organization marketplace
-4. AEs update through their normal plugin management flow
+2. Re-applies any pre-configured settings if needed
+3. Uploads to the organization marketplace
+4. AEs update through Settings > Plugins (remove old, upload new)
 
-**What updates preserve:**
-- AE's personalized CLAUDE.md (identity, variables, calibration data)
-- All Notion databases and data
-- Generated Tier 3 skill files (profile, brand-voice, company-intel, battlecards)
-
-**What updates may change:**
-- Command files (new features, bug fixes)
-- Universal skill files (Tier 1 — meddpicc, deal-strategy, etc.)
-- System configuration
-
-### AE Offboarding
-
-1. AE removes the plugin from their Claude Cowork settings
-2. AE's Notion databases remain — they own their data
-3. No shared data to clean up, no admin action required
+**What updates preserve:** Each AE's workspace data (deals, contacts, tasks, call notes, custom skills, knowledge bases) and their identity settings. Only the plugin brain gets updated.
 
 ### New AE Onboarding
 
 1. New AE installs from the private marketplace
-2. Runs `/setup` — pre-configured company settings are already in place
-3. Personalizes their individual settings (~30 minutes with pre-configured fields)
-4. Ready to sell
+2. Creates their workspace folder and Project
+3. Opens a conversation — pre-configured company settings are already loaded
+4. Personalizes their individual settings (5 minutes)
+5. Ready to sell
+
+### AE Offboarding
+
+1. AE removes the plugin from Claude Desktop
+2. AE's workspace folder remains on their machine — they own their data
+3. No shared data to clean up, no admin action required
 
 ---
 
 ## Troubleshooting
 
 **AE can't find the plugin:**
-- Verify the plugin is published to the correct team/org scope
+- Verify the plugin is published to the correct team scope
 - Check that the AE has marketplace access permissions
 
-**Notion databases not creating:**
-- Each AE needs their own Notion integration with workspace access
-- The integration must have "Insert content" and "Read content" capabilities
-- Run `/setup` again — it will retry database creation
-
-**Pre-configured settings not appearing:**
+**Settings not appearing for AE:**
 - Verify CLAUDE.md was saved correctly before publishing
-- Check that template variable syntax is exact: `{{VARIABLE_NAME}}`
-- AE can manually enter any missing values during `/setup`
+- AE can enter any missing information during their first conversation
 
 **Different teams need different competitors/products:**
 - Create separate plugin distributions per team
-- Or leave competitor fields empty and let each AE configure during `/setup`
+- Or leave competitor fields empty and let each AE's auto-research fill them in
 
 ---
 
 ## Security Considerations
 
-- **No shared data:** Each AE's Notion databases are independent. No cross-AE data access.
-- **API keys:** Notion API keys should never be committed to version control or shared in plain text. Each AE manages their own key.
-- **No external data transmission:** SalesSidekick does not send data to any external service beyond the configured connectors (Notion, Gmail, Google Calendar, Google Drive, Gamma). All connectors use the AE's own authenticated accounts.
-- **Plugin files:** The plugin contains no executable code — only markdown files, a JSON manifest, and a JSON MCP configuration. All logic runs through Claude's native capabilities.
+- **No shared data:** Each AE's workspace is independent. No cross-AE data access.
+- **All data is local:** Deal data, contacts, call notes live on the AE's machine. Nothing is sent to external services unless the AE explicitly connects a service (Gmail, Calendar, etc.)
+- **No executable code:** The plugin contains only markdown files and JSON configuration. All logic runs through Claude's native capabilities.
+- **Connectors use AE's own accounts:** Gmail, Calendar, and Drive all authenticate through the AE's personal account. No admin credentials needed.
+- **Personal use license:** SalesSidekick is licensed to Rebel HQ Inc. AEs may use and modify for personal/internal business use. Distribution or resale is prohibited.

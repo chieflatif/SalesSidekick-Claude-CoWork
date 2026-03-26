@@ -27,14 +27,14 @@ Identifies expansion opportunities across the territory by analyzing product cov
 
 **User provides:** Nothing required. Optionally: "focus on upsell" or "look at [specific industry segment]."
 
-**System reads from Notion:**
+**System reads:**
 - Companies: all companies with Territory Status, Industry, Current Products, Account Size, Hell Yes/Hell No
 - Deals: deal history (including Closed Won) for penetration analysis
 - Contacts: contact coverage across accounts
 
 ## Execution Steps
 
-1. Read all companies from Notion
+1. Read all companies from workspace data
 2. Analyze product penetration: for each company, compare Current Products against the full product portfolio ({{PRIMARY_PRODUCT}}, {{SECONDARY_PRODUCTS}})
 3. Identify product gaps: accounts using some products but not others
 4. Identify dormant accounts: Territory Status = Active but no recent deals or activity
@@ -106,7 +106,7 @@ TOP 5 WHITESPACE ACTIONS:
 
 ## Evidence Grading
 
-- Account data and product penetration from Notion → Verified
+- Account data and product penetration from workspace data → Verified
 - Estimated deal values (based on account size × average deal size) → Estimated
 - Market segment potential → Hypothesis
 
@@ -114,5 +114,5 @@ TOP 5 WHITESPACE ACTIONS:
 
 | Missing Connector | Impact on /whitespace |
 |-------------------|----------------------|
-| No Notion | Cannot analyze territory. Asks: "Describe your territory — how many accounts, what industries, what products do they use?" Produces a framework-based analysis from user input. |
-| All other connectors | No impact. /whitespace reads from Notion only. |
+| No workspace | Not in SalesSidekick project. Asks: "Describe your territory — how many accounts, what industries, what products do they use?" Capability still works from conversation context but nothing saves between sessions. |
+| All other connectors | No impact. |

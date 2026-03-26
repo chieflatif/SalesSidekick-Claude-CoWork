@@ -175,7 +175,7 @@ Aggregate MEDDPICC scores into a deal-level confidence:
 ### MEDDPICC Element Change Tracking
 
 When call processing scores MEDDPICC elements:
-1. Compare new scores against existing scores in Notion
+1. Compare new scores against existing scores in the deal record
 2. Document every change with evidence quotes from the call
 3. Write changes to MEDDPICC Changes field in Call Notes
 4. Update the individual element fields (M through C) in Deals

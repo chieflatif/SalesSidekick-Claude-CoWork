@@ -36,7 +36,7 @@ Examples:
 - skills/posting-guide/SKILL.md: 3-Type Framework, structure templates, hook formulas, frequency goals, pre-publish checklist
 - skills/brand-voice/SKILL.md: vocabulary, tone, banned phrases
 
-**System reads from Notion:**
+**System reads:**
 - LinkedIn Posts: recent posts for variety (avoid repeating types or topics)
 
 ## Execution Steps
@@ -56,7 +56,7 @@ Examples:
    - Clear takeaway or call-to-engagement
    - Appropriate length (typically 150-300 words for LinkedIn)
 4. Apply brand voice rules (vocabulary substitutions, banned phrases, tone)
-5. Check against recent posts in Notion — flag if topic or type was used recently
+5. Check against recent posts — flag if topic or type was used recently
 6. Run 6-point pre-publish checklist:
    1. **Hook test:** Would you stop scrolling? First 2 lines must create curiosity or tension.
    2. **Value test:** Does the reader learn something or feel something?
@@ -65,7 +65,7 @@ Examples:
    5. **CTA test:** Is there a clear call-to-engagement (question, invitation, challenge)?
    6. **Brand safety test:** Nothing that could embarrass {{COMPANY}} or damage relationships?
 7. Present draft with checklist results
-8. Offer to save to LinkedIn Posts database in Notion
+8. Offer to save to LinkedIn Posts database
 
 ## Output Format
 
@@ -90,11 +90,11 @@ PRE-PUBLISH CHECKLIST:
 Result: [X/6 passed]
 
 POSTING CONTEXT:
-- Recent posts: [last 3 post types and dates from Notion]
+- Recent posts: [last 3 post types and dates from workspace]
 - Suggested posting time: [based on {{LINKEDIN_AUDIENCE}}]
 - This week's count: [X of 4-5 target]
 
-💡 Want me to try a different type or angle? Save to Notion as draft?
+💡 Want me to try a different type or angle? Save as draft?
 ```
 
 ## Database Read/Write
@@ -125,7 +125,7 @@ POSTING CONTEXT:
 
 | Missing Connector | Impact on /draft-post |
 |-------------------|-----------------------|
-| No Notion | Cannot check recent posts or save drafts. Generates post without variety check. Notes: "Connect Notion to track your posting history and save drafts." |
+| No workspace | Not in SalesSidekick project. Generates post without variety check. Capability still works from conversation context but nothing saves between sessions. Open your SalesSidekick workspace to track posting history and save drafts. |
 | No posting-guide skill | Uses generic LinkedIn best practices. Notes: "Run /setup to personalize your posting framework." |
 | No brand-voice skill | Uses generic professional tone. Notes: "Run /setup to personalize your voice." |
 | All other connectors | No impact. |

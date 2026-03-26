@@ -14,7 +14,7 @@ intent-triggers:
 
 ## Purpose
 
-The flagship command. Processes any sales call through the 6-Output Framework, extracting maximum intelligence from every conversation. Transforms a raw call transcript into structured data across 4 Notion databases — ensuring zero intelligence loss between sessions.
+The flagship command. Processes any sales call through the 6-Output Framework, extracting maximum intelligence from every conversation. Transforms a raw call transcript into your workspace — MEDDPICC scores, tasks, coaching, and deal updates — ensuring zero intelligence loss between sessions.
 
 Alias: `/call`
 
@@ -31,7 +31,7 @@ Alias: `/call`
 - Company name (if not obvious from transcript)
 - (Optional) Specific emphasis: "Focus on competitive intel" or "I need the follow-up email ASAP"
 
-**System reads from Notion:**
+**System reads:**
 - Companies: current company record for context
 - Contacts: known contacts at the company
 - Deals: active deal record (stage, MEDDPICC scores, previous risks)
@@ -44,8 +44,8 @@ Alias: `/call`
 
 ### Standard Execution
 1. If transcript not provided and Drive connected, check for recent recordings. Otherwise ask user to paste transcript.
-2. Identify the company and match to Notion Companies record. If no match, suggest `/add-company` first.
-3. Identify participants and match to Notion Contacts.
+2. Identify the company and match to Companies record. If no match, suggest `/add-company` first.
+3. Identify participants and match to Contacts.
 4. Load current deal record including existing MEDDPICC scores and risk levels.
 5. Process transcript through the **6-Output Framework**:
 
@@ -64,7 +64,7 @@ Alias: `/call`
 ### Output 2: Task Extraction
 8. Extract every action item from the transcript
 9. For each task: assign owner (AE / Prospect / Internal), priority (High / Medium / Low), estimate time, set due date
-10. Format tasks for Notion write
+10. Format tasks for workspace write
 
 ### Output 3: Coaching Feedback
 11. Score 5 coaching dimensions (1-5 scale):
@@ -175,7 +175,7 @@ Competitor: [Name] | Win Probability: [0.X]
 | #4 Context is King | Reads all prior context before analyzing the new call |
 | #6 10-Minute Rule | Every extracted task has a time estimate, all under 10 min |
 | #8 Laws of Karma | Evidence-graded coaching feedback, honest risk assessment |
-| #10 Be the Chief of Staff | Nothing from the call is lost — everything persisted to Notion |
+| #10 Be the Chief of Staff | Nothing from the call is lost — everything persisted to workspace |
 
 ## Evidence Grading
 
@@ -188,7 +188,7 @@ Competitor: [Name] | Win Probability: [0.X]
 
 | Missing Connector | Impact on /closeout |
 |-------------------|---------------------|
-| No Notion | All 6 outputs still generated but NOT persisted. User receives formatted text output. Warns: "These results won't be saved. Connect Notion and re-run to persist." |
+| No workspace | All outputs generated. Not in a workspace, so results display but don't save. Open your SalesSidekick workspace to save automatically. |
 | No Drive | Cannot auto-discover transcripts. Asks user to paste transcript directly. All processing works normally after that. |
 | No Gmail | Follow-up email generated as copy-paste text instead of offering to send directly. |
 | No Calendar | No impact. /closeout doesn't use Calendar. |
@@ -199,7 +199,7 @@ After execution, offer to persist (batched, one confirmation):
 
 | Data | Database | Condition |
 |------|----------|-----------|
-| Company record | Companies | If company not already in Notion |
+| Company record | Companies | If company not already tracked |
 | Contacts mentioned | Contacts | If new names/titles identified in transcript |
 | Action items extracted | Tasks | Always — one record per task from Output 2 |
 | Deal stage update | Deals | If MEDDPICC changes or risk signals warrant stage movement |

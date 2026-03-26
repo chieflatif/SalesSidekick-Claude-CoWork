@@ -146,7 +146,7 @@ When a user references a company by name, resolve using this priority order:
 2. **Starts-with match** if no exact match (e.g., "Acme" matches "Acme Corporation")
 3. **Contains match** as fallback (e.g., "Acme" matches "The Acme Group")
 4. **Multiple matches** → ask user to clarify: "I found multiple matches: [list]. Which one?"
-5. **No match** → "I don't have [Company] in Notion. Want me to add [Company] to your pipeline?"
+5. **No match** → "I don't have [Company] in my records. Want me to add [Company] to your pipeline?"
 
 When resolving for deal-specific capabilities (deal strategy, competitive analysis, meeting prep):
 - After finding the company, look for active deals (Stage ≠ Closed Won, Closed Lost)

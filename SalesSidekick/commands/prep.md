@@ -26,7 +26,7 @@ Loads everything the system knows about an account and produces a structured pre
 
 **User provides:** Company name (required).
 
-**System reads from Notion:**
+**System reads:**
 - Companies: full company record
 - Contacts: all contacts at the company
 - Deals: active deal(s) with the company
@@ -37,7 +37,7 @@ Loads everything the system knows about an account and produces a structured pre
 
 ## Execution Steps
 
-1. Resolve company name to Notion Companies record (fuzzy match if needed)
+1. Resolve company name to Companies record (fuzzy match if needed)
 2. Load full company context: industry, size, tech stack, current products, territory status, Hell Yes/Hell No
 3. Load all contacts at the company with roles and sentiment
 4. Load active deal(s): stage, value, MEDDPICC scores, risk level, next step
@@ -116,7 +116,7 @@ N/A — this command displays existing data. It does not generate quantitative c
 
 | Missing Connector | Impact on /prep |
 |-------------------|-----------------|
-| No Notion | Cannot load account data. Asks: "Tell me about [Company] — what do they do, what's the deal status, and what happened on your last call?" Produces a manually-built prep based on user input. |
-| No Calendar | Meeting details (time, attendees) omitted. User provides meeting context. All Notion-based sections work normally. |
+| No workspace | Not in SalesSidekick project. Asks: "Tell me about [Company] — what do they do, what's the deal status, and what happened on your last call?" Capability still works from conversation context but nothing saves between sessions. |
+| No Calendar | Meeting details (time, attendees) omitted. User provides meeting context. All workspace-based sections work normally. |
 | No Gmail | No impact. /prep doesn't use email. |
 | No Drive | No impact. /prep doesn't use Drive. |

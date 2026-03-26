@@ -18,7 +18,7 @@ intent-triggers:
 
 End-of-day ritual that ensures nothing falls through the cracks. Reviews what got done today, flags what didn't, and previews tomorrow so the AE can close their laptop with confidence.
 
-**Read-only — does NOT write to Notion.** This is a review command, not an update command. If the AE wants to mark tasks as done or update deal status, they do that in Notion or through other commands.
+**Read-only — does NOT write to workspace.** This is a review command, not an update command. If the AE wants to mark tasks as done or update deal status, they do that through other commands.
 
 ## When to Use
 
@@ -30,11 +30,11 @@ End-of-day ritual that ensures nothing falls through the cracks. Reviews what go
 
 **User provides:** Nothing required.
 
-**System reads from Notion:**
-- Tasks database: all tasks (comparing Status to identify completed vs still open)
-- Deals database: active deals for progress check
-- Call Notes database: calls logged today
-- Companies database: for context grouping
+**System reads:**
+- Tasks: all tasks (comparing Status to identify completed vs still open)
+- Deals: active deals for progress check
+- Call Notes: calls logged today
+- Companies: for context grouping
 
 **System reads from Calendar (if connected):** Tomorrow's meetings for preview.
 
@@ -96,7 +96,7 @@ Nothing fell through. Rest up. 💪
 - Companies: Company Name
 - Contacts: Name, Title, Company (relation) — for tomorrow meeting context
 
-**Writes:** None. /end-of-day is strictly read-only. Per Product Bible specification, this command does NOT modify Notion.
+**Writes:** None. /end-of-day is strictly read-only. This command does NOT modify workspace data.
 
 ## Commandment Alignment
 
@@ -114,7 +114,7 @@ N/A — this command does not generate quantitative claims. It reads and display
 
 | Missing Connector | Impact on /end-of-day |
 |-------------------|-----------------------|
-| No Notion | Cannot read tasks or deals. Asks: "Walk me through what you accomplished today and what's still open. I'll help you organize for tomorrow." Produces a manually-built wrap. |
+| No workspace | Not in SalesSidekick project. Asks: "Walk me through what you accomplished today and what's still open. I'll help you organize for tomorrow." Capability still works from conversation context but nothing saves between sessions. |
 | No Calendar | Asks: "Any meetings tomorrow I should know about?" Tomorrow preview built from user response instead of calendar data. All other sections work normally. |
 | No Gmail | No impact. |
 | No Drive | No impact. |

@@ -26,17 +26,17 @@ Your daily "home screen." Surfaces everything you need to know this morning: tas
 
 **User provides:** Nothing required. Optionally, can specify a date: `/today Friday` or `/today 2026-03-07`.
 
-**System reads from Notion:**
-- Tasks database: all tasks with Status ≠ Done, filtered by Due Date ≤ today
-- Deals database: all active deals (Stage ≠ Closed Won, Closed Lost)
-- Call Notes database: recent call notes for context
-- Companies database: company names for grouping
+**System reads:**
+- Tasks: all tasks with Status ≠ Done, filtered by Due Date ≤ today
+- Deals: all active deals (Stage ≠ Closed Won, Closed Lost)
+- Call Notes: recent call notes for context
+- Companies: company names for grouping
 
 **System reads from Calendar (if connected):** Today's meetings with attendee names and times.
 
 ## Execution Steps
 
-1. Read all tasks from Notion where Status ≠ Done and Due Date ≤ today
+1. Read all tasks from workspace data where Status ≠ Done and Due Date ≤ today
 2. Group tasks by Company (using the Company relation field)
 3. Within each company group, sort by Priority (High → Medium → Low), then by Due Date (oldest first)
 4. Flag overdue tasks (Due Date < today) with ⚠️
@@ -45,7 +45,7 @@ Your daily "home screen." Surfaces everything you need to know this morning: tas
    - Approaching close dates: deals with Close Date within 14 days
    - High-risk signals: Deal Risk = High or MEDDPICC Confidence = Low
    - Stale accounts: Last Activity > 14 days ago
-6. If Calendar connected, read today's meetings and match attendees to Companies/Contacts in Notion
+6. If Calendar connected, read today's meetings and match attendees to Companies/Contacts in workspace data
 7. For each meeting found, add a quick context line: company, deal stage, last call summary, top MEDDPICC gap
 8. Compile the briefing
 
@@ -110,7 +110,7 @@ N/A — this command does not generate quantitative claims. It reads and display
 
 | Missing Connector | Impact on /today |
 |-------------------|-----------------|
-| No Notion | Cannot read tasks or deals. Asks: "What's on your plate today? Give me your top 3-5 priorities and I'll help you organize them." Produces a manually-built action plan. |
+| No workspace | Not in SalesSidekick project. Asks: "What's on your plate today? Give me your top 3-5 priorities and I'll help you organize them." Capability still works from conversation context but nothing saves between sessions. |
 | No Calendar | Meetings section omitted. Task and deal sections still work. Asks: "Any meetings today I should know about?" |
 | No Gmail | No impact. /today doesn't use email. |
 | No Drive | No impact. /today doesn't use Drive. |

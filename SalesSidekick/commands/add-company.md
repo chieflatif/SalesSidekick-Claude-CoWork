@@ -14,7 +14,7 @@ intent-triggers:
 
 ## Purpose
 
-Guided creation of a new company record in Notion. Uses a sequential conversational intake to gather information, applies Hell Yes / Hell No qualification scoring, and creates a properly structured account record. This is the only command that creates company records — ensures data consistency and qualification discipline.
+Guided creation of a new company record. Uses a sequential conversational intake to gather information, applies Hell Yes / Hell No qualification scoring, and creates a properly structured account record. This is the only command that creates company records — ensures data consistency and qualification discipline.
 
 ## When to Use
 
@@ -29,12 +29,12 @@ Guided creation of a new company record in Notion. Uses a sequential conversatio
 
 **System reads:**
 - Web search: basic company info if not provided by user
-- Notion Companies: check if company already exists (prevent duplicates)
+- Companies: check if company already exists (prevent duplicates)
 
 ## Execution Steps
 
-1. Check if company already exists in Notion:
-   - If found: "I already have [Company] in Notion. Want me to show the existing record? Or is this a different [Company]?"
+1. Check if company already exists in records:
+   - If found: "I already have [Company] in my records. Want me to show the existing record? Or is this a different [Company]?"
    - If not found: proceed with creation
 2. If user provided details upfront, pre-fill what's available
 3. If user provided only the company name, gather information conversationally:
@@ -52,7 +52,7 @@ Guided creation of a new company record in Notion. Uses a sequential conversatio
    - **Evaluating:** Partial fit — some signals positive, some unclear
    - **Hell No:** Poor fit — wrong industry, wrong size, or clear misalignment
    - Present the qualification honestly: "Based on [evidence], this looks like a [Hell Yes/Evaluating/Hell No]. Here's why: [reasons]."
-6. Create the company record in Notion with all gathered fields
+6. Create the company record with all gathered fields
 7. Confirm creation and suggest next steps
 
 ## Output Format
@@ -115,7 +115,7 @@ NEXT STEPS:
 | Commandment | How /add-company Serves It |
 |-------------|---------------------------|
 | #1 Speed is Life | Quick conversational intake — not a 20-field form |
-| #7 One Source of Truth | Creates in Notion, the canonical source |
+| #7 One Source of Truth | Creates in workspace, the canonical source |
 | #8 Laws of Karma | Honest qualification — Hell No is a valid answer |
 
 ## Evidence Grading
@@ -129,6 +129,6 @@ NEXT STEPS:
 
 | Missing Connector | Impact on /add-company |
 |-------------------|------------------------|
-| No Notion | Cannot create company record. Collects all information conversationally and presents it formatted. Suggests: "Connect Notion to save this record. For now, here's the structured profile to store manually." |
+| No workspace | Not in SalesSidekick project. Collects all information conversationally and presents it formatted. Capability still works from conversation context but nothing saves between sessions. Open your SalesSidekick workspace to save automatically. |
 | No web search | Cannot supplement user info. Relies entirely on user-provided details. Notes which fields could benefit from /research. |
 | All other connectors | No impact. |

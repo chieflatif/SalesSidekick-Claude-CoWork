@@ -15,7 +15,7 @@ intent-triggers:
 
 ## Purpose
 
-Guided creation of a new deal record in Notion. Links the deal to an existing company and contacts, initializes all 8 MEDDPICC scores to Red (nothing is assumed), and sets up the deal for proper pipeline tracking. This is the only command that creates deal records — ensures MEDDPICC discipline from day one.
+Guided creation of a new deal record. Links the deal to an existing company and contacts, initializes all 8 MEDDPICC scores to Red (nothing is assumed), and sets up the deal for proper pipeline tracking. This is the only command that creates deal records — ensures MEDDPICC discipline from day one.
 
 ## When to Use
 
@@ -28,16 +28,16 @@ Guided creation of a new deal record in Notion. Links the deal to an existing co
 
 **User provides:** Company name (required). Optionally: deal details upfront ("add deal at Acme Corp, $50K platform license, closing Q2").
 
-**System reads from Notion:**
+**System reads:**
 - Companies: verify company exists, load context
 - Contacts: available contacts at the company for linking
 - Deals: check for existing active deals (prevent unintentional duplicates)
 
 ## Execution Steps
 
-1. Verify company exists in Notion:
+1. Verify company exists in records:
    - If found: load company record and proceed
-   - If not found: "I don't have [Company] in Notion yet. Want me to run `/add-company [Company]` first?"
+   - If not found: "I don't have [Company] in my records yet. Want me to run `/add-company [Company]` first?"
 2. Check for existing active deals at this company:
    - If active deal exists: "There's already an active deal at [Company]: [Deal Name] at [Stage] — $[Value]. Want to add a second deal, or update the existing one?"
 3. If user provided details upfront, pre-fill what's available
@@ -59,7 +59,7 @@ Guided creation of a new deal record in Notion. Links the deal to an existing co
    - C-Champion: Red
    - C-Competition: Red
    - This is intentional — nothing is assumed. The AE must earn Green through verified evidence.
-7. Create the deal record in Notion
+7. Create the deal record
 8. Confirm creation and suggest immediate next steps
 
 ## Output Format
@@ -133,13 +133,13 @@ NEXT STEPS:
 | Commandment | How /add-deal Serves It |
 |-------------|------------------------|
 | #1 Speed is Life | Conversational intake, not a 22-field form |
-| #7 One Source of Truth | Creates in Notion, properly linked |
+| #7 One Source of Truth | Creates in workspace, properly linked |
 | #8 Laws of Karma | MEDDPICC starts at Red — nothing is assumed, everything is earned |
 
 ## Evidence Grading
 
 - Deal value, close date, stage → Verified (user provided)
-- Company linking → Verified (from Notion)
+- Company linking → Verified (from workspace data)
 - MEDDPICC initialization → Verified (deliberate Red defaults, not assessment)
 - Forecast category if auto-assigned → Estimated
 
@@ -147,5 +147,5 @@ NEXT STEPS:
 
 | Missing Connector | Impact on /add-deal |
 |-------------------|--------------------|
-| No Notion | Cannot create deal record. Collects all information and presents it formatted. Suggests: "Connect Notion to save this deal. Here's the structured record to track manually." |
-| All other connectors | No impact. /add-deal uses Notion only. |
+| No workspace | Not in SalesSidekick project. Collects all information and presents it formatted. Capability still works from conversation context but nothing saves between sessions. Open your SalesSidekick workspace to save automatically. |
+| All other connectors | No impact. |

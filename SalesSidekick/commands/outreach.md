@@ -28,7 +28,7 @@ Generates a tailored prospecting email for cold or warm outreach. Reads account 
 
 **User provides:** Company name (required). Optionally: specific contact name, specific angle, or trigger event context.
 
-**System reads from Notion:**
+**System reads:**
 - Companies: company profile, industry, tech stack, notes (including /research briefs)
 - Contacts: target contact if specified (name, title, email)
 - Deals: any prior deal history
@@ -43,7 +43,7 @@ Generates a tailored prospecting email for cold or warm outreach. Reads account 
 0. If this is the first time the user runs /outreach, ask: "What is your typical email tone? Paste a sample email if you have one." Use the response to calibrate email voice in the brand-voice skill. This runs once and is remembered for all future /outreach calls.
 
 ### Standard Execution
-1. Load company record from Notion (if exists)
+1. Load company record from workspace data (if exists)
 2. Check for recent /research brief in company Notes — if none exists, suggest: "No research brief found. Want me to run `/research [Company]` first for a stronger outreach?"
 3. Identify the best outreach angle:
    - **Financial:** ROI, cost savings, revenue impact — use when company has public financial pressure or growth targets
@@ -86,7 +86,7 @@ Alternative angles available:
 
 VOICE CHECK: ✅ [X/7 passed] — [any flags]
 
-Evidence: [Verified] company data from Notion/research | [Estimated] angle selection | [Hypothesis] projected relevance
+Evidence: [Verified] company data from workspace/research | [Estimated] angle selection | [Hypothesis] projected relevance
 
 💡 Want me to try a different angle? Or run /research [Company] for deeper intel?
 ```
@@ -111,17 +111,17 @@ Evidence: [Verified] company data from Notion/research | [Estimated] angle selec
 ## Evidence Grading
 
 **Mandatory on this command.** All outreach claims must be graded:
-- Company facts from Notion or /research → Verified
+- Company facts from workspace data or /research → Verified
 - Angle selection rationale → Estimated
 - Projected relevance or pain point assumptions → Hypothesis
 
-If the outreach is primarily hypothesis-grade (no research, no Notion data), warn: "This outreach is based on assumptions. Consider running `/research [Company]` first for verified intelligence."
+If the outreach is primarily hypothesis-grade (no research, no workspace data), warn: "This outreach is based on assumptions. Consider running `/research [Company]` first for verified intelligence."
 
 ## Graceful Degradation
 
 | Missing Connector | Impact on /outreach |
 |-------------------|---------------------|
-| No Notion | Cannot load account intel. Asks: "Tell me about this company — industry, size, what they might need. I'll craft the outreach." Produces angle-based email from user input. Warns that quality improves with /research. |
+| No workspace | Not in SalesSidekick project. Asks: "Tell me about this company — industry, size, what they might need. I'll craft the outreach." Produces angle-based email from user input. Capability still works from conversation context but nothing saves between sessions. Quality improves with /research. |
 | No Gmail | Default behavior — generates copy-paste email text. No degradation. |
 | No brand-voice skill | Uses generic professional tone. Notes: "Run /setup to personalize your email voice." |
 | All other connectors | No impact. |

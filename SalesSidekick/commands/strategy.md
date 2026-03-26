@@ -30,7 +30,7 @@ This is the thinking command — when a deal is complex, stuck, or at a crossroa
 
 **User provides:** Company name (required). Optionally, a specific concern: "worried about the champion going quiet" or "competitor just got a meeting with the CTO."
 
-**System reads from Notion:**
+**System reads:**
 - Companies: company profile, industry, size
 - Deals: full deal record (stage, value, MEDDPICC scores, risk, competitor)
 - Contacts: stakeholder map with roles and sentiment
@@ -43,7 +43,7 @@ This is the thinking command — when a deal is complex, stuck, or at a crossroa
 0. If this is the first time the user runs /strategy, ask: "Do you prefer aggressive or conservative deal strategy? When deals are stuck, do you tend to push or pull back?" Use the response to calibrate Three Paths threshold in the deal-strategy skill. This runs once and is remembered for all future /strategy calls.
 
 ### Standard Execution
-1. Load full account and deal context from Notion
+1. Load full account and deal context from workspace data
 2. Apply the **Five-Lens Prism** — analyze the deal through each lens:
 
 | Lens | Analyzes | Key Questions |
@@ -143,7 +143,7 @@ Evidence grades: [X] Verified / [Y] Estimated / [Z] Hypothesis
 ## Evidence Grading
 
 **Mandatory on this command.** All strategic claims must be graded:
-- Deal data from Notion (stage, MEDDPICC, value) → Verified
+- Deal data from workspace (stage, MEDDPICC, value) → Verified
 - Competitive positioning based on battlecard + call history → Estimated
 - Strategic projections (win probability, path outcomes) → Hypothesis
 
@@ -153,7 +153,7 @@ If >50% of the analysis is hypothesis-grade, flag it: "This strategy is heavy on
 
 | Missing Connector | Impact on /strategy |
 |-------------------|---------------------|
-| No Notion | Cannot load deal or account data. Asks user to describe the deal situation. Produces analysis based on user-provided context only. Notes that analysis quality is limited without historical data. |
+| No workspace | Not in SalesSidekick project. Asks user to describe the deal situation. Produces analysis based on user-provided context only. Capability still works from conversation context but nothing saves between sessions. |
 | No Calendar | No impact. /strategy doesn't use Calendar. |
 | No Gmail | No impact. /strategy doesn't use email. |
 | No Drive | No impact. /strategy doesn't use Drive. |

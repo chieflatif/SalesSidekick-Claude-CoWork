@@ -26,7 +26,7 @@ Territory-wide weekly digest. Tracks deal movement, MEDDPICC score changes, and 
 
 **User provides:** Nothing required. Optionally: "for last week" or "for the week of March 3."
 
-**System reads from Notion:**
+**System reads:**
 - Deals: all active deals with Last Activity, Stage, MEDDPICC scores
 - Tasks: completed tasks this week, new tasks created
 - Call Notes: calls logged this week
@@ -108,12 +108,12 @@ Copy-paste ready for email, Slack, or CRM notes.
 | Commandment | How /weekly Serves It |
 |-------------|----------------------|
 | #1 Speed is Life | Full week recap in one command |
-| #7 One Source of Truth | All data from Notion — single source |
+| #7 One Source of Truth | All data from workspace — single source |
 | #10 Be the Chief of Staff | AE walks into 1:1 fully prepared |
 
 ## Evidence Grading
 
-- Deal values, stages, and dates from Notion → Verified
+- Deal values, stages, and dates from workspace data → Verified
 - Net pipeline change calculations → Verified (derived from data)
 - Priority recommendations → Estimated (system assessment)
 
@@ -121,5 +121,5 @@ Copy-paste ready for email, Slack, or CRM notes.
 
 | Missing Connector | Impact on /weekly |
 |-------------------|-------------------|
-| No Notion | Cannot generate weekly summary. Asks: "Walk me through your week — what deals moved, what calls happened, what's coming up?" Produces a manually-built weekly summary. |
-| All other connectors | No impact. /weekly reads from Notion only. |
+| No workspace | Not in SalesSidekick project. Asks: "Walk me through your week — what deals moved, what calls happened, what's coming up?" Capability still works from conversation context but nothing saves between sessions. |
+| All other connectors | No impact. |

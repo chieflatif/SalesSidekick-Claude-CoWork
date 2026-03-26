@@ -33,7 +33,7 @@ Examples:
 - `/deck Acme Corp executive summary for their CFO`
 - `/deck Acme Corp competitive displacement vs [Competitor]`
 
-**System reads from Notion:**
+**System reads:**
 - Companies: company profile, industry, tech stack, account size
 - Deals: stage, value, MEDDPICC scores, competitor, next step
 - Contacts: stakeholder map for audience awareness
@@ -50,7 +50,7 @@ Examples:
 0. If this is the first time the user runs /deck, ask: "How do you prefer presentations? Data-heavy, narrative, or visual?" Use the response to set deck template preference in the profile skill. This runs once and is remembered for all future /deck calls.
 
 ### Standard Execution
-1. Load company and deal context from Notion
+1. Load company and deal context from workspace data
 2. Determine the template — auto-select based on deal stage or use user preference:
 
 | Template | Auto-Selects When | Best For |
@@ -101,7 +101,7 @@ BRAND TOKENS APPLIED:
 - Fonts: [✅ applied / ⚠️ using defaults]
 
 EVIDENCE SUMMARY:
-- [X] Verified claims (from Notion data, company-intel)
+- [X] Verified claims (from workspace data, company-intel)
 - [X] Estimated claims (inferred from context)
 - [X] Hypothesis claims (projections, assumptions)
 
@@ -118,7 +118,7 @@ EVIDENCE SUMMARY:
 - Contacts: key stakeholders for audience awareness
 - Call Notes: recent 3-5 calls for relevant insights
 
-**Writes:** None. /deck generates presentation files. Does not modify Notion.
+**Writes:** None. /deck generates presentation files. Does not modify workspace data.
 
 ## Commandment Alignment
 
@@ -131,7 +131,7 @@ EVIDENCE SUMMARY:
 ## Evidence Grading
 
 **Mandatory on this command.** All deck claims must be graded:
-- Company data from Notion → Verified
+- Company data from workspace data → Verified
 - Case studies and proof points from company-intel skill → Verified (if from real sources)
 - ROI projections or estimated impact → Estimated
 - Market positioning claims or competitive comparisons → Estimated or Hypothesis
@@ -143,7 +143,7 @@ If >50% of deck content is hypothesis-grade, warn: "This deck is heavy on assump
 
 | Missing Connector | Impact on /deck |
 |-------------------|-----------------|
-| No Notion | Cannot load account context. Asks: "Tell me about the company, your deal stage, and what this presentation needs to accomplish." Produces a generic-structure deck from user input. |
+| No workspace | Not in SalesSidekick project. Asks: "Tell me about the company, your deal stage, and what this presentation needs to accomplish." Produces a generic-structure deck from user input. Capability still works from conversation context but nothing saves between sessions. |
 | No PptxGenJS / no pptx skill | Cannot generate .pptx file. Produces slide content as formatted text. If Gamma is available, offers that path instead. |
 | No Gamma | Cannot use Gamma path. Default .pptx pipeline or formatted text output. |
 | No brand tokens (pre-/setup) | Uses default styling. Notes: "Run /setup to apply your brand colors, logo, and fonts." |

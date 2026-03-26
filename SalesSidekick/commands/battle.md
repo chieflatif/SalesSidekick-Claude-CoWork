@@ -27,7 +27,7 @@ Loads the relevant competitive battlecard and applies it to a specific deal. Ass
 
 **User provides:** Company name (required). Optionally, the competitor name if known.
 
-**System reads from Notion:**
+**System reads:**
 - Companies: company profile
 - Deals: deal record including Primary Competitor field
 - Call Notes: recent calls mentioning competitors
@@ -38,7 +38,7 @@ Loads the relevant competitive battlecard and applies it to a specific deal. Ass
 
 ## Execution Steps
 
-1. Load deal and company context from Notion
+1. Load deal and company context from workspace data
 2. Identify the primary competitor:
    - If specified by user, use that
    - If not, check Deal record's Primary Competitor field
@@ -131,7 +131,7 @@ RECOMMENDED NEXT MOVE:
 
 | Missing Connector | Impact on /battle |
 |-------------------|-------------------|
-| No Notion | Cannot load deal context or competitive history. Asks user to describe the competitive situation. Loads battlecard from skills/battlecards/ and applies generically. |
+| No workspace | Not in SalesSidekick project. Asks user to describe the competitive situation. Loads battlecard from skills/battlecards/ and applies generically. Capability still works from conversation context but nothing saves between sessions. |
 | No battlecards skill | If battlecards haven't been generated (pre-/setup), provides generic competitive analysis framework based on available information. Notes that running /setup will generate detailed battlecards. |
 | All other connectors | No impact. |
 

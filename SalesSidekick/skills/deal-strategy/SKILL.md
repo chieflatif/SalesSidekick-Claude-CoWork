@@ -210,7 +210,7 @@ All strategic analysis must be evidence-graded:
 
 | Source | Grade |
 |--------|-------|
-| Deal data from Notion (stage, MEDDPICC, value) | Verified |
+| Deal data from workspace (stage, MEDDPICC, value) | Verified |
 | Customer quotes from call notes | Verified |
 | Competitive positioning from battlecard + call history | Estimated |
 | Industry trends and benchmarks | Estimated |

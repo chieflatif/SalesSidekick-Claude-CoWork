@@ -32,7 +32,7 @@ This is the integrity enforcement mechanism for the entire system. It operationa
 
 **System reads:**
 - The output being audited (from current session context)
-- Relevant Notion data for fact-checking (if available)
+- Relevant workspace data for fact-checking (if available)
 
 ## Execution Steps
 
@@ -102,7 +102,7 @@ RECOMMENDED ACTIONS:
 
 ## Database Read/Write
 
-**Reads:** Relevant Notion records for fact-checking (Companies, Deals, Contacts, Call Notes — whichever pertain to the output being audited).
+**Reads:** Relevant workspace records for fact-checking (Companies, Deals, Contacts, Call Notes — whichever pertain to the output being audited).
 
 **Writes:** None. /audit is read-only — it produces analysis but does not modify any records.
 
@@ -125,5 +125,5 @@ RECOMMENDED ACTIONS:
 
 | Missing Connector | Impact on /audit |
 |-------------------|-----------------|
-| No Notion | Cannot fact-check claims against database records. Audit still runs the 7-question battery and evidence grading check based on session context alone. Notes that database verification was not possible. |
+| No workspace | Not in SalesSidekick project. Audit still runs the 7-question battery and evidence grading check based on session context alone. Notes that data verification was not possible. |
 | All other connectors | No impact. /audit operates on session context. |

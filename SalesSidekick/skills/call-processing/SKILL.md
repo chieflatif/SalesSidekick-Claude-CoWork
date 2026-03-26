@@ -193,9 +193,9 @@ COMPETITIVE INTEL:
 - Win probability is always a hypothesis — evidence-grade it
 - Don't fabricate competitive intelligence from assumptions
 
-### Notion Write Mapping
+### Write Mapping
 
-Call processing writes to 4 databases:
+Call processing writes to 4 data types:
 
 1. **Call Notes** — new record with all 10 fields
 2. **Tasks** — new records for each extracted task

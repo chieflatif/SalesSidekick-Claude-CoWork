@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SalesSidekick — How Call Processing Works</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #0a0e17; color: #e2e8f0; line-height: 1.6; padding: 40px 20px; }
+  .container { max-width: 900px; margin: 0 auto; }
+
+  h1 { font-size: 2rem; font-weight: 800; margin-bottom: 8px; }
+  h1 span { background: linear-gradient(135deg, #D4836B, #22d3ee); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .subtitle { color: #94a3b8; font-size: 1.1rem; margin-bottom: 48px; }
+
+  .step-flow { display: flex; flex-direction: column; gap: 0; }
+
+  .step { display: flex; gap: 24px; align-items: flex-start; position: relative; }
+  .step-connector { width: 60px; display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .step-number { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.1rem; color: #0a0e17; flex-shrink: 0; }
+  .step-line { width: 3px; flex-grow: 1; min-height: 24px; }
+
+  .step-content { background: #1a202c; border-radius: 12px; padding: 24px; flex-grow: 1; margin-bottom: 16px; border-left: 4px solid; }
+
+  .step-content h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+  .step-content p { color: #94a3b8; font-size: 0.95rem; }
+  .step-content .output { margin-top: 12px; padding: 12px 16px; background: #0a0e17; border-radius: 8px; font-size: 0.85rem; color: #cbd5e1; }
+  .step-content .output strong { color: #e2e8f0; }
+
+  .input { border-color: #D4836B; }
+  .input .step-number { background: #D4836B; }
+  .input .step-line { background: linear-gradient(to bottom, #D4836B, #f59e0b); }
+
+  .process { border-color: #f59e0b; }
+  .process .step-number { background: #f59e0b; }
+  .process .step-line { background: linear-gradient(to bottom, #f59e0b, #22d3ee); }
+
+  .output-step { border-color: #22d3ee; }
+  .output-step .step-number { background: #22d3ee; }
+  .output-step .step-line { background: linear-gradient(to bottom, #22d3ee, #22d3ee); }
+
+  .six-outputs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 32px; margin-bottom: 32px; }
+  .output-card { background: #1a202c; border-radius: 12px; padding: 20px; border-top: 3px solid; }
+  .output-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+  .output-card p { color: #94a3b8; font-size: 0.85rem; }
+  .output-card.scoring { border-color: #D4836B; }
+  .output-card.tasks { border-color: #f59e0b; }
+  .output-card.coaching { border-color: #a78bfa; }
+  .output-card.email { border-color: #22d3ee; }
+  .output-card.risk { border-color: #ef4444; }
+  .output-card.intel { border-color: #34d399; }
+
+  .meddpicc-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; margin-top: 24px; margin-bottom: 32px; }
+  .meddpicc-cell { text-align: center; padding: 12px 4px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; }
+  .meddpicc-cell .letter { font-size: 1.2rem; display: block; margin-bottom: 4px; }
+  .red { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
+  .yellow { background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
+  .green { background: rgba(34, 211, 153, 0.2); color: #34d399; border: 1px solid rgba(34, 211, 153, 0.3); }
+
+  .bottom-note { margin-top: 48px; padding: 24px; background: #1a202c; border-radius: 12px; border-left: 4px solid #D4836B; }
+  .bottom-note h3 { color: #D4836B; margin-bottom: 8px; }
+  .bottom-note p { color: #94a3b8; font-size: 0.95rem; }
+
+  .tag { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-right: 6px; }
+  .tag-auto { background: rgba(34, 211, 153, 0.15); color: #34d399; }
+  .tag-saved { background: rgba(96, 165, 250, 0.15); color: #60a5fa; }
+
+  @media (max-width: 600px) {
+    .six-outputs { grid-template-columns: 1fr; }
+    .meddpicc-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1><span>Call Processing</span></h1>
+  <p class="subtitle">What happens when you paste a call transcript into SalesSidekick</p>
+
+  <div class="step-flow">
+
+    <div class="step">
+      <div class="step-connector">
+        <div class="step-number input">1</div>
+        <div class="step-line input"></div>
+      </div>
+      <div class="step-content input">
+        <h3>You paste a transcript</h3>
+        <p>Any format works — raw text, a copied doc, meeting notes, even a voice memo summary. Just paste it and say "I just finished a call with Acme."</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-connector">
+        <div class="step-number process">2</div>
+        <div class="step-line process"></div>
+      </div>
+      <div class="step-content process">
+        <h3>SalesSidekick reads the full conversation</h3>
+        <p>Identifies who was on the call, what was discussed, what commitments were made, what objections came up, and what competitive intel surfaced.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-connector">
+        <div class="step-number process">3</div>
+        <div class="step-line process"></div>
+      </div>
+      <div class="step-content process">
+        <h3>Runs through 6 analysis frameworks simultaneously</h3>
+        <p>MEDDPICC scoring, task extraction, coaching analysis, email drafting, risk detection, and competitive intelligence — all in one pass.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-connector">
+        <div class="step-number output-step">4</div>
+        <div class="step-line output-step"></div>
+      </div>
+      <div class="step-content output-step">
+        <h3>Produces 6 outputs and saves everything</h3>
+        <p>Each output is actionable. Your deal record, contact records, and task list are all updated automatically.</p>
+        <div class="output">
+          <span class="tag tag-auto">auto-saved</span> Call note with extracted intelligence<br>
+          <span class="tag tag-auto">auto-saved</span> Deal record updated with new MEDDPICC scores<br>
+          <span class="tag tag-auto">auto-saved</span> Contact records updated with last activity<br>
+          <span class="tag tag-saved">created</span> Action items as tracked tasks
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <h2 style="font-size: 1.4rem; font-weight: 700; margin: 40px 0 16px;">The 6 Outputs</h2>
+
+  <div class="six-outputs">
+    <div class="output-card scoring">
+      <h4>1. MEDDPICC Scoring</h4>
+      <p>Each of the 8 qualification elements scored Red, Yellow, or Green — with evidence from the call for every change.</p>
+    </div>
+    <div class="output-card tasks">
+      <h4>2. Action Items</h4>
+      <p>Every commitment, follow-up, and next step extracted and saved as tracked tasks with due dates.</p>
+    </div>
+    <div class="output-card coaching">
+      <h4>3. Coaching Feedback</h4>
+      <p>5 dimensions scored 1-5: discovery quality, objection handling, next-step creation, competitive awareness, rapport building.</p>
+    </div>
+    <div class="output-card email">
+      <h4>4. Follow-Up Email</h4>
+      <p>Ready-to-send follow-up drafted in your voice. Summarizes key points, confirms next steps, keeps momentum.</p>
+    </div>
+    <div class="output-card risk">
+      <h4>5. Risk Signals</h4>
+      <p>Flags anything concerning: stalled champion, budget uncertainty, competitor mention, timeline slip, missing stakeholder.</p>
+    </div>
+    <div class="output-card intel">
+      <h4>6. Competitive Intel</h4>
+      <p>Any competitor mentioned is captured. If a battlecard exists, displacement angles are surfaced immediately.</p>
+    </div>
+  </div>
+
+  <h2 style="font-size: 1.4rem; font-weight: 700; margin: 40px 0 16px;">MEDDPICC After the Call</h2>
+  <p style="color: #94a3b8; margin-bottom: 16px;">Each element is scored based on what was said — and what wasn't. Here's an example after a first discovery call:</p>
+
+  <div class="meddpicc-grid">
+    <div class="meddpicc-cell yellow"><span class="letter">M</span>Metrics</div>
+    <div class="meddpicc-cell red"><span class="letter">E</span>Econ Buyer</div>
+    <div class="meddpicc-cell yellow"><span class="letter">D</span>Criteria</div>
+    <div class="meddpicc-cell green"><span class="letter">D</span>Process</div>
+    <div class="meddpicc-cell red"><span class="letter">P</span>Paper</div>
+    <div class="meddpicc-cell green"><span class="letter">I</span>Pain</div>
+    <div class="meddpicc-cell yellow"><span class="letter">C</span>Champion</div>
+    <div class="meddpicc-cell red"><span class="letter">C</span>Competition</div>
+  </div>
+
+  <div class="bottom-note">
+    <h3>How to use it</h3>
+    <p>Just paste your transcript and tell SalesSidekick who the call was with. Any format works — you don't need to clean it up or format it. Say something like "I just got off a call with Sarah at Acme — here's the transcript" and paste it in. Everything else is automatic.</p>
+  </div>
+
+  <p style="text-align: center; color: #475569; font-size: 0.8rem; margin-top: 48px;">&copy; 2026 Rebel HQ Inc. &middot; SalesSidekick v4.0</p>
+
+</div>
+</body>
+</html>

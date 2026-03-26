@@ -30,19 +30,19 @@ Conducts thorough research on a target company using web search and available co
 
 **System reads:**
 - Web search: company website, news, press releases, leadership, funding, tech analysis
-- Notion (if company exists): current company record, deal history, call notes
+- Workspace data (if company exists): current company record, deal history, call notes
 
 ## Execution Steps
 
 1. Search the web for the company: official website, recent news, press releases, leadership changes, funding rounds, product announcements
-2. If the company exists in Notion, load existing context for comparison
+2. If the company exists in workspace data, load existing context for comparison
 3. Research technology stack (built-with analysis, job postings for tech clues, integration partners)
 4. Identify key personnel: C-suite, VP-level decision makers relevant to {{PRODUCT_DESCRIPTION}}
 5. Map competitive landscape: who else serves this company, what tools/vendors they use
 6. Identify strategic selling angles based on findings
 7. Evidence-grade every claim throughout the brief
-8. Save the structured brief to Notion Companies record (Notes field) if the company exists
-9. If the company doesn't exist in Notion, suggest: "Want me to create this account? Run `/add-company`."
+8. Save the structured brief to Companies record (Notes field) if the company exists
+9. If the company doesn't exist in records, suggest: "Want me to create this account? Run `/add-company`."
 
 ## Output Format
 
@@ -125,9 +125,9 @@ RECOMMENDED NEXT STEP:
 
 | Missing Connector | Impact on /research |
 |-------------------|--------------------|
-| No Notion | Research still works via web search. Results displayed but not saved to any database. Warns: "Connect Notion to save this research." |
+| No workspace | Not in SalesSidekick project. Research still works via web search. Results displayed but not saved. Capability still works from conversation context but nothing saves between sessions. Open your SalesSidekick workspace to save automatically. |
 | No web search | Cannot conduct research. Asks user to provide company information manually. Structures whatever the user provides into the brief format. |
-| All other connectors | No impact. /research uses web search + Notion only. |
+| All other connectors | No impact. |
 
 ## Proactive Data Capture
 
@@ -135,7 +135,7 @@ After execution, offer to persist (batched, one confirmation):
 
 | Data | Database | Condition |
 |------|----------|-----------|
-| Company record | Companies | If company not already in Notion |
+| Company record | Companies | If company not already tracked |
 | Key contacts found | Contacts | If key personnel identified during research |
 
 If database doesn't exist yet, offer to create it first (see CLAUDE.md Section 14.4).

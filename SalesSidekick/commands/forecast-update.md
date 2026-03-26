@@ -27,12 +27,12 @@ Generates a formatted forecast update ready to paste into Salesforce, HubSpot, o
 
 **User provides:** Nothing required. Optionally: "for Q1" or "closing this month only."
 
-**System reads from Notion:**
+**System reads:**
 - Deals: all active deals with Stage, Value, Close Date, Forecast Category
 
 ## Execution Steps
 
-1. Read all active deals from Notion
+1. Read all active deals from workspace data
 2. Filter by relevant time period (current quarter by default, or user-specified)
 3. Apply default stage probability weights (customizable via {{DEAL_STAGES}}):
    | Stage | Default Probability |
@@ -75,7 +75,7 @@ COMMIT DEALS:
 | Deal | Company | Stage | Value | Weighted | Close Date |
 |------|---------|-------|-------|----------|------------|
 | [Deal] | [Co] | [Stage] | $[X] | $[X] | [date] |
-[Verified] Values from Notion. [Estimated] Weights from stage probability.
+[Verified] Values from workspace. [Estimated] Weights from stage probability.
 
 BEST CASE DEALS:
 | Deal | Company | Stage | Value | Weighted | Close Date | Risk |
@@ -98,7 +98,7 @@ UPSIDE OPPORTUNITIES:
 CRM PASTE-READY:
 [Formatted for {{CRM_SYSTEM}} — copy and paste directly]
 
-Evidence: Deal values [Verified] from Notion | Stage probabilities [Estimated] standard weights | Gap analysis [Estimated]
+Evidence: Deal values [Verified] from workspace | Stage probabilities [Estimated] standard weights | Gap analysis [Estimated]
 ```
 
 ## Database Read/Write
@@ -113,13 +113,13 @@ Evidence: Deal values [Verified] from Notion | Stage probabilities [Estimated] s
 | Commandment | How /forecast-update Serves It |
 |-------------|-------------------------------|
 | #1 Speed is Life | Forecast done in seconds, not hours of spreadsheet work |
-| #7 One Source of Truth | Notion data → CRM output. No dual-write. |
+| #7 One Source of Truth | Workspace data → CRM output. No dual-write. |
 | #8 Laws of Karma | Evidence-graded math — never fudges numbers |
 
 ## Evidence Grading
 
 **Mandatory on this command.** All numbers must be tagged:
-- Deal values from Notion → Verified
+- Deal values from workspace data → Verified
 - Stage probability weights → Estimated (standard multipliers, documented)
 - Forecast projections (gap analysis, coverage ratio) → Estimated
 - Growth assumptions or "upside" projections → Hypothesis
@@ -128,7 +128,7 @@ Evidence: Deal values [Verified] from Notion | Stage probabilities [Estimated] s
 
 | Missing Connector | Impact on /forecast-update |
 |-------------------|-----------------------------|
-| No Notion | Cannot read deals. Asks: "List your deals with stage, value, close date, and forecast category. I'll build the forecast." Produces manually-built forecast. |
+| No workspace | Not in SalesSidekick project. Asks: "List your deals with stage, value, close date, and forecast category. I'll build the forecast." Capability still works from conversation context but nothing saves between sessions. |
 | No CRM connector | Default behavior — generates paste-ready text. No degradation. |
 | All other connectors | No impact. |
 

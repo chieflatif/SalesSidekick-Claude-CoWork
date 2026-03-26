@@ -38,7 +38,7 @@ Enables the AE to create new custom commands that extend SalesSidekick's capabil
    - When it would be used
    - What inputs it needs
    - What outputs it should produce
-   - What data it needs from Notion
+   - What data it needs from workspace
 2. Confirm understanding: "Here's what I think you want: [summary]. Is that right?"
 
 ### Phase 2: Commandment Check
@@ -52,7 +52,7 @@ Enables the AE to create new custom commands that extend SalesSidekick's capabil
 | 4 | Context is King | Does it load context before acting? No naked actions? |
 | 5 | Voice First | Can it handle voice-to-text input? |
 | 6 | 10-Minute Rule | Is the output consumable in under 10 minutes? |
-| 7 | One Source of Truth | Does it read/write to Notion (not create parallel systems)? |
+| 7 | One Source of Truth | Does it read/write to workspace (not create parallel systems)? |
 | 8 | Laws of Karma | Does it evidence-grade claims? No fabrication? |
 | 9 | Pitch Angles | If customer-facing, does it use angles not feature lists? |
 | 10 | Be the Chief of Staff | Does it anticipate next steps? |
@@ -82,7 +82,7 @@ Enables the AE to create new custom commands that extend SalesSidekick's capabil
    - Verify database fields referenced actually exist in schemas
    - Verify skills referenced actually exist
    - Check that evidence grading is specified for quantitative outputs
-   - Validate graceful degradation covers Notion (P0) at minimum
+   - Validate graceful degradation covers no-workspace (P0) at minimum
    - Check for conflicts with existing commands (overlapping purpose)
 9. Present audit results: "Audit found [X] issues: [list]. Fixing..."
 10. Fix any issues found
@@ -141,7 +141,7 @@ Ready to install /[command-name]?
 **Reads:**
 - CLAUDE.md: current Command Index (to check for conflicts and update)
 - Existing command files: to check for overlapping purpose
-- Notion database schemas: to validate field references in new command
+- Workspace data schemas: to validate field references in new command
 
 **Writes:**
 - commands/[name].md: creates new command file
@@ -153,7 +153,7 @@ Ready to install /[command-name]?
 |-------------|------------------------------|
 | #1 Speed is Life | Builds commands in minutes, not hours of manual work |
 | #2 Stop Digging | AI scaffolds the command — AE describes intent |
-| #7 One Source of Truth | Ensures new commands integrate with Notion |
+| #7 One Source of Truth | Ensures new commands integrate with workspace |
 | #8 Laws of Karma | Built-in audit — every new command meets quality standards |
 
 ## Evidence Grading
@@ -166,6 +166,6 @@ Ready to install /[command-name]?
 
 | Missing Connector | Impact on /skill-builder |
 |-------------------|--------------------------|
-| No Notion | Can still build commands, but cannot validate Notion field references. Warns: "Cannot verify database fields — make sure referenced fields exist in your Notion setup." |
+| No workspace | Not in SalesSidekick project. Can still build commands, but cannot validate data field references. Warns: "Cannot verify data fields — make sure referenced fields exist in your workspace setup." |
 | Pre-/setup | Can still build commands, but Commandment 9 (Pitch Angles) check may be limited without company-intel context. Proceeds with warning. |
 | All other connectors | No impact. /skill-builder operates on the file system. |

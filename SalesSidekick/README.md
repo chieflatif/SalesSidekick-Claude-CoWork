@@ -2,7 +2,7 @@
 
 **SalesSidekick is an AI sales partner that learns how you sell and gets better the more you use it.** Process your calls, prep for meetings, manage your pipeline, build competitive playbooks, write outreach — just tell it what you need in plain language.
 
-It's not a prompt library or a template collection. It's a working system that thinks about your deals, remembers your conversations, and drives your territory forward while you focus on building relationships.
+Think of it as a colleague who's always on top of your book of business. Not a general-purpose AI assistant — a work partner built specifically for strategic sellers. It thinks about your deals, remembers your conversations, and drives your territory forward while you focus on building relationships.
 
 ---
 

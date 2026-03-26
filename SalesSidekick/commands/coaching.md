@@ -28,13 +28,13 @@ Analyzes call performance patterns across all logged calls. Scores the AE on 5 c
 
 **User provides:** Nothing required. Optionally: time period ("last month"), specific dimension focus ("how's my discovery?"), or specific deals to analyze.
 
-**System reads from Notion:**
+**System reads:**
 - Call Notes: all logged calls with Coaching Score and Summary
 - Deals: deal outcomes for win/loss correlation
 
 ## Execution Steps
 
-1. Load all call notes from Notion (default: last 30 days, or user-specified period)
+1. Load all call notes from workspace data (default: last 30 days, or user-specified period)
 2. If fewer than 3 calls logged, warn: "I only have [X] calls logged. Coaching analysis is most accurate with 5+ calls. Want me to analyze what I have, or log more calls with /closeout first?"
 3. Analyze each coaching dimension across all calls:
 
@@ -122,7 +122,7 @@ Evidence: [Verified] scores from logged calls | [Estimated] pattern analysis and
 
 ## Evidence Grading
 
-- Individual call coaching scores from Notion → Verified
+- Individual call coaching scores from workspace data → Verified
 - Aggregate dimension scores (averages, trends) → Verified (calculated from data)
 - Pattern analysis and correlations → Estimated
 - Improvement projections and recommendations → Hypothesis
@@ -131,7 +131,7 @@ Evidence: [Verified] scores from logged calls | [Estimated] pattern analysis and
 
 | Missing Connector | Impact on /coaching |
 |-------------------|--------------------|
-| No Notion | Cannot load call data. Asks: "Walk me through your last 3-5 sales calls — who did you meet, what went well, what was challenging?" Produces coaching analysis from user-provided descriptions. Notes that accuracy improves significantly with logged call data from /closeout. |
+| No workspace | Not in SalesSidekick project. Asks: "Walk me through your last 3-5 sales calls — who did you meet, what went well, what was challenging?" Produces coaching analysis from user-provided descriptions. Capability still works from conversation context but nothing saves between sessions. Accuracy improves significantly with logged call data. |
 | Fewer than 3 calls | Warns about limited data. Provides analysis with low-confidence caveat. |
 | No coaching scores in call notes | If calls logged without coaching dimension (pre-/closeout or manually added), offers to retroactively assess from call summaries if available. |
 | All other connectors | No impact. |

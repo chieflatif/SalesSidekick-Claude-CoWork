@@ -27,7 +27,7 @@ Complete territory-wide pipeline view. Reads all active deals, scores them by ME
 
 **User provides:** Nothing required. Optionally: "focus on deals closing this quarter" or "show me at-risk only."
 
-**System reads from Notion:**
+**System reads:**
 - Deals: all active deals (Stage ≠ Closed Won, Closed Lost)
 - Companies: company context for each deal
 - Tasks: open tasks per deal
@@ -35,7 +35,7 @@ Complete territory-wide pipeline view. Reads all active deals, scores them by ME
 
 ## Execution Steps
 
-1. Read all active deals from Notion
+1. Read all active deals from workspace data
 2. For each deal, calculate a Health Score based on:
    - MEDDPICC Confidence (H/M/L)
    - Deal Risk level (H/M/L)
@@ -112,7 +112,7 @@ TERRITORY STATS:
 
 ## Evidence Grading
 
-- Deal values and stages from Notion → Verified
+- Deal values and stages from workspace data → Verified
 - Weighted pipeline math (stage probability × value) → Estimated
 - Health score classifications → Estimated (system assessment based on data patterns)
 - Priority action recommendations → Hypothesis (system-generated strategic suggestions)
@@ -121,5 +121,5 @@ TERRITORY STATS:
 
 | Missing Connector | Impact on /pipeline |
 |-------------------|--------------------|
-| No Notion | Cannot read deals. Asks: "List your active deals with stage, value, and close date. I'll help you prioritize." Produces manually-built pipeline view. |
-| All other connectors | No impact. /pipeline reads from Notion only. |
+| No workspace | Not in SalesSidekick project. Asks: "List your active deals with stage, value, and close date. I'll help you prioritize." Capability still works from conversation context but nothing saves between sessions. |
+| All other connectors | No impact. |
