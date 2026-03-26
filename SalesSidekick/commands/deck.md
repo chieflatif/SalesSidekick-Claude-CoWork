@@ -96,7 +96,7 @@ SLIDE SUMMARY:
 OUTPUT: [.pptx file attached / Gamma link]
 
 BRAND TOKENS APPLIED:
-- Logo: [✅ applied / ⚠️ not set — run /setup]
+- Logo: [✅ applied / ⚠️ not set — tell me your brand colors]
 - Colors: [✅ applied / ⚠️ using defaults]
 - Fonts: [✅ applied / ⚠️ using defaults]
 
@@ -146,8 +146,8 @@ If >50% of deck content is hypothesis-grade, warn: "This deck is heavy on assump
 | No workspace | Not in SalesSidekick project. Asks: "Tell me about the company, your deal stage, and what this presentation needs to accomplish." Produces a generic-structure deck from user input. Capability still works from conversation context but nothing saves between sessions. |
 | No PptxGenJS / no pptx skill | Cannot generate .pptx file. Produces slide content as formatted text. If Gamma is available, offers that path instead. |
 | No Gamma | Cannot use Gamma path. Default .pptx pipeline or formatted text output. |
-| No brand tokens (pre-/setup) | Uses default styling. Notes: "Run /setup to apply your brand colors, logo, and fonts." |
-| No company-intel skill | Uses generic proof points. Notes: "Run /setup to generate company-specific case studies and positioning." |
+| No brand tokens (pre-/setup) | Uses default styling. Notes: "Share your brand colors or a screenshot and I'll apply them." |
+| No company-intel skill | Uses generic proof points. Notes: "Share company docs and I'll build case studies and positioning." |
 | All other connectors | No impact. |
 
 ## Proactive Data Capture

@@ -134,7 +134,7 @@ Every quantitative claim MUST be tagged:
 | Missing Connector | Impact on /pov |
 |-------------------|----------------|
 | No workspace | Not in SalesSidekick project. Asks user to describe the company, deal, and pain points. Produces a POV based on user input, but notes that evidence grading will be weaker. Capability still works from conversation context but nothing saves between sessions. |
-| No company-intel skill | If company-intel hasn't been generated (pre-/setup), POV relies on user-provided context and web search. Notes that running /setup will enable richer POVs. |
+| No company-intel skill | If company-intel hasn't been generated (pre-/setup), POV relies on user-provided context and web search. Notes: "Share company docs or intel and I'll build richer business cases." |
 | All other connectors | No impact. |
 
 ## Proactive Data Capture

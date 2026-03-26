@@ -75,7 +75,7 @@ UNASSIGNED / INTERNAL
 DEALS NEEDING ATTENTION:
 🔴 [Deal Name] — Stale (no activity in [X] days). Next step: [suggestion]
 🟡 [Deal Name] — Close date in [X] days, MEDDPICC gaps: [elements at Red]
-🔴 [Deal Name] — High risk. [Reason]. Consider /strategy [Company].
+🔴 [Deal Name] — High risk. [Reason]. Want me to run a strategy analysis?
 
 QUICK STATS:
 - Tasks due today: [X] | Overdue: [X]

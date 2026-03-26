@@ -111,7 +111,7 @@ Evidence: [Verified] contact and deal data from workspace | [Estimated] tone and
 |-------------------|-----------------|
 | No workspace | Not in SalesSidekick project. Asks: "Tell me about the situation — who's it to, what's the context, what do you need to say?" Drafts from user-provided context only. Capability still works from conversation context but nothing saves between sessions. |
 | No Gmail | Default behavior — generates copy-paste text with subject and body. No degradation. |
-| No brand-voice skill | Uses generic professional tone. Notes: "Run /setup to personalize your email voice." |
+| No brand-voice skill | Uses generic professional tone. Notes: "Tell me about your communication style and I'll calibrate." |
 | All other connectors | No impact. |
 
 ## Proactive Data Capture

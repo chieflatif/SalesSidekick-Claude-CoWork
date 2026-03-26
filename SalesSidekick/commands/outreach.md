@@ -123,7 +123,7 @@ If the outreach is primarily hypothesis-grade (no research, no workspace data), 
 |-------------------|---------------------|
 | No workspace | Not in SalesSidekick project. Asks: "Tell me about this company — industry, size, what they might need. I'll craft the outreach." Produces angle-based email from user input. Capability still works from conversation context but nothing saves between sessions. Quality improves with /research. |
 | No Gmail | Default behavior — generates copy-paste email text. No degradation. |
-| No brand-voice skill | Uses generic professional tone. Notes: "Run /setup to personalize your email voice." |
+| No brand-voice skill | Uses generic professional tone. Notes: "Tell me about your communication style and I'll calibrate." |
 | All other connectors | No impact. |
 
 ## Proactive Data Capture

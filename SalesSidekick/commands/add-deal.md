@@ -93,7 +93,7 @@ MEDDPICC INITIALIZED — ALL RED:
 | C - Champion | 🔴 Red | No champion identified |
 | C - Competition | 🔴 Red | Competitive landscape unknown |
 
-→ Use /closeout after calls to start upgrading these scores with evidence.
+→ After your next call, paste the transcript and I'll start upgrading these scores with evidence.
 
 NEXT STEPS:
 1. Ask me to prep you before your next meeting

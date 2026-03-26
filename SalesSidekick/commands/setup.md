@@ -123,7 +123,7 @@ An optional deep personalization session that captures context the system can't 
 
 **Skip if:** All 6 databases exist (verified by Notion search) and connectors are verified.
 
-29. **Search Notion for each database by name** — use the Notion search API to search for: "Companies", "Contacts", "Deals", "Tasks", "Call Notes", "LinkedIn Posts". Do this regardless of whether a Config page exists. **Absence of a Config page does NOT mean databases don't exist** — the user may have databases from a previous session, a prior install, or a partial setup. Never assume FRESH = no databases.
+29. **Search Notion for each database by name** — use the Notion search API to search for: "Companies", "Contacts", "Deals", "Tasks", "Call Notes", "LinkedIn Posts". Do this The user may have databases from a previous session, a prior install, or a partial setup. Never assume FRESH = no databases.
    - For each database found by name: confirm with the user — "I found a database called [name] in your Notion — is that your SalesSidekick one, or a different one?" Record its ID only after the user confirms it's the right one. Never silently adopt databases the user doesn't confirm.
    - If the user says "that's not mine" or "that's a different one": skip that match and create a new database with a distinct name, e.g., "SalesSidekick — Companies".
    - If the user says "I'm not sure" or "it might be": say "No problem — I'll create a fresh one to be safe. You can always delete the old one from Notion later." Then create.

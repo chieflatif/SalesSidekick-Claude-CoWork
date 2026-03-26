@@ -126,8 +126,8 @@ POSTING CONTEXT:
 | Missing Connector | Impact on /draft-post |
 |-------------------|-----------------------|
 | No workspace | Not in SalesSidekick project. Generates post without variety check. Capability still works from conversation context but nothing saves between sessions. Open your SalesSidekick workspace to track posting history and save drafts. |
-| No posting-guide skill | Uses generic LinkedIn best practices. Notes: "Run /setup to personalize your posting framework." |
-| No brand-voice skill | Uses generic professional tone. Notes: "Run /setup to personalize your voice." |
+| No posting-guide skill | Uses generic LinkedIn best practices. Notes: "Tell me about your LinkedIn audience and I'll calibrate." |
+| No brand-voice skill | Uses generic professional tone. Notes: "Share some writing samples and I'll match your voice." |
 | All other connectors | No impact. |
 
 ## Proactive Data Capture

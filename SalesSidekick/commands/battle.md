@@ -132,7 +132,7 @@ RECOMMENDED NEXT MOVE:
 | Missing Connector | Impact on /battle |
 |-------------------|-------------------|
 | No workspace | Not in SalesSidekick project. Asks user to describe the competitive situation. Loads battlecard from skills/battlecards/ and applies generically. Capability still works from conversation context but nothing saves between sessions. |
-| No battlecards skill | If battlecards haven't been generated (pre-/setup), provides generic competitive analysis framework based on available information. Notes that running /setup will generate detailed battlecards. |
+| No battlecards skill | If battlecards haven't been generated (pre-/setup), provides generic competitive analysis framework based on available information. Notes: "Share your competitive intel and I'll build battlecards." |
 | All other connectors | No impact. |
 
 ## Proactive Data Capture

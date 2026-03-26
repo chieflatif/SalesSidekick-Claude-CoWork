@@ -948,17 +948,17 @@ No API calls required for steps 1-5. External services are only contacted when a
 
 **State detection logic:**
 
-| V4 markers in Global CLAUDE.md? | V3-style content? | Project folder with data/index.md? | State | Action |
-|--------------------------------|-------------------|-----------------------------------|-------|--------|
+| Identity markers present? | Pre-marker identity content? | Project folder with data/index.md? | State | Action |
+|--------------------------|----------------------------|-----------------------------------|-------|--------|
 | No | No | No | **FRESH** | Run getting-started flow (Section 15.2) |
-| No | Yes | No | **V3 UPGRADE** | Wrap identity in markers, run V3-to-V4 migration |
+| No | Yes | No | **LEGACY UPGRADE** | Wrap existing identity in markers, guide through workspace setup |
 | Yes | n/a | No | **STANDALONE** | Identity works. No data persistence. Nudge to open SalesSidekick workspace. |
 | Yes | n/a | Yes | **RETURNING** | Normal session. Check health-check.md for issues. |
 | No | No | Yes | **WORKSPACE ONLY** | Ask for basics, write identity (Steps 2-6 of onboarding) |
 
-**V4 markers check:** Look for `<!-- SALESSIDEKICK-IDENTITY-START -->` in Global CLAUDE.md. If present, identity has been set up.
+**Markers check:** Look for `<!-- SALESSIDEKICK-IDENTITY-START -->` in Global CLAUDE.md. If present, identity has been set up.
 
-**V3 content check:** If no markers but Global CLAUDE.md contains SalesSidekick identity content (user name, company, product from V3 setup wizard), this is a V3 upgrade — wrap existing content in markers and proceed to migration.
+**Pre-marker content check:** If no markers but Global CLAUDE.md contains SalesSidekick identity content (user name, company, product from a previous setup), this is a legacy upgrade — wrap existing content in markers and guide through workspace setup.
 
 **Personalization depth detection (for RETURNING state):**
 
@@ -1362,11 +1362,7 @@ When a session starts, compare the `plugin_version` in the Project CLAUDE.md (`.
 **Repository:** https://github.com/chieflatif/SalesSidekick-Claude-CoWork
 **License:** Personal Use (see LICENSE)
 
-**Version History:**
-- **v4.0.0** — Local-first rearchitecture. Everything runs locally — no external services required. Identity auto-written to Global CLAUDE.md. Local workspace files for all data. Signal intelligence (12 types). Background agents via scheduled tasks. Selling style assessment (7 questions). Custom skills survive updates. Knowledge base architecture.
-- **v3.0.2** — Onboarding rewrite. Global settings block. Duplicate DB prevention. System self-explanation.
-- **v3.0.0** — Natural language architecture. Intent engine. Progressive personalization. Database-on-demand.
-- **v2.0.0** — Full plugin build. 22 commands, 11 skills, 6 databases. 10 Commandments framework.
+**Version:** 4.0.0 — Local-first architecture. Everything runs locally. Identity auto-written. Signal intelligence. Background agents. Selling style assessment. Custom skills. Knowledge bases.
 
 **Compatibility:**
 - Primary: Claude Cowork (guided UI, visual plugin management)
