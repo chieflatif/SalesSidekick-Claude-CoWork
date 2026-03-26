@@ -37,7 +37,7 @@ Guided creation of a new deal record. Links the deal to an existing company and 
 
 1. Verify company exists in records:
    - If found: load company record and proceed
-   - If not found: "I don't have [Company] in my records yet. Want me to run `/add-company [Company]` first?"
+   - If not found: "I don't have [Company] in my records yet. Want me to add them to your pipeline first?"
 2. Check for existing active deals at this company:
    - If active deal exists: "There's already an active deal at [Company]: [Deal Name] at [Stage] — $[Value]. Want to add a second deal, or update the existing one?"
 3. If user provided details upfront, pre-fill what's available
@@ -96,9 +96,9 @@ MEDDPICC INITIALIZED — ALL RED:
 → Use /closeout after calls to start upgrading these scores with evidence.
 
 NEXT STEPS:
-1. Run `/prep [Company]` before your next meeting
-2. After the meeting, run `/closeout` to score MEDDPICC elements
-3. Run `/strategy [Company]` when you need strategic direction
+1. Ask me to prep you before your next meeting
+2. After the meeting, paste the transcript and I'll score everything
+3. Ask me for a deal strategy when you need direction
 
 💡 Want me to prep for your first meeting with them?
 ```

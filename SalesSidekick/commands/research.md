@@ -42,7 +42,7 @@ Conducts thorough research on a target company using web search and available co
 6. Identify strategic selling angles based on findings
 7. Evidence-grade every claim throughout the brief
 8. Save the structured brief to Companies record (Notes field) if the company exists
-9. If the company doesn't exist in records, suggest: "Want me to create this account? Run `/add-company`."
+9. If the company doesn't exist in records, suggest: "Want me to add them to your pipeline?"
 
 ## Output Format
 
@@ -138,4 +138,4 @@ After execution, offer to persist (batched, one confirmation):
 | Company record | Companies | If company not already tracked |
 | Key contacts found | Contacts | If key personnel identified during research |
 
-If database doesn't exist yet, offer to create it first (see CLAUDE.md Section 14.4).
+If database doesn't exist yet, offer to create it first (see CLAUDE.md Section 15.4).

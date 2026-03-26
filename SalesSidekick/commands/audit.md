@@ -22,7 +22,7 @@ This is the integrity enforcement mechanism for the entire system. It operationa
 
 **Three trigger modes:**
 - **Manual:** User types `/audit` to critique the most recent output or a specified prior output
-- **Suggested:** After any major output (`/strategy`, `/pov`, `/battle`, `/deck`, `/closeout`), the system recommends: "Run `/audit` to validate this output?"
+- **Suggested:** After any major output (`/strategy`, `/pov`, `/battle`, `/deck`, `/closeout`), the system recommends: "Want me to audit this output?"
 - **Mandatory:** During `/setup` Phase 7, the audit runs automatically on the initial configuration
 
 ## Inputs

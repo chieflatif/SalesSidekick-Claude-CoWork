@@ -159,4 +159,4 @@ After execution, offer to persist (batched, one confirmation):
 | Presentation file | Google Drive (working folder) | If Drive connected — save .pptx or Gamma link |
 | Deck summary | Companies (Notes field) | Always — append deck type and date to company notes |
 
-If database doesn't exist yet, offer to create it first (see CLAUDE.md Section 14.4).
+If database doesn't exist yet, offer to create it first (see CLAUDE.md Section 15.4).

@@ -60,7 +60,7 @@ This is the most hypothesis-prone command in the system. Evidence grading is cri
    - Industry projections → Hypothesis (flag clearly)
 6. Check the 50% Rule: if more than half the Math of Pain section is hypothesis-grade, flag the document for more research
 7. Present the POV draft with evidence grades visible
-8. Suggest: "Run `/audit` to validate this before sharing externally?"
+8. Suggest: "Want me to audit this before you share it externally?"
 
 ## Output Format
 
@@ -146,4 +146,4 @@ After execution, offer to persist (batched, one confirmation):
 | POV document | Google Drive (working folder) | If Drive connected — save as shareable document |
 | POV summary | Companies (Notes field) | Always — append POV summary to company notes for reference |
 
-If database doesn't exist yet, offer to create it first (see CLAUDE.md Section 14.4).
+If database doesn't exist yet, offer to create it first (see CLAUDE.md Section 15.4).

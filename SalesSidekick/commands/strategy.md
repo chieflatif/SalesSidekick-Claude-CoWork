@@ -167,4 +167,4 @@ After execution, offer to persist (batched, one confirmation):
 | Deal stage update | Deals | If Five-Lens analysis reveals stage should change |
 | MEDDPICC score updates | Deals | If analysis surfaces new evidence changing element scores |
 
-If database doesn't exist yet, offer to create it first (see CLAUDE.md Section 14.4).
+If database doesn't exist yet, offer to create it first (see CLAUDE.md Section 15.4).

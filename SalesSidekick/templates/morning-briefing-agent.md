@@ -28,6 +28,7 @@ For each deal in the "Deals (Active)" table, evaluate these signals:
 - `stage-stall`: Stage unchanged > 14 days (compare last_activity to today). HIGH if close_date within 30 days, else MEDIUM.
 - `close-date-risk`: close_date < 30 days away AND health < 50. CRITICAL.
 - `amount-change`: Amount differs from previous signals table entry (if any). MEDIUM.
+- `velocity-deviation`: Deal has been in current stage longer than average for that stage (only evaluate if 5+ active deals exist for baseline). LOW.
 
 **Engagement:**
 - `activity-gap`: last_activity > 7 days ago. HIGH if close_date within 14 days, else MEDIUM.

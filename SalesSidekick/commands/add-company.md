@@ -82,9 +82,9 @@ FIELDS NOT YET POPULATED:
 - [Field]: [how to gather — e.g., "Run /research to identify tech stack"]
 
 NEXT STEPS:
-- Run `/research [Company]` to build a full intel brief
-- Run `/add-deal [Company]` when there's an opportunity
-- Run `/outreach [Company]` to begin prospecting
+- "Want me to do a deep research on them?"
+- "Want to add a deal for them?"
+- "Want me to draft an outreach email?"
 
 💡 Want me to run /research next to fill in the gaps?
 ```

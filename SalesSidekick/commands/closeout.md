@@ -100,7 +100,7 @@ Alias: `/call`
 21. Recommend displacement tactics if competitor is actively engaged
 
 22. Present all 6 outputs to the user
-23. Suggest: "Run `/audit` to validate this analysis?"
+23. Suggest: "Want me to audit this analysis before you act on it?"
 
 ## Output Format
 
@@ -206,4 +206,4 @@ After execution, offer to persist (batched, one confirmation):
 | Call notes | Call Notes | Always — full 6-Output summary as structured record |
 | Competitive intel | Deals / Battlecards | If competitor mentioned in transcript |
 
-If database doesn't exist yet, offer to create it first (see CLAUDE.md Section 14.4).
+If database doesn't exist yet, offer to create it first (see CLAUDE.md Section 15.4).

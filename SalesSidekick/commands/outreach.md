@@ -44,7 +44,7 @@ Generates a tailored prospecting email for cold or warm outreach. Reads account 
 
 ### Standard Execution
 1. Load company record from workspace data (if exists)
-2. Check for recent /research brief in company Notes — if none exists, suggest: "No research brief found. Want me to run `/research [Company]` first for a stronger outreach?"
+2. Check for recent /research brief in company Notes — if none exists, suggest: "No research brief found. Want me to research them first for a stronger outreach?"
 3. Identify the best outreach angle:
    - **Financial:** ROI, cost savings, revenue impact — use when company has public financial pressure or growth targets
    - **Technical:** Integration, capability gaps, modernization — use when tech stack signals are strong
@@ -134,4 +134,4 @@ After execution, offer to persist (batched, one confirmation):
 |------|----------|-----------|
 | Email draft | Companies (Notes field) | If user wants to save the outreach for reference |
 
-If database doesn't exist yet, offer to create it first (see CLAUDE.md Section 14.4).
+If database doesn't exist yet, offer to create it first (see CLAUDE.md Section 15.4).
