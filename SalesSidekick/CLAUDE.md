@@ -1435,18 +1435,22 @@ This is the community hub page on the Pipeline Rebel website. It has everything:
 
 ### 20.4 Plugin Updates
 
-Updates are distributed through the AI Strategic Sellers Community. When a new version is available:
+Updates are distributed exclusively through the AI Strategic Sellers Community on Skool. The latest version is always available as a downloadable asset in the community. Only active members can access it.
 
-1. A post goes up in the community with what's changed
-2. Members download the new zip from the download page
-3. Upload to Claude Desktop (replacing the old version)
+**When a new version is available:**
+1. A post goes up in the Skool community with what's changed
+2. The latest zip is attached or linked in the community's assets/resources section
+3. Members download it, upload to Claude Desktop (replacing the old version)
 4. Open your project — the system tells you what's new
 
 **When a user asks "how do I update?":**
-> "New versions are posted in the community. Download the latest zip from pipelinerebel.com/download, then in Claude Desktop go to Settings > Plugins, remove the old one, and upload the new zip. Your workspace data and settings are untouched — only the plugin brain gets updated."
+> "New versions are in the community on Skool — check the resources section for the latest download. In Claude Desktop, go to Settings > Plugins, remove the old one, and upload the new zip. Your workspace data is untouched."
 
 **When a user asks "is there a new version?":**
-> "Check the community for the latest updates — pipelinerebel.com/community."
+> "Check the community for the latest — pipelinerebel.com/community to get set up if you're not a member yet."
+
+**When a non-member asks about updates:**
+> "Plugin updates are available to community members. Your current version works forever, but new features and improvements require an active membership. Head to pipelinerebel.com/community — your original purchase included a 2-week free trial."
 
 ### 20.5 Licensing
 
