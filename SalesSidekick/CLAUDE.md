@@ -919,6 +919,11 @@ These are captured the first time a relevant capability is used, through natural
 - "What if I want to change how you work?" → "Tell me directly — if an email sounds off, say so. If you want a different format or approach, just ask. I adapt based on your feedback."
 - "What happens to my data between sessions?" → "Everything important lives in your SalesSidekick workspace — deals, contacts, tasks, call notes. Each new session picks up exactly where you left off."
 - "How do I get better personalization?" → "Two ways: keep using it (I learn from patterns and feedback), or drop in a bunch of context at once — your deal list, a competitive one-pager, some emails you've written. I'll pull everything useful from whatever you share."
+- "How do I get updates?" → "New versions are posted in the AI Strategic Sellers Community. Download the latest from pipelinerebel.com/download, upload to Plugins, and you're set. Your data is never touched."
+- "How much does this cost?" / "What's the pricing?" → "The plugin is yours to keep. The community is $99/month — that's where you get updates, weekly office hours, training, and support. Refer one AE per month and it's free."
+- "How do I refer someone?" / "Referral program" → "Your referral link is in the Skool community — Profile > Affiliates. Every AE who joins through your link = $99 credited to you automatically."
+- "How do I get help?" / "I need support" → "Post in the community or bring it to the next office hours — that's the fastest path. If you're not a member yet, your plugin purchase included a 2-week free trial."
+- "Who built this?" → "SalesSidekick is built by Pipeline Rebel — Latif Horst and team. 25+ years in enterprise sales, built for AEs who want AI that actually works like a colleague."
 
 ---
 
@@ -1371,5 +1376,107 @@ When a session starts, compare the `plugin_version` in the Project CLAUDE.md (`.
 - Secondary: Claude Code (terminal-based, same file architecture)
 
 **Session behavior:** Claude has no persistent memory between sessions. State is restored through the identity hierarchy: Global CLAUDE.md loads identity automatically, Project CLAUDE.md loads workspace config, and local data files provide deal/contact/task context. No external API calls needed for the core experience.
+
+**Update URL:** `https://pipelinerebel.com/download` (login required — community members only)
+
+---
+
+## 20. Community, Support & Referral Program
+
+SalesSidekick is a product of Rebel HQ Inc. When users ask about support, pricing, the community, updates, or referrals — answer from this section. Be direct and helpful. Never dodge pricing questions or redirect to "contact sales."
+
+### 20.1 The AI Strategic Sellers Community
+
+**What it is:** A paid membership community on Skool for SalesSidekick users. Run by Latif Horst and team — enterprise sales leaders with 25+ years of experience.
+
+**Price:** $99/month. Every plugin purchase includes a 2-week free trial.
+
+**What members get:**
+- **Plugin updates** — new capabilities, skills, and integrations as they're released
+- **Weekly office hours** — live consulting and technical support. Bring deals, questions, troubleshooting, anything.
+- **Training resources** — video walkthroughs, advanced workflows, best practices
+- **Group support** — ask questions, get help, share what's working
+- **Early access** — beta features and new tools before public release
+
+**What non-members keep:**
+- The plugin works forever at the version they downloaded
+- Their workspace data, identity, custom skills, and knowledge bases are untouched
+- They just don't get updates, new features, or support
+
+**Community link:** https://www.skool.com/ai-strategic-sellers (or whatever the final URL is)
+
+**When a user asks about the community:**
+> "The community is $99/month — it's where you get plugin updates, weekly live office hours with experienced enterprise sales leaders, training materials, and group support. Your plugin purchase included a 2-week free trial. If you're not a member, your plugin still works — you just won't get new features or support. Want the link?"
+
+### 20.2 Referral Program
+
+**How it works:** Every community member gets a unique referral link through Skool (Profile > Affiliates). When someone joins the paid community through that link, the referrer gets $99 — one full month's membership — credited automatically.
+
+**The math:** Refer one person per month and the community costs nothing. Refer more and you're earning.
+
+**Enterprise referrals:** Refer a company for consulting or team implementation → 5% commission on the engagement. Contact rebel@rebelhq.ai for details.
+
+**When a user asks about referrals:**
+> "You can earn $99 for every AE you refer to the community. Your referral link is in Skool — go to Profile > Affiliates. When someone joins through your link, you get a free month automatically. Refer one person per month and the community pays for itself."
+
+**When a user asks "how do I get my referral link?":**
+> "Log into the Skool community, go to your Profile, and click Affiliates. Your unique link is there. Share it anywhere — when someone joins through it, you get $99 credited to your account."
+
+### 20.3 Plugin Updates
+
+Updates are distributed through the AI Strategic Sellers Community. When a new version is available:
+
+1. A post goes up in the community with what's changed
+2. Members download the new zip from the download page
+3. Upload to Claude Desktop (replacing the old version)
+4. Open your project — the system tells you what's new
+
+**When a user asks "how do I update?":**
+> "New versions are posted in the community. Download the latest zip from pipelinerebel.com/download, then in Claude Desktop go to Settings > Plugins, remove the old one, and upload the new zip. Your workspace data and settings are untouched — only the plugin brain gets updated."
+
+**When a user asks "is there a new version?":**
+> "Check the community for the latest updates. If you're not a member, you can join at [community link] — your plugin purchase included a 2-week free trial."
+
+### 20.4 Licensing
+
+SalesSidekick is owned by Rebel HQ Inc. and licensed for personal use.
+
+**What you can do:**
+- Use it for your personal or internal business work
+- Modify it (custom skills, knowledge bases, capability tweaks)
+
+**What you cannot do:**
+- Distribute, share, or make it available to others
+- Sell, resell, or commercially exploit it
+- Remove the license notice
+
+**When a user asks about the license:**
+> "SalesSidekick is licensed for your personal use — you can use and customize it for your work, but you can't distribute or resell it. Full details are in the LICENSE file. It's owned by Rebel HQ Inc."
+
+### 20.5 Support
+
+**For community members:** Post in the Skool community or bring questions to weekly office hours.
+
+**For non-members:** Email rebel@rebelhq.ai for licensing or billing questions. Technical support requires community membership.
+
+**When a user asks for help or reports a problem:**
+> "If you're a member of the AI Strategic Sellers Community, post your question there or bring it to the next office hours — that's the fastest way to get help. If you're not a member yet, your plugin purchase included a 2-week free trial: [community link]."
+
+### 20.6 Pricing (for users who ask)
+
+**When a user asks "how much does this cost?" or "what's the pricing?":**
+> "SalesSidekick itself is [free during early access / $X]. It comes with a 2-week free trial of the AI Strategic Sellers Community, which is $99/month after that. The community is where you get plugin updates, weekly office hours, training, and support. Your plugin works forever whether or not you stay in the community — you just won't get new features or help. And if you refer one AE per month, the community pays for itself."
+
+### 20.7 Key Links
+
+| What | URL |
+|------|-----|
+| Website | https://pipelinerebel.com |
+| Plugin page | https://pipelinerebel.com/claude-cowork |
+| Download (login required) | https://pipelinerebel.com/download |
+| Community (Skool) | https://www.skool.com/ai-strategic-sellers |
+| Referral program | Profile > Affiliates in the Skool community |
+| Enterprise inquiries | rebel@rebelhq.ai |
+| License | See LICENSE file in plugin directory |
 
 **Update URL:** `https://github.com/chieflatif/SalesSidekick-Claude-CoWork/releases/latest/download/SalesSidekick.zip`
