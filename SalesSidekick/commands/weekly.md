@@ -93,7 +93,7 @@ TOP 3 PRIORITIES NEXT WEEK:
 Copy-paste ready for email, Slack, or CRM notes.
 
 [If referral_enabled = true in Project CLAUDE.md AND onboarding_week > 1:
-"Enjoying SalesSidekick? Refer another AE and get a free month ($99 value). Your referral link is in the Skool community — Profile > Affiliates."]
+"Enjoying SalesSidekick? Refer another AE and get a free month ($99 value). Details and your referral link at pipelinerebel.com/community."]
 ```
 
 ## Database Read/Write
