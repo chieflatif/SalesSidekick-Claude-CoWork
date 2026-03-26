@@ -52,11 +52,11 @@ You talk to it like a colleague who's always on top of your book of business.
 
 ## Getting Started
 
-1. **Install** — Download the `.zip` from [GitHub releases](https://github.com/chieflatif/SalesSidekick-Claude-CoWork/releases), upload to Claude Cowork (Customize > Plugins > Add personal plugin)
-2. **Connect Notion** — Create a [Notion integration](https://www.notion.so/my-integrations), add your API key to `.mcp.json`
-3. **Start talking** — Open a conversation and say hi. SalesSidekick introduces itself, asks for the basics (name, company, what you sell), and offers to research your company immediately.
+1. **Install** — Download the `.zip` from [GitHub releases](https://github.com/chieflatif/SalesSidekick-Claude-CoWork/releases), upload to Claude Desktop (Settings > Plugins > Add Plugin)
+2. **Create a workspace** — Make a folder called `SalesSidekick` in your Documents. Create a Project in Claude Desktop pointing at it.
+3. **Start talking** — Open a conversation in your project and say hi. SalesSidekick introduces itself, asks for the basics, researches your company, and sets everything up automatically.
 
-That's it. You're working in under 2 minutes.
+That's it. You're working in under 5 minutes. No external accounts or services required.
 
 See [QUICK-START.md](QUICK-START.md) for the full onboarding guide.
 
@@ -70,7 +70,7 @@ SalesSidekick uses progressive personalization — it gets smarter through use, 
 
 **Through use:** It picks up your competitors from call transcripts, learns your communication style from email edits, infers your ICP from the companies you work with, and builds context from every interaction.
 
-**Databases on demand:** The first time you process a call, it offers to create a Call Notes database. The first time you research a company, it offers to save it. Each database is created when you first need it — one confirmation, takes seconds.
+**Data builds as you go:** The first time you process a call, it saves the intelligence. The first time you add a deal, it starts tracking. Your workspace builds itself naturally — no upfront database creation needed.
 
 **Optional deep personalization:** When you're ready to go all-in, ask for a deep personalization session (~15 minutes). It captures the things organic use can't easily infer — structured competitive battlecards, calibrated brand voice from writing samples, explicit quota and territory numbers.
 
@@ -80,13 +80,12 @@ SalesSidekick uses progressive personalization — it gets smarter through use, 
 
 | Integration | Required? | What It Enables |
 |-------------|-----------|----------------|
-| **Notion** | Yes | Your single source of truth — 6 databases for companies, contacts, deals, tasks, call notes, and LinkedIn posts |
 | Gmail | No | Send emails directly instead of copy-paste |
 | Google Calendar | No | Meeting-aware briefings and automatic prep triggers |
 | Google Drive | No | Auto-discover call transcripts and store documents |
-| Gamma | No | Web-based presentations as alternative to .pptx |
+| Notion | No | Structured database views for power users and cross-device access |
 
-All optional integrations enhance convenience. Missing one changes behavior, never breaks it. See [CONNECTORS.md](CONNECTORS.md) for setup details.
+Everything works without any connectors. Each one adds convenience. Missing one changes behavior, never breaks it. See [CONNECTORS.md](CONNECTORS.md) for setup details.
 
 ---
 
@@ -107,39 +106,22 @@ SalesSidekick isn't prompt tricks — it's built on real sales methodologies:
 
 ### How It Works
 
-SalesSidekick is a Claude Cowork plugin — an all-markdown system that gives Claude deep sales domain knowledge and structured workflows.
+SalesSidekick is a Claude Cowork plugin — an all-markdown system that gives Claude deep sales domain knowledge, structured workflows, and local-first data persistence.
 
-**File structure:**
-```
-SalesSidekick/
-├── CLAUDE.md              # Brain — identity, intent engine, frameworks, state machine
-├── CONNECTORS.md          # Integration setup and degradation reference
-├── README.md              # This file
-├── INSTALLATION-GUIDE.md  # Detailed setup for all installation methods
-├── QUICK-START.md         # Onboarding guide
-├── CHANGELOG.md           # Version history
-├── LICENSE                # Personal Use License
-├── .mcp.json              # Notion MCP server configuration
-├── .claude-plugin/
-│   ├── plugin.json        # Plugin manifest and metadata
-│   └── marketplace.json   # Marketplace catalog for CLI install
-├── commands/              # 22 capability files (.md)
-│   ├── today.md           # Morning briefing
-│   ├── closeout.md        # Call processing
-│   ├── strategy.md        # Deal strategy
-│   └── ... (19 more)
-└── skills/                # 11 reference knowledge directories
-    ├── meddpicc/SKILL.md
-    ├── deal-strategy/SKILL.md
-    ├── brand-voice/SKILL.md
-    └── ... (8 more)
-```
+**Four-layer architecture:**
+- **Global CLAUDE.md** — Your stable identity (name, company, product, style). Loads before every session, everywhere.
+- **Project CLAUDE.md** — Workspace config (data schemas, signal rules, agent schedules). Loads in your SalesSidekick project.
+- **Plugin brain** — Frameworks, commandments, intent engine, capability definitions. Ships with the plugin.
+- **Skills** — Domain expertise (MEDDPICC, deal strategy, call processing, etc.). Fire automatically based on intent.
 
-**Intent Engine:** Natural language input is classified into intent categories (start-my-day, process-call, prepare-meeting, etc.) and routed to the appropriate capabilities and skills automatically. No slash commands needed — though power users can use them if they prefer.
+**Local-first data:**
+All your deals, contacts, call notes, and tasks are stored as structured markdown files in your workspace folder. An index file provides fast querying. Background agents run signal intelligence (12 risk patterns) and generate views (forecast, pipeline, tasks) on a schedule.
 
-**Personalization State Machine:** The system tracks its own knowledge state (FRESH → BASICS → LEARNING → CALIBRATED) and adjusts behavior accordingly. Variables are captured progressively through use — explicit questions for things that must be asked, organic capture from conversations, and inference from patterns.
+**Signal intelligence:** The system monitors your deals for stage stalls, missing decision-makers, forecast conflicts, qualification gaps, and 8 other risk patterns. Findings surface in your morning briefing.
 
-**Skill System:** 11 reference knowledge packages (MEDDPICC rubrics, deal strategy frameworks, brand voice rules, Notion schemas, etc.) load automatically based on intent classification. Three tiers: universal (always available), template (user-configurable), and regenerated (rebuilt during personalization with user-specific content).
+**Custom skills:** Customize how any capability works by placing a modified skill file in your workspace. Your customizations survive plugin updates.
+
+**Upgrade-safe:** Plugin = the brain (replaced on update). Workspace = your data (never touched). Identity = your settings (preserved automatically).
 
 </details>
 

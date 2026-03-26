@@ -6,6 +6,57 @@ Each release is marked: **✅ No action needed** or **⚠️ Action required** (
 
 ---
 
+## v4.0.0 — Local-First Architecture (2026-03-25)
+
+**⚠️ Major version — see "Upgrading from v3" below.**
+
+### New
+
+**Everything runs locally — no external services required**
+- Your deals, contacts, call notes, tasks, and all data now live as files in your SalesSidekick workspace folder. No database service needed to get started.
+- Your identity is saved automatically during setup — no copy-paste step.
+- Background agents check your pipeline every morning and generate a briefing before you open your laptop.
+
+**Signal intelligence**
+- 12 risk patterns monitored automatically: stalling deals, missing decision-makers, forecast conflicts, qualification gaps, and more.
+- Findings ranked by severity and included in your morning briefing.
+- Configurable thresholds based on your typical deal size.
+
+**Selling style assessment**
+- 7 optional questions during setup that calibrate how the system works for you.
+- Affects email length, strategy aggressiveness, briefing format, and forecast framing.
+- Skip it and the system figures it out from how you work over the first few sessions.
+
+**Custom skills and knowledge bases**
+- Customize how any capability works by placing a modified file in your workspace.
+- Build knowledge bases from your documents — paste anything in and the system consolidates it.
+- Bring custom GPTs into SalesSidekick: paste the system prompt and documents, get a working skill.
+- Everything in your workspace survives plugin updates.
+
+**Upgrade detection**
+- The system detects when you've installed a new version and shows you what's changed.
+- Schema migrations apply automatically — your data files are updated to the new format.
+- If you've customized capabilities, the system lets you compare your version with the updated default.
+
+### Changed
+
+- Commandment #7 updated: "Your workspace is where real work happens" (previously referenced an external service)
+- Connectors (Gmail, Calendar, Drive, Notion) are all optional — none required
+- Onboarding rewritten: workspace setup, automatic identity save, style assessment, background briefing setup
+- State detection uses identity markers in settings file instead of external service
+
+### Upgrading from v3
+
+1. Download the new zip and upload to Plugins (replacing the old version)
+2. Create a SalesSidekick folder in your Documents
+3. Create a Cowork Project pointing at that folder
+4. Open a conversation — the system detects your existing identity and guides you through the migration
+5. If you have data in Notion from v3, the system offers to copy it to your local workspace
+
+Your existing identity is preserved. Your Notion data is preserved (and can still be accessed if you keep Notion connected).
+
+---
+
 ## v3.0.2 — Onboarding, Global Settings, and Upgrade (2026-03-19)
 
 **✅ No action needed** — upgrade by re-uploading the zip. Existing Notion data and Config page are untouched.
