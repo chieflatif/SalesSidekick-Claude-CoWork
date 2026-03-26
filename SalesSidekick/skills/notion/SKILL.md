@@ -1,26 +1,29 @@
 ---
-name: notion
-description: Central reference for all Notion database schemas, read/write patterns, account resolution logic, and write failure handling
+name: data-persistence
+description: Data operations reference — local file schemas, write protocol, account resolution, and optional Notion database schemas
 tier: 1 (universal)
 auto-fire:
   intents: [all data operations]
-  context: "When any interaction requires reading from or writing to Notion databases"
+  context: "When any interaction requires reading from or writing to data — local files or Notion databases"
 user-invocable: false
 ---
 
-# Notion — Database Operations Skill
+# Data Persistence Skill
 
 ## Purpose
 
-Central reference for all Notion database operations. Contains the complete schemas for all 6 databases (70 fields total), read/write patterns per command, account resolution logic, and write failure handling. This is the single source of truth for how SalesSidekick interacts with Notion.
+Central reference for all data operations. In V4, the primary data layer is local workspace files (YAML frontmatter markdown). Notion databases are an optional enhancement for users who want structured views and cross-device access.
+
+**Primary path:** Read/write local files in the workspace `data/` directory. Follow the write protocol in the Project CLAUDE.md (`.claude/CLAUDE.md`).
+
+**Optional path:** If Notion is connected, data can also be written to Notion databases using the schemas below. Local files are always canonical.
 
 ## When Referenced
 
-- **Any interaction reading from Notion** (all data operations) — schema lookup, field validation, and account resolution logic for database queries
-- **Any interaction writing to Notion** (all data operations) — field mapping, write patterns, and write failure handling for database updates
-- **Deep personalization sessions** (customize-system intent) — creates all 6 databases with these schemas during initial configuration
-- **Adding new accounts and deals** (add-account intent) — record creation patterns for Companies, Contacts, and Deals databases
-- **Processing calls** (process-call intent) — writes to 4 databases simultaneously (Call Notes, Tasks, Deals, Companies)
+- **Any interaction reading or writing data** — local file operations, schema validation, account resolution
+- **Deep personalization sessions** — creates local data structure and optionally Notion databases
+- **Adding accounts and deals** — record creation in local files (and Notion if connected)
+- **Processing calls** — writes to multiple local files simultaneously (call note, deal, contacts, tasks, index)
 
 ## Core Framework
 
@@ -189,111 +192,37 @@ When a Notion write fails:
 4. **Retry once** on transient errors (rate limit, timeout). If retry fails, fall back to manual mode.
 5. **Log the failure context** so self-audit can check for patterns.
 
-### Three-Tier Persistence Architecture
+### V4 Persistence Architecture
 
-SalesSidekick uses three distinct persistence layers. Understanding the hierarchy is critical for correct session behavior.
+SalesSidekick uses a three-tier persistence model. No external services required for the core experience.
 
 | Tier | Where | What lives here | When it's read | API calls |
 |------|-------|----------------|----------------|-----------|
-| **Slow lane** | Cowork global settings field | Stable identity: name, company, product, ICP, competitors, communication style. Set once, rarely changes. | Automatically by Cowork before any plugin fires | Zero |
-| **Local fallback** | `sidekick-state.md` in SalesSidekick folder | Mirror of global settings block — written automatically after personalization. Used when global settings haven't been updated yet, or as a richer fallback. | On session start if folder is active and file exists | Zero |
-| **Operational** | Notion Config page + 6 databases | Dynamic data: deal status, contacts, tasks, DB IDs, full personalization variables, connector status, call notes | Lazily, on first operation requiring stored data | Per operation |
+| **Slow lane** | Global CLAUDE.md (`/mnt/.claude/CLAUDE.md`) | Stable identity: name, company, product, ICP, competitors, selling style, quality rules. Written automatically during onboarding within `<!-- SALESSIDEKICK-IDENTITY-START/END -->` markers. | Automatically by Cowork before any plugin fires | Zero |
+| **Fast lane** | Local workspace files (`data/` in Project folder) | All operational data: deals, contacts, companies, call notes, tasks. Stored as structured markdown with YAML frontmatter. `data/index.md` is the flattened read cache. | On demand when capabilities need data | Zero |
+| **Optional** | Notion databases (if connected) | Structured database views of the same data. Cross-device access. | Only when user explicitly requests Notion features | Per operation |
 
-**Why this matters for session startup:**
-- Basic identity (who the user is, what they sell) is available from tiers 1 and 2 with zero API overhead
-- Notion is only called when the session actually needs database data
-- A session spent drafting an email or discussing deal strategy may never call Notion at all
-- If Notion is unavailable, tiers 1 and 2 keep the system functional for non-database work
+**Data operations use the write protocol defined in the Project CLAUDE.md** (`.claude/CLAUDE.md` in the workspace). The full schemas, cross-reference rules, and ops.log format are there.
 
-**sidekick-state.md format:** Markdown file, same content as the global settings block — plain prose, not structured key:value data. **Read as freeform context, same as global settings text: parse for identity signals (name, company, product, competitors, communication style), no structured parsing required.** Written automatically to the active folder after any personalization session (deep personalization or first-run). Never needs to be manually created or edited by the user.
+**Local files are always canonical.** If local files and Notion disagree, local files win.
 
-**Staleness:** Tier 1 (global settings) always supersedes tier 2 (sidekick-state.md). A stale `sidekick-state.md` is harmless by design — the more current global settings win. The file updates whenever a new personalization session completes.
+### Notion Database Creation (optional — deep personalization Phase 6)
 
-**Missing file:** If the active folder has no `sidekick-state.md`, skip tier 2 silently and fall through to tier 3. Never error or warn the user about an absent file.
+Only if the user has Notion connected and wants database access:
 
-**When to write sidekick-state.md:** At the end of any session that captures or updates identity data — both the first-run getting-started flow (CLAUDE.md Section 15.2) and deep personalization sessions (setup.md). The file should always reflect the most current personalization state.
+1. Search Notion by name before creating — never duplicate
+2. Create in dependency order: Companies → Contacts → Deals → Tasks → Call Notes → LinkedIn Posts
+3. Set up cross-relations after all databases exist
+4. Store database IDs in the Project CLAUDE.md
+5. Verify by reading back each database
 
-### Config Page (7th persistence target — created first, always)
+### Notion Database Schemas (for optional Notion sync)
 
-The Config page is a single Notion page (not a database) that stores all identity and personalization variables. It is the persistent replacement for CLAUDE.md template variables, which are read-only in Cowork and cannot be written back by the plugin.
-
-**Why this exists:** Plugin files (including CLAUDE.md) are read-only in Claude Cowork. Variables like `{{AE_NAME}}`, `{{COMPANY}}` etc. cannot be written at runtime. Without the Config page, every session would restart as FRESH with no memory of identity or personalization. The Config page solves this — it's the live source of truth for all Tier 2 variables.
-
-**Page title:** `SalesSidekick — Config`
-
-**Structure:** A Notion page with a two-column table of variable names and values:
-
-```
-| Variable | Value |
-|----------|-------|
-| AE_NAME | [name] |
-| AE_TITLE | [title] |
-| COMPANY | [company] |
-| COMPANY_URL | [url] |
-| PRODUCT_DESCRIPTION | [description] |
-| PRIMARY_PRODUCT | [product] |
-| SECONDARY_PRODUCTS | [products] |
-| ICP_INDUSTRY | [industry] |
-| ICP_SIZE | [size] |
-| ICP_USE_CASE | [use case] |
-| TERRITORY_SIZE | [count] |
-| TERRITORY_TYPE | [type] |
-| REGION | [region] |
-| QUOTA_AMOUNT | [quota] |
-| FISCAL_YEAR_START | [month] |
-| AVERAGE_DEAL_SIZE | [amount] |
-| SALES_CYCLE_LENGTH | [duration] |
-| TOP_COMPETITOR_1 | [competitor] |
-| TOP_COMPETITOR_2 | [competitor] |
-| TOP_COMPETITOR_3 | [competitor] |
-| COMMUNICATION_STYLE | [style] |
-| EMAIL_SIGN_OFF | [sign-off] |
-| LINKEDIN_TOPICS | [topics] |
-| LINKEDIN_AUDIENCE | [audience] |
-| CRM_SYSTEM | [crm] |
-| DEAL_STAGES | [stages] |
-| MANAGER_NAME | [name] |
-| TEAM_NAME | [name] |
-| NOTION_CONNECTED | true |
-| GMAIL_CONNECTED | [true/false] |
-| CALENDAR_CONNECTED | [true/false] |
-| DRIVE_CONNECTED | [true/false] |
-| GAMMA_CONNECTED | [true/false] |
-| NOTION_COMPANIES_DB_ID | [id] |
-| NOTION_CONTACTS_DB_ID | [id] |
-| NOTION_DEALS_DB_ID | [id] |
-| NOTION_TASKS_DB_ID | [id] |
-| NOTION_CALL_NOTES_DB_ID | [id] |
-| NOTION_LINKEDIN_POSTS_DB_ID | [id] |
-| PLUGIN_VERSION | [e.g. 3.0.0] |
-```
-
-**Version tracking:** The `PLUGIN_VERSION` field stores the plugin version that last wrote to this Config page. On first Config read each session, compare PLUGIN_VERSION to the current plugin version (found in plugin.json). If they differ, the user has upgraded since their last session — surface a brief "what's new" note and update PLUGIN_VERSION to current. If the field is empty, write the current version on first save.
-
-**Config page access pattern:** Read the Config page lazily — not at session start, but on the first operation that requires stored data (database query, DB ID lookup, full personalization state check). This means:
-- Sessions that only use basic identity (name, company from Cowork global settings) have zero Notion API overhead
-- Sessions that touch databases read Config once on first use, then cache all values for the rest of the session
-- If no Notion operation occurs in a session, Config is never read
-
-**State detection:** On first Config read, check populated fields to determine FRESH / BASICS / LEARNING / CALIBRATED. If the Config page does not exist → FRESH state.
-
-**Write behavior:** Any variable captured during the session (name, company, territory, competitor, connector status) is written to the Config page immediately. Never silently drop a variable — if the Notion write fails, present the value in a copy-paste block.
-
-### Database Creation (used by deep personalization Phase 6)
-
-When creating databases during deep personalization:
-1. Create Config page first — this is required before anything else persists
-2. Create databases in dependency order: Companies → Contacts → Deals → Tasks → Call Notes → LinkedIn Posts
-3. Companies and Contacts must exist before Deals (for relations)
-4. Set up all relations after databases exist
-5. Populate Select field options with defaults listed above
-6. Store resulting database IDs in the Config page (not in CLAUDE.md — plugin files are read-only in Cowork)
-7. Verify creation by reading back each database
+The schemas below define the Notion database structure. They are used ONLY when Notion is connected and the user has opted into database sync. The primary data model uses the YAML frontmatter schemas defined in the Project CLAUDE.md template.
 
 ## Personalization Notes
 
 - Select field options for Industry, Primary Competitor, and Current Products are customized during deep personalization
-- Stage names and probability weights may be customized (stored as DEAL_STAGES in Config page)
-- Database IDs are stored in the Config page after creation
+- Stage names and probability weights may be customized
 - Account resolution logic is universal — no personalization needed
-- CLAUDE.md template variables ({{AE_NAME}}, etc.) are read-only defaults — the Config page overrides them on first Config read
+- Identity and personalization variables live in Global CLAUDE.md — not in Notion
