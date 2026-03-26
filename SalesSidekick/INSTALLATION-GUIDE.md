@@ -61,7 +61,6 @@ These are all optional. SalesSidekick works without any of them. Each one adds c
 | Gmail | Send emails directly instead of copy-paste | Settings > Connectors > Gmail |
 | Google Calendar | Meeting-aware briefings and auto-prep | Settings > Connectors > Calendar |
 | Google Drive | Auto-find call transcripts | Settings > Connectors > Drive |
-| Notion | Structured database views for power users | See [CONNECTORS.md](CONNECTORS.md) |
 
 If a service isn't connected, SalesSidekick adapts — it'll ask you to paste transcripts instead of finding them, generate copy-paste emails instead of sending, and ask about your schedule instead of reading your calendar.
 

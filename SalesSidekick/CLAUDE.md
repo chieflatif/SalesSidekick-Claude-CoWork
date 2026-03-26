@@ -256,7 +256,7 @@ Your stable identity — name, company, product, ICP, competitors, communication
 All deal, contact, company, call note, and task data. Stored as structured markdown files in your SalesSidekick Project folder. Background agents generate views (forecast, pipeline, signals) automatically. Zero API calls.
 
 **Connected services (optional — enhance but never required):**
-If connectors like Notion, Gmail, Calendar, or Drive are available, the system uses them to extend capabilities. None are required for the core experience.
+If connectors like Gmail, Calendar, or Drive are available, the system uses them to extend capabilities. None are required for the core experience.
 
 ### 10.2 Connector Status
 
@@ -265,7 +265,6 @@ All connectors are optional. The system detects what's available and adapts.
 - Gmail: {{GMAIL_CONNECTED}}
 - Google Calendar: {{CALENDAR_CONNECTED}}
 - Google Drive: {{DRIVE_CONNECTED}}
-- Notion: {{NOTION_CONNECTED}}
 - Gamma: {{GAMMA_CONNECTED}}
 - CRM System: {{CRM_SYSTEM}}
 
@@ -407,7 +406,7 @@ Every user input maps to one of these intent categories. Each category triggers 
 
 | Capability | Skills loaded |
 |-----------|-------------|
-| today | profile, notion |
+| today | profile |
 
 ---
 
@@ -420,7 +419,7 @@ Every user input maps to one of these intent categories. Each category triggers 
 
 | Capability | Skills loaded |
 |-----------|-------------|
-| end-of-day | profile, notion |
+| end-of-day | profile |
 
 ---
 
@@ -433,7 +432,7 @@ Every user input maps to one of these intent categories. Each category triggers 
 
 | Capability | Skills loaded | Proactive data capture |
 |-----------|-------------|----------------------|
-| closeout | call-processing, meddpicc, brand-voice, notion | Offer to save: company record (if new), contacts mentioned, tasks extracted, deal stage update, call notes, competitive intel. Batched as one confirmation. |
+| closeout | call-processing, meddpicc, brand-voice | Offer to save: company record (if new), contacts mentioned, tasks extracted, deal stage update, call notes, competitive intel. Batched as one confirmation. |
 
 ---
 
@@ -446,7 +445,7 @@ Every user input maps to one of these intent categories. Each category triggers 
 
 | Capability | Skills loaded |
 |-----------|-------------|
-| prep | profile, company-intel, meddpicc, battlecards, notion |
+| prep | profile, company-intel, meddpicc, battlecards |
 
 ---
 
@@ -459,7 +458,7 @@ Every user input maps to one of these intent categories. Each category triggers 
 
 | Capability | Skills loaded |
 |-----------|-------------|
-| strategy | deal-strategy, meddpicc, battlecards, company-intel, notion |
+| strategy | deal-strategy, meddpicc, battlecards, company-intel |
 
 ---
 
@@ -498,7 +497,7 @@ Every user input maps to one of these intent categories. Each category triggers 
 
 | Capability | Skills loaded |
 |-----------|-------------|
-| pipeline | meddpicc, notion, profile |
+| pipeline | meddpicc, profile |
 
 ---
 
@@ -511,7 +510,7 @@ Every user input maps to one of these intent categories. Each category triggers 
 
 | Capability | Skills loaded |
 |-----------|-------------|
-| whitespace | profile, notion, company-intel |
+| whitespace | profile, company-intel |
 
 ---
 
@@ -524,7 +523,7 @@ Every user input maps to one of these intent categories. Each category triggers 
 
 | Capability | Skills loaded |
 |-----------|-------------|
-| forecast-update | meddpicc, notion, profile |
+| forecast-update | meddpicc, profile |
 
 ---
 
@@ -542,7 +541,7 @@ Every user input maps to one of these intent categories. Each category triggers 
 
 | Capability | Skills loaded |
 |-----------|-------------|
-| outreach OR email | brand-voice, company-intel, notion |
+| outreach OR email | brand-voice, company-intel |
 
 ---
 
@@ -581,7 +580,7 @@ Every user input maps to one of these intent categories. Each category triggers 
 
 | Capability | Skills loaded | Proactive data capture |
 |-----------|-------------|----------------------|
-| research | company-intel, notion | Offer to save as company record if not already tracked |
+| research | company-intel | Offer to save as company record if not already tracked |
 
 ---
 
@@ -598,7 +597,7 @@ Every user input maps to one of these intent categories. Each category triggers 
 
 | Capability | Skills loaded | Proactive data capture |
 |-----------|-------------|----------------------|
-| add-company, optionally add-deal | notion, profile (qualification gates) | Create company record, offer to create deal |
+| add-company, optionally add-deal | profile (qualification gates) | Create company record, offer to create deal |
 
 ---
 
@@ -611,7 +610,7 @@ Every user input maps to one of these intent categories. Each category triggers 
 
 | Capability | Skills loaded |
 |-----------|-------------|
-| weekly | meddpicc, notion, profile |
+| weekly | meddpicc, profile |
 
 ---
 
@@ -624,7 +623,7 @@ Every user input maps to one of these intent categories. Each category triggers 
 
 | Capability | Skills loaded |
 |-----------|-------------|
-| coaching | call-processing, notion |
+| coaching | call-processing |
 
 ---
 
@@ -650,7 +649,7 @@ Every user input maps to one of these intent categories. Each category triggers 
 
 | Capability | Skills loaded |
 |-----------|-------------|
-| setup | profile, company-intel, battlecards, brand-voice, notion |
+| setup | profile, company-intel, battlecards, brand-voice |
 
 ---
 
@@ -682,7 +681,7 @@ Every user input maps to one of these intent categories. Each category triggers 
 
 | Capability | Skills loaded |
 |-----------|-------------|
-| (context ingestion — no standalone capability file, handled inline) | profile, company-intel, battlecards, brand-voice, notion |
+| (context ingestion — no standalone capability file, handled inline) | profile, company-intel, battlecards, brand-voice |
 
 **Ingestion routing logic:**
 
@@ -869,7 +868,6 @@ All template variables use `{{DOUBLE_CURLY_BRACES}}` syntax. Variables are captu
 - `{{GMAIL_CONNECTED}}` — true/false
 - `{{CALENDAR_CONNECTED}}` — true/false
 - `{{DRIVE_CONNECTED}}` — true/false
-- `{{NOTION_CONNECTED}}` — true/false
 - `{{GAMMA_CONNECTED}}` — true/false
 
 ### Secure Configuration
@@ -1355,7 +1353,7 @@ Skills auto-fire based on intent classification. When the intent engine (Section
 | **MEDDPICC** | skills/meddpicc/ | 1 (universal) | Fires on: process-call, think-about-deal, prepare-meeting, check-pipeline, add-account intents. 8-element scoring rubric with R/Y/G definitions. |
 | **Deal Strategy** | skills/deal-strategy/ | 1 (universal) | Fires on: think-about-deal, build-case, handle-competition intents. Five-Lens Prism, Three Paths, 5-Component POV Model. |
 | **Call Processing** | skills/call-processing/ | 1 (universal) | Fires on: process-call intent. 6-Output Framework, coaching dimensions, risk signal categories. |
-| **Data Persistence** | skills/notion/ | 1 (universal) | Fires on any intent that reads from or writes to data. Local file schemas, write protocol, index management, account resolution logic. |
+| **Data Persistence** | skills/data/ | 1 (universal) | Fires on any intent that reads from or writes to data. Local file schemas, write protocol, index management, account resolution logic. |
 | **PPTX** | skills/pptx/ | 1 (universal) | Fires on: create-deck intent (pptx path). PptxGenJS pipeline, brand tokens, 5 deck templates. |
 | **Gamma** | skills/gamma/ | 1 (universal) | Fires on: create-deck intent (gamma path). Alternative presentation path, prompt templates, limitations. |
 | **Posting Guide** | skills/posting-guide/ | 2 (template) | Fires on: write-post intent. 3-Type Framework, hook formulas, frequency goals, pre-publish checklist. |

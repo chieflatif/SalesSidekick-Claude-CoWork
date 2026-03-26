@@ -119,24 +119,16 @@ An optional deep personalization session that captures context the system can't 
 
 **Value beyond organic capture:** Explicit brand token extraction vs. best-effort from company website.
 
-### Phase 6: Connectors & Databases (~3-5 min)
+### Phase 6: Connectors (~2 min)
 
-**Skip if:** All 6 databases exist (verified by Notion search) and connectors are verified.
+**Skip if:** Connectors already verified.
 
-29. **Search Notion for each database by name** — use the Notion search API to search for: "Companies", "Contacts", "Deals", "Tasks", "Call Notes", "LinkedIn Posts". Do this The user may have databases from a previous session, a prior install, or a partial setup. Never assume FRESH = no databases.
-   - For each database found by name: confirm with the user — "I found a database called [name] in your Notion — is that your SalesSidekick one, or a different one?" Record its ID only after the user confirms it's the right one. Never silently adopt databases the user doesn't confirm.
-   - If the user says "that's not mine" or "that's a different one": skip that match and create a new database with a distinct name, e.g., "SalesSidekick — Companies".
-   - If the user says "I'm not sure" or "it might be": say "No problem — I'll create a fresh one to be safe. You can always delete the old one from Notion later." Then create.
-   - For databases genuinely not found after searching: create them with exact schemas (see skills/notion/SKILL.md — Companies 12 fields, Contacts 9, Deals 22, Tasks 9, Call Notes 10, LinkedIn Posts 8).
-30. Create any missing databases in dependency order: Companies → Contacts → Deals → Tasks → Call Notes → LinkedIn Posts.
-31. Wire cross-relations after all databases exist (Companies↔Contacts, Deals→Companies, Deals→Contacts, Tasks→Companies, Tasks→Deals, Call Notes→Companies, Call Notes→Deals, LinkedIn Posts→Companies).
-32. Store all 6 database IDs in the Project CLAUDE.md (`.claude/CLAUDE.md` in the workspace).
-33. Auto-detect available connectors (Gmail, Calendar, Drive, Gamma)
-34. For each detected connector, verify access and record status
-35. Note connector status for this session's behavior
-36. Confirm graceful degradation rules for any missing connectors
+29. Auto-detect available connectors (Gmail, Calendar, Drive, Gamma)
+30. For each detected connector, verify access and record status
+31. Note connector status for this session's behavior
+32. Confirm graceful degradation rules for any missing connectors
 
-**Value beyond organic capture:** Bulk database creation and connector verification vs. one-at-a-time on-demand creation.
+**Value beyond organic capture:** Connector verification and awareness in one pass.
 
 ### Phase 7: Verification (~2 min)
 
@@ -177,7 +169,7 @@ Here's what I've got:
 - What you sell: [PRIMARY_PRODUCT] — [one-line description]
 - Your territory: [TERRITORY_TYPE]
 - Competitors I know: [TOP_COMPETITOR_1], [TOP_COMPETITOR_2], [TOP_COMPETITOR_3]
-- Your data lives in: your SalesSidekick workspace [+ Notion databases if connected]
+- Your data lives in: your SalesSidekick workspace
 - Connectors: Gmail [✅/❌] | Calendar [✅/❌] | Drive [✅/❌]
 
 What's next? You can:
@@ -196,7 +188,7 @@ I'll take it from there.
 - Writes company intel to `knowledge-bases/company-intel.md`
 - Writes battlecards to `knowledge-bases/battlecards.md`
 - Updates signal thresholds in Project CLAUDE.md
-- Creates Notion databases if Phase 6 is run (searches by name first — never duplicate)
+
 
 **Reads:**
 - Global CLAUDE.md for existing identity (to skip redundant questions)
@@ -227,7 +219,6 @@ The audit in Phase 7 checks evidence grading compliance.
 
 | Missing Connector | Impact on Deep Personalization |
 |-------------------|-------------------------------|
-| No Notion | Phase 6 (Databases) is skipped. Everything else works — identity writes to Global CLAUDE.md, knowledge bases write to local workspace files. |
 | No Gmail | Skips Gmail verification. {{GMAIL_CONNECTED}} set to false. Capabilities will generate copy-paste email text. |
 | No Calendar | Skips Calendar verification. {{CALENDAR_CONNECTED}} set to false. Morning briefing will ask about meetings. |
 | No Drive | Skips Drive verification. {{DRIVE_CONNECTED}} set to false. Call processing will ask for transcript paste. |

@@ -83,7 +83,6 @@ SalesSidekick uses progressive personalization — it gets smarter through use, 
 | Gmail | No | Send emails directly instead of copy-paste |
 | Google Calendar | No | Meeting-aware briefings and automatic prep triggers |
 | Google Drive | No | Auto-discover call transcripts and store documents |
-| Notion | No | Structured database views for power users and cross-device access |
 
 Everything works without any connectors. Each one adds convenience. Missing one changes behavior, never breaks it. See [CONNECTORS.md](CONNECTORS.md) for setup details.
 
