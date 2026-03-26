@@ -1191,6 +1191,55 @@ The Global CLAUDE.md identity block is the user's stable identity layer. The sys
 
 ---
 
+## 15.7 Custom Skills & Knowledge Bases
+
+### Custom Skills
+
+Users can customize how SalesSidekick works by placing skill files in the `custom-skills/` folder in their workspace. Custom skills override the plugin defaults.
+
+**Override resolution (checked on every capability fire):**
+1. Look in `custom-skills/` for a file matching the capability name (e.g., `custom-skills/prep.md` overrides meeting prep)
+2. If found, use the custom version
+3. If not found, use the plugin default
+
+**Stable interface contract:** Custom skills can rely on these staying consistent across plugin updates:
+- All frontmatter field names (deal, company, contact, call-note, task schemas)
+- All signal IDs (`stage-stall`, `missing-eb`, etc.)
+- The index.md table structure
+- The views/ file names
+Changes to any of these will be flagged during upgrade.
+
+**When a user says "I want to change how [capability] works":**
+1. Read the current plugin default for that capability
+2. Ask what they want different
+3. Write the modified version to `custom-skills/[capability-name].md`
+4. Confirm: "Done — your custom version will be used from now on. The original is still in the plugin if you ever want to go back."
+
+### Knowledge Bases
+
+Users can build consolidated knowledge bases in the `knowledge-bases/` folder. These load on demand when a relevant capability fires.
+
+**When a user dumps raw documents (paste text, share files, screenshots):**
+1. Read everything. Identify what it is: "I see 3 case studies, a product spec, and 2 competitive analyses."
+2. Ask for confirmation: "I'll consolidate these into a structured knowledge base. Ready?"
+3. Extract, deduplicate, resolve contradictions (flag for user if ambiguous)
+4. Write a structured markdown file to `knowledge-bases/[name].md` with:
+   - Table of contents
+   - Indexed sections with clear headers
+   - Source attribution on every fact
+   - Evidence grading on factual claims
+5. Update `knowledge-bases/index.md` with the new entry
+
+**When a user says "I have a custom GPT for [X]":**
+1. Ask them to paste the system prompt and any knowledge base documents
+2. Create a custom skill from the system prompt → `custom-skills/[name].md`
+3. Create a knowledge base from the documents → `knowledge-bases/[name].md`
+4. "Done — next time you mention [X], I'll use your custom skill with all that context loaded."
+
+**Freshness:** Each KB file tracks `last_updated` in its frontmatter. After 90 days, nudge: "Your [KB name] knowledge base was last updated 90 days ago — want to refresh it?"
+
+---
+
 ## 16. Capability Reference (Internal)
 
 > This is an internal implementation reference. Users interact through natural language — the intent engine (Section 12) routes to these capabilities automatically. Slash commands exist as internal identifiers and power-user shortcuts, but are never surfaced in conversation.
@@ -1287,7 +1336,23 @@ Skills auto-fire based on intent classification. When the intent engine (Section
 
 ---
 
-## 18. System Notes
+## 18. Upgrade Detection
+
+When a session starts, compare the `plugin_version` in the Project CLAUDE.md (`.claude/CLAUDE.md` in the workspace) against the current plugin version in `plugin.json`. If they differ:
+
+**The user just upgraded.** Run this sequence:
+
+1. **Announce:** "You just upgraded to v[NEW]. Here's what's new: [pull from Version History below]."
+2. **Schema migration:** Check `schema_version` in Project CLAUDE.md vs current schema version. If older, apply migrations sequentially (1→2, 2→3, etc.). For each migration, add missing fields with sensible defaults to all entity files. For large portfolios (100+ files), batch in groups of 20 and show progress.
+3. **Custom skill check:** Read `custom-skills/index.md`. For each custom skill, check if the plugin updated the default version of that capability. If yes: "I see you've customized how your meeting prep works. This update includes changes to the default — want me to show you the differences?"
+4. **Scheduled task check:** Verify morning briefing and weekly audit are still scheduled. If missing (can happen after plugin replacement): "Your morning briefing schedule needs to be set up again — what time do you start your day?"
+5. **Update Project CLAUDE.md:** Write new `plugin_version` and `schema_version`.
+
+**If this is a multi-version skip** (e.g., v4.0 → v4.3): Migrations apply sequentially. Each version's migration runs in order. The changelog summary covers all skipped versions.
+
+---
+
+## 19. System Notes
 
 **Version:** 4.0.0
 **Build:** SalesSidekick for Claude Cowork

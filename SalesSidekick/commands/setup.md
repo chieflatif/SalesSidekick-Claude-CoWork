@@ -54,7 +54,7 @@ An optional deep personalization session that captures context the system can't 
 
 **Skip if:** All explicit variables already populated.
 
-1. Check the Notion Config page (`SalesSidekick — Config`) for already-populated variables. CLAUDE.md Section 13 documents the full list of variables — use it as a reference, not as the state source. CLAUDE.md template variables are read-only defaults and always show placeholder text; only the Notion Config page shows real values.
+1. Check the Global CLAUDE.md identity block for already-populated variables. Also check local workspace files for any existing data. CLAUDE.md Section 13 documents the full list of variables.
 2. For each unpopulated **explicit** variable, ask conversationally — batch related questions together
 3. Key explicit variables to capture if missing:
    - {{AE_TITLE}} — title/role
@@ -66,7 +66,7 @@ An optional deep personalization session that captures context the system can't 
    - {{DEAL_STAGES}} — pipeline stage names
 4. If already inferred from organic use, confirm rather than re-ask:
    - {{ICP_INDUSTRY}}, {{ICP_SIZE}}, {{ICP_USE_CASE}} — these are normally inferred from deal patterns, but deep personalization can capture them directly if not yet available
-5. Write all captured values to the Notion Config page (`SalesSidekick — Config`). Create it if it doesn't exist. **Do not attempt to write to CLAUDE.md — plugin files are read-only in Cowork.**
+5. Write all captured values to the Global CLAUDE.md identity block (within `<!-- SALESSIDEKICK-IDENTITY-START/END -->` markers — read the file first, replace only the SalesSidekick section). Also update signal thresholds in the Project CLAUDE.md if average deal size was captured.
 6. Confirm: "Identity locked in. [summary of what was captured]."
 
 ### Phase 2: Company Intelligence (~5-10 min, AI-assisted)
@@ -76,7 +76,7 @@ An optional deep personalization session that captures context the system can't 
 7. Using {{COMPANY_URL}} and {{PRODUCT_DESCRIPTION}}, research the company via web search
 8. Generate draft `skills/company-intel/SKILL.md` with: company overview, product portfolio, market position, key differentiators, pricing context, case studies by vertical, key metrics
 9. Present the draft to the user for review and refinement
-10. Finalize and save the company-intel skill file. Note: if skill files are read-only (Cowork mode), present the finalized content and instruct the user to paste it into `skills/company-intel/SKILL.md` manually, or store key facts in the Notion Config page under a "Company Intel" section.
+10. Save the company intel to `knowledge-bases/company-intel.md` in the workspace. This is a knowledge base file — always accessible, editable, and survives plugin updates.
 
 **Value beyond organic capture:** Structured, comprehensive company profile vs. fragments gathered across individual interactions.
 
@@ -87,9 +87,9 @@ An optional deep personalization session that captures context the system can't 
 11. Check existing competitor variables — use competitors already captured organically
 12. Ask if there are additional competitors to add (up to 5 total)
 13. For each competitor, research via web search
-14. Generate draft `skills/battlecards/SKILL.md` with per-competitor sections: overview, strengths, weaknesses, displacement strategy, talk tracks, proof points, trap questions, landmine responses
+14. Generate battlecard content with per-competitor sections: overview, strengths, weaknesses, displacement strategy, talk tracks, proof points, trap questions, landmine responses
 15. Present battlecards to user for validation — competitors know things AI doesn't
-16. Finalize and save the battlecards skill file
+16. Save to `knowledge-bases/battlecards.md` in the workspace
 17. Populate any missing {{TOP_COMPETITOR_N}} variables
 
 **Value beyond organic capture:** Systematic displacement playbooks for each competitor vs. ad-hoc competitive notes from individual calls.
@@ -130,10 +130,10 @@ An optional deep personalization session that captures context the system can't 
    - For databases genuinely not found after searching: create them with exact schemas (see skills/notion/SKILL.md — Companies 12 fields, Contacts 9, Deals 22, Tasks 9, Call Notes 10, LinkedIn Posts 8).
 30. Create any missing databases in dependency order: Companies → Contacts → Deals → Tasks → Call Notes → LinkedIn Posts.
 31. Wire cross-relations after all databases exist (Companies↔Contacts, Deals→Companies, Deals→Contacts, Tasks→Companies, Tasks→Deals, Call Notes→Companies, Call Notes→Deals, LinkedIn Posts→Companies).
-32. Store all 6 database IDs in the Notion Config page (`SalesSidekick — Config`). **Do not attempt to write to CLAUDE.md — plugin files are read-only in Cowork.**
+32. Store all 6 database IDs in the Project CLAUDE.md (`.claude/CLAUDE.md` in the workspace).
 33. Auto-detect available connectors (Gmail, Calendar, Drive, Gamma)
 34. For each detected connector, verify access and record status
-35. Set connector status variables: {{NOTION_CONNECTED}}, {{GMAIL_CONNECTED}}, {{CALENDAR_CONNECTED}}, {{DRIVE_CONNECTED}}, {{GAMMA_CONNECTED}} — write to Notion Config page
+35. Note connector status for this session's behavior
 36. Confirm graceful degradation rules for any missing connectors
 
 **Value beyond organic capture:** Bulk database creation and connector verification vs. one-at-a-time on-demand creation.
@@ -141,68 +141,21 @@ An optional deep personalization session that captures context the system can't 
 ### Phase 7: Verification (~2 min)
 
 37. Run smoke test: create a test company record, write and read back, then delete
-38. Regenerate `skills/profile/SKILL.md` with full AE identity and context (note: if skill files are read-only in Cowork, write full profile content to a Notion page titled "SalesSidekick — Profile" instead)
+38. Verify Global CLAUDE.md identity block contains all captured data
 39. Run the self-audit capability on the configuration
 40. Fix any issues found during audit
 
 ---
 
-**⚠️ STOP — Step 41 is mandatory. Do not produce the completion summary until this step is done and the user has acknowledged it.**
+41. **Update Global CLAUDE.md identity block — automatic.**
 
----
+This is the most important output of the deep personalization session. Read `/mnt/.claude/CLAUDE.md`, find the `<!-- SALESSIDEKICK-IDENTITY-START/END -->` markers, and replace the content between them with the complete updated identity block using all captured data. Leave all content outside the markers untouched.
 
-41. **Generate personalized global settings block — REQUIRED, cannot be skipped.**
+If auto-write fails, present the block for copy-paste: "I wasn't able to save your settings automatically. Here's the updated block — paste it into your Cowork settings."
 
-This is the most important output of the entire deep personalization session. Without it, every future session restarts without knowing who the user is — no identity, no competitive context, no communication style. The global settings field is the 'slow lane' context layer that loads before any plugin fires, before any API call.
+Say: "I've updated your identity settings with everything we just captured. Every future session will know all of this from the first message."
 
-Generate the block now using all captured identity, product, ICP, competitive, and communication data. Present it as the FIRST prominent item in your final output — before the completion summary. Label it clearly.
-
-Say:
-
-> "**Your Global Settings Block — paste this before anything else.**
->
-> Go to **Claude Desktop > Settings > Cowork** (the custom instructions field) and paste this in now. This is the slow lane — the context that never changes and loads before every session, before any API call, before Notion. It means every future session knows who you are, what you sell, and how to beat your competitors from the very first message. No re-asking. No setup.
->
-> Update it only when something fundamental changes: new company, new product, new primary competitors. Everything that refreshes regularly (battlecards, case studies, deal data) lives in Notion."
-
-**Format of the generated block:**
-```
-I am [AE_NAME], [AE_TITLE] at [COMPANY] ([COMPANY_URL]).
-
-What I sell: [PRODUCT_DESCRIPTION]
-Primary product: [PRIMARY_PRODUCT]
-I sell to: [ICP_INDUSTRY] companies, [ICP_SIZE], focused on [ICP_USE_CASE]
-Territory: [TERRITORY_TYPE]
-Communication style: [COMMUNICATION_STYLE]. Sign-off: "[EMAIL_SIGN_OFF]"
-
-Top competitors and how I beat them:
-- [TOP_COMPETITOR_1]: [1-line displacement angle from research]
-- [TOP_COMPETITOR_2]: [1-line displacement angle from research]
-- [TOP_COMPETITOR_3]: [1-line displacement angle from research]
-
-Key differentiation angles:
-- Financial: [from research — cost savings, ROI, risk reduction]
-- Technical: [from research — integration advantages, architecture, security]
-- Strategic: [from research — market position, partnerships, roadmap]
-
-I use voice-to-text — interpret my intent, not my grammar.
-
-QUALITY RULES — apply to everything you produce:
-
-No hallucination. If you don't have a verified source, say "I don't know" or "I'd need to verify." Grade every factual claim: Verified (sourced), Estimated (calculated with stated assumptions), or Hypothesis (pattern-based guess).
-
-No slop. Every sentence must earn its place. Match MY voice, not a corporate template. Before delivering any written content, ask: "Would this person actually write this?"
-
-Do the research first. Before generating content about a company, person, deal, or topic — look it up. Check Notion. Search the web. Notion is my single source of truth for deal and account data.
-
-Give me options, not decisions. Always present 2-3 paths with trade-offs. Never prescribe a single answer.
-
-Respect my time. Lead with the answer, not the reasoning. Break complex work into 10-minute chunks.
-```
-
-42. If a SalesSidekick folder is active in this Cowork session ("Work in a folder"), write a `sidekick-state.md` file to that folder. This is the local fallback — same content as the global settings block, stored as a markdown file. Future sessions that open with the same folder will read this file before touching Notion, providing rich identity context without any API call. Write it silently (no user-facing confirmation needed — it's automatic).
-
-43. After user confirms they've saved the global settings block (or acknowledges it), produce the Personalization Complete summary.
+42. Produce the Personalization Complete summary.
 
 ## Output Format
 
@@ -210,10 +163,10 @@ Respect my time. Lead with the answer, not the reasoning. Break complex work int
 
 **If running a single phase:** Just run that phase and confirm.
 
-**Final output structure — in this exact order:**
+**Final output structure:**
 
-1. **Global settings block first** (step 41 — mandatory, cannot be skipped)
-2. **Personalization Complete summary** (only after user acknowledges the global settings block)
+1. **Auto-write identity to Global CLAUDE.md** (step 41 — automatic)
+2. **Personalization Complete summary**
 
 **Personalization Complete summary format:**
 ```
@@ -224,8 +177,8 @@ Here's what I've got:
 - What you sell: [PRIMARY_PRODUCT] — [one-line description]
 - Your territory: [TERRITORY_TYPE]
 - Competitors I know: [TOP_COMPETITOR_1], [TOP_COMPETITOR_2], [TOP_COMPETITOR_3]
-- Your data lives in: 6 Notion databases ([X] existing, [Y] new)
-- Connectors: Notion ✅ | Gmail [✅/❌] | Calendar [✅/❌] | Drive [✅/❌] | Gamma [❌]
+- Your data lives in: your SalesSidekick workspace [+ Notion databases if connected]
+- Connectors: Gmail [✅/❌] | Calendar [✅/❌] | Drive [✅/❌]
 
 What's next? You can:
 - Share your top 3 active deals (paste a screenshot or just name them)
@@ -236,19 +189,18 @@ What's next? You can:
 I'll take it from there.
 ```
 
-## Database Read/Write
+## Data Read/Write
 
 **Writes:**
-- Creates Notion databases (only those not found by name search — never duplicate)
-- Writes all database IDs to the Notion Config page (`SalesSidekick — Config`)
-- Writes all captured Tier 2 variables to the Notion Config page
-- Generates personalized global settings block for user to paste into Cowork global settings
-- Writes `sidekick-state.md` to the active Cowork folder (if a folder is active) — same content as the global settings block, local identity fallback requiring zero API calls
-- Writes PLUGIN_VERSION to Notion Config page
+- Updates Global CLAUDE.md identity block (within markers — auto-write)
+- Writes company intel to `knowledge-bases/company-intel.md`
+- Writes battlecards to `knowledge-bases/battlecards.md`
+- Updates signal thresholds in Project CLAUDE.md
+- Creates Notion databases if Phase 6 is run (searches by name first — never duplicate)
 
 **Reads:**
-- Notion Config page for existing Tier 2 variables (to skip redundant questions)
-- Notion search for each database by name (to skip creation of existing databases)
+- Global CLAUDE.md for existing identity (to skip redundant questions)
+- Local workspace files for existing data
 - Web search for company intel and competitor research
 
 ## Commandment Alignment
@@ -258,7 +210,7 @@ I'll take it from there.
 | #1 Speed is Life | 15 minutes, not 45 — skips what's already known from organic use |
 | #2 Stop Digging, Start Orchestrating | AI researches company and competitors — user validates |
 | #4 Context is King | Captures explicit-only variables that organic use can't infer |
-| #7 One Source of Truth | Creates/completes the Notion backbone that all capabilities use |
+| #7 One Source of Truth | Writes identity to Global CLAUDE.md, knowledge to workspace files |
 | #8 Laws of Karma | Mandatory audit at end catches fabrication in generated content |
 | #10 Be the Chief of Staff | After deep personalization, system operates at maximum intelligence |
 
@@ -275,7 +227,7 @@ The audit in Phase 7 checks evidence grading compliance.
 
 | Missing Connector | Impact on Deep Personalization |
 |-------------------|-------------------------------|
-| No Notion | Cannot create databases. Session completes identity capture and skill generation only. Offer to connect Notion and resume later. |
+| No Notion | Phase 6 (Databases) is skipped. Everything else works — identity writes to Global CLAUDE.md, knowledge bases write to local workspace files. |
 | No Gmail | Skips Gmail verification. {{GMAIL_CONNECTED}} set to false. Capabilities will generate copy-paste email text. |
 | No Calendar | Skips Calendar verification. {{CALENDAR_CONNECTED}} set to false. Morning briefing will ask about meetings. |
 | No Drive | Skips Drive verification. {{DRIVE_CONNECTED}} set to false. Call processing will ask for transcript paste. |
