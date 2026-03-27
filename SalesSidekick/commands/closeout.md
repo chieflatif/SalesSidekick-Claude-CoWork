@@ -1,13 +1,6 @@
 ---
 description: Post-call processing — 6-Output Framework (MEDDPICC, tasks, coaching, email, risks, competitive intel)
 argument-hint: "[paste call transcript or describe the call]"
-intent-triggers:
-  - intent: process-call
-    phrases:
-      - "just got off a call"
-      - "debrief this call"
-      - "here's my transcript"
-      - "wrap up my call"
 ---
 
 # /closeout — Post-Call Processing

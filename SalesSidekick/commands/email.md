@@ -1,14 +1,6 @@
 ---
 description: Quick contextual email — existing relationships, no puffing, reads like AE wrote it
 argument-hint: "[Company name] about [topic]"
-intent-triggers:
-  - intent: write-email
-    context: existing relationship
-    phrases:
-      - "send a follow-up"
-      - "email to"
-      - "write a reply"
-      - "follow up with"
 ---
 
 # /email — Quick Contextual Email

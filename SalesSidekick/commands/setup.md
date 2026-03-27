@@ -1,16 +1,6 @@
 ---
 description: Optional deep personalization — sharpen SalesSidekick beyond what organic use captures
 argument-hint: "(optional: phase name — 'battlecards', 'brand voice', 'connectors', etc.)"
-intent-triggers:
-  - intent: customize-system
-    phrases:
-      - "let's personalize"
-      - "configure my settings"
-      - "deep setup"
-      - "set me up"
-      - "let's go deep"
-      - "full personalization"
-      - "set everything up"
 ---
 
 # Deep Personalization Session

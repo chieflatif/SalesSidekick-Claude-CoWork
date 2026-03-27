@@ -1,13 +1,6 @@
 ---
 description: Pre-meeting intelligence brief with talking points and MEDDPICC gaps to probe
 argument-hint: "[Company name]"
-intent-triggers:
-  - intent: prepare-meeting
-    phrases:
-      - "I have a meeting with"
-      - "get me ready for"
-      - "prep me for"
-      - "what do I need to know"
 ---
 
 # /prep — Pre-Meeting Intelligence Brief

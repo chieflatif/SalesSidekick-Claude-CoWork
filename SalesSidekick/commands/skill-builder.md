@@ -1,13 +1,6 @@
 ---
 description: Custom command creation — 5-phase scaffold with Commandment validation and audit
 argument-hint: "[description of command to create]"
-intent-triggers:
-  - intent: extend-system
-    phrases:
-      - "create a new command"
-      - "build a workflow"
-      - "add a capability"
-      - "new skill"
 ---
 
 # /skill-builder — Custom Command Creation

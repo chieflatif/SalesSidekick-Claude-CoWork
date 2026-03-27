@@ -1,13 +1,6 @@
 ---
 description: Territory expansion analysis — product gaps, upsell opportunities, underserved segments
 argument-hint: "(no arguments)"
-intent-triggers:
-  - intent: find-growth
-    phrases:
-      - "where are the gaps"
-      - "expansion opportunities"
-      - "underserved segments"
-      - "upsell potential"
 ---
 
 # /whitespace — Territory Whitespace Analysis

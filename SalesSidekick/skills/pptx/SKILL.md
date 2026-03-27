@@ -1,10 +1,6 @@
 ---
 name: pptx
 description: PptxGenJS pipeline for generating native .pptx presentations with brand tokens, 5 deck templates, and visual QA
-tier: 1 (universal)
-auto-fire:
-  intents: [create-deck]
-  context: "When building a presentation via native pptx generation"
 user-invocable: false
 ---
 

@@ -1,13 +1,6 @@
 ---
 description: 7-question self-critique battery — validates outputs for accuracy, gaps, and integrity
 argument-hint: "[optional: specify which output to audit]"
-intent-triggers:
-  - intent: check-quality
-    phrases:
-      - "check my work"
-      - "audit this"
-      - "is this solid"
-      - "quality check"
 ---
 
 # /audit — Self-Critique Protocol

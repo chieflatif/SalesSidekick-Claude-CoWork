@@ -1,10 +1,6 @@
 ---
 name: profile
 description: AE professional identity and context used for personalized output across all commands
-tier: 3 (regenerated)
-auto-fire:
-  intents: [all]
-  context: "Fires on nearly every interaction — provides AE identity, territory context, qualification gates, and operating rhythm"
 user-invocable: false
 ---
 

@@ -1,13 +1,6 @@
 ---
 description: Competitive displacement analysis — win probability, talk tracks, and proof points
 argument-hint: "[Company name]"
-intent-triggers:
-  - intent: handle-competition
-    phrases:
-      - "competitor showed up"
-      - "how do we beat"
-      - "competitive displacement"
-      - "they're evaluating [competitor]"
 ---
 
 # /battle — Competitive Displacement

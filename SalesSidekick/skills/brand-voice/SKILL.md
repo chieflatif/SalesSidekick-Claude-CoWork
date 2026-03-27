@@ -1,10 +1,6 @@
 ---
 name: brand-voice
 description: Defines the AE's personal communication voice, email formatting, vocabulary substitutions, and the 7-point voice check
-tier: 3 (regenerated)
-auto-fire:
-  intents: [write-email, create-deck, write-post, process-call, build-case]
-  context: "When producing any written content — emails, presentations, posts, follow-ups, or business cases"
 user-invocable: false
 ---
 

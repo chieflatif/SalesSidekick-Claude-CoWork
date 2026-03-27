@@ -1,13 +1,6 @@
 ---
 description: CRM-ready forecast — weighted pipeline math, commit/upside/best-case breakdown
 argument-hint: "(no arguments)"
-intent-triggers:
-  - intent: forecast
-    phrases:
-      - "what's my forecast"
-      - "numbers for my manager"
-      - "commit upside best case"
-      - "forecast update"
 ---
 
 # /forecast-update — CRM-Ready Forecast

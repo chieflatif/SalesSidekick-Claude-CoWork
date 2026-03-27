@@ -1,10 +1,6 @@
 ---
 name: deal-strategy
 description: Strategic frameworks including the Five-Lens Prism, Three Paths, and 5-Component POV Model for deal analysis
-tier: 1 (universal)
-auto-fire:
-  intents: [think-about-deal, build-case, handle-competition]
-  context: "When analyzing deal strategy, building executive-level business cases, or handling competitive situations"
 user-invocable: false
 ---
 

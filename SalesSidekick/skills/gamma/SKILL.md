@@ -1,10 +1,6 @@
 ---
 name: gamma
 description: Alternative presentation generation path via Gamma MCP with prompt templates and decision tree for Gamma vs PPTX
-tier: 1 (universal)
-auto-fire:
-  intents: [create-deck]
-  context: "When building a presentation via Gamma integration"
 user-invocable: false
 ---
 

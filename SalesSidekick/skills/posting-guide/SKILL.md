@@ -1,10 +1,6 @@
 ---
 name: posting-guide
 description: LinkedIn content framework with 3-Type post structure, hook formulas, cadence goals, and 6-point pre-publish checklist
-tier: 2 (template)
-auto-fire:
-  intents: [write-post]
-  context: "When creating LinkedIn or social media content"
 user-invocable: false
 ---
 

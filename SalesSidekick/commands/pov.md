@@ -1,13 +1,6 @@
 ---
 description: Point of View document — 5-Component Model with evidence-graded claims
 argument-hint: "[Company name]"
-intent-triggers:
-  - intent: build-case
-    phrases:
-      - "I need a business case"
-      - "build a POV"
-      - "executive justification"
-      - "value story"
 ---
 
 # /pov — Point of View Document

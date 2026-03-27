@@ -1,10 +1,6 @@
 ---
 name: meddpicc
 description: 8-element MEDDPICC qualification scoring rubric with Red/Yellow/Green definitions and discovery questions
-tier: 1 (universal)
-auto-fire:
-  intents: [process-call, think-about-deal, prepare-meeting, check-pipeline, add-account]
-  context: "When evaluating deal health, qualification status, or processing call insights"
 user-invocable: false
 ---
 

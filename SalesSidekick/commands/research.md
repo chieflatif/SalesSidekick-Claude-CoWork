@@ -1,13 +1,6 @@
 ---
 description: Deep account research — web search, structured intel brief, evidence-graded
 argument-hint: "[Company name]"
-intent-triggers:
-  - intent: research-company
-    phrases:
-      - "tell me about"
-      - "what do we know about"
-      - "dig into"
-      - "research [company]"
 ---
 
 # /research — Deep Account Research

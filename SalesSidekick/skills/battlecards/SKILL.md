@@ -1,10 +1,6 @@
 ---
 name: battlecards
 description: Detailed competitive displacement playbooks with talk tracks, proof points, trap questions, and landmine responses
-tier: 3 (regenerated)
-auto-fire:
-  intents: [handle-competition, think-about-deal]
-  context: "When a competitor is mentioned or competitive dynamics are relevant to deal strategy"
 user-invocable: false
 ---
 

@@ -1,13 +1,6 @@
 ---
 description: Presentation generation — 5 templates, auto-selects by stage, .pptx or Gamma
 argument-hint: "[Company name]"
-intent-triggers:
-  - intent: create-deck
-    phrases:
-      - "build a deck"
-      - "I need slides"
-      - "presentation for"
-      - "make a deck"
 ---
 
 # /deck — Presentation Generation

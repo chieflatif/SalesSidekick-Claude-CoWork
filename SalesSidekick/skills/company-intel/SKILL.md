@@ -1,10 +1,6 @@
 ---
 name: company-intel
 description: Company knowledge base with product portfolio, competitive positioning, case studies, and key metrics
-tier: 3 (regenerated)
-auto-fire:
-  intents: [prepare-meeting, think-about-deal, write-email, research-company, create-deck, build-case]
-  context: "When discussing or working on a specific company — meetings, strategy, outreach, research, or presentations"
 user-invocable: false
 ---
 

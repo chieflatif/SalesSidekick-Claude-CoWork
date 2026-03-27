@@ -1,13 +1,6 @@
 ---
 description: Guided company record creation — conversational intake, Hell Yes/Hell No qualification
 argument-hint: "[Company name]"
-intent-triggers:
-  - intent: add-account
-    phrases:
-      - "new prospect"
-      - "add [company]"
-      - "new account"
-      - "track this company"
 ---
 
 # /add-company — Add Company Record

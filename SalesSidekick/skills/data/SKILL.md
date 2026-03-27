@@ -1,10 +1,6 @@
 ---
 name: data-persistence
 description: Data operations reference — local file schemas, write protocol, account resolution, and structured database schemas
-tier: 1 (universal)
-auto-fire:
-  intents: [all data operations]
-  context: "When any interaction requires reading from or writing to data"
 user-invocable: false
 ---
 

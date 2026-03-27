@@ -1,13 +1,6 @@
 ---
 description: LinkedIn post — 3-Type Framework, brand voice, 6-point pre-publish checklist
 argument-hint: "[optional: topic or post type]"
-intent-triggers:
-  - intent: write-post
-    phrases:
-      - "LinkedIn post about"
-      - "draft a post"
-      - "write something for LinkedIn"
-      - "social media post"
 ---
 
 # /draft-post — LinkedIn Post

@@ -1,13 +1,6 @@
 ---
 description: Call pattern analysis — 5 dimensions scored 1-5 across logged calls
 argument-hint: "(no arguments)"
-intent-triggers:
-  - intent: improve-skills
-    phrases:
-      - "how am I doing on calls"
-      - "coaching feedback"
-      - "call patterns"
-      - "help me improve"
 ---
 
 # /coaching — Call Pattern Analysis

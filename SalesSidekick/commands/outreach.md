@@ -1,14 +1,6 @@
 ---
 description: Prospecting email — account intel, Financial/Technical/Strategic angle, sub-200 words
 argument-hint: "[Company name]"
-intent-triggers:
-  - intent: write-email
-    context: new relationship
-    phrases:
-      - "cold email to"
-      - "outreach to"
-      - "prospecting email"
-      - "reach out to"
 ---
 
 # /outreach — Prospecting Email

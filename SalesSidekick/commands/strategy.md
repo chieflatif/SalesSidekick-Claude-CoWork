@@ -1,13 +1,6 @@
 ---
 description: Five-Lens Prism deal strategy with Three Paths recommendation — evidence-graded
 argument-hint: "[Company name]"
-intent-triggers:
-  - intent: think-about-deal
-    phrases:
-      - "how should I approach"
-      - "this deal is stalling"
-      - "I'm stuck on"
-      - "deal strategy"
 ---
 
 # /strategy — Deal Strategy Analysis

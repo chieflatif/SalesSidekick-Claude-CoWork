@@ -1,10 +1,6 @@
 ---
 name: call-processing
 description: 6-Output Framework for post-call processing including MEDDPICC scoring, task extraction, coaching, and risk signals
-tier: 1 (universal)
-auto-fire:
-  intents: [process-call]
-  context: "When processing a call transcript or reviewing call patterns and coaching feedback"
 user-invocable: false
 ---
 
