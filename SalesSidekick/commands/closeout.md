@@ -92,8 +92,15 @@ Alias: `/call`
 20. Reference relevant battlecard from skills/battlecards/
 21. Recommend displacement tactics if competitor is actively engaged
 
-22. Present all 6 outputs to the user
-23. Suggest: "Want me to audit this analysis before you act on it?"
+### Pattern Extraction (runs after Output 6)
+22. Review the call for reusable patterns — signals that predict outcomes, tactics that worked or failed, competitive dynamics worth remembering.
+23. If 1-2 genuine patterns are detected, write them to `data/patterns/` using the pattern-memory skill format. Before writing, check for semantic overlap with existing patterns — if similar, increment occurrences instead of creating a new file.
+24. If the deal status changed to closed-won or closed-lost during this closeout, prompt:
+    > "This deal just closed. Want me to run a win/loss synthesis? I'll review all call notes and deal history to extract patterns for your future deals."
+    If yes, load ALL call notes and quick notes for this deal chronologically, analyze the deal arc, extract 3-5 patterns, write a deal retrospective to `data/call-notes/retro-{date}-{deal-slug}.md`, and present the synthesis.
+
+25. Present all 6 outputs (plus any pattern notes) to the user
+26. Suggest: "Want me to audit this analysis before you act on it?"
 
 ## Output Format
 

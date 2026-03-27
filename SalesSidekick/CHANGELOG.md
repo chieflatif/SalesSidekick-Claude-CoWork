@@ -4,6 +4,62 @@ All notable changes to SalesSidekick are documented here.
 
 ---
 
+## v4.1.0 — Compounding Intelligence (2026-03-27)
+
+**Your AI gets smarter the more you use it.**
+
+### New
+
+**Quick Capture (`/note`)**
+- Capture deal intel in under 10 seconds — hallway conversations, Slack messages, LinkedIn observations
+- Auto-classifies to company, contact, and deal. Flags MEDDPICC changes. Offers task creation.
+- Aliases: `/n`, `/brain`
+
+**Pattern Memory**
+- New skill that extracts reusable patterns from your deals — what works, what doesn't, timing insights
+- After every call debrief, 0-2 patterns are extracted and stored
+- On deal close (won or lost), a full win/loss synthesis runs with 3-5 lessons saved
+- Patterns compound over time — after 20+ deals, you have a personalized coaching engine
+
+**Bulk Transcript Ingestion (`/ingest-calls`)**
+- Drop in a month or quarter of call transcripts — system maps your entire territory
+- Scans all transcripts, clusters by company, identifies opportunities, then processes chronologically
+- Extracts signals (not raw text): people, MEDDPICC, competitive, risk, decision, action, relationship
+- Handles 50-100+ transcripts by processing one at a time and storing signal-dense summaries
+- The "cold start killer" — go from zero to fully populated pipeline in one session
+
+**Community & Support Intent**
+- System now responds to "how do I get help?", "referral program", "pricing", "updates", "office hours"
+- Routes to the right answer from Section 20 based on what you asked
+
+**Capability Usage Tracking**
+- System tracks which capabilities each user has used (simple counters)
+- Tips become contextual — prioritize tips about capabilities the user hasn't discovered yet
+- Drives smarter onboarding: if you've never run a meeting prep, the prep tip surfaces next
+
+**Connector Workaround Guidance**
+- When Calendar, Gmail, Drive, or CRM aren't connected, system proactively offers workarounds
+- Screenshots, exports, personal email invites, transcript downloads — practical alternatives explained
+
+### Improved
+
+**Smarter Context Loading**
+- `/prep` now loads ALL call notes (including quick captures), pattern history, and cross-deal insights
+- `/today` surfaces intel from the last 48 hours that hasn't been reflected in deal scores yet
+- `/weekly` detects recurring themes across deals and flags matches against historical patterns
+- `/closeout` extracts pattern notes after processing and offers win/loss synthesis on deal close
+
+**Tips Rotation**
+- 18 tips (up from 15) — 3 new community/referral tips mixed naturally across weeks
+- Community trial mentioned at end of onboarding
+
+### Schema Changes
+- New entity type: `pattern` (stored in `data/patterns/`)
+- New `call_type` value: `note` (for quick captures)
+- New directory: `data/patterns/` (created during workspace setup)
+
+---
+
 ## v4.0.0 — Local-First Architecture (2026-03-25)
 
 **Everything runs locally. No external services required.**

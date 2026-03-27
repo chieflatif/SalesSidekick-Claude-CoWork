@@ -38,9 +38,15 @@ Territory-wide weekly digest. Tracks deal movement, MEDDPICC score changes, and 
    - Net change from last week (new deals + upgrades - downgrades - closed lost)
    - Forecast by category (Commit, Best Case, Pipeline)
 4. Summarize call activity: number of calls, companies engaged
-5. Summarize task completion: completed vs created ratio
-6. Identify top 3 priorities for the coming week
-7. Format as a shareable summary suitable for email, Slack, or 1:1 prep
+5. Cross-deal pattern scan:
+   - Read ALL call notes and quick notes from the past 7 days
+   - Identify recurring themes across deals (e.g., multiple champions mentioning budget pressure, same competitor appearing in multiple deals, similar objections surfacing)
+   - If patterns found, add section "PATTERNS THIS WEEK" with evidence from specific notes
+6. Read `data/patterns/` directory. Compare current deal states to historical patterns.
+   - If any active deal matches a historically risky pattern, flag it.
+7. Summarize task completion: completed vs created ratio
+8. Identify top 3 priorities for the coming week
+9. Format as a shareable summary suitable for email, Slack, or 1:1 prep
 
 ## Output Format
 
@@ -71,6 +77,12 @@ MEDDPICC CHANGES:
 STALLED DEALS (>7 days no activity):
 ⚠️ [Deal] at [Company] — $[value] — Last activity: [date]
    → Recommended action: [specific]
+
+PATTERNS THIS WEEK:
+🔍 {Pattern description} — seen across {X} deals: {deal names}
+   Evidence: {specific note references}
+🔍 {Pattern description} — matches historical pattern: "{pattern text}"
+   ⚠️ Risk: {deal name} matches a historically risky pattern ({confidence} confidence, {occurrences} prior observations)
 
 ACTIVITY THIS WEEK:
 - Calls logged: [X] across [Y] accounts

@@ -107,7 +107,7 @@ deal: deal-slug                     # optional — not all calls are deal-specif
 contacts: [contact-slug]
 date: 2026-03-25
 duration: ""
-call_type: other                    # discovery | demo | negotiation | check-in | internal | other
+call_type: other                    # discovery | demo | negotiation | check-in | internal | note | other
 meddpicc_changes: {}                # only elements that changed
 signals_detected: []
 tasks_extracted: 0
@@ -138,6 +138,28 @@ updated: 2026-03-25
 ```
 
 Required: type, id, description, due_date, status, created
+
+### Pattern
+
+```yaml
+---
+_schema: 1
+type: pattern
+id: pattern-2026-03-27-001
+pattern_type: signal-pattern         # signal-pattern | win-pattern | loss-pattern | competitive-pattern | timing-pattern
+confidence: low                      # low | medium | high
+source_deals: [deal-slug]
+source_notes: [call-note-id]
+tags: [competitor-name, deal-stage, meddpicc-element]
+occurrences: 1
+created: 2026-03-27
+updated: 2026-03-27
+---
+```
+
+Required: type, id, pattern_type, confidence, created
+Body contains: one clear sentence describing the pattern, **Evidence:** section with specific references, **Implication:** section with recommended action.
+Patterns are stored in `data/patterns/`. Before creating a new pattern, check for semantic overlap with existing patterns — if similar, increment occurrences instead.
 
 ---
 
@@ -260,11 +282,74 @@ tips_shown: []
 referral_enabled: true
 onboarding_week: 1
 
-**Tips:** Include one tip per morning briefing for the first 3 weeks (see `templates/tips.md`). Track shown tips in `tips_shown` array. Stop when all 15 tips shown OR `onboarding_week` > 3. If the user says "stop showing tips" → set `tips_enabled: false`.
+**Tips:** Include one tip per morning briefing for the first 3 weeks (see `templates/tips.md`). Track shown tips in `tips_shown` array. Stop when all 18 tips shown OR `onboarding_week` > 3. If the user says "stop showing tips" → set `tips_enabled: false`.
+
+**Contextual tip selection:** After onboarding week 1, prefer tips based on `capability_usage` below. Prioritize tips about capabilities the user has NOT used yet. If the user has never run a meeting prep, surface the prep tip next. If they've never captured a quick note, surface the note tip. This ensures tips teach the user about capabilities they don't know exist — not ones they've already discovered.
 
 **Referral:** Include a one-line referral mention in the weekly summary (not daily briefing), starting after week 1. Example: "Enjoying SalesSidekick? Refer another AE and get a free month ($99 value). Details and your referral link at pipelinerebel.com/community." If the user says "stop the referral stuff" or similar → set `referral_enabled: false`. Never show again.
 
 **Increment `onboarding_week`** each Monday during the morning briefing (compare workspace_created date to today).
+
+---
+
+## Capability Usage Tracking
+
+Track which capabilities the user has used. Updated automatically after each capability fires. This data drives contextual tip selection and helps the system identify what the user hasn't discovered yet.
+
+```yaml
+capability_usage:
+  today: 0
+  end-of-day: 0
+  weekly: 0
+  closeout: 0
+  prep: 0
+  strategy: 0
+  battle: 0
+  pov: 0
+  pipeline: 0
+  whitespace: 0
+  forecast-update: 0
+  deck: 0
+  outreach: 0
+  email: 0
+  draft-post: 0
+  research: 0
+  add-company: 0
+  add-deal: 0
+  note: 0
+  coaching: 0
+  audit: 0
+  setup: 0
+  skill-builder: 0
+last_updated: {{CREATED_DATE}}
+```
+
+**Update rule:** After every capability execution, increment the count for that capability and update `last_updated`. This is a simple counter — no timestamps per use.
+
+**How tips use this data:** When selecting the next tip to show, check `capability_usage`. Map tips to capabilities:
+
+| Tip | Related capability | Show when |
+|-----|-------------------|-----------|
+| 1 (CRM screenshot) | add-company, add-deal | add-company = 0 |
+| 2 (Call transcript) | closeout | closeout = 0 |
+| 3 (What do you know) | research | research = 0 |
+| 4 (Natural language) | (general) | Always eligible in week 1 |
+| 5 (Drop in docs) | (context ingestion) | Always eligible in week 1 |
+| 6 (Community trial) | (community) | Always eligible |
+| 7 (What needs attention) | pipeline | pipeline = 0 |
+| 8 (Prep for meeting) | prep | prep = 0 |
+| 9 (Customize capabilities) | skill-builder | skill-builder = 0 |
+| 10 (Knowledge bases) | (context ingestion) | Always eligible in week 2 |
+| 11 (Referral program) | (community) | Always eligible |
+| 12 (Custom GPT migration) | skill-builder | Always eligible in week 2 |
+| 13 (Forecast) | forecast-update | forecast-update = 0 |
+| 14 (Morning briefing) | today | today < 3 |
+| 15 (Coaching) | coaching | coaching = 0 |
+| 16 (Office hours) | (community) | Always eligible |
+| 17 (Competitive analysis) | battle | battle = 0 |
+| 18 (Business case) | pov | pov = 0 |
+
+**Selection priority:** Unused capabilities first (count = 0), then least-used, then general/community tips. Never repeat a tip already in `tips_shown`.
 
 ---
 

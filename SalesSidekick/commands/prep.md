@@ -34,12 +34,15 @@ Loads everything the system knows about an account and produces a structured pre
 2. Load full company context: industry, size, tech stack, current products, territory status, Hell Yes/Hell No
 3. Load all contacts at the company with roles and sentiment
 4. Load active deal(s): stage, value, MEDDPICC scores, risk level, next step
-5. Load last 3-5 call notes for conversation history
-6. Load open tasks for context on outstanding commitments
-7. If Calendar connected, match upcoming meeting with attendees to Contacts
-8. Identify MEDDPICC gaps (any element at Red) and generate probing questions for each
-9. Identify the top 3 talking points based on: recent activity, deal stage, open tasks, competitive context
-10. Produce the prep brief
+5. Load ALL call notes for this company (including /note quick captures), sorted by date descending.
+   - If more than 10 notes exist, load the 10 most recent in full, and for older notes load only the YAML frontmatter + first 2 lines of body.
+6. Load any entries from `data/patterns/` that match this company, deal stage, industry, or deal size range.
+7. Cross-reference: scan other active deals for shared contacts, shared competitors, or similar MEDDPICC profiles. If a relevant parallel exists, note it.
+8. Load open tasks for context on outstanding commitments
+9. If Calendar connected, match upcoming meeting with attendees to Contacts
+10. Identify MEDDPICC gaps (any element at Red) and generate probing questions for each
+11. Identify the top 3 talking points based on: recent activity, deal stage, open tasks, competitive context
+12. Produce the prep brief
 
 ## Output Format
 
@@ -78,6 +81,10 @@ TOP 3 TALKING POINTS:
 2. [Based on open tasks or commitments]
 3. [Based on competitive context or risk signals]
 
+PATTERNS & HISTORY:
+- {Any relevant pattern from data/patterns/ that applies to this deal's current state}
+- {Any cross-deal insight, e.g., "You're also competing against Gong in the Acme deal — their pricing objection surfaced there too"}
+
 WATCH OUT FOR:
 - [Risk or concern based on call history patterns]
 ```
@@ -89,7 +96,8 @@ WATCH OUT FOR:
 - Contacts: all 9 fields (filtered by company)
 - Deals: all 22 fields (active deals with company)
 - Tasks: open tasks related to the company
-- Call Notes: last 3-5 calls with the company
+- Call Notes: all call notes and quick captures for the company (10 most recent in full, older notes frontmatter + first 2 lines)
+- Patterns: entries from `data/patterns/` matching company, deal stage, industry, or deal size range
 
 **Writes:** None. /prep is read-only.
 

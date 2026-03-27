@@ -33,14 +33,16 @@ Your daily "home screen." Surfaces everything you need to know this morning: tas
 2. Group tasks by Company (using the Company relation field)
 3. Within each company group, sort by Priority (High → Medium → Low), then by Due Date (oldest first)
 4. Flag overdue tasks (Due Date < today) with ⚠️
-5. Read all active deals and identify "Deals Needing Attention":
+5. Read all call notes and quick notes (/note entries where call_type = note) from the last 48 hours.
+   Surface any that contain risk signals, competitive intel, or MEDDPICC-relevant updates that haven't been reflected in deal scores yet.
+6. Read all active deals and identify "Deals Needing Attention":
    - Overdue activities: deals with no task activity in >7 days
    - Approaching close dates: deals with Close Date within 14 days
    - High-risk signals: Deal Risk = High or MEDDPICC Confidence = Low
    - Stale accounts: Last Activity > 14 days ago
-6. If Calendar connected, read today's meetings and match attendees to Companies/Contacts in workspace data
-7. For each meeting found, add a quick context line: company, deal stage, last call summary, top MEDDPICC gap
-8. Compile the briefing
+7. If Calendar connected, read today's meetings and match attendees to Companies/Contacts in workspace data
+8. For each meeting found, add a quick context line: company, deal stage, last call summary, top MEDDPICC gap
+9. Compile the briefing
 
 ## Output Format
 
@@ -64,6 +66,11 @@ TASKS BY ACCOUNT:
 
 UNASSIGNED / INTERNAL
   ☐ [Tasks not linked to a company]
+
+RECENT INTEL (last 48 hours):
+💡 {Company} — {intel-type}: {1-line summary from quick note}
+💡 {Company} — {intel-type}: {1-line summary from quick note}
+{If MEDDPICC impact detected: "⚠️ This may affect [Element] on the [Deal] deal — not yet reflected in scores."}
 
 DEALS NEEDING ATTENTION:
 🔴 [Deal Name] — Stale (no activity in [X] days). Next step: [suggestion]
