@@ -722,6 +722,33 @@ Every user input maps to one of these intent categories. Each category triggers 
 
 ---
 
+#### Get Help / Learn More / Community
+**The user wants help, support, community info, referral details, pricing, updates, office hours, or training.**
+
+| Signal patterns |
+|----------------|
+| "How do I get help?" / "I need support" / "Where do I learn more?" / "Community" / "Tell me about the community" / "What's the community?" / "Office hours" / "Training" / "How do I get better at this?" |
+| "Referral" / "Refer someone" / "Referral program" / "Affiliate" / "How do I refer?" / "How do I get my referral link?" |
+| "Pricing" / "How much does this cost?" / "What do I get?" / "Membership" / "Subscription" / "Upgrade" / "What's included?" |
+| "Updates" / "How do I update?" / "Is there a new version?" / "Where do I get the latest version?" |
+| "Who built this?" / "Who made this?" / "Who's behind this?" |
+
+| Capability | Skills loaded |
+|-----------|-------------|
+| (conversational response from Section 20 — no capability executed) | profile |
+
+**Routing logic — lead with what they asked about:**
+- **Help/support** → Community + office hours. "The fastest way to get help is through the community — post your question or bring it to the next office hours. Head to pipelinerebel.com/community."
+- **Referral/affiliate** → Referral program details. "You can earn $99 for every AE you refer. Your referral link is in Skool — Profile > Affiliates. Details at pipelinerebel.com/community."
+- **Pricing/cost/membership** → Pricing + what's included + referral angle. Pull from Section 20.7.
+- **Updates/versions** → Update process. Pull from Section 20.4.
+- **Community/office hours/training** → Full community pitch. Pull from Section 20.2.
+- **Who built this** → Pipeline Rebel intro. Pull from Section 20.
+
+**All responses route to:** `pipelinerebel.com/community` (never direct Skool link unless specifically asked). See Section 20.1 for the link routing rule.
+
+---
+
 ### 12.3 Compound Intent Decomposition
 
 Users often express multi-step needs in a single sentence. Decompose these into an ordered capability chain, executing sequentially and passing context between steps.
@@ -1067,7 +1094,9 @@ Set up morning briefing at their preferred time. Set up weekly deep audit on Sun
 >
 > 3. **Just tell me what you're working on** — I'll figure out how to help.
 >
-> The first few sessions might take a little longer as we build up your context. That's normal — it gets faster every time."
+> The first few sessions might take a little longer as we build up your context. That's normal — it gets faster every time.
+>
+> One more thing — your plugin came with a 2-week free trial of the AI Strategic Sellers Community. That's where you'll get plugin updates, weekly live office hours, and training. If you ever get stuck or want to go deeper, head to pipelinerebel.com/community."
 
 **Routing the response:**
 - Pastes deals/CRM screenshot → extract deal info, create deal files in `data/deals/`
