@@ -101,7 +101,7 @@ SalesSidekick checks for new versions automatically and lets you know in your mo
 
 **To upgrade:**
 
-1. Download the new `.zip` from the community on Skool (resources section) or from pipelinerebel.com/download
+1. Download the new `.zip` from the community at pipelinerebel.com/community or from pipelinerebel.com/download
 2. Open your SalesSidekick project and say "I have the new version" — the system walks you through the rest
 3. Follow the steps it gives you (remove old plugin, upload new zip — takes about a minute)
 4. Once you confirm it's done, the system handles everything else automatically

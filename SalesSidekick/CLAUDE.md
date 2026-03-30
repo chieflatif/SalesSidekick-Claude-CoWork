@@ -304,20 +304,20 @@ These rules apply to EVERY data write. The full protocol with schemas is in the 
 6. **Index.md is a cache, not truth.** Entity files always win if they disagree with the index.
 7. **Background agents are read-only on `data/`.** They write only to `views/`. No exceptions.
 8. **Closed deals stay but stop signaling.** Set `status: closed-won` or `closed-lost`. Move to Closed section in index. Exclude from signal processing.
-9. **Check for duplicates before creating.** Before writing any new entity file, check if a matching record already exists (same company + date for call notes, same company name for companies, same deal slug for deals). If a match exists, present the existing record with a file link and ask before overwriting.
-10. **Always show files created or updated.** Every command that writes data MUST end with a "FILES UPDATED" block listing every file created or modified, with a `computer://` link for each. No exceptions. The user should never have to ask "where did you save that?"
+9. **Check for duplicates before creating.** Before writing any new entity file, check if a matching record already exists (same company + date for call notes, same company name for companies, same deal slug for deals). If a match exists, present the existing record with a link to the file and ask before overwriting. Note: multiple calls to the same company on the same date are valid (e.g., morning discovery + afternoon follow-up) — show existing notes and ask the user to confirm this is a new call.
+10. **Always show files created or updated.** Every command that writes data MUST end with a "FILES UPDATED" block listing every file created or modified, with the full file path for each. No exceptions. The user should never have to ask "where did you save that?" If no files were written (e.g., user declined to overwrite a duplicate), show "No files changed."
 
 **FILES UPDATED format (mandatory on every data write):**
 ```
 📁 FILES UPDATED
-| File | Action | Link |
+| File | Action | Path |
 |------|--------|------|
-| [entity type]: [id] | Created / Updated | [View](computer:///[workspace-path]/[file-path]) |
+| [entity type]: [id] | Created / Updated | data/[type]/[filename].md |
 ```
 
 Rules:
 - Only list files actually written in this operation (not files that were only read)
-- Every row gets a `computer://` link the user can click to open the file
+- Show the relative path from the workspace root (e.g., `data/deals/acme-enterprise.md`)
 - This block appears at the end of every capability that writes data: call processing, add company, add deal, quick capture, research, draft post, skill builder, and any future write operation
 
 ---
@@ -1146,25 +1146,27 @@ Create: `.claude/CLAUDE.md` (project config with schemas, write protocol, signal
 Set up morning briefing at their preferred time. Set up weekly deep audit on Sunday 6am local. If the user declines, skip silently — they can say "set up my morning briefing" anytime later.
 
 **Step 9 — Entry points**
-> "You're all set. Here are the best ways to start building your context:
+> "You're all set. Here's the fastest way to build your context:
 >
-> 1. **Drop in your call transcripts** — this is the fastest path. If you can export a month of calls from Gong, Chorus, Fireflies, or wherever you record, I'll map your entire territory from the conversations — companies, contacts, deals, MEDDPICC scores, everything. The more calls you give me, the smarter I start.
+> 1. **Paste a screenshot of your forecast or pipeline** — I'll extract your deals, stages, amounts, and close dates. Instant territory map.
 >
-> 2. **Share your top 3 active deals** — paste a screenshot of your CRM or forecast, or just tell me about them. I'll create records for each one and start tracking everything.
+> 2. **Paste a screenshot of your account list or key stakeholders** — I'll build out your companies and contacts.
 >
-> 3. **Drop in a single call transcript** — paste it in and I'll extract the key intelligence, score the deal, create follow-up tasks, and draft your follow-up email.
+> 3. **Drop in your last 3-4 call transcripts for your top deals** — I'll run full analysis on each: MEDDPICC scoring, action items, follow-up emails, risk flags.
 >
-> 4. **Just tell me what you're working on** — I'll figure out how to help.
+> Start with the forecast screenshot — that gives us the most context the fastest. Then we layer on the calls.
 >
 > The first few sessions might take a little longer as we build up your context. That's normal — it gets faster every time.
 >
-> One more thing — your plugin came with a 2-week free trial of the AI Strategic Sellers Community. That's where you'll get plugin updates, weekly live office hours, and training. If you ever get stuck or want to go deeper, head to pipelinerebel.com/community."
+> One more thing — your plugin came with a 2-week free trial of the AI Strategic Sellers Community. That's where you'll get plugin updates, weekly live office hours, and training. Head to pipelinerebel.com/community."
 
 **Routing the response:**
-- Pastes deals/CRM screenshot → extract deal info, create deal files in `data/deals/`
+- Pastes forecast/CRM screenshot → extract deal info, create deal files in `data/deals/`
+- Pastes account list/stakeholders → extract companies and contacts
 - Pastes transcript → route to call processing (6-Output Framework), create call note + tasks + deal updates
 - "Get started" / "let's go" → move immediately
 - Pastes documents → route to ingest-context flow (Section 12.2)
+- Mentions bulk transcripts or "I have a month of calls" → route to `/ingest-calls` (power feature, not recommended for first session — suggest starting with forecast + top 5 deals first)
 - "Go deeper" → route to deep personalization (setup.md)
 
 **Time to value: under 5 minutes.**
@@ -1524,13 +1526,11 @@ When a session starts, compare the `plugin_version` in the Project CLAUDE.md (`.
 
 ## 19. System Notes
 
-**Version:** 4.1.0
+**Version:** 4.1.0 — Compounding Intelligence. Quick capture, pattern memory, bulk ingest, usage tracking. Local-first architecture.
 **Build:** SalesSidekick for Claude Cowork
 **Author:** Pipeline Rebel (Latif Horst)
 **Repository:** https://github.com/chieflatif/SalesSidekick-Claude-CoWork
 **License:** Personal Use (see LICENSE)
-
-**Version:** 4.1.0 — Local-first architecture. Everything runs locally. Identity auto-written. Signal intelligence. Background agents. Selling style assessment. Custom skills. Knowledge bases.
 
 **Compatibility:**
 - Primary: Claude Cowork (guided UI, visual plugin management)

@@ -83,10 +83,10 @@ EVIDENCE SUMMARY:
 ICP FIT: [Hell Yes / Evaluating / Hell No] — based on [{{ICP_INDUSTRY}}, {{ICP_SIZE}}, {{ICP_USE_CASE}}]
 
 📁 FILES UPDATED
-| File | Action | Link |
+| File | Action | Path |
 |------|--------|------|
-| Company: [id] | Created/Updated | [View](computer:///[workspace-path]/data/companies/[id].md) |
-| Index | Updated | [View](computer:///[workspace-path]/data/index.md) |
+| Company: [id] | Created/Updated | [Open](data/companies/[id].md) |
+| Index | Updated | [Open](data/index.md) |
 
 RECOMMENDED NEXT STEP:
 [Specific action based on research findings]

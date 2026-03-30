@@ -88,11 +88,11 @@ MEDDPICC INITIALIZED — ALL RED:
 → After your next call, paste the transcript and I'll start upgrading these scores with evidence.
 
 📁 FILES UPDATED
-| File | Action | Link |
+| File | Action | Path |
 |------|--------|------|
-| Deal: [id] | Created | [View](computer:///[workspace-path]/data/deals/[id].md) |
-| Company: [id] | Updated (deal reference added) | [View](computer:///[workspace-path]/data/companies/[id].md) |
-| Index | Updated | [View](computer:///[workspace-path]/data/index.md) |
+| Deal: [id] | Created | [Open](data/deals/[id].md) |
+| Company: [id] | Updated (deal reference added) | [Open](data/companies/[id].md) |
+| Index | Updated | [Open](data/index.md) |
 
 NEXT STEPS:
 1. Ask me to prep you before your next meeting

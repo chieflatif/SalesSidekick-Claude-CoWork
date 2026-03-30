@@ -168,14 +168,14 @@ Competitor: [Name] | Win Probability: [0.X]
 [Analysis and recommended tactics]
 
 📁 FILES UPDATED
-| File | Action | Link |
+| File | Action | Path |
 |------|--------|------|
-| Call Notes: [id] | Created | [View](computer:///[workspace-path]/data/call-notes/[id].md) |
-| Deal: [id] | Updated (MEDDPICC, risk, next step) | [View](computer:///[workspace-path]/data/deals/[id].md) |
-| Tasks: [N] new | Created | [View folder](computer:///[workspace-path]/data/tasks/) |
-| Company: [id] | Updated (last_activity) | [View](computer:///[workspace-path]/data/companies/[id].md) |
-| Patterns: [id] | Created/Updated (if any) | [View](computer:///[workspace-path]/data/patterns/[id].md) |
-| Index | Updated | [View](computer:///[workspace-path]/data/index.md) |
+| Call Notes: [id] | Created | [Open](data/call-notes/[id].md) |
+| Deal: [id] | Updated (MEDDPICC, risk, next step) | [Open](data/deals/[id].md) |
+| Tasks: [N] new | Created | [Open](data/tasks/) |
+| Company: [id] | Updated (last_activity) | [Open](data/companies/[id].md) |
+| Patterns: [id] | Created/Updated (if any) | [Open](data/patterns/[id].md) |
+| Index | Updated | [Open](data/index.md) |
 
 💡 Want me to audit this analysis before you act on it?
 ```

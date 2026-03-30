@@ -88,10 +88,10 @@ POSTING CONTEXT:
 - This week's count: [X of 4-5 target]
 
 📁 FILES UPDATED (if saved)
-| File | Action | Link |
+| File | Action | Path |
 |------|--------|------|
-| LinkedIn Posts: [id] | Created | [View](computer:///[workspace-path]/data/linkedin-posts/[id].md) |
-| Index | Updated | [View](computer:///[workspace-path]/data/index.md) |
+| LinkedIn Posts: [id] | Created | [Open](data/linkedin-posts/[id].md) |
+| Index | Updated | [Open](data/index.md) |
 
 💡 Want me to try a different type or angle?
 ```

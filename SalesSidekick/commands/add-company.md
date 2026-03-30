@@ -75,10 +75,10 @@ FIELDS NOT YET POPULATED:
 - [Field]: [how to gather — e.g., "Run /research to identify tech stack"]
 
 📁 FILES UPDATED
-| File | Action | Link |
+| File | Action | Path |
 |------|--------|------|
-| Company: [id] | Created | [View](computer:///[workspace-path]/data/companies/[id].md) |
-| Index | Updated | [View](computer:///[workspace-path]/data/index.md) |
+| Company: [id] | Created | [Open](data/companies/[id].md) |
+| Index | Updated | [Open](data/index.md) |
 
 NEXT STEPS:
 - "Want me to do a deep research on them?"
