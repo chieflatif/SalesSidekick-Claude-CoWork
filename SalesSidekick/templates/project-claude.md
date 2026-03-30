@@ -357,5 +357,6 @@ last_updated: {{CREATED_DATE}}
 
 plugin_version: {{PLUGIN_VERSION}}
 schema_version: 1
+last_version_check: {{CREATED_DATE}}
 workspace_created: {{CREATED_DATE}}
 last_migration: none

@@ -6,7 +6,7 @@ Get up and running in under 5 minutes. No technical setup required.
 
 ## Step 1: Install the Plugin
 
-1. Download `SalesSidekick.zip` from the [releases page](https://github.com/chieflatif/SalesSidekick-Claude-CoWork/releases)
+1. Download `SalesSidekick.zip` from [pipelinerebel.com/download](https://pipelinerebel.com/download)
 2. Open Claude Desktop
 3. Go to **Settings** > **Plugins** > **Add Plugin** > **Upload a File**
 4. Select the `SalesSidekick.zip` file you downloaded

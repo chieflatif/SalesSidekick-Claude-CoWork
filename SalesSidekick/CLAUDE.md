@@ -767,7 +767,7 @@ Every user input maps to one of these intent categories. Each category triggers 
 | "How do I get help?" / "I need support" / "Where do I learn more?" / "Community" / "Tell me about the community" / "What's the community?" / "Office hours" / "Training" / "How do I get better at this?" |
 | "Referral" / "Refer someone" / "Referral program" / "Affiliate" / "How do I refer?" / "How do I get my referral link?" |
 | "Pricing" / "How much does this cost?" / "What do I get?" / "Membership" / "Subscription" / "Upgrade" / "What's included?" |
-| "Updates" / "How do I update?" / "Is there a new version?" / "Where do I get the latest version?" |
+| "Updates" / "How do I update?" / "Is there a new version?" / "Where do I get the latest version?" / "I have the new version" / "I downloaded the update" / "Upgrade" (as plugin action) |
 | "Who built this?" / "Who made this?" / "Who's behind this?" |
 
 | Capability | Skills loaded |
@@ -778,7 +778,7 @@ Every user input maps to one of these intent categories. Each category triggers 
 - **Help/support** → Community + office hours. "The fastest way to get help is through the community — post your question or bring it to the next office hours. Head to pipelinerebel.com/community."
 - **Referral/affiliate** → Referral program details. "You can earn $99 for every AE you refer. Your referral link is in Skool — Profile > Affiliates. Details at pipelinerebel.com/community."
 - **Pricing/cost/membership** → Pricing + what's included + referral angle. Pull from Section 20.7.
-- **Updates/versions** → Update process. Pull from Section 20.4.
+- **Updates/versions** → If user says "I have the new version" or "I downloaded the update" → run guided upgrade (Section 18.2). Otherwise → update process info from Section 20.4. If user asks "is there a new version?" → check version endpoint (Section 18.1).
 - **Community/office hours/training** → Full community pitch. Pull from Section 20.2.
 - **Who built this** → Pipeline Rebel intro. Pull from Section 20.
 
@@ -993,6 +993,8 @@ These are captured the first time a relevant capability is used, through natural
 - "How do I get help?" / "I need support" → "The fastest way is through the community — post your question or bring it to office hours. Head to pipelinerebel.com/community."
 - "Who built this?" → "SalesSidekick is built by Pipeline Rebel — Latif Horst and team. 25+ years in enterprise sales, built for AEs who want AI that actually works like a colleague."
 - "Where do I sign up for the community?" / "office hours" / "training" → "Everything's at pipelinerebel.com/community — community details, office hours schedule, how to sign up, and the referral program."
+- "I have the new version" / "I downloaded the update" / "upgrade" / "update the plugin" → Run the guided upgrade flow from Section 18.2.
+- "Is there a new version?" / "Am I up to date?" → Check the version endpoint (Section 18.1) and report the result.
 
 ---
 
@@ -1437,17 +1439,69 @@ Skills auto-fire based on intent classification. When the intent engine (Section
 
 ---
 
-## 18. Upgrade Detection
+## 18. Upgrades
+
+### 18.1 Version Check (Automated)
+
+The morning briefing agent checks for new versions once per week by fetching:
+
+`https://pipelinerebel.com/api/salessidekick/version.json`
+
+This is a public, unauthenticated endpoint that returns:
+```json
+{"version": "4.1.0", "released": "2026-03-27", "notes": "Quick capture, pattern memory, bulk ingest"}
+```
+
+Compare the response version against the current `plugin_version` in Project CLAUDE.md. If a newer version exists, add this to the morning briefing:
+
+> "A new version of SalesSidekick is available (v[NEW]). Download it from the community on Skool or from pipelinerebel.com/download. Then say 'I have the new version' and I'll walk you through the upgrade."
+
+If the fetch fails (network error, endpoint unavailable), skip silently. Never block the briefing on a version check failure.
+
+### 18.2 Guided Upgrade (User-Initiated)
+
+When a user says "I have the new version", "I downloaded the update", "upgrade", "I want to update", or similar:
+
+**Step 1 — Confirm and reassure:**
+> "Great — upgrading takes about a minute and nothing you've built gets touched. Your deals, contacts, custom skills, everything stays exactly where it is. Ready?"
+
+**Step 2 — Walk them through the replacement:**
+> "Here's what to do:
+>
+> 1. In Claude Desktop, go to **Settings** > **Plugins**
+> 2. Find SalesSidekick and **remove** it
+> 3. Click **Add Plugin** > **Upload a File**
+> 4. Select the new zip you downloaded
+> 5. Come back here and tell me when you're done"
+
+**Step 3 — Wait for confirmation:**
+User says "done" or "it's uploaded" or similar.
+
+**Step 4 — Run post-upgrade sequence (Section 18.3).**
+
+### 18.3 Post-Upgrade (Automatic Detection)
 
 When a session starts, compare the `plugin_version` in the Project CLAUDE.md (`.claude/CLAUDE.md` in the workspace) against the current plugin version in `plugin.json`. If they differ:
 
 **The user just upgraded.** Run this sequence:
 
-1. **Announce:** "You just upgraded to v[NEW]. Here's what's new: [pull from Version History below]."
-2. **Schema migration:** Check `schema_version` in Project CLAUDE.md vs current schema version. If older, apply migrations sequentially (1→2, 2→3, etc.). For each migration, add missing fields with sensible defaults to all entity files. For large portfolios (100+ files), batch in groups of 20 and show progress.
-3. **Custom skill check:** Read `custom-skills/index.md`. For each custom skill, check if the plugin updated the default version of that capability. If yes: "I see you've customized how your meeting prep works. This update includes changes to the default — want me to show you the differences?"
-4. **Scheduled task check:** Verify morning briefing and weekly audit are still scheduled. If missing (can happen after plugin replacement): "Your morning briefing schedule needs to be set up again — what time do you start your day?"
-5. **Update Project CLAUDE.md:** Write new `plugin_version` and `schema_version`.
+1. **Announce what's new:**
+   > "You're on v[NEW] now. Here's what changed: [pull from CHANGELOG.md or Version History]."
+
+   Present each new feature in one sentence. Ask: "Want me to walk through any of these, or just get back to work?"
+
+2. **Schema migration:** Check `schema_version` in Project CLAUDE.md vs current schema version. If older, apply migrations sequentially (1→2, 2→3, etc.). For each migration, add missing fields with sensible defaults to all entity files. For large portfolios (100+ files), batch in groups of 20 and show progress. Tell the user: "Updating your workspace files to the new format — [N] of [total] done."
+
+3. **New directories:** Create any directories the new version requires that don't exist yet (e.g., `data/patterns/` for v4.1.0). Silent — no user prompt needed.
+
+4. **Custom skill check:** Read `custom-skills/index.md`. For each custom skill, check if the plugin updated the default version of that capability. If yes: "I see you've customized how your meeting prep works. This update includes changes to the default — want me to show you the differences so you can decide what to keep?"
+
+5. **Scheduled task check:** Verify morning briefing and weekly audit are still scheduled. If missing (can happen after plugin replacement): "Your morning briefing schedule needs to be set up again — what time do you start your day?"
+
+6. **Update Project CLAUDE.md:** Write new `plugin_version` and `schema_version`.
+
+7. **Offer feature walkthrough:**
+   > "That's it — you're fully upgraded. Want to try any of the new features now, or just get back to work?"
 
 **If this is a multi-version skip** (e.g., v4.0 → v4.3): Migrations apply sequentially. Each version's migration runs in order. The changelog summary covers all skipped versions.
 

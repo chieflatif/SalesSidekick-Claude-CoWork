@@ -52,7 +52,7 @@ You talk to it like a colleague who's always on top of your book of business.
 
 ## Getting Started
 
-1. **Install** — Download the `.zip` from [GitHub releases](https://github.com/chieflatif/SalesSidekick-Claude-CoWork/releases), upload to Claude Desktop (Settings > Plugins > Add Plugin)
+1. **Install** — Download the `.zip` from [pipelinerebel.com/download](https://pipelinerebel.com/download), upload to Claude Desktop (Settings > Plugins > Add Plugin)
 2. **Create a workspace** — Make a folder called `SalesSidekick` in your Documents. Create a Project in Claude Desktop pointing at it.
 3. **Start talking** — Open a conversation in your project and say hi. SalesSidekick introduces itself, asks for the basics, researches your company, and sets everything up automatically.
 

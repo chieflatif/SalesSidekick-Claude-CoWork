@@ -16,7 +16,7 @@ SalesSidekick is designed for individual AE use, but it deploys cleanly across t
 
 ### 1.1 Get the Plugin
 
-Download `SalesSidekick.zip` from the [releases page](https://github.com/chieflatif/SalesSidekick-Claude-CoWork/releases).
+Download `SalesSidekick.zip` from [pipelinerebel.com/download](https://pipelinerebel.com/download).
 
 ### 1.2 Pre-Configure Shared Settings (Optional)
 

@@ -11,7 +11,7 @@ That's it. No other accounts, services, or technical setup required.
 
 ## Install the Plugin
 
-1. Download `SalesSidekick.zip` from the [releases page](https://github.com/chieflatif/SalesSidekick-Claude-CoWork/releases/latest/download/SalesSidekick.zip)
+1. Download `SalesSidekick.zip` from [pipelinerebel.com/download](https://pipelinerebel.com/download)
 2. Open Claude Desktop
 3. Go to **Settings** > **Plugins** > **Add Plugin** > **Upload a File**
 4. Select the `SalesSidekick.zip` file you downloaded
@@ -97,13 +97,14 @@ SalesSidekick is just a collection of text files — no executable code. If you 
 
 ## Upgrading
 
-When a new version is available:
+SalesSidekick checks for new versions automatically and lets you know in your morning briefing when one is available. You can also ask "is there a new version?" anytime.
 
-1. Download the new `.zip` from the [same link](https://github.com/chieflatif/SalesSidekick-Claude-CoWork/releases/latest/download/SalesSidekick.zip)
-2. In Claude Desktop, go to **Settings** > **Plugins**
-3. Remove the old SalesSidekick plugin
-4. Upload the new zip file
-5. Open your SalesSidekick project — the system will tell you what's new
+**To upgrade:**
+
+1. Download the new `.zip` from the community on Skool (resources section) or from pipelinerebel.com/download
+2. Open your SalesSidekick project and say "I have the new version" — the system walks you through the rest
+3. Follow the steps it gives you (remove old plugin, upload new zip — takes about a minute)
+4. Once you confirm it's done, the system handles everything else automatically
 
 **Your data is untouched.** Deals, contacts, call notes, custom skills, knowledge bases — everything in your workspace survives the upgrade. Only the plugin brain gets updated.
 

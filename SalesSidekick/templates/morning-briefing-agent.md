@@ -156,6 +156,15 @@ Combine everything into a briefing:
   Pick the next unshown tip from templates/tips.md.
   Include it as: "**Did you know?** [tip text]"
   Add the tip number to tips_shown in Project CLAUDE.md.
-  If all 15 tips have been shown, set tips_enabled to false.]
+  If all tips have been shown, set tips_enabled to false.]
 [If tips_enabled = false: omit this section]
+
+## Update Available
+[Once per week (check if 7+ days since last version check — track last_version_check date in Project CLAUDE.md):
+  Fetch https://pipelinerebel.com/api/salessidekick/version.json
+  Compare response version to plugin_version in Project CLAUDE.md.
+  If newer: "A new version of SalesSidekick is available (v[NEW]). Download it from the community on Skool or from pipelinerebel.com/download. Then say 'I have the new version' and I'll walk you through the upgrade."
+  Update last_version_check in Project CLAUDE.md to today.
+  If fetch fails: skip silently, try again next week.]
+[If version is current or check not due: omit this section]
 ```
