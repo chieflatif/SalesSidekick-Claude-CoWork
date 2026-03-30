@@ -198,6 +198,10 @@ Call processing writes to 4 data types:
 3. **Deals** — update MEDDPICC scores, MEDDPICC Confidence, Deal Risk, Last Activity
 4. **Companies** — update Last Activity
 
+**Duplicate check (before writing):** Search `data/call-notes/` for existing notes matching the same company + date. If found, present the existing note with a file link and ask before overwriting.
+
+**File link output (after writing):** Every call processing execution must end with a FILES UPDATED block listing every file created or updated, with `computer://` links. See CLAUDE.md Section 10.4 Rule 10.
+
 ## Personalization Notes
 
 - Follow-up email applies brand-voice skill (Tier 3 — regenerated during deep personalization)

@@ -87,12 +87,17 @@ MEDDPICC INITIALIZED — ALL RED:
 
 → After your next call, paste the transcript and I'll start upgrading these scores with evidence.
 
+📁 FILES UPDATED
+| File | Action | Link |
+|------|--------|------|
+| Deal: [id] | Created | [View](computer:///[workspace-path]/data/deals/[id].md) |
+| Company: [id] | Updated (deal reference added) | [View](computer:///[workspace-path]/data/companies/[id].md) |
+| Index | Updated | [View](computer:///[workspace-path]/data/index.md) |
+
 NEXT STEPS:
 1. Ask me to prep you before your next meeting
 2. After the meeting, paste the transcript and I'll score everything
 3. Ask me for a deal strategy when you need direction
-
-💡 Want me to prep for your first meeting with them?
 ```
 
 ## Database Read/Write

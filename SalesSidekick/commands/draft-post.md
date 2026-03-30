@@ -87,7 +87,13 @@ POSTING CONTEXT:
 - Suggested posting time: [based on {{LINKEDIN_AUDIENCE}}]
 - This week's count: [X of 4-5 target]
 
-💡 Want me to try a different type or angle? Save as draft?
+📁 FILES UPDATED (if saved)
+| File | Action | Link |
+|------|--------|------|
+| LinkedIn Posts: [id] | Created | [View](computer:///[workspace-path]/data/linkedin-posts/[id].md) |
+| Index | Updated | [View](computer:///[workspace-path]/data/index.md) |
+
+💡 Want me to try a different type or angle?
 ```
 
 ## Database Read/Write

@@ -74,12 +74,16 @@ QUALIFICATION ASSESSMENT:
 FIELDS NOT YET POPULATED:
 - [Field]: [how to gather — e.g., "Run /research to identify tech stack"]
 
+📁 FILES UPDATED
+| File | Action | Link |
+|------|--------|------|
+| Company: [id] | Created | [View](computer:///[workspace-path]/data/companies/[id].md) |
+| Index | Updated | [View](computer:///[workspace-path]/data/index.md) |
+
 NEXT STEPS:
 - "Want me to do a deep research on them?"
 - "Want to add a deal for them?"
 - "Want me to draft an outreach email?"
-
-💡 Want me to run /research next to fill in the gaps?
 ```
 
 ## Database Read/Write

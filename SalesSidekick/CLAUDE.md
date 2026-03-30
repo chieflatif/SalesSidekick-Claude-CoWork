@@ -304,6 +304,21 @@ These rules apply to EVERY data write. The full protocol with schemas is in the 
 6. **Index.md is a cache, not truth.** Entity files always win if they disagree with the index.
 7. **Background agents are read-only on `data/`.** They write only to `views/`. No exceptions.
 8. **Closed deals stay but stop signaling.** Set `status: closed-won` or `closed-lost`. Move to Closed section in index. Exclude from signal processing.
+9. **Check for duplicates before creating.** Before writing any new entity file, check if a matching record already exists (same company + date for call notes, same company name for companies, same deal slug for deals). If a match exists, present the existing record with a file link and ask before overwriting.
+10. **Always show files created or updated.** Every command that writes data MUST end with a "FILES UPDATED" block listing every file created or modified, with a `computer://` link for each. No exceptions. The user should never have to ask "where did you save that?"
+
+**FILES UPDATED format (mandatory on every data write):**
+```
+📁 FILES UPDATED
+| File | Action | Link |
+|------|--------|------|
+| [entity type]: [id] | Created / Updated | [View](computer:///[workspace-path]/[file-path]) |
+```
+
+Rules:
+- Only list files actually written in this operation (not files that were only read)
+- Every row gets a `computer://` link the user can click to open the file
+- This block appears at the end of every capability that writes data: call processing, add company, add deal, quick capture, research, draft post, skill builder, and any future write operation
 
 ---
 

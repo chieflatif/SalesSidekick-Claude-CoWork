@@ -37,7 +37,25 @@ Alias: `/call`
 
 ### Standard Execution
 1. If transcript not provided and Drive connected, check for recent recordings. Otherwise ask user to paste transcript.
-2. Identify the company and match to Companies record. If no match, suggest `/add-company` first.
+
+### Step 1.5: Check for Existing Analysis (BEFORE full processing)
+
+Before running the 6-Output Framework, check if this call has already been processed:
+
+1a. Search `data/call-notes/` for any file matching the same company AND same date (compare `company` + `date` fields in YAML frontmatter).
+
+1b. If existing call note found:
+   - Present it with a file link: "I already processed a call with [Company] on [Date]. Here's the existing analysis: [View call notes](computer:///[workspace-path]/data/call-notes/[id].md)"
+   - Show a summary: call type, MEDDPICC snapshot, number of tasks extracted
+   - Ask: "Want me to reprocess this, or is the existing analysis what you need?"
+   - If user says reprocess → continue to Step 2 (flag as reprocess, not new)
+   - If user says existing is fine → present the existing analysis and stop
+
+1c. If multiple calls to the same company on the same date exist (valid — e.g., morning discovery + afternoon follow-up), show all and let the user confirm this is a new call.
+
+1d. If no existing call note found → continue to Step 2 as normal.
+
+2. Identify the company and match to Companies record. If no match, ask "Want me to add them to your pipeline first?"
 3. Identify participants and match to Contacts.
 4. Load current deal record including existing MEDDPICC scores and risk levels.
 5. Process transcript through the **6-Output Framework**:
@@ -149,7 +167,17 @@ Overall Confidence: [High/Medium/Low]
 Competitor: [Name] | Win Probability: [0.X]
 [Analysis and recommended tactics]
 
-💡 Run /audit to validate this analysis?
+📁 FILES UPDATED
+| File | Action | Link |
+|------|--------|------|
+| Call Notes: [id] | Created | [View](computer:///[workspace-path]/data/call-notes/[id].md) |
+| Deal: [id] | Updated (MEDDPICC, risk, next step) | [View](computer:///[workspace-path]/data/deals/[id].md) |
+| Tasks: [N] new | Created | [View folder](computer:///[workspace-path]/data/tasks/) |
+| Company: [id] | Updated (last_activity) | [View](computer:///[workspace-path]/data/companies/[id].md) |
+| Patterns: [id] | Created/Updated (if any) | [View](computer:///[workspace-path]/data/patterns/[id].md) |
+| Index | Updated | [View](computer:///[workspace-path]/data/index.md) |
+
+💡 Want me to audit this analysis before you act on it?
 ```
 
 ## Database Read/Write
