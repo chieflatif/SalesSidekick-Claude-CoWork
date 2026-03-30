@@ -138,7 +138,7 @@ Ready to install /[command-name]?
 
 **Writes:**
 - commands/[name].md: creates new command file
-- CLAUDE.md: updates Section 14 (Command Index) with new entry
+- CLAUDE.md: updates Section 16 (Capability Reference) with new entry
 
 ## Commandment Alignment
 

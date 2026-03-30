@@ -90,6 +90,13 @@ Minimal. The whole point is speed.
 ```
 ✅ Captured → {Company} / {Contact} / {intel-type}
 {Optional: MEDDPICC flag or task suggestion — max 1 line}
+
+📁 FILES UPDATED
+| File | Action | Path |
+|------|--------|------|
+| Call Notes: [id] | Created | data/call-notes/[id].md |
+| Deal: [id] | Updated (last_activity) | data/deals/[id].md |
+| Index | Updated | data/index.md |
 ```
 
 ## What This Command Does NOT Do

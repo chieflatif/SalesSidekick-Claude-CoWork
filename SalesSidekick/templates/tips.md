@@ -57,7 +57,7 @@ Say "what's my forecast?" and I'll break down your pipeline into commit, upside,
 I check your deals every morning automatically (if you set up the morning briefing). When you open your laptop, the briefing is already waiting — signals, tasks, and anything that needs your attention.
 
 **Tip 15:**
-After processing a few calls, say "how am I doing?" I'll analyze your call patterns across 5 coaching dimensions — discovery quality, objection handling, next-step creation, competitive awareness, and rapport building.
+After processing a few calls, say "how am I doing?" I'll analyze your call patterns across 5 coaching dimensions — discovery quality, objection handling, rapport, next-step clarity, and talk ratio.
 
 **Tip 16:**
 Got a workflow you can't figure out? Bring it to the next office hours — live help from enterprise sales leaders who've been doing this for 25+ years. Schedule and details at pipelinerebel.com/community.

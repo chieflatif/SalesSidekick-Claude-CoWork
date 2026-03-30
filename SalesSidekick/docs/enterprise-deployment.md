@@ -96,7 +96,7 @@ SalesSidekick is an AE productivity tool, not a management surveillance tool. Ea
 
 ### Plugin Updates
 
-1. Admin downloads the latest version from GitHub
+1. Admin downloads the latest version from pipelinerebel.com/download
 2. Re-applies any pre-configured settings if needed
 3. Uploads to the organization marketplace
 4. AEs update through Settings > Plugins (remove old, upload new)

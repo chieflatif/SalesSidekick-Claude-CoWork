@@ -130,6 +130,16 @@ For each company (process one at a time, in order of most transcripts → fewest
    > - 2 patterns extracted, 3 open tasks identified
    > - Key risk: Paper process not started, close date in 6 weeks
    >
+   > 📁 FILES UPDATED
+   > | File | Action | Path |
+   > |------|--------|------|
+   > | Company: acme-corp | Created | data/companies/acme-corp.md |
+   > | Deal: acme-enterprise | Created | data/deals/acme-enterprise.md |
+   > | Contacts: 4 | Created | data/contacts/ |
+   > | Call Notes: 5 | Created | data/call-notes/ |
+   > | Patterns: 2 | Created | data/patterns/ |
+   > | Index | Updated | data/index.md |
+   >
    > Moving to Globex next..."
 
 ### Phase 2.5: Per-Account Verification (runs after each company)
@@ -194,6 +204,17 @@ After processing all calls for a company, run a self-audit before moving to the 
     > 1. [Most urgent deal action]
     > 2. [Biggest risk to address]
     > 3. [Biggest opportunity spotted]
+    >
+    > 📁 FILES UPDATED (total)
+    > | File | Count | Path |
+    > |------|-------|------|
+    > | Companies | [N] | data/companies/ |
+    > | Deals | [N] | data/deals/ |
+    > | Contacts | [N] | data/contacts/ |
+    > | Call Notes | [N] | data/call-notes/ |
+    > | Patterns | [N] | data/patterns/ |
+    > | Tasks | [N] | data/tasks/ |
+    > | Index | Updated | data/index.md |
     >
     > Want me to run a full pipeline review?"
 
