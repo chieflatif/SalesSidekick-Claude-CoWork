@@ -1,6 +1,6 @@
 ---
 name: posting-guide
-description: LinkedIn content framework with 3-Type post structure, hook formulas, cadence goals, and 6-point pre-publish checklist
+description: "Fires when the user wants to draft a LinkedIn post. Provides: 3-Type Framework (personal, business, educational), hook formulas, posting cadence goals, audience targeting, and 6-point pre-publish checklist. Output contract: a ready-to-post LinkedIn draft with type selection, hook, body, CTA, and compliance with brand voice."
 user-invocable: false
 ---
 

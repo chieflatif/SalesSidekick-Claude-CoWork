@@ -1,6 +1,6 @@
 ---
 name: brand-voice
-description: Defines the AE's personal communication voice, email formatting, vocabulary substitutions, and the 7-point voice check
+description: "Fires on any written output — emails, outreach, LinkedIn posts, business cases, follow-ups. Provides: voice rules, email formatting, vocabulary substitutions, banned phrases, sign-off, and 7-point voice check. Output contract: all written content matches the user's calibrated tone and style."
 user-invocable: false
 ---
 

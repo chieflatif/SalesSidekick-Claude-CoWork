@@ -1,6 +1,6 @@
 ---
 name: data-persistence
-description: Data operations reference — local file schemas, write protocol, account resolution, and structured database schemas
+description: "Fires on any operation that reads or writes deal, company, contact, call note, or task data. Provides: file schemas, write protocol (entity + index + cross-references + ops.log), account name resolution (fuzzy matching), read-time validation, duplicate detection rules. Output contract: every data write follows the standard protocol and produces a FILES UPDATED block."
 user-invocable: false
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: meddpicc
-description: 8-element MEDDPICC qualification scoring rubric with Red/Yellow/Green definitions and discovery questions
+description: "Fires on call processing, deal strategy, meeting prep, pipeline review, and deal creation. Provides: 8-element scoring rubric (Metrics, Economic Buyer, Decision Criteria, Decision Process, Paper Process, Identify Pain, Champion, Competition) with Red/Yellow/Green definitions, evidence requirements per level, and discovery questions to advance each element. Output contract: every MEDDPICC score has a specific evidence quote or gap identification."
 user-invocable: false
 ---
 

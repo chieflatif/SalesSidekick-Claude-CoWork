@@ -1,6 +1,6 @@
 ---
 name: deal-strategy
-description: Strategic frameworks including the Five-Lens Prism, Three Paths, and 5-Component POV Model for deal analysis
+description: "Fires when a user asks about deal strategy, how to approach a stalled deal, or needs a business case. Produces: Five-Lens Prism analysis (stakeholder psychology, political capital, competitive dynamics, hidden leverage, temporal dynamics), Three Paths recommendation (velocity/diagnostic/protective), 5-Component POV model. Output contract: three distinct strategic options with evidence grading, never a single recommendation."
 user-invocable: false
 ---
 

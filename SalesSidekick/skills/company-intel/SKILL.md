@@ -1,6 +1,6 @@
 ---
 name: company-intel
-description: Company knowledge base with product portfolio, competitive positioning, case studies, and key metrics
+description: "Fires on meeting prep, outreach, research, deck creation, and business case building. Provides: company overview, product portfolio, market position, differentiators, pricing context, case studies by vertical, key selling metrics. Output contract: company-specific context that makes outputs relevant to the prospect's actual situation."
 user-invocable: false
 ---
 

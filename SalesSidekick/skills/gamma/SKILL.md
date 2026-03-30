@@ -1,6 +1,6 @@
 ---
 name: gamma
-description: Alternative presentation generation path via Gamma MCP with prompt templates and decision tree for Gamma vs PPTX
+description: "Fires when the user requests a presentation AND the Gamma connector is available. Provides: Gamma-specific prompt templates, slide structure guidance, and decision logic for Gamma vs native PPTX path. Output contract: a web-based presentation via Gamma API, or falls back to PPTX if Gamma is unavailable."
 user-invocable: false
 ---
 

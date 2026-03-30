@@ -1,6 +1,6 @@
 ---
 name: pattern-memory
-description: Extracts, stores, and retrieves sales patterns from accumulated deal intelligence
+description: "Fires after call processing and on deal close (won or lost). Produces: reusable selling patterns extracted from deal intelligence — what tactics worked, what signals predicted outcomes, timing insights, competitive dynamics. On deal close: full win/loss synthesis with 3-5 lessons. Output contract: patterns are deduplicated against existing patterns before storing, occurrence counts incremented for recurring patterns."
 user-invocable: false
 ---
 

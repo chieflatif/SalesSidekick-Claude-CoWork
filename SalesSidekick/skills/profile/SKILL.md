@@ -1,6 +1,6 @@
 ---
 name: profile
-description: AE professional identity and context used for personalized output across all commands
+description: "Fires on nearly every session. Provides: AE identity (name, title, company, product), territory context (type, size, region, quota), ICP definition, qualification gates (Hell Yes / Hell No signals), operating rhythm (daily, weekly cadence). Output contract: all outputs are personalized to this specific AE's role, territory, and selling motion."
 user-invocable: false
 ---
 

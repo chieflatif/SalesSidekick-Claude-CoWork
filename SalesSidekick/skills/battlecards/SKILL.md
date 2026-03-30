@@ -1,6 +1,6 @@
 ---
 name: battlecards
-description: Detailed competitive displacement playbooks with talk tracks, proof points, trap questions, and landmine responses
+description: "Fires when a competitor is mentioned, a competitive situation arises, or the user asks how to beat/displace/win against a specific vendor. Produces: per-competitor displacement playbook with strengths, weaknesses, talk tracks, proof points, trap questions, and landmine responses. Triggers on: handle-competition, think-about-deal (competitive lens), battle analysis."
 user-invocable: false
 ---
 

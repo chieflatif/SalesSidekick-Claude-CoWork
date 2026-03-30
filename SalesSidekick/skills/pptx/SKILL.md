@@ -1,6 +1,6 @@
 ---
 name: pptx
-description: PptxGenJS pipeline for generating native .pptx presentations with brand tokens, 5 deck templates, and visual QA
+description: "Fires when the user requests a presentation or deck and Gamma is not available (or user prefers PPTX). Provides: PptxGenJS code generation pipeline, brand tokens (colors, fonts, logo), 5 deck templates (executive, technical, competitive, QBR, custom), and visual QA checklist. Output contract: a downloadable .pptx file with consistent branding."
 user-invocable: false
 ---
 

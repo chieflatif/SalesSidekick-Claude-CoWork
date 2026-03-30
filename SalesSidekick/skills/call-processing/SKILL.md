@@ -1,6 +1,6 @@
 ---
 name: call-processing
-description: 6-Output Framework for post-call processing including MEDDPICC scoring, task extraction, coaching, and risk signals
+description: "Fires when a call transcript is pasted or the user says they finished a call. Produces: 6 structured outputs — MEDDPICC scoring with evidence, task extraction with owners and dates, coaching feedback on 5 dimensions, follow-up email in 3 tones, risk signals with mitigation actions, competitive intel. Output contract: every output is actionable, not just analytical."
 user-invocable: false
 ---
 
