@@ -27,10 +27,11 @@ This is the most hypothesis-prone command in the system. Evidence grading is cri
 - Deals: deal context, MEDDPICC scores
 - Call Notes: conversation insights
 - Contacts: stakeholder map (especially Economic Buyer)
+- Platform Document (if exists): `data/research/{company-slug}-platform.md` — loads pain signals for Math of Pain, selling angles for Mechanism, company snapshot for Executive Anchor, and prism insights for Blind Spot identification
 
 **System reads from skills:**
 - skills/deal-strategy/SKILL.md: 5-Component POV Model
-- skills/company-intel/SKILL.md: company data and case studies
+- skills/company-intel/SKILL.md: company data, case studies, pain signal mapping
 
 ## Execution Steps
 

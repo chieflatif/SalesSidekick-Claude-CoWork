@@ -25,6 +25,7 @@ Drafts a quick, natural email for existing relationships. Not cold outreach (/ou
 - Contacts: primary contact (or specified contact), email, title
 - Deals: current deal status, stage, next steps
 - Call Notes: recent calls for context
+- Platform Document (if exists): `data/research/{company-slug}-platform.md` — loads voice & language guide to mirror the company's tone and terminology in emails
 
 **System reads from skills:**
 - skills/brand-voice/SKILL.md: email formatting rules, vocabulary, banned phrases

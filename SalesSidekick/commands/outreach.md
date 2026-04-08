@@ -24,10 +24,11 @@ Generates a tailored prospecting email for cold or warm outreach. Reads account 
 - Companies: company profile, industry, tech stack, notes (including /research briefs)
 - Contacts: target contact if specified (name, title, email)
 - Deals: any prior deal history
+- Platform Document (if exists): `data/research/{company-slug}-platform.md` — loads prism insights for differentiated opening angles, voice & language guide for tone mirroring, and selling angles for angle selection
 
 **System reads from skills:**
 - skills/brand-voice/SKILL.md: email formatting rules, vocabulary, banned phrases
-- skills/company-intel/SKILL.md: product positioning and proof points
+- skills/company-intel/SKILL.md: product positioning, proof points, pain signal mapping
 
 ## Execution Steps
 

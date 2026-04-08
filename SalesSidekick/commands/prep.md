@@ -25,6 +25,7 @@ Loads everything the system knows about an account and produces a structured pre
 - Deals: active deal(s) with the company
 - Tasks: open tasks related to the company
 - Call Notes: recent call history (last 3-5 calls)
+- Platform Document (if exists): `data/research/{company-slug}-platform.md` — loads voice & language guide, pain signals, prism insights, and key contact profile into the prep brief for richer talking points
 
 **System reads from Calendar (if connected):** Meeting details (time, attendees, agenda if available).
 

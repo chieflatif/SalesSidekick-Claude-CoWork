@@ -29,6 +29,7 @@ This is the thinking command — when a deal is complex, stuck, or at a crossroa
 - Contacts: stakeholder map with roles and sentiment
 - Call Notes: recent history for patterns
 - Tasks: open commitments
+- Platform Document (if exists): `data/research/{company-slug}-platform.md` — loads strategic intel, competitive position, and pain signals to enrich Five-Lens Prism analysis
 
 ## Execution Steps
 
