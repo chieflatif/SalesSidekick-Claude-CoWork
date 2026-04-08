@@ -1466,7 +1466,7 @@ The morning briefing agent checks for new versions once per week by fetching:
 
 This is a public, unauthenticated endpoint that returns:
 ```json
-{"version": "4.1.0", "released": "2026-03-27", "notes": "Quick capture, pattern memory, bulk ingest"}
+{"version": "4.1.1", "released": "2026-04-08", "notes": "Upgrade intelligence hardening"}
 ```
 
 Compare the response version against the current `plugin_version` in Project CLAUDE.md. If a newer version exists, add this to the morning briefing:
@@ -1498,7 +1498,35 @@ User says "done" or "it's uploaded" or similar.
 
 ### 18.3 Post-Upgrade (Automatic Detection)
 
-When a session starts, compare the `plugin_version` in the Project CLAUDE.md (`.claude/CLAUDE.md` in the workspace) against the current plugin version in `plugin.json`. If they differ:
+When a session starts, do NOT rely on a simple version mismatch alone. Run a workspace upgrade audit first.
+
+**Read in this order:**
+1. Global CLAUDE.md (`/mnt/.claude/CLAUDE.md`)
+2. Project CLAUDE.md (`.claude/CLAUDE.md`) if it exists
+3. Workspace structure: `data/`, `data/index.md`, `views/`, `custom-skills/`, `knowledge-bases/`
+4. Key directories introduced by newer versions: `data/research/`, `data/patterns/`
+5. `custom-skills/index.md` if present
+
+**Classify the environment before doing anything:**
+
+| Condition | Environment | What it means | Action |
+|-----------|-------------|---------------|--------|
+| No workspace folder open | STANDALONE | Plugin upgraded, but no upgradeable workspace is mounted | Explain that the plugin is current, but workspace upgrades happen only inside the SalesSidekick project |
+| Global identity exists without markers | LEGACY IDENTITY | User has older identity content in Global CLAUDE.md | Wrap the existing SalesSidekick identity in markers before anything else |
+| `data/` exists but `.claude/CLAUDE.md` is missing | WORKSPACE CONFIG MISSING | Older or partial workspace | Create Project CLAUDE.md from template, then continue the audit |
+| `.claude/CLAUDE.md` exists but `plugin_version` or `schema_version` missing | LEGACY WORKSPACE METADATA | Workspace predates formal version tracking | Infer the baseline version from folder structure, write missing version fields, then continue |
+| `plugin_version` in Project CLAUDE.md differs from current plugin version | VERSION UPGRADE | Plugin brain changed | Run the full upgrade sequence below |
+| `schema_version` older than current | SCHEMA UPGRADE | Workspace data shape changed | Run sequential schema migrations |
+| Required directories for current version are missing | LAYOUT DRIFT | Workspace is partially upgraded | Create missing directories and indexes, then continue |
+| Everything matches current expectations | CURRENT | No upgrade work needed | Continue normally |
+
+**Version inference rules for legacy workspaces:**
+- If local workspace exists but `data/patterns/` does not, treat as pre-v4.1.0 local-first workspace.
+- If `data/research/` exists and `data/patterns/` exists, treat as v4.1.x-era workspace unless metadata says otherwise.
+- If only Global CLAUDE identity exists and no local workspace exists, treat as identity-only legacy install.
+- Never guess a newer version than the evidence supports. When uncertain, classify as the oldest compatible local-first version and migrate forward conservatively.
+
+If the environment is `VERSION UPGRADE`, `SCHEMA UPGRADE`, `WORKSPACE CONFIG MISSING`, `LEGACY WORKSPACE METADATA`, `LAYOUT DRIFT`, or `LEGACY IDENTITY`:
 
 **The user just upgraded.** Run this sequence:
 
@@ -1507,26 +1535,59 @@ When a session starts, compare the `plugin_version` in the Project CLAUDE.md (`.
 
    Present each new feature in one sentence. Ask: "Want me to walk through any of these, or just get back to work?"
 
-2. **Schema migration:** Check `schema_version` in Project CLAUDE.md vs current schema version. If older, apply migrations sequentially (1→2, 2→3, etc.). For each migration, add missing fields with sensible defaults to all entity files. For large portfolios (100+ files), batch in groups of 20 and show progress. Tell the user: "Updating your workspace files to the new format — [N] of [total] done."
+2. **Stabilize identity and config first:**
+   - If Global CLAUDE.md contains legacy pre-marker SalesSidekick identity, wrap it in `<!-- SALESSIDEKICK-IDENTITY-START/END -->` markers without changing the content itself.
+   - If Project CLAUDE.md is missing, create it from the current template.
+   - If Project CLAUDE.md exists but lacks version fields, add: `plugin_version`, `schema_version`, `workspace_layout_version`, `last_version_check`, `workspace_created`, `last_migration`, `last_upgrade_audit`, `upgrade_state`, `migration_history`.
 
-3. **New directories:** Create any directories the new version requires that don't exist yet (e.g., `data/patterns/` for v4.1.0). Silent — no user prompt needed.
+3. **Schema migration:** Check `schema_version` in Project CLAUDE.md vs current schema version. If older, apply migrations sequentially (1→2, 2→3, etc.). For each migration, add missing fields with sensible defaults to all entity files. For large portfolios (100+ files), batch in groups of 20 and show progress. Tell the user: "Updating your workspace files to the new format — [N] of [total] done."
 
-4. **Custom skill check:** Read `custom-skills/index.md`. For each custom skill, check if the plugin updated the default version of that capability. If yes: "I see you've customized how your meeting prep works. This update includes changes to the default — want me to show you the differences so you can decide what to keep?"
+4. **Workspace layout audit:** Check for all required paths for the current plugin version. Create any that are missing:
+   - `.claude/`
+   - `data/`
+   - `data/index.md`
+   - `data/companies/`
+   - `data/deals/`
+   - `data/contacts/`
+   - `data/call-notes/`
+   - `data/tasks/`
+   - `data/research/`
+   - `data/patterns/`
+   - `views/`
+   - `custom-skills/`
+   - `knowledge-bases/`
+   - `exports/`
 
-5. **Scheduled task check:** Verify morning briefing and weekly audit are still scheduled. If missing (can happen after plugin replacement): "Your morning briefing schedule needs to be set up again — what time do you start your day?"
+   If `data/index.md` is missing or clearly stale after migration, rebuild it from the entity files before continuing.
 
-6. **Update Project CLAUDE.md:** Write new `plugin_version` and `schema_version`.
+5. **Custom skill check:** Read `custom-skills/index.md`. For each custom skill, check if the plugin updated the default version of that capability. If yes: "I see you've customized how your meeting prep works. This update includes changes to the default — want me to show you the differences so you can decide what to keep?"
 
-7. **Offer feature walkthrough:**
+6. **Scheduled task check:** Verify morning briefing and weekly audit are still scheduled. If missing (can happen after plugin replacement): "Your morning briefing schedule needs to be set up again — what time do you start your day?"
+
+7. **Run an upgrade health scan:** Before declaring success, check:
+   - Project CLAUDE.md exists and is parseable
+   - version fields are present and current
+   - required directories exist
+   - `data/index.md` exists
+   - entity files still parse after migration
+   - no obvious broken cross-references introduced by the migration
+
+   If anything is off, write the finding to `views/health-check.md` and tell the user exactly what still needs attention instead of claiming success.
+
+8. **Update Project CLAUDE.md:** Write new `plugin_version`, `schema_version`, `workspace_layout_version`, `last_migration`, `last_upgrade_audit`, and set `upgrade_state: current`. Append a short item to `migration_history`.
+
+9. **Offer feature walkthrough:**
    > "That's it — you're fully upgraded. Want to try any of the new features now, or just get back to work?"
 
 **If this is a multi-version skip** (e.g., v4.0 → v4.3): Migrations apply sequentially. Each version's migration runs in order. The changelog summary covers all skipped versions.
+
+**Hard rule:** Never tell the user an upgrade is complete until identity markers, workspace config, required directories, version fields, and index presence have all been checked.
 
 ---
 
 ## 19. System Notes
 
-**Version:** 4.1.0 — Compounding Intelligence. Quick capture, pattern memory, bulk ingest, usage tracking. Local-first architecture.
+**Version:** 4.1.1 — Upgrade Intelligence Hardening. Stronger legacy detection, workspace upgrade audit, and post-install migration handling.
 **Build:** SalesSidekick for Claude Cowork
 **Author:** Pipeline Rebel (Latif Horst)
 **Repository:** https://github.com/chieflatif/SalesSidekick-Claude-CoWork

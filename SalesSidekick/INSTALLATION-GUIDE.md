@@ -89,7 +89,7 @@ SalesSidekick is just a collection of text files — no executable code. If you 
 5. Create a Cowork Project in Claude Desktop pointing at your SalesSidekick folder
 6. Open a conversation in the project — Claude automatically reads the instructions and skills
 
-**What works:** All 22 capabilities, all 11 skills, the full intent engine, selling style assessment, signal intelligence, background agents.
+**What works:** The full shipped plugin — all current capabilities and skills, the full intent engine, selling style assessment, signal intelligence, background agents.
 
 **What's different:** The plugin won't appear in your Plugins list, but it functions identically because Cowork reads project-level instructions and skills from the folder structure.
 
@@ -105,6 +105,18 @@ SalesSidekick checks for new versions automatically and lets you know in your mo
 2. Open your SalesSidekick project and say "I have the new version" — the system walks you through the rest
 3. Follow the steps it gives you (remove old plugin, upload new zip — takes about a minute)
 4. Once you confirm it's done, the system handles everything else automatically
+
+**What happens after you install the new zip:**
+
+SalesSidekick automatically inspects your existing environment before it says the upgrade is complete. It checks:
+
+- your Global CLAUDE identity block
+- whether your workspace has a Project CLAUDE config
+- whether your workspace is missing newer folders like `data/research/` or `data/patterns/`
+- whether your workspace version metadata is missing or stale
+- whether your `data/index.md` and core layout are present
+
+If anything is missing or outdated, SalesSidekick upgrades the workspace in place before returning to normal work.
 
 **Your data is untouched.** Deals, contacts, call notes, custom skills, knowledge bases — everything in your workspace survives the upgrade. Only the plugin brain gets updated.
 
@@ -135,6 +147,7 @@ After your first conversation, verify everything is working:
 |-------------|-------------------|
 | "What's on my plate today?" | Shows your tasks and deals (or invites you to add some if empty) |
 | "Tell me about [company you've discussed]" | Recalls company context from your workspace |
+| "Research [company]" | Builds an evidence-graded Platform Document and saves it to your workspace if you're in your SalesSidekick project |
 | Paste a call transcript | Processes it: MEDDPICC scoring, action items, follow-up email, risk flags |
 | "How should I approach [deal]?" | Strategic analysis with three paths forward |
 

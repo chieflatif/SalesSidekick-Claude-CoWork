@@ -4,11 +4,46 @@ All notable changes to SalesSidekick are documented here.
 
 ---
 
+## v4.1.1 — Upgrade Intelligence Hardening (2026-04-08)
+
+**Safer upgrades for older workspaces and older installs.**
+
+Full release notes: `docs/release-notes-v4.1.1.md`
+
+### Improved
+
+**Automatic upgrade detection**
+- The plugin now classifies the user's environment before claiming an upgrade is complete
+- Detects legacy identity-only installs, missing workspace config, stale schema metadata, layout drift, and normal version upgrades
+- Falls back conservatively when version metadata is missing instead of assuming a newer layout
+
+**Post-upgrade workspace audit**
+- Upgrade flow now checks Global CLAUDE markers, Project CLAUDE presence, required directories, index presence, and version metadata
+- If the workspace is partial or stale, SalesSidekick now repairs the structure before returning to normal work
+- Upgrade success is no longer declared until the workspace passes a basic health scan
+
+**Version tracking**
+- Project CLAUDE metadata now tracks workspace layout state and upgrade audit state more explicitly
+- Migration history is recorded so future releases can reason about older environments more safely
+
+**Release docs**
+- Backfilled the staged `/research` Platform Document upgrade into the release docs
+- Installation and upgrade docs now explain that the plugin automatically inspects and upgrades older local workspaces after a new zip is installed
+
+---
+
 ## v4.1.0 — Compounding Intelligence (2026-03-27)
 
 **Your AI gets smarter the more you use it.**
 
 ### New
+
+**Platform Document Research (`/research`)**
+- `/research` now runs as a staged intelligence pipeline instead of a single-pass summary
+- Four stages: Collect, Extract, Prism, Assemble
+- Produces an 11-section Platform Document with evidence grading on every claim
+- Saves reusable account intelligence to `data/research/{company-slug}-platform.md`
+- Downstream capabilities now have a richer intelligence layer for prep, strategy, outreach, business cases, and contextual email
 
 **Quick Capture (`/note`)**
 - Capture deal intel in under 10 seconds — hallway conversations, Slack messages, LinkedIn observations

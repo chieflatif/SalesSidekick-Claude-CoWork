@@ -69,7 +69,7 @@ Not sure what to say? Try these:
 - **"I just finished a call with..."** — paste a transcript and get the full debrief
 - **"Write a follow-up email to Sarah at Acme"** — contextual email in your voice
 - **"What's my forecast looking like?"** — pipeline breakdown with risk flags
-- **"Research this company for me"** — deep account research with evidence grading
+- **"Research this company for me"** — deep account research that creates a reusable Platform Document with evidence grading
 - **"Build a business case for Acme"** — executive-level POV with financial angles
 - **"What can you do?"** — full explanation of everything SalesSidekick knows how to do
 

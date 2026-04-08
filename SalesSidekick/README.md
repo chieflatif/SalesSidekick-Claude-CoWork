@@ -4,6 +4,10 @@
 
 Think of it as a colleague who's always on top of your book of business. Not a general-purpose AI assistant — a work partner built specifically for strategic sellers. It thinks about your deals, remembers your conversations, and drives your territory forward while you focus on building relationships.
 
+**Current release highlight:** `/research` now runs as a staged intelligence pipeline that produces a reusable Platform Document in your workspace. That research feeds meeting prep, strategy, outreach, business cases, and contextual email instead of dying in a one-off summary.
+
+**Upgrade-safe:** when you install a newer SalesSidekick zip, the plugin checks your existing workspace, detects older layouts or missing config, and upgrades the environment before it tells you you're ready.
+
 ---
 
 ## What It Feels Like
@@ -44,7 +48,7 @@ You talk to it like a colleague who's always on top of your book of business.
 
 **Content creation** — Prospecting emails, follow-ups, LinkedIn posts, presentations. All in your voice, backed by account intelligence.
 
-**Account research** — Deep company research with structured intel briefs. Evidence-graded so you know what's verified and what's estimated.
+**Account research** — Deep account research through a staged pipeline: collect, extract, prism, assemble. Produces an evidence-graded Platform Document that downstream capabilities can reuse.
 
 **Progressive personalization** — It starts working immediately. The more you use it, the sharper it gets — it learns your competitors, your communication style, your deal patterns, and your territory dynamics through natural use.
 
@@ -114,7 +118,7 @@ SalesSidekick is a Claude Cowork plugin — an all-markdown system that gives Cl
 - **Skills** — Domain expertise (MEDDPICC, deal strategy, call processing, etc.). Fire automatically based on intent.
 
 **Local-first data:**
-All your deals, contacts, call notes, and tasks are stored as structured markdown files in your workspace folder. An index file provides fast querying. Background agents run signal intelligence (12 risk patterns) and generate views (forecast, pipeline, tasks) on a schedule.
+All your deals, contacts, call notes, tasks, and research documents are stored as structured markdown files in your workspace folder. An index file provides fast querying. Background agents run signal intelligence (12 risk patterns) and generate views (forecast, pipeline, tasks) on a schedule.
 
 **Signal intelligence:** The system monitors your deals for stage stalls, missing decision-makers, forecast conflicts, qualification gaps, and 8 other risk patterns. Findings surface in your morning briefing.
 
