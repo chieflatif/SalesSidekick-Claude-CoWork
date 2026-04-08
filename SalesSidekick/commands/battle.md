@@ -25,6 +25,7 @@ Loads the relevant competitive battlecard and applies it to a specific deal. Ass
 - Deals: deal record including Primary Competitor field
 - Call Notes: recent calls mentioning competitors
 - Contacts: stakeholder map (who's aligned with which vendor)
+- Platform Document (if exists): `data/research/{company-slug}-platform.md` — loads competitive position data from strategic intel section
 
 **System reads from skills:**
 - skills/battlecards/SKILL.md: per-competitor displacement playbooks

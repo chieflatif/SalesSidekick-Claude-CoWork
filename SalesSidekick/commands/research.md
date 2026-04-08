@@ -242,7 +242,7 @@ When a Platform Document exists, downstream capabilities automatically use it:
 | Business case (POV) | Pain signals + selling angles + company snapshot for 5-Component Model |
 | Contextual email | Voice & language guide to mirror the company's tone |
 | Outreach | Prism insights + selling angles for differentiated opening |
-| Competitive analysis | Competitive position data from strategic intel |
+| Competitive analysis (/battle) | Competitive position data from strategic intel |
 
 ## Database Read/Write
 

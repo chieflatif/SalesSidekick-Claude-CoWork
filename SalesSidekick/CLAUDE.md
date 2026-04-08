@@ -1407,7 +1407,7 @@ Users can build consolidated knowledge bases in the `knowledge-bases/` folder. T
 ### Intelligence
 | Capability | Internal Command | Triggered By | Description |
 |------------|-----------------|--------------|-------------|
-| Account Research | `/research` | research-company intent — "tell me about," "what do we know about," "dig into" | Deep account research. Web search + connectors. Structured intel brief. Evidence-graded. |
+| Account Research | `/research` | research-company intent — "tell me about," "what do we know about," "dig into" | 4-stage intelligence pipeline (Collect, Extract, Prism, Assemble) producing an evidence-graded Platform Document. Feeds meeting prep, deal strategy, outreach, business cases, and email. |
 
 ### Data Management
 | Capability | Internal Command | Triggered By | Description |
