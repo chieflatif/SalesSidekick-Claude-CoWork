@@ -23,7 +23,7 @@ If a connected database service is available, data can also be synced to structu
 
 ### Database Schemas
 
-#### Companies (12 fields)
+#### Companies (13 fields)
 | # | Field | Type | Options/Notes |
 |---|-------|------|---------------|
 | 1 | Company Name | Title | — |
@@ -38,6 +38,7 @@ If a connected database service is available, data can also be synced to structu
 | 10 | Last Activity | Date | Auto-updated on any interaction |
 | 11 | Notes | Text | Research briefs, general context |
 | 12 | Website | URL | — |
+| 13 | Evidence Sources | List | Provenance: what sources informed key fields (grade, source, date per field). See Project CLAUDE.md for format. |
 
 #### Contacts (9 fields)
 | # | Field | Type | Options/Notes |
@@ -196,9 +197,11 @@ SalesSidekick uses a three-tier persistence model. No external services required
 | **Fast lane** | Local workspace files (`data/` in Project folder) | All operational data: deals, contacts, companies, call notes, tasks. Stored as structured markdown with YAML frontmatter. `data/index.md` is the flattened read cache. | On demand when capabilities need data | Zero |
 | **Optional** | Connected databases (if available) | Structured database views of the same data. Cross-device access. | Only when user explicitly requests database features | Per operation |
 
-**Data operations use the write protocol defined in the Project CLAUDE.md** (`.claude/CLAUDE.md` in the workspace). The full schemas, cross-reference rules, and ops.log format are there.
+**Data operations use the write protocol defined in the Project CLAUDE.md** (`.claude/CLAUDE.md` in the workspace). The full schemas, cross-reference rules, ops.log format, and write-verification step are there.
 
 **Local files are always canonical.** If local files and connected databases disagree, local files win.
+
+**Write verification:** Every write operation completes with a read-back verification step. After writing the entity file, updating the index, updating cross-references, and logging to ops.log, the system reads back the index row for the primary entity and confirms key fields match. If they don't match, the index update is retried once. If retry fails, VERIFY_FAIL is logged and the user is informed. This catches partial writes immediately.
 
 ### Database Creation (optional — deep personalization Phase 6)
 

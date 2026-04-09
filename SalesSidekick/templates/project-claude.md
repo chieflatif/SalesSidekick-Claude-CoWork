@@ -51,7 +51,7 @@ Computed (set by system, not user): health, last_activity, signals
 
 ```yaml
 ---
-_schema: 1
+_schema: 2
 type: company
 id: company-slug
 name: Company Name
@@ -61,6 +61,7 @@ size: 0                             # employee count
 region: ""
 deals: []                           # computed from deal files
 contacts: []                        # computed from contact files
+evidence_sources: []                # provenance: what sources informed key fields
 last_researched: 2026-03-25
 created: 2026-03-25
 updated: 2026-03-25
@@ -69,6 +70,33 @@ updated: 2026-03-25
 
 Required: type, id, name, created
 Computed: deals, contacts
+
+**evidence_sources format:** Each entry records what source informed a field update. Appended by `/research` and other intelligence-gathering capabilities.
+
+```yaml
+evidence_sources:
+  - field: industry
+    value: "Financial Services"
+    grade: verified
+    source: "SEC IAPD registration"
+    date: 2026-04-09
+  - field: size
+    value: 6
+    grade: verified
+    source: "Company website team page"
+    date: 2026-04-09
+  - field: tech_stack
+    value: "Microsoft 365"
+    grade: estimated
+    source: "Job postings on LinkedIn"
+    date: 2026-04-09
+```
+
+**Grade values:** `verified` (official source — SEC, website, press release), `estimated` (inferred from signals — job postings, tech detection), `hypothesis` (industry pattern or assumption).
+
+**Usage:** Downstream capabilities can check evidence freshness and grade before citing company data. If a field was last sourced >90 days ago, the system can flag it for re-research. If a field is hypothesis-grade, the system knows to present it cautiously.
+
+**Migration from schema 1:** Add `evidence_sources: []` to existing company files. Non-destructive — empty list means "no provenance tracked yet." Fields populated before provenance tracking are treated as ungraded.
 
 ### Contact
 
@@ -228,10 +256,11 @@ Every time data is created or updated, follow this sequence:
 3. Update any cross-referenced entity files (e.g., add the deal to the company's deals list)
 4. Update those entities' rows in index.md too
 5. Append one line to `data/ops.log`
+6. **Verify** — Read back the index.md row for the primary entity. Confirm the key fields match the entity file (id, stage, amount, close_date for deals; id, name, industry for companies; id, name, company for contacts). If mismatch: retry the index update once. If retry fails: append a VERIFY_FAIL line to ops.log and inform the user: "I wrote the [entity] file but the index may be out of sync. The weekly audit will fix this, or you can say 'rebuild my index' now."
 
 **Directory creation-on-demand:** If the target directory doesn't exist, create it first.
 
-**When a write gets interrupted:** The next session's health check detects the inconsistency and offers to fix it.
+**When a write gets interrupted:** The next session's health check detects the inconsistency and offers to fix it. The verify step (step 6) catches most inconsistencies immediately, but if the session ends mid-write, the weekly audit is the backstop.
 
 ### Operation Log Format
 
@@ -356,7 +385,7 @@ last_updated: {{CREATED_DATE}}
 ## Version
 
 plugin_version: {{PLUGIN_VERSION}}
-schema_version: 1
+schema_version: 2
 workspace_layout_version: 1
 last_version_check: {{CREATED_DATE}}
 workspace_created: {{CREATED_DATE}}

@@ -306,6 +306,7 @@ These rules apply to EVERY data write. The full protocol with schemas is in the 
 8. **Closed deals stay but stop signaling.** Set `status: closed-won` or `closed-lost`. Move to Closed section in index. Exclude from signal processing.
 9. **Check for duplicates before creating.** Before writing any new entity file, check if a matching record already exists (same company + date for call notes, same company name for companies, same deal slug for deals). If a match exists, present the existing record with a link to the file and ask before overwriting. Note: multiple calls to the same company on the same date are valid (e.g., morning discovery + afternoon follow-up) — show existing notes and ask the user to confirm this is a new call.
 10. **Always show files created or updated.** Every command that writes data MUST end with a "FILES UPDATED" block listing every file created or modified, with the full file path for each. No exceptions. The user should never have to ask "where did you save that?" If no files were written (e.g., user declined to overwrite a duplicate), show "No files changed."
+11. **Verify after every write.** After completing steps 1-5, read back the index.md row for the primary entity and confirm key fields match the entity file. If mismatch: retry the index update once. If retry fails: log VERIFY_FAIL to ops.log and inform the user. This catches partial writes immediately instead of waiting for the weekly audit.
 
 **FILES UPDATED format (mandatory on every data write):**
 ```
@@ -1138,7 +1139,7 @@ Read Global CLAUDE.md. Find the `<!-- SALESSIDEKICK-IDENTITY-START -->` markers 
 If the write fails for any reason, present the identity block as a copy-paste fallback: "I wasn't able to save your settings automatically. Copy this block and paste it into your Cowork settings — takes 10 seconds."
 
 **Step 7 — Create project folder structure**
-Create: `.claude/CLAUDE.md` (project config with schemas, write protocol, signal thresholds), `data/`, `data/index.md` (empty tables), `data/companies/`, `data/deals/`, `data/contacts/`, `data/call-notes/`, `data/tasks/`, `data/patterns/`, `views/`, `custom-skills/`, `knowledge-bases/`, `exports/`.
+Create: `.claude/CLAUDE.md` (project config with schemas, write protocol, signal thresholds), `data/`, `data/index.md` (empty tables), `data/companies/`, `data/deals/`, `data/contacts/`, `data/call-notes/`, `data/tasks/`, `data/patterns/`, `data/research/`, `views/`, `custom-skills/`, `knowledge-bases/`, `exports/`.
 
 **Step 8 — Set up scheduled agents**
 > "One more thing — want me to check your deals every morning and have a briefing ready when you open your laptop? What time do you usually start your day?"
@@ -1580,6 +1581,18 @@ If the environment is `VERSION UPGRADE`, `SCHEMA UPGRADE`, `WORKSPACE CONFIG MIS
    > "That's it — you're fully upgraded. Want to try any of the new features now, or just get back to work?"
 
 **If this is a multi-version skip** (e.g., v4.0 → v4.3): Migrations apply sequentially. Each version's migration runs in order. The changelog summary covers all skipped versions.
+
+### Schema Migration Definitions
+
+**Schema 1 → 2** (v4.2.0):
+1. Read every file in `data/companies/`
+2. For each file: add `evidence_sources: []` to frontmatter if missing, update `_schema: 2`
+3. Create `data/research/` directory if it doesn't exist
+4. Update `schema_version: 2` in Project CLAUDE.md
+5. Append to `migration_history`: `"schema 1→2: added evidence_sources to companies (v4.2.0)"`
+6. Log each migration write to `data/ops.log`
+
+**Migration is non-destructive:** `evidence_sources: []` means "no provenance tracked yet." No existing data is removed or changed. Fields populated before provenance tracking are treated as ungraded until the next `/research` run populates sources.
 
 **Hard rule:** Never tell the user an upgrade is complete until identity markers, workspace config, required directories, version fields, and index presence have all been checked.
 

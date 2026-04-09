@@ -4,6 +4,39 @@ All notable changes to SalesSidekick are documented here.
 
 ---
 
+## v4.2.0 — Data Integrity & Evidence Provenance (2026-04-09)
+
+**Every write is verified. Every fact has a source.**
+
+### New
+
+**Write-verification read-back**
+- Every data write now includes a verification step: after writing the entity file and updating the index, the system reads back the index row and confirms key fields match
+- If mismatch detected: retries the index update once. If retry fails: logs VERIFY_FAIL and informs the user immediately
+- Catches partial writes at the moment they happen instead of waiting for the weekly audit
+
+**Evidence provenance on company records**
+- Company records now track `evidence_sources` — a structured log of what source informed each key field (industry, size, tech stack)
+- Each entry records: the field, the value, the evidence grade (verified/estimated/hypothesis), the source, and the date
+- Downstream capabilities can check freshness and grade before citing company data
+- Fields populated before provenance tracking are treated as ungraded until the next research run
+
+### Improved
+
+**Onboarding directory structure**
+- `data/research/` now included in the standard workspace layout created during onboarding
+- Previously created on demand by the research command; now part of the initial setup
+
+### Schema Changes
+- Company schema: `_schema` 1 → 2. New field: `evidence_sources` (list, default empty)
+- Migration is automatic and non-destructive. Existing company files get `evidence_sources: []` added
+- No fields removed or renamed. Schema 2 is a strict superset of schema 1
+
+### Upgrading from v4.1.x
+Upload the new zip and open your workspace. The system detects the schema change and migrates your company files automatically. Nothing is lost or overwritten.
+
+---
+
 ## v4.1.1 — Upgrade Intelligence Hardening (2026-04-08)
 
 **Safer upgrades for older workspaces and older installs.**
