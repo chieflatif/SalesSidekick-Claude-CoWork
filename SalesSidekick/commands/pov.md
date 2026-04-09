@@ -1,5 +1,5 @@
 ---
-description: Point of View document — 5-Component Model with evidence-graded claims
+description: "Point of View document — context-aware 5-Component Model. Assesses intelligence depth (thin/partial/rich) and automatically triggers research when context is insufficient. Early deals get deep research first; later deals synthesize existing intelligence. Evidence-graded with mandatory Context Reasoning pass before writing."
 argument-hint: "[Company name]"
 ---
 
@@ -35,11 +35,33 @@ This is the most hypothesis-prone command in the system. Evidence grading is cri
 
 ## Execution Steps
 
-### Step 1: Load context
-1. Load full account context from workspace data
-2. Load Platform Document if it exists (`data/research/{company-slug}-platform.md`)
-3. Load company-intel skill for product positioning and case studies
-4. Load deal-strategy skill for the 5-Component Model framework (including Context Reasoning)
+### Step 1: Intelligence Assessment — How much do we already know?
+
+Before anything else, assess the depth of available context for this company. The POV's quality is directly proportional to the intelligence behind it. This step determines whether to research first or synthesize what exists.
+
+**Load and inventory:**
+1. Check for Platform Document (`data/research/{company-slug}-platform.md`)
+2. Check for company record in `data/companies/`
+3. Check for deal record(s), MEDDPICC scores, call notes, contact maps
+4. Check what the AE just provided in this conversation (email, chart, verbal context, transcript)
+5. Load company-intel skill for product positioning and case studies
+6. Load deal-strategy skill for the 5-Component Model framework (including Context Reasoning)
+
+**Assess intelligence depth:**
+
+| Depth | What exists | POV behavior |
+|-------|------------|-------------|
+| **Thin** | No Platform Document. No deal record. Minimal or no call notes. Maybe just a company name and some verbal context from the AE. | **Research-first mode.** Automatically run the full 4-stage research pipeline (Collect → Extract → Prism → Assemble) to build a Platform Document BEFORE attempting the POV. Tell the AE: "I don't have much on [Company] yet — running deep research first so the POV is grounded in real intelligence. This will take a few minutes." The research output feeds directly into the POV. |
+| **Partial** | Company record exists. Maybe some call notes or a deal record. But no Platform Document, or the Platform Document is stale (>30 days old). | **Targeted research mode.** Run focused web searches to fill specific gaps — industry economics for Math of Pain, recent news for Executive Anchor, competitive landscape for Blind Spot. Don't re-research what's already known. Merge new findings with existing context. |
+| **Rich** | Platform Document exists and is recent. Deal record with MEDDPICC scores. Multiple call notes. Contact map. The AE just provided fresh context (new email, new conversation notes). | **Synthesis mode.** All the intelligence is here. The POV's job is to reason over existing context plus whatever the AE just provided. No new research needed unless a specific gap surfaces during Context Reasoning. |
+
+**Key principle:** A POV built on thin context will be generic — and generic POVs don't close deals. The system should invest the time in research upfront rather than produce a weak POV fast. Early-deal POVs take longer because the research IS the work. Late-deal POVs are fast because the intelligence already exists.
+
+**Deal stage awareness:**
+- **Pre-deal / first engagement:** Almost always Thin. Research is the primary activity. The POV is the vehicle for delivering that research as a compelling narrative.
+- **Early stage (Discovery/Qualification):** Usually Partial. Some call notes exist but deep company intelligence is missing. Targeted research fills gaps.
+- **Mid stage (Evaluation/Proposal):** Usually Rich. Multiple calls processed, MEDDPICC scoring in progress, competitive dynamics known. POV synthesizes and structures what's already known.
+- **Late stage (Negotiation/Close):** Rich. POV draws on everything — fresh context from the AE about what changed in the latest conversation, combined with the full history.
 
 ### Step 2: Context Reasoning (MANDATORY — before any writing)
 
