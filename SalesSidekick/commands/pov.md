@@ -35,26 +35,51 @@ This is the most hypothesis-prone command in the system. Evidence grading is cri
 
 ## Execution Steps
 
+### Step 1: Load context
 1. Load full account context from workspace data
-2. Load company-intel skill for product positioning and case studies
-3. Load deal-strategy skill for the 5-Component Model framework
-4. Build the POV using the **5-Component Model**:
+2. Load Platform Document if it exists (`data/research/{company-slug}-platform.md`)
+3. Load company-intel skill for product positioning and case studies
+4. Load deal-strategy skill for the 5-Component Model framework (including Context Reasoning)
+
+### Step 2: Context Reasoning (MANDATORY — before any writing)
+
+Run the full Context Reasoning pass from the deal-strategy skill. This is internal reasoning, not questions to the user. Use whatever the AE provided — their words, the client's message, research data, call notes, deal history — to reason through:
+
+1. **Relationship reality** — What's the relationship? Personal or company engagement? What tone does it demand?
+2. **IS vs BECOMING** — Does the research match the AE's description of this client's situation? If research says "established" but the AE says "fledgling," write to the AE's reality.
+3. **Language mapping** — Identify the words this client uses. Map every term before writing. If they say "families" not "accounts," "advisors" not "reps" — use their language throughout.
+4. **Framing** — Frame every pain point as an opportunity for value, not a threat. Positive capability, not disaster avoidance.
+5. **Assumption check** — What am I assuming about maturity, urgency, decision-makers, budget? Flag anything that would change the POV if wrong.
+6. **ROI calibration** — Default to modest, break-even framing. Deep research grounds the numbers; gentle presentation earns trust.
+7. **Specificity pass** — Every section must contain something that couldn't be copy-pasted into another POV.
+
+**If Context Reasoning surfaces a critical gap** (e.g., can't determine if the firm is established or building, don't know the relationship type, no sense of budget expectations), ask ONE focused question. Not a questionnaire — one question about the thing that would most change the output.
+
+### Step 3: Build the POV using the 5-Component Model
 
 | Component | Purpose | Content |
 |-----------|---------|---------|
-| **Executive Anchor** | Hook the reader in 2 sentences | Industry trend or business pressure the exec already feels |
-| **Blind Spot** | Show them something they haven't considered | The hidden cost, risk, or opportunity they're missing |
-| **Math of Pain** | Quantify the blind spot | Specific numbers that make the blind spot feel real and urgent |
-| **Mechanism** | Present the solution approach | How this problem gets solved (outcome-focused, not feature-focused) |
-| **Call to Action** | One clear next step | Low-commitment, high-value next move |
+| **Executive Anchor** | Open with THEIR situation | Their words, their goals, their specific context — not a generic industry trend |
+| **Blind Spot** | Show them something they haven't quantified | Framed as opportunity, in their language, specific to their situation |
+| **Math of Pain** | Quantify modestly | Break-even framing, defensible numbers, research-grounded but gently presented |
+| **Mechanism** | Present the approach | Outcome-focused, described in terms the buyer can picture, not jargon |
+| **Call to Action** | One next step | Ideally their own idea reflected back. Proportional to the relationship stage. |
 
+### Step 4: Evidence-grade and quality gate
 5. Evidence-grade EVERY quantitative claim:
    - Case study metrics → Verified (with source)
    - Calculations based on prospect's data → Estimated (show assumptions)
    - Industry projections → Hypothesis (flag clearly)
 6. Check the 50% Rule: if more than half the Math of Pain section is hypothesis-grade, flag the document for more research
-7. Present the POV draft with evidence grades visible
-8. Suggest: "Want me to audit this before you share it externally?"
+7. Run the Quality Gate from the deal-strategy skill:
+   - Language test: any words the buyer wouldn't use?
+   - Specificity test: would this work for a different company?
+   - Tone test: does it match the relationship?
+   - Assumption test: did IS vs BECOMING conflicts get resolved correctly?
+   - ROI test: numbers modest enough to defend?
+   - Sendability test: would the AE put their name on this?
+8. Present the POV draft with evidence grades visible
+9. Suggest: "Want me to audit this before you share it externally?"
 
 ## Output Format
 

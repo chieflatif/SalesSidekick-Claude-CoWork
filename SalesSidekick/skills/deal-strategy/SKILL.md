@@ -152,13 +152,65 @@ After Five-Lens analysis, synthesize into three distinct paths forward. The AE a
 
 Used by the business case capability to build a Point of View document. A POV is NOT a pitch — it's a perspective on the prospect's business that demonstrates deep understanding.
 
+**Before the 5 components fire, the system must complete a context reasoning pass.** The components tell you WHAT to write. The context reasoning tells you HOW TO THINK so you don't write the wrong thing.
+
+#### Context Reasoning (MANDATORY — runs before any component)
+
+This is not a questionnaire. This is internal reasoning the system performs using whatever context the AE provided — their words, the client's email, research data, call notes, deal history. The system reasons through each item and flags gaps only when they'd materially change the output.
+
+**1. Relationship reality**
+- What is the relationship between the AE and this person? (friend, warm contact, cold prospect, enterprise stakeholder)
+- Is this a personal engagement or a company engagement? (determines "I" vs "we," tone, formality)
+- What tone does the relationship demand? Match the client's communication style, not a default template.
+
+**2. Client situation — IS vs BECOMING**
+- Research tells you what the firm IS. The AE's context tells you what it's BECOMING.
+- A $283M AUM firm with 6 staff might look established in SEC filings but be a fledgling team with an aspirational org chart. A 500-person company might be mid-reorg with half the team leaving.
+- **Always ask yourself:** Is the research showing current reality or historical reality? Is the client's own description of their situation aspirational or operational?
+- When research and AE context conflict, the AE's context wins. Flag the conflict but write to the reality, not the data.
+
+**3. Language mapping**
+- Before writing a single word, identify the language this client uses. Not your language. Not consulting language. THEIR language.
+- Industry terms: "advisors" not "reps," "families" not "accounts," "custodian" not "platform"
+- Formality level: match the client's email/communication style
+- Jargon to avoid: if the buyer isn't technical, no "AI agent," "LLM," "RAG," "skills" (in the jargon sense), or any internal framework terminology
+- **Test:** Would this person use this word in a conversation with a colleague? If not, don't use it.
+
+**4. Framing — value, not fear**
+- Every pain point, risk, or gap should be framed as an opportunity for value, not a threat.
+- "Your team can trust what the system produces — and defend it in an exam" not "you're at risk of compliance violations."
+- "Your new partner walks in and the system explains how the firm operates" not "you have a knowledge transfer problem."
+- Compliance, risk, and operational gaps are real — but position the solution as positive capability, not disaster avoidance.
+
+**5. Assumption check**
+- What am I assuming about this firm's maturity? (Is the org chart real or aspirational?)
+- What am I assuming about their urgency? (Are they ready to move or exploring?)
+- What am I assuming about who's involved in the decision? (Solo buyer, partner, board?)
+- What am I assuming about budget? (Has a number been discussed, or am I guessing?)
+- If any assumption would change the POV's framing, tone, or specificity — flag it and write to the safer interpretation.
+
+**6. ROI calibration**
+- Default to modest, defensible numbers. Break-even framing over aggressive ROI claims.
+- "7 hours/week recovered" is better than "$210K annual return" — the first is tangible, the second invites scrutiny.
+- Do deep research to ground the numbers. Present them gently. Keep the receipts but don't show them unless asked.
+- If the AE says anything about being nervous about numbers or wanting to de-risk claims, dial back further.
+
+**7. Specificity pass**
+- Every section must contain something specific to THIS client that couldn't be copy-pasted into another POV.
+- The Executive Anchor references their specific situation, not a generic industry trend.
+- The Blind Spot uses their data, their org structure, their competitive position.
+- Quarterly milestones (if included) describe things the buyer can PICTURE — concrete scenarios using the client's own role language, not abstract jargon like "skills deployed across all divisions."
+- **Test:** If you replaced the company name with a competitor's name and the POV still worked, it's not specific enough.
+
 #### Component 1: Executive Anchor
-*A 2-sentence opening that speaks to what the executive cares about.*
+*Open with THEIR situation, not yours. The first thing they read should make them feel understood.*
 
 **Rules:**
 - Address a business outcome, not a technology problem
-- Reference their specific situation (industry, size, competitive position)
+- Reference their specific situation — their words, their chart, their email, their stated goals
+- If they sent you something (an email, a chart, a doc), reference it directly: "You sent me a vision for seven divisions"
 - Make them feel understood before you make any claims
+- Do NOT open with who you are or what you do. Open with THEM.
 - Evidence grade: Should reference Verified data about the company
 
 #### Component 2: Blind Spot
@@ -168,17 +220,22 @@ Used by the business case capability to build a Point of View document. A POV is
 - Not an insult — a genuine insight they'll recognize as true
 - Should be specific enough that they think "how did they know that?"
 - Often tied to industry trends, competitive shifts, or operational inefficiencies
+- Frame as opportunity, not threat (Context Reasoning #4)
+- Must use the client's language (Context Reasoning #3)
 - Evidence grade: Can be Estimated based on industry patterns, but flag it
 
 #### Component 3: Math of Pain
-*Quantify the cost of inaction.*
+*Quantify the cost of inaction — modestly.*
 
 **Rules:**
 - Use their numbers when possible (from calls, public data)
 - If using estimates, clearly tag them and show the math
 - Three types of cost: direct financial, opportunity cost, risk cost
+- Default to break-even framing: "recover X hours/week" over "save $Xk/year" (Context Reasoning #6)
+- Do deep research to ground numbers (industry economics, benchmarks, comparable firms). Use the research to make claims defensible but present them gently.
 - Must tag every number with evidence grade (Verified/Estimated/Hypothesis)
 - This is where the 50% Rule matters most — if >50% is hypothesis-grade, flag the entire POV
+- Position as "we'll build the model together" not "here's what you'll save"
 
 #### Component 4: Mechanism
 *How you solve it — but positioned as an approach, not a product demo.*
@@ -187,18 +244,32 @@ Used by the business case capability to build a Point of View document. A POV is
 - Lead with the approach/methodology, not the product
 - Connect back to the Blind Spot — show how the mechanism addresses it
 - Use Financial, Technical, or Strategic angle (Commandment 9) — not features
-- Reference proof points from similar companies
+- Reference proof points from similar companies — but only where the prospect matches the vertical or challenge
+- Describe outcomes in terms the buyer can picture (Context Reasoning #7)
 - Evidence grade: Proof points should be Verified, projected outcomes Estimated
 
 #### Component 5: Call to Action
-*One specific, low-friction next step.*
+*One specific, low-friction next step — ideally their own idea reflected back.*
 
 **Rules:**
 - Must be proportional to the stage of the relationship
+- If the client already suggested a next step (workshop, call, meeting), use THAT — reflect their idea back, don't invent a new one
 - Early stage: "15-minute call to explore if this resonates"
 - Mid stage: "Working session to map out the impact for your specific situation"
 - Late stage: "Executive briefing with your team to align on the business case"
 - Never ask for more commitment than the evidence supports
+- Pricing (if included): present with flexibility language. "Starting point, not a finished plan." If a range was discussed, anchor at the discussed number with room to adjust.
+
+#### Quality Gate (runs after all 5 components are drafted)
+
+Before presenting the POV, check:
+
+1. **Language test:** Are there any words or phrases the buyer wouldn't use themselves? Replace every one.
+2. **Specificity test:** Could this POV work for a different company if you swapped the name? If yes, it's not specific enough.
+3. **Tone test:** Does this match the relationship? A POV for a friend should not read like a consulting proposal. A POV for a Fortune 100 should not read like a casual email.
+4. **Assumption test:** Did Context Reasoning surface any conflicts between research and AE context? If so, did the POV write to the AE's reality, not the research's data?
+5. **ROI test:** Are the numbers modest enough to be defensible? Would the AE feel comfortable if the client asked "where did this number come from?"
+6. **Sendability test:** Would the AE actually put their name on this and send it? If it sounds like an AI wrote it, rewrite.
 
 ### Evidence Grading for Strategic Analysis
 
