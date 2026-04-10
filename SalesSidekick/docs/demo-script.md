@@ -1,15 +1,15 @@
 # SalesSidekick — Demo Script
 
-A 10-minute walk-through covering the key commands and workflows. Use this script for live demos, recorded walkthroughs, or self-guided tours.
+A 10-minute walk-through covering the key workflows and the overall experience. Use this script for live demos, recorded walkthroughs, or self-guided tours.
 
 ---
 
 ## Before the Demo
 
 **Prerequisites:**
-- SalesSidekick installed and `/setup` completed
-- At least 1 company, 1 deal, and 1 contact in Notion
-- At least 1 logged call (for /coaching demo)
+- SalesSidekick installed and initial setup completed
+- At least 1 company, 1 deal, and 1 contact in the workspace
+- At least 1 logged call (for the coaching demo)
 
 **Demo environment:** Use a real or realistic test account. SalesSidekick's value comes from personalized output — generic data produces generic demos.
 
@@ -17,16 +17,16 @@ A 10-minute walk-through covering the key commands and workflows. Use this scrip
 
 ## Act 1: Morning Routine (2 min)
 
-### /today — Morning Briefing
+### Morning Briefing
 
-**Say:** "Every morning starts the same way. One command gives me my entire day."
+**Say:** "Every morning starts the same way. One prompt gives me my entire day."
 
-```
-/today
+```text
+What's on my plate today?
 ```
 
 **Show:**
-- Task list pulled from Notion
+- Task list pulled from the workspace
 - Deals needing attention (stalled, approaching close date)
 - Meeting prep auto-generated for today's calendar
 
@@ -36,12 +36,12 @@ A 10-minute walk-through covering the key commands and workflows. Use this scrip
 
 ## Act 2: Meeting Prep (2 min)
 
-### /prep — Pre-Meeting Intelligence
+### Meeting Prep
 
 **Say:** "I have a meeting with [Company] in 30 minutes. Let me pull up the brief."
 
-```
-/prep [Company]
+```text
+Prep me for [Company]
 ```
 
 **Show:**
@@ -56,19 +56,19 @@ A 10-minute walk-through covering the key commands and workflows. Use this scrip
 
 ## Act 3: After the Call (3 min)
 
-### /closeout — 6-Output Framework
+### Call Debrief
 
 **Say:** "The meeting just ended. I have a transcript. Watch what happens."
 
-```
-/closeout
+```text
+I just got off a call with [Company]. Here's the transcript.
 ```
 
 **Paste a call transcript** (or let Drive auto-discover it).
 
 **Show the 6 outputs:**
 1. **MEDDPICC Update** — Red/Yellow/Green scoring with evidence
-2. **Tasks Extracted** — Action items with owners and due dates, written to Notion
+2. **Tasks Extracted** — Action items with owners and due dates, written to the workspace
 3. **Coaching Feedback** — What went well, what to improve
 4. **Follow-Up Email** — Ready to send (or copy-paste)
 5. **Risk Signals** — Concerns detected in the conversation
@@ -80,12 +80,12 @@ A 10-minute walk-through covering the key commands and workflows. Use this scrip
 
 ## Act 4: Deal Strategy (2 min)
 
-### /strategy — Five-Lens Prism
+### Deal Strategy
 
 **Say:** "This deal is complex. Let me get a strategic read."
 
-```
-/strategy [Company]
+```text
+How should I approach [Company]?
 ```
 
 **Show:**
@@ -99,12 +99,12 @@ A 10-minute walk-through covering the key commands and workflows. Use this scrip
 
 ## Act 5: Pipeline View (1 min)
 
-### /pipeline — Territory Health
+### Pipeline View
 
 **Say:** "Let me pull up the full pipeline."
 
-```
-/pipeline
+```text
+Show me the pipeline.
 ```
 
 **Show:**
@@ -113,27 +113,27 @@ A 10-minute walk-through covering the key commands and workflows. Use this scrip
 - Health indicators (green/yellow/red)
 - Stage distribution
 
-**Key point:** "One command, full pipeline visibility. Every deal scored by MEDDPICC confidence, not just rep optimism."
+**Key point:** "One prompt, full pipeline visibility. Every deal scored by MEDDPICC confidence, not just rep optimism."
 
 ---
 
 ## Closing (30 sec)
 
-**Say:** "That's the daily flow: /today in the morning, /prep before meetings, /closeout after calls, /strategy for complex deals, /pipeline for the big picture. There are 22 commands total — outreach emails, LinkedIn posts, presentations, CRM updates, competitive analysis — all personalized to me, my company, and my territory."
+**Say:** "That's the daily flow: morning briefing, meeting prep, call debrief, deal strategy, and full pipeline review. It covers outreach, follow-ups, presentations, research, competitive analysis, and pipeline work without making me babysit the system."
 
-**Final point:** "And it took ~45 minutes to set up. One `/setup` command. After that, it just works."
+**Final point:** "Setup takes a few minutes. After that, it just works."
 
 ---
 
 ## Bonus Demos (if time allows)
 
-| Command | Demo Scenario | Time |
+| Workflow | Demo Scenario | Time |
 |---------|--------------|------|
-| `/outreach [Company]` | Generate a prospecting email with 3 angle options | 1 min |
-| `/battle [Company]` | Competitive displacement strategy against a named competitor | 1 min |
-| `/deck [Company]` | Auto-generate a presentation matched to deal stage | 2 min |
-| `/draft-post` | Create a LinkedIn post using the 3-Type Framework | 1 min |
-| `/forecast-update` | Generate CRM paste-ready output | 30 sec |
+| Prospecting email | Generate a prospecting email with 3 angle options | 1 min |
+| Competitive strategy | Competitive displacement strategy against a named competitor | 1 min |
+| Presentation support | Generate a presentation matched to deal stage | 2 min |
+| LinkedIn post | Create a post using the 3-Type Framework | 1 min |
+| Forecast update | Generate CRM paste-ready output | 30 sec |
 
 ---
 
@@ -141,6 +141,6 @@ A 10-minute walk-through covering the key commands and workflows. Use this scrip
 
 - **Use real data.** SalesSidekick's personalization is the differentiator — generic data undersells it.
 - **Show the evidence grades.** Point out Verified vs. Estimated vs. Hypothesis tags. This builds trust.
-- **Highlight the Notion writes.** After /closeout, open Notion and show the new records. Data persistence is concrete proof of value.
-- **Don't rush /closeout.** It's the most impressive command. Let the 6 outputs breathe.
-- **If a connector is missing, that's a feature.** Show how the command adapts gracefully — it asks for manual input instead of failing.
+- **Highlight the saved records.** After the call debrief, open the workspace files and show the new records. Data persistence is concrete proof of value.
+- **Don't rush the call debrief.** It's the most impressive workflow. Let the 6 outputs breathe.
+- **If a connector is missing, that's a feature.** Show how the workflow adapts gracefully — it asks for manual input instead of failing.
