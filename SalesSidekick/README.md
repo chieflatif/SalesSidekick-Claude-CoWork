@@ -4,7 +4,7 @@
 
 Think of it as a colleague who's always on top of your book of business. Not a general-purpose AI assistant — a work partner built specifically for strategic sellers. It thinks about your deals, remembers your conversations, and drives your territory forward while you focus on building relationships.
 
-**Current release highlight:** `/research` now runs as a staged intelligence pipeline that produces a reusable Platform Document in your workspace. That research feeds meeting prep, strategy, outreach, business cases, and contextual email instead of dying in a one-off summary.
+**Current release highlight:** SalesSidekick now has an Intelligence Trail for substantive conversation context. Useful account details, stakeholder nuance, decisions, and competitive intel shared outside a formal command can be saved to your workspace instead of disappearing when you start a new chat.
 
 **Upgrade-safe:** when you install a newer SalesSidekick zip, the plugin checks your existing workspace, detects older layouts or missing config, and upgrades the environment before it tells you you're ready.
 
@@ -72,9 +72,9 @@ SalesSidekick uses progressive personalization — it gets smarter through use, 
 
 **First conversation:** It asks for three things (name, company, what you sell) and starts working.
 
-**Through use:** It picks up your competitors from call transcripts, learns your communication style from email edits, infers your ICP from the companies you work with, and builds context from every interaction.
+**Through use:** It picks up your competitors from call transcripts, learns your communication style from email edits, infers your ICP from the companies you work with, and keeps a lightweight Intelligence Trail for substantive conversation context that does not fit a formal command.
 
-**Data builds as you go:** The first time you process a call, it saves the intelligence. The first time you add a deal, it starts tracking. Your workspace builds itself naturally — no upfront database creation needed.
+**Data builds as you go:** The first time you process a call, it saves the intelligence. The first time you add a deal, it starts tracking. When you share useful context in passing, SalesSidekick can preserve it in `data/trail/` and promote only explicit, high-confidence facts to entity notes.
 
 **Optional deep personalization:** When you're ready to go all-in, ask for a deep personalization session (~15 minutes). It captures the things organic use can't easily infer — structured competitive battlecards, calibrated brand voice from writing samples, explicit quota and territory numbers.
 

@@ -112,11 +112,11 @@ SalesSidekick automatically inspects your existing environment before it says th
 
 - your Global CLAUDE identity block
 - whether your workspace has a Project CLAUDE config
-- whether your workspace is missing newer folders like `data/research/` or `data/patterns/`
+- whether your workspace is missing newer folders like `data/research/`, `data/patterns/`, or `data/trail/`
 - whether your workspace version metadata is missing or stale
 - whether your `data/index.md` and core layout are present
 
-If anything is missing or outdated, SalesSidekick upgrades the workspace in place before returning to normal work.
+If anything is missing or outdated, SalesSidekick upgrades the workspace in place before returning to normal work. For v4.2.1, this includes creating `data/trail/` for passive conversation context and updating workspace layout metadata without changing existing deal, contact, call note, research, pattern, or custom skill files.
 
 **Your data is untouched.** Deals, contacts, call notes, custom skills, knowledge bases — everything in your workspace survives the upgrade. Only the plugin brain gets updated.
 

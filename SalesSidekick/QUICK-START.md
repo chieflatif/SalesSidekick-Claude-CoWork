@@ -94,6 +94,7 @@ You'll see this briefing when you open your SalesSidekick project and ask "what'
 - **The first few sessions take a little longer** as you build up context. That's normal — it gets faster every time.
 - **You can always change how it works.** If an email sounds off, tell it. If you want a different format, ask. SalesSidekick adapts to your feedback.
 - **Drop anything in, any format.** A CRM screenshot, a copied email, a raw transcript, a company one-pager — just paste it. SalesSidekick figures out what it is.
+- **Useful context can carry forward.** When you share substantive deal, account, stakeholder, or competitive context in normal conversation, SalesSidekick can preserve it in the Intelligence Trail so it is available in future sessions.
 - **Optional connectors:** Gmail (send emails directly), Google Calendar (meeting-aware briefings), Google Drive (find transcripts automatically). None required. See [CONNECTORS.md](CONNECTORS.md) for setup.
 - **Upgrades are easy.** Download the new zip, upload it to Plugins. Your workspace data and personal settings are untouched — only the plugin brain gets updated.
 

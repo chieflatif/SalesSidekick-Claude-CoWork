@@ -176,7 +176,9 @@ When resolving for deal-specific capabilities (deal strategy, competitive analys
 
 ### Intelligence Trail
 
-Trail files (`data/trail/`) are written passively during every substantive conversation. They capture: what was discussed, which entities were referenced, what decisions were made, and what intelligence was filed. One file per conversation per day. The trail is the safety net that catches intelligence the structured commands miss. See CLAUDE.md Section 10.5 for the full capture rules and file format.
+Trail files (`data/trail/`) are written passively during substantive conversations. They capture: what was discussed, which entities were referenced, what decisions were made, and what intelligence was filed. One file per conversation per day. The trail is the safety net that catches intelligence the structured commands miss.
+
+Use the Section 10.5 capture decision policy before writing: `NOOP`, `TRAIL_ONLY`, `TRAIL_PLUS_ENTITY_UPDATE`, or `ASK_USER`. Default to trail-only when uncertain. Entity notes are updated only for explicit, high-confidence facts tied to existing records; casual or inferred remarks stay in the trail.
 
 ### Write Failure Handling
 

@@ -131,7 +131,7 @@ Write findings to views/health-check.md. If no issues: "All clean — [N] entiti
 
 ### 10. Scan data/trail/ for recent intelligence
 
-Read all trail files from the last 7 days (`data/trail/`). For each file, extract:
+If `data/trail/` is missing, treat that as a layout drift finding and note it in `views/health-check.md`; do not fail the briefing. If it exists, read all trail files from the last 7 days. For each file, extract:
 - What entities were discussed
 - Key decisions or direction changes
 - Open threads (things discussed but not resolved)

@@ -325,13 +325,11 @@ Rules:
 
 ### 10.5 Intelligence Trail — Passive Capture
 
-**This is the most important behavioral instruction in the system.**
-
 Conversations are temporary. Files are permanent. Intelligence discussed in a conversation that doesn't get written to a file is LOST when the user starts a new conversation. The user will NOT remember to save it. There are no hooks in this runtime that can do it automatically after the fact. The ONLY moment to capture intelligence is DURING the conversation, as it happens.
 
-**The rule:** After every substantive response — any response where the user shared, discussed, or revealed information about a company, contact, deal, competitor, decision, preference, or strategic direction — write an intelligence trail entry to `data/trail/`.
+**The rule:** After every substantive response — any response where the user shared, discussed, or revealed information about a company, contact, deal, competitor, decision, preference, or strategic direction — run the passive capture decision policy below.
 
-This is not optional. This is not "offer to capture." This is a standing instruction: **capture first, mention it briefly, move on.**
+This is a standing instruction, but it is not permission to rewrite canonical business records casually. The trail is the default safety net. Entity files are updated only when the captured intelligence is explicit, high-confidence, and tied to an existing record.
 
 #### What triggers a trail entry
 
@@ -348,6 +346,19 @@ This is not optional. This is not "offer to capture." This is a standing instruc
 - System/plugin questions ("how do I update?")
 - Pure output generation with no new intelligence (writing an email from existing data)
 - Conversations that don't reference any entity or deal context
+
+#### Capture decision policy
+
+Before writing anything, classify the turn:
+
+| Decision | Use when | Action |
+|----------|----------|--------|
+| `NOOP` | No new business intelligence, or the same intelligence was already captured in this conversation | Write nothing |
+| `TRAIL_ONLY` | Useful conversational context, strategy, preference, relationship detail, or inferred intelligence that is not yet safe as canonical truth | Append one trail entry only |
+| `TRAIL_PLUS_ENTITY_UPDATE` | The user stated an explicit fact tied to an existing company/contact/deal and it does not contradict current records | Append one trail entry and add a short dated note to the relevant entity file |
+| `ASK_USER` | The capture would overwrite/contradict a field, create a new entity, save sensitive non-sales information, or you are unsure whether it should become canonical | Ask a one-sentence confirmation before updating entity files; trail-only is still okay for non-sensitive context |
+
+**Default to `TRAIL_ONLY` when uncertain.** Do not promote casual or inferred remarks into canonical entity fields. If a command already wrote the same intelligence to a structured file, do not duplicate it in the trail unless there was additional conversational context worth preserving.
 
 #### Trail file format
 
@@ -373,6 +384,8 @@ entries: 2
 
 **Entities:** [company-slug], [contact-slug], [deal-slug]
 
+**Capture decision:** TRAIL_ONLY | TRAIL_PLUS_ENTITY_UPDATE
+
 **Intelligence captured:**
 - [What was learned — plain language, specific]
 - [What was learned — plain language, specific]
@@ -389,7 +402,7 @@ entries: 2
 
 #### How it behaves in conversation
 
-1. **Capture silently.** Don't ask permission. Don't interrupt the conversation flow. Just write the trail entry and update any entity files with the new intelligence.
+1. **Capture quietly.** Don't interrupt the conversation flow. Run the capture decision policy, write at most one trail entry for the turn, and update entity files only when the decision is `TRAIL_PLUS_ENTITY_UPDATE`.
 
 2. **Mention briefly at the end of your response.** One line, not a block:
    > "Captured: Gong entering Acme evaluation (from Dan) → company notes + trail updated."
@@ -399,11 +412,13 @@ entries: 2
 
 3. **Don't over-capture.** If the user is just asking you to rewrite an email or adjust formatting, that's not intelligence. The bar is: would this information be useful in a future conversation about this entity? If yes, capture it. If no, skip it.
 
-4. **Update entity files when possible.** If the intelligence relates to a company, contact, or deal that already has a file, append to that file's notes section too. The trail is the catch-all; entity files are the structured home. Both get updated.
+4. **Update entity files conservatively.** If the intelligence is an explicit user-stated fact about an existing company, contact, or deal, append a dated note to that entity file and include the trail file path as the source. If it is inferred, ambiguous, strategic direction, or relationship nuance, keep it trail-only unless the user confirms.
 
 5. **If the entity doesn't exist yet:** Write to the trail file only. Offer (once, briefly): "I don't have [Company] in your records yet — want me to start tracking them?"
 
 6. **If the workspace doesn't exist:** Write nothing. You can't persist intelligence without the file system. Nudge the user to open their SalesSidekick workspace.
+
+7. **Passive capture exception to FILES UPDATED:** For standalone passive trail capture, use the quiet "Captured:" one-liner instead of the full FILES UPDATED block. If passive capture happens as part of a command that already writes files, include the trail file in that command's FILES UPDATED block.
 
 #### How trail files are used
 
@@ -425,8 +440,8 @@ entries: 2
 |-----------|-----------------|-------------------|--------------|
 | **Call notes** | Structured intelligence from a call transcript | When a transcript is processed | /closeout command |
 | **Quick capture (/note)** | One specific piece of intel the user explicitly shares | When the user says "note:" or similar | /note command |
-| **Trail entry** | The conversational context, decisions, and incidental intelligence from ANY interaction | Automatically, during every substantive conversation | The system (passive, no command needed) |
-| **Entity notes** | Accumulated intelligence on a specific company/contact/deal | Updated by commands AND by trail capture | Multiple sources |
+| **Trail entry** | Conversational context, decisions, and incidental intelligence from substantive interactions | Automatically, when the capture decision is `TRAIL_ONLY` or `TRAIL_PLUS_ENTITY_UPDATE` | The system (passive, no command needed) |
+| **Entity notes** | Accumulated intelligence on a specific company/contact/deal | Updated by commands and by `TRAIL_PLUS_ENTITY_UPDATE` captures | Multiple sources |
 
 The trail is the safety net. It catches everything that the structured commands miss.
 
@@ -1576,7 +1591,7 @@ The morning briefing agent checks for new versions once per week by fetching:
 
 This is a public, unauthenticated endpoint that returns:
 ```json
-{"version": "4.1.1", "released": "2026-04-08", "notes": "Upgrade intelligence hardening"}
+{"version": "4.2.1", "released": "2026-04-09", "notes": "Intelligence Trail passive capture hardening"}
 ```
 
 Compare the response version against the current `plugin_version` in Project CLAUDE.md. If a newer version exists, add this to the morning briefing:
@@ -1651,7 +1666,7 @@ If the environment is `VERSION UPGRADE`, `SCHEMA UPGRADE`, `WORKSPACE CONFIG MIS
    - If Project CLAUDE.md is missing, create it from the current template.
    - If Project CLAUDE.md exists but lacks version fields, add: `plugin_version`, `schema_version`, `workspace_layout_version`, `last_version_check`, `workspace_created`, `last_migration`, `last_upgrade_audit`, `upgrade_state`, `migration_history`.
 
-3. **Schema migration:** Check `schema_version` in Project CLAUDE.md vs current schema version. If older, apply migrations sequentially (1→2, 2→3, etc.). For each migration, add missing fields with sensible defaults to all entity files. For large portfolios (100+ files), batch in groups of 20 and show progress. Tell the user: "Updating your workspace files to the new format — [N] of [total] done."
+3. **Schema and layout migration:** Check `schema_version` in Project CLAUDE.md vs current schema version (`2`). If older, apply schema migrations sequentially (1→2, 2→3, etc.). Then check `workspace_layout_version` vs current layout version (`2`). If older, apply layout migrations sequentially. For entity schema migrations, add missing fields with sensible defaults to all entity files. For large portfolios (100+ files), batch in groups of 20 and show progress. Tell the user: "Updating your workspace files to the new format — [N] of [total] done."
 
 4. **Workspace layout audit:** Check for all required paths for the current plugin version. Create any that are missing:
    - `.claude/`
@@ -1664,6 +1679,7 @@ If the environment is `VERSION UPGRADE`, `SCHEMA UPGRADE`, `WORKSPACE CONFIG MIS
    - `data/tasks/`
    - `data/research/`
    - `data/patterns/`
+   - `data/trail/`
    - `views/`
    - `custom-skills/`
    - `knowledge-bases/`
@@ -1698,12 +1714,20 @@ If the environment is `VERSION UPGRADE`, `SCHEMA UPGRADE`, `WORKSPACE CONFIG MIS
 1. Read every file in `data/companies/`
 2. For each file: add `evidence_sources: []` to frontmatter if missing, update `_schema: 2`
 3. Create `data/research/` directory if it doesn't exist
-4. Create `data/trail/` directory if it doesn't exist
-5. Update `schema_version: 2` in Project CLAUDE.md
+4. Update `schema_version: 2` in Project CLAUDE.md
 5. Append to `migration_history`: `"schema 1→2: added evidence_sources to companies (v4.2.0)"`
 6. Log each migration write to `data/ops.log`
 
 **Migration is non-destructive:** `evidence_sources: []` means "no provenance tracked yet." No existing data is removed or changed. Fields populated before provenance tracking are treated as ungraded until the next `/research` run populates sources.
+
+**Workspace layout 1 → 2** (v4.2.1):
+1. Create `data/trail/` directory if it doesn't exist
+2. Create or refresh `views/recent-activity.md` during the next morning briefing
+3. Update `workspace_layout_version: 2` in Project CLAUDE.md
+4. Append to `migration_history`: `"layout 1→2: added intelligence trail directory (v4.2.1)"`
+5. Log the directory creation and Project CLAUDE.md update to `data/ops.log`
+
+**Layout migration is non-destructive:** existing entities, call notes, research documents, patterns, and custom skills are not changed. The trail directory starts empty for existing workspaces and fills only from future conversations.
 
 **Hard rule:** Never tell the user an upgrade is complete until identity markers, workspace config, required directories, version fields, and index presence have all been checked.
 
@@ -1711,7 +1735,7 @@ If the environment is `VERSION UPGRADE`, `SCHEMA UPGRADE`, `WORKSPACE CONFIG MIS
 
 ## 19. System Notes
 
-**Version:** 4.1.1 — Upgrade Intelligence Hardening. Stronger legacy detection, workspace upgrade audit, and post-install migration handling.
+**Version:** 4.2.1 — Intelligence Trail. Passive conversation capture, conservative entity promotion, and layout migration for `data/trail/`.
 **Build:** SalesSidekick for Claude Cowork
 **Author:** Pipeline Rebel (Latif Horst)
 **Repository:** https://github.com/chieflatif/SalesSidekick-Claude-CoWork

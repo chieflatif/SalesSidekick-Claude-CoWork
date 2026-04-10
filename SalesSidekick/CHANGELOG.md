@@ -4,6 +4,37 @@ All notable changes to SalesSidekick are documented here.
 
 ---
 
+## v4.2.1 — Intelligence Trail Hardening (2026-04-09)
+
+**Conversations now leave a recoverable trail without casually overwriting canonical business records.**
+
+Full release notes: `docs/release-notes-v4.2.1.md`
+
+### New
+
+**Intelligence Trail (`data/trail/`)**
+- Substantive conversation context can now be captured passively during the conversation, instead of relying on users to remember to run a command before starting a new chat
+- Trail entries preserve what was discussed, which entities were referenced, what decisions were made, and what intelligence was filed
+- Morning briefing now summarizes recent trail activity in "What You've Been Working On" so users can pick up where they left off
+
+### Improved
+
+**Conservative capture policy**
+- Passive capture now uses an explicit decision policy: `NOOP`, `TRAIL_ONLY`, `TRAIL_PLUS_ENTITY_UPDATE`, or `ASK_USER`
+- Trail-only is the default when the intelligence is conversational, inferred, ambiguous, or not ready for canonical records
+- Entity files are updated only for explicit, high-confidence facts tied to existing company/contact/deal records
+- Passive trail capture uses a quiet "Captured:" one-liner; command-based writes still use the full FILES UPDATED block
+
+**Upgrade and layout migration**
+- New workspaces include `data/trail/` during setup
+- Existing `v4.2.0` workspaces get a non-destructive layout migration from `workspace_layout_version: 1` to `2`
+- The upgrade audit now treats missing `data/trail/` as layout drift and repairs it before declaring the workspace current
+
+### Upgrading from v4.2.0
+Upload the new zip and open your workspace. SalesSidekick creates `data/trail/`, updates workspace layout metadata, and leaves existing deals, contacts, call notes, research docs, patterns, and custom skills untouched.
+
+---
+
 ## v4.2.0 — Data Integrity & Evidence Provenance (2026-04-09)
 
 **Every write is verified. Every fact has a source.**

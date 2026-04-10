@@ -8,7 +8,7 @@ This file is auto-generated during SalesSidekick setup. It tells the system how 
 
 Every file in `data/` has a structured header (YAML frontmatter) followed by free-text notes. The header is the data. The notes are context.
 
-**Schema version:** 1
+**Schema version:** 2
 
 ### Deal
 
@@ -201,9 +201,9 @@ entries: 0
 ```
 
 Required: type, date, entries
-Body contains: timestamped intelligence entries. Each entry has: topic summary, context (what the user was doing and why), entities referenced, intelligence captured, decisions made, and files updated. See CLAUDE.md Section 10.5 for the full format and capture rules.
+Body contains: timestamped intelligence entries. Each entry has: topic summary, context (what the user was doing and why), entities referenced, capture decision (`TRAIL_ONLY` or `TRAIL_PLUS_ENTITY_UPDATE`), intelligence captured, decisions made, and files updated. See CLAUDE.md Section 10.5 for the full format and capture rules.
 
-Trail files are stored in `data/trail/`. One file per conversation per day. Append new entries to an existing day file rather than creating duplicates. Trail files are the passive intelligence safety net — they capture context and decisions from conversations that don't produce formal documents.
+Trail files are stored in `data/trail/`. One file per conversation per day. Append new entries to an existing day file rather than creating duplicates. Trail files are the passive intelligence safety net — they capture context and decisions from conversations that don't produce formal documents. Entity records are updated only when the captured intelligence is explicit, high-confidence, and tied to an existing record.
 
 ---
 
@@ -402,7 +402,7 @@ last_updated: {{CREATED_DATE}}
 
 plugin_version: {{PLUGIN_VERSION}}
 schema_version: 2
-workspace_layout_version: 1
+workspace_layout_version: 2
 last_version_check: {{CREATED_DATE}}
 workspace_created: {{CREATED_DATE}}
 last_migration: none
