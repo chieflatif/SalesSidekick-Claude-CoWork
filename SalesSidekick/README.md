@@ -8,6 +8,16 @@ Think of it as a colleague who's always on top of your book of business. Not a g
 
 **Upgrade-safe:** when you install a newer SalesSidekick zip, the plugin checks your existing workspace, detects older layouts or missing config, and upgrades the environment before it tells you you're ready.
 
+## Current Version
+
+- Current packaged version in this repo: `v4.2.2`
+- Latest published GitHub release: [SalesSidekick v4.2.1](https://github.com/chieflatif/SalesSidekick-Claude-CoWork/releases/tag/v4.2.1)
+- Changelog: [CHANGELOG.md](CHANGELOG.md)
+- Release notes:
+  - [v4.2.2](docs/release-notes-v4.2.2.md)
+  - [v4.2.1](docs/release-notes-v4.2.1.md)
+  - [v4.1.1](docs/release-notes-v4.1.1.md)
+
 ---
 
 ## What It Feels Like
