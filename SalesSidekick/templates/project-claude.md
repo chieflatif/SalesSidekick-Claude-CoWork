@@ -189,6 +189,22 @@ Required: type, id, pattern_type, confidence, created
 Body contains: one clear sentence describing the pattern, **Evidence:** section with specific references, **Implication:** section with recommended action.
 Patterns are stored in `data/patterns/`. Before creating a new pattern, check for semantic overlap with existing patterns — if similar, increment occurrences instead.
 
+### Trail
+
+```yaml
+---
+_schema: 1
+type: trail
+date: 2026-04-09
+entries: 0
+---
+```
+
+Required: type, date, entries
+Body contains: timestamped intelligence entries. Each entry has: topic summary, context (what the user was doing and why), entities referenced, intelligence captured, decisions made, and files updated. See CLAUDE.md Section 10.5 for the full format and capture rules.
+
+Trail files are stored in `data/trail/`. One file per conversation per day. Append new entries to an existing day file rather than creating duplicates. Trail files are the passive intelligence safety net — they capture context and decisions from conversations that don't produce formal documents.
+
 ---
 
 ## Index.md Format

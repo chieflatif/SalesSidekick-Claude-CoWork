@@ -129,12 +129,40 @@ Quick validation on index.md:
 
 Write findings to views/health-check.md. If no issues: "All clean — [N] entities checked, no issues found."
 
-### 10. Write views/morning-briefing.md
+### 10. Scan data/trail/ for recent intelligence
+
+Read all trail files from the last 7 days (`data/trail/`). For each file, extract:
+- What entities were discussed
+- Key decisions or direction changes
+- Open threads (things discussed but not resolved)
+- Intelligence that was filed to entity records
+
+Write a summary to `views/recent-activity.md`:
+
+```markdown
+# Recent Activity — Last 7 Days
+
+## What You've Been Working On
+[Group by entity: "Acme Corp — 3 conversations: competitive analysis, strategy discussion, prep for Dan meeting. Key decision: holding on next step until competitive picture is clear."]
+
+## Key Decisions Made
+[Chronological: "Apr 7 — Acme: hold on push, run competitive analysis first." "Apr 8 — Globex: switching to Diagnostic path, champion went quiet."]
+
+## Open Threads
+[Things discussed but not resolved — no deal note, no task, no decision. These are the things that fall through cracks.]
+```
+
+If no trail files exist in the last 7 days, write: "No recent conversation trail. Intelligence is only captured when you're in your SalesSidekick workspace."
+
+### 11. Write views/morning-briefing.md
 
 Combine everything into a briefing:
 
 ```markdown
 # Morning Briefing — [today's date]
+
+## What You've Been Working On
+[From recent-activity.md — 3-5 line summary of the last few days' conversations, grouped by account. Helps the user remember where they left off.]
 
 ## Deals Needing Attention
 [Top 3-5 signals by severity, with recommended action for each]

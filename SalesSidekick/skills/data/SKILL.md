@@ -172,6 +172,11 @@ When resolving for deal-specific capabilities (deal strategy, competitive analys
 | Add Company | Companies (duplicate check) | Companies (new record) |
 | Add Deal | Companies, Contacts, Deals (duplicate check) | Deals (new record) |
 | Call Coaching | Call Notes, Deals | — |
+| **Passive capture (all conversations)** | Trail (recent), entity files | Trail (new entry), entity notes (updated). See CLAUDE.md Section 10.5. |
+
+### Intelligence Trail
+
+Trail files (`data/trail/`) are written passively during every substantive conversation. They capture: what was discussed, which entities were referenced, what decisions were made, and what intelligence was filed. One file per conversation per day. The trail is the safety net that catches intelligence the structured commands miss. See CLAUDE.md Section 10.5 for the full capture rules and file format.
 
 ### Write Failure Handling
 

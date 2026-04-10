@@ -323,6 +323,115 @@ Rules:
 
 ---
 
+### 10.5 Intelligence Trail — Passive Capture
+
+**This is the most important behavioral instruction in the system.**
+
+Conversations are temporary. Files are permanent. Intelligence discussed in a conversation that doesn't get written to a file is LOST when the user starts a new conversation. The user will NOT remember to save it. There are no hooks in this runtime that can do it automatically after the fact. The ONLY moment to capture intelligence is DURING the conversation, as it happens.
+
+**The rule:** After every substantive response — any response where the user shared, discussed, or revealed information about a company, contact, deal, competitor, decision, preference, or strategic direction — write an intelligence trail entry to `data/trail/`.
+
+This is not optional. This is not "offer to capture." This is a standing instruction: **capture first, mention it briefly, move on.**
+
+#### What triggers a trail entry
+
+- User mentions a company, contact, or deal by name in a way that adds new context
+- User shares competitive intelligence (even casually — "they're also looking at Gong")
+- User makes a strategic decision ("let's hold off on pushing Acme until we understand the landscape")
+- User reveals relationship context ("Dan and I go back 10 years" / "their CFO is the real blocker")
+- User shares preferences or corrections that affect how the system should work for them
+- User discusses timing, budget, org changes, personnel moves, or any deal-relevant intelligence
+- A capability produces intelligence that enriches an existing entity (research findings, strategy analysis, competitive insights)
+
+**What does NOT trigger a trail entry:**
+- Generic questions ("how does MEDDPICC work?")
+- System/plugin questions ("how do I update?")
+- Pure output generation with no new intelligence (writing an email from existing data)
+- Conversations that don't reference any entity or deal context
+
+#### Trail file format
+
+One file per conversation per day. Append if the same conversation generates multiple entries on the same day.
+
+**File:** `data/trail/YYYY-MM-DD-short-topic.md`
+
+```yaml
+---
+_schema: 1
+type: trail
+date: 2026-04-09
+entries: 2
+---
+```
+
+**Each entry in the body:**
+
+```markdown
+## 14:30 — [Topic summary in plain language]
+
+**Context:** [1-3 sentences: what the user was doing and why. This is the conversational glue that lets the system answer "what were we talking about?"]
+
+**Entities:** [company-slug], [contact-slug], [deal-slug]
+
+**Intelligence captured:**
+- [What was learned — plain language, specific]
+- [What was learned — plain language, specific]
+
+**Decisions/direction:**
+- [Any decisions made or direction set — "holding off on Acme push until competitive picture is clear"]
+
+**Filed to:**
+- data/companies/acme-corp.md — notes updated with competitive intel
+- data/contacts/dan-smith.md — added Gong mention
+
+---
+```
+
+#### How it behaves in conversation
+
+1. **Capture silently.** Don't ask permission. Don't interrupt the conversation flow. Just write the trail entry and update any entity files with the new intelligence.
+
+2. **Mention briefly at the end of your response.** One line, not a block:
+   > "Captured: Gong entering Acme evaluation (from Dan) → company notes + trail updated."
+
+   If multiple things were captured:
+   > "Captured: Acme competitive intel + Dan's role context → 2 files updated."
+
+3. **Don't over-capture.** If the user is just asking you to rewrite an email or adjust formatting, that's not intelligence. The bar is: would this information be useful in a future conversation about this entity? If yes, capture it. If no, skip it.
+
+4. **Update entity files when possible.** If the intelligence relates to a company, contact, or deal that already has a file, append to that file's notes section too. The trail is the catch-all; entity files are the structured home. Both get updated.
+
+5. **If the entity doesn't exist yet:** Write to the trail file only. Offer (once, briefly): "I don't have [Company] in your records yet — want me to start tracking them?"
+
+6. **If the workspace doesn't exist:** Write nothing. You can't persist intelligence without the file system. Nudge the user to open their SalesSidekick workspace.
+
+#### How trail files are used
+
+- **"What were we talking about?"** — System reads recent trail files, surfaces context summaries with entity links.
+- **"What happened with [Company] last week?"** — System greps trail files for the company slug, returns chronological context.
+- **Morning briefing** — Scans the last 7 days of trail files. Surfaces: "This week you worked on: [entities with context]. Key decisions: [decisions]. Open threads: [things discussed but not resolved]."
+- **Meeting prep** — When prepping for a company, loads any trail entries mentioning that company for recent conversational context that may not be in formal call notes.
+- **Any capability that loads entity context** — Trail entries for that entity in the last 30 days are included as recent intelligence.
+
+#### Trail maintenance
+
+- Trail files older than 90 days are considered stale. The weekly audit can flag them for archival.
+- Trail files are never deleted automatically — they're append-only history.
+- If the trail directory exceeds 100 files, the weekly audit suggests compaction: merge older entries into monthly summaries.
+
+#### Relationship to other data types
+
+| Data type | What it captures | When it's written | Who writes it |
+|-----------|-----------------|-------------------|--------------|
+| **Call notes** | Structured intelligence from a call transcript | When a transcript is processed | /closeout command |
+| **Quick capture (/note)** | One specific piece of intel the user explicitly shares | When the user says "note:" or similar | /note command |
+| **Trail entry** | The conversational context, decisions, and incidental intelligence from ANY interaction | Automatically, during every substantive conversation | The system (passive, no command needed) |
+| **Entity notes** | Accumulated intelligence on a specific company/contact/deal | Updated by commands AND by trail capture | Multiple sources |
+
+The trail is the safety net. It catches everything that the structured commands miss.
+
+---
+
 ## 11. Evidence Grading
 
 **CRITICAL — This applies to every command that generates quantitative claims.**
@@ -1139,7 +1248,7 @@ Read Global CLAUDE.md. Find the `<!-- SALESSIDEKICK-IDENTITY-START -->` markers 
 If the write fails for any reason, present the identity block as a copy-paste fallback: "I wasn't able to save your settings automatically. Copy this block and paste it into your Cowork settings — takes 10 seconds."
 
 **Step 7 — Create project folder structure**
-Create: `.claude/CLAUDE.md` (project config with schemas, write protocol, signal thresholds), `data/`, `data/index.md` (empty tables), `data/companies/`, `data/deals/`, `data/contacts/`, `data/call-notes/`, `data/tasks/`, `data/patterns/`, `data/research/`, `views/`, `custom-skills/`, `knowledge-bases/`, `exports/`.
+Create: `.claude/CLAUDE.md` (project config with schemas, write protocol, signal thresholds), `data/`, `data/index.md` (empty tables), `data/companies/`, `data/deals/`, `data/contacts/`, `data/call-notes/`, `data/tasks/`, `data/patterns/`, `data/research/`, `data/trail/`, `views/`, `custom-skills/`, `knowledge-bases/`, `exports/`.
 
 **Step 8 — Set up scheduled agents**
 > "One more thing — want me to check your deals every morning and have a briefing ready when you open your laptop? What time do you usually start your day?"
@@ -1505,7 +1614,7 @@ When a session starts, do NOT rely on a simple version mismatch alone. Run a wor
 1. Global CLAUDE.md (`/mnt/.claude/CLAUDE.md`)
 2. Project CLAUDE.md (`.claude/CLAUDE.md`) if it exists
 3. Workspace structure: `data/`, `data/index.md`, `views/`, `custom-skills/`, `knowledge-bases/`
-4. Key directories introduced by newer versions: `data/research/`, `data/patterns/`
+4. Key directories introduced by newer versions: `data/research/`, `data/patterns/`, `data/trail/`
 5. `custom-skills/index.md` if present
 
 **Classify the environment before doing anything:**
@@ -1524,6 +1633,7 @@ When a session starts, do NOT rely on a simple version mismatch alone. Run a wor
 **Version inference rules for legacy workspaces:**
 - If local workspace exists but `data/patterns/` does not, treat as pre-v4.1.0 local-first workspace.
 - If `data/research/` exists and `data/patterns/` exists, treat as v4.1.x-era workspace unless metadata says otherwise.
+- If `data/trail/` exists, treat as v4.2.x-era workspace.
 - If only Global CLAUDE identity exists and no local workspace exists, treat as identity-only legacy install.
 - Never guess a newer version than the evidence supports. When uncertain, classify as the oldest compatible local-first version and migrate forward conservatively.
 
@@ -1588,7 +1698,8 @@ If the environment is `VERSION UPGRADE`, `SCHEMA UPGRADE`, `WORKSPACE CONFIG MIS
 1. Read every file in `data/companies/`
 2. For each file: add `evidence_sources: []` to frontmatter if missing, update `_schema: 2`
 3. Create `data/research/` directory if it doesn't exist
-4. Update `schema_version: 2` in Project CLAUDE.md
+4. Create `data/trail/` directory if it doesn't exist
+5. Update `schema_version: 2` in Project CLAUDE.md
 5. Append to `migration_history`: `"schema 1→2: added evidence_sources to companies (v4.2.0)"`
 6. Log each migration write to `data/ops.log`
 
