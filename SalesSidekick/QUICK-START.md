@@ -45,7 +45,7 @@ SalesSidekick will:
 
 ## Your First Five Minutes
 
-SalesSidekick is voice-first. You don't need commands or special syntax — just talk like you'd talk to a colleague.
+SalesSidekick is voice-first. You do not need special syntax or a rigid format. Just talk like you would talk to a colleague.
 
 **Two great ways to start getting value immediately:**
 

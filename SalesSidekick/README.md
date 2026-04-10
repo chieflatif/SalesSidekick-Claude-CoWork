@@ -4,7 +4,7 @@
 
 Think of it as a colleague who's always on top of your book of business. Not a general-purpose AI assistant — a work partner built specifically for strategic sellers. It thinks about your deals, remembers your conversations, and drives your territory forward while you focus on building relationships.
 
-**Current release highlight:** SalesSidekick now ships with a stronger global identity layer and an Intelligence Trail for substantive conversation context. Useful account details, stakeholder nuance, decisions, and competitive intel shared outside a formal command can be saved to your workspace instead of disappearing when you start a new chat, while setup and memory guardrails are packaged directly into the plugin.
+**Current release highlight:** SalesSidekick now ships with a stronger global identity layer and an Intelligence Trail for substantive conversation context. Useful account details, stakeholder nuance, decisions, and competitive intel shared in regular conversation can be saved to your workspace instead of disappearing when you start a new chat, while setup and memory guardrails are packaged directly into the plugin.
 
 **Upgrade-safe:** when you install a newer SalesSidekick zip, the plugin checks your existing workspace, detects older layouts or missing config, and upgrades the environment before it tells you you're ready.
 
@@ -82,7 +82,7 @@ SalesSidekick uses progressive personalization — it gets smarter through use, 
 
 **First conversation:** It asks for three things (name, company, what you sell) and starts working.
 
-**Through use:** It picks up your competitors from call transcripts, learns your communication style from email edits, infers your ICP from the companies you work with, and keeps a lightweight Intelligence Trail for substantive conversation context that does not fit a formal command.
+**Through use:** It picks up your competitors from call transcripts, learns your communication style from email edits, infers your ICP from the companies you work with, and keeps a lightweight Intelligence Trail for substantive conversation context that does not fit neatly into a structured workflow.
 
 **Data builds as you go:** The first time you process a call, it saves the intelligence. The first time you add a deal, it starts tracking. When you share useful context in passing, SalesSidekick can preserve it in `data/trail/` and promote only explicit, high-confidence facts to entity notes.
 

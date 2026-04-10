@@ -21,7 +21,7 @@ That's it. No other accounts, services, or technical setup required.
 
 ## Set Up Your Workspace
 
-SalesSidekick saves your deals, contacts, call notes, and everything else to a folder on your machine. Think of it as your personal sales command center.
+SalesSidekick saves your deals, contacts, call notes, and everything else to a folder on your machine. Think of it as your personal sales workspace.
 
 1. Create a folder called `SalesSidekick` in your Documents folder
 2. In Claude Desktop, click the **+** icon next to **Projects** in the left sidebar
