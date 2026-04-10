@@ -4,6 +4,33 @@ All notable changes to SalesSidekick are documented here.
 
 ---
 
+## v4.2.2 — Global Identity Packaging (2026-04-10)
+
+**SalesSidekick now ships with a stronger Tier 1 layer, not just a thinner identity block.**
+
+Full release notes: `docs/release-notes-v4.2.2.md`
+
+### New
+
+**Packaged global identity template**
+- Added `templates/global-identity.md` so the plugin has a real packaged template for the Global CLAUDE.md block
+- The global block now includes the cascading context architecture, memory/setup protection, communication defaults, and quality guardrails instead of relying on a thinner improvised identity write
+
+### Improved
+
+**Setup and identity updates are more consistent**
+- Getting started and deep setup now write the global block from the packaged template
+- Identity refreshes keep the full Tier 1 structure intact while updating the personalized fields
+- SalesSidekick's global layer now matches the stronger operating-system pattern already used in Pipeline Rebel
+
+### User-Facing Impact
+
+- New installs get a stronger global settings layer from day one
+- Existing users who rerun setup or refresh settings get the richer Tier 1 block automatically
+- Memory and upgrade behavior do not change; this release makes the global protection layer more explicit and consistent
+
+---
+
 ## v4.2.1 — Intelligence Trail Hardening (2026-04-09)
 
 **Conversations now leave a recoverable trail without casually overwriting canonical business records.**

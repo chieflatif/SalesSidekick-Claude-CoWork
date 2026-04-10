@@ -200,7 +200,7 @@ SalesSidekick uses a three-tier persistence model. No external services required
 
 | Tier | Where | What lives here | When it's read | API calls |
 |------|-------|----------------|----------------|-----------|
-| **Slow lane** | Global CLAUDE.md (`/mnt/.claude/CLAUDE.md`) | Stable identity: name, company, product, ICP, competitors, selling style, quality rules. Written automatically during onboarding within `<!-- SALESSIDEKICK-IDENTITY-START/END -->` markers. | Automatically by Cowork before any plugin fires | Zero |
+| **Slow lane** | Global CLAUDE.md (`/mnt/.claude/CLAUDE.md`) | Stable identity and operating guardrails: name, company, product, ICP, competitors, selling style, quality rules, cascading context rules, and memory/setup protection. Written automatically during onboarding from `templates/global-identity.md` within `<!-- SALESSIDEKICK-IDENTITY-START/END -->` markers. | Automatically by Cowork before any plugin fires | Zero |
 | **Fast lane** | Local workspace files (`data/` in Project folder) | All operational data: deals, contacts, companies, call notes, tasks. Stored as structured markdown with YAML frontmatter. `data/index.md` is the flattened read cache. | On demand when capabilities need data | Zero |
 | **Optional** | Connected databases (if available) | Structured database views of the same data. Cross-device access. | Only when user explicitly requests database features | Per operation |
 

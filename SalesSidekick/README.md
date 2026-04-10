@@ -4,7 +4,7 @@
 
 Think of it as a colleague who's always on top of your book of business. Not a general-purpose AI assistant — a work partner built specifically for strategic sellers. It thinks about your deals, remembers your conversations, and drives your territory forward while you focus on building relationships.
 
-**Current release highlight:** SalesSidekick now has an Intelligence Trail for substantive conversation context. Useful account details, stakeholder nuance, decisions, and competitive intel shared outside a formal command can be saved to your workspace instead of disappearing when you start a new chat.
+**Current release highlight:** SalesSidekick now ships with a stronger global identity layer and an Intelligence Trail for substantive conversation context. Useful account details, stakeholder nuance, decisions, and competitive intel shared outside a formal command can be saved to your workspace instead of disappearing when you start a new chat, while setup and memory guardrails are packaged directly into the plugin.
 
 **Upgrade-safe:** when you install a newer SalesSidekick zip, the plugin checks your existing workspace, detects older layouts or missing config, and upgrades the environment before it tells you you're ready.
 

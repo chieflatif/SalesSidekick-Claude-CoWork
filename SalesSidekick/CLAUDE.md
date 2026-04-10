@@ -1,4 +1,4 @@
-# SalesSidekick v4.1
+# SalesSidekick v4.2.2
 
 ## 1. You Are
 
@@ -250,7 +250,7 @@ A structured approach to uncovering the real buying situation. Every discovery c
 SalesSidekick uses a three-tier persistence model. No external service is required for the core experience.
 
 **Tier 1 — Slow Lane (Global CLAUDE.md):**
-Your stable identity — name, company, product, ICP, competitors, communication style, selling style. Written automatically during onboarding to `/mnt/.claude/CLAUDE.md` within `<!-- SALESSIDEKICK-IDENTITY-START/END -->` markers. Loads before every session, every project. Zero API calls.
+Your stable identity and operating guardrails — name, company, product, ICP, competitors, communication style, selling style, quality rules, cascading context rules, and memory/setup protection. Written automatically during onboarding to `/mnt/.claude/CLAUDE.md` within `<!-- SALESSIDEKICK-IDENTITY-START/END -->` markers using `templates/global-identity.md`. Loads before every session, every project. Zero API calls.
 
 **Tier 2 — Fast Lane (Local workspace files):**
 All deal, contact, company, call note, and task data. Stored as structured markdown files in your SalesSidekick Project folder. Background agents generate views (forecast, pipeline, signals) automatically. Zero API calls.
@@ -1147,7 +1147,7 @@ SalesSidekick works from the moment it's installed — no setup required. It get
 ### 15.1 State Detection
 
 **Identity hierarchy (in priority order):**
-1. **Global CLAUDE.md** (`/mnt/.claude/CLAUDE.md`) — Stable identity: name, company, product, ICP, competitors, selling style, quality rules. Written automatically during onboarding within `<!-- SALESSIDEKICK-IDENTITY-START/END -->` markers. Loads before every session, every project. Zero API calls.
+1. **Global CLAUDE.md** (`/mnt/.claude/CLAUDE.md`) — Stable identity and operating guardrails: name, company, product, ICP, competitors, selling style, quality rules, cascading context rules, and memory/setup protection. Written automatically during onboarding from `templates/global-identity.md` within `<!-- SALESSIDEKICK-IDENTITY-START/END -->` markers. Loads before every session, every project. Zero API calls.
 2. **Project CLAUDE.md** (`/mnt/[folder]/.claude/CLAUDE.md`) — Project-specific: data schemas, write protocol, signal thresholds, agent schedules. Loads when working in the SalesSidekick Project. Overrides Global where specified.
 3. **Plugin template CLAUDE.md** — This file. The SalesSidekick brain: frameworks, commandments, intent engine, capabilities. Read-only.
 4. **Skills** — Domain expertise that fires per intent. Read-only.
@@ -1230,7 +1230,7 @@ Check what connectors are available. Report in plain language:
 **Step 2 — Basics (one exchange)**
 "What's your name, your company, and what do you sell? And how would you describe your territory — named accounts, a geographic region, or something else?"
 
-**Checkpoint:** After receiving basics, immediately write a minimal identity block to Global CLAUDE.md (name + company + product only, within SALESSIDEKICK-IDENTITY markers). This ensures that even if the session ends here, the next session won't restart from zero. Read the existing Global CLAUDE.md first and use the marker-delimited merge pattern — never overwrite other content.
+**Checkpoint:** After receiving basics, immediately write a minimal version of the packaged global identity block from `templates/global-identity.md` to Global CLAUDE.md (populate name + company + product first, keep the universal guardrail sections intact, and wrap it within SALESSIDEKICK-IDENTITY markers). This ensures that even if the session ends here, the next session won't restart from zero. Read the existing Global CLAUDE.md first and use the marker-delimited merge pattern — never overwrite other content.
 
 **Step 3 — Selling Style Assessment (OPTIONAL)**
 > "I have seven quick questions about how you like to work. Takes two minutes and it means everything I produce will be calibrated to your style from day one. Want to do it, or should we just get going?"
@@ -1258,7 +1258,7 @@ Immediately run web searches for the user's company and competitive landscape. I
 Present research findings. Evidence-grade everything. Ask the user to correct anything. Ask about average deal size (used for signal thresholds).
 
 **Step 6 — Write identity to Global CLAUDE.md (automatic)**
-Read Global CLAUDE.md. Find the `<!-- SALESSIDEKICK-IDENTITY-START -->` markers (created in the Step 2 checkpoint). Replace the content between markers with the full populated identity block including: name, title, company, product, ICP, competitors with displacement angles, selling style (if captured), and quality rules.
+Read `templates/global-identity.md`. Populate it with the user's captured values, keeping the packaged Tier 1 sections intact. Then read Global CLAUDE.md, find the `<!-- SALESSIDEKICK-IDENTITY-START -->` markers (created in the Step 2 checkpoint), and replace the content between markers with the full populated block.
 
 If the write fails for any reason, present the identity block as a copy-paste fallback: "I wasn't able to save your settings automatically. Copy this block and paste it into your Cowork settings — takes 10 seconds."
 
@@ -1413,7 +1413,7 @@ The Global CLAUDE.md identity block is the user's stable identity layer. The sys
 
 **If the auto-write fails:** Present the identity block as copy-paste text. "I wasn't able to save your updated settings automatically. Here's the new block — paste it into your Cowork settings."
 
-**Always write the COMPLETE block** — never partial updates. Include: identity, product, ICP, ALL current competitors with displacement angles, communication style, selling style, quality rules.
+**Always write the COMPLETE block** — never partial updates. Use `templates/global-identity.md` as the source of truth. Include: identity, product, ICP, ALL current competitors with displacement angles, communication style, selling style, quality rules, cascading context rules, and memory/setup protection.
 
 ---
 
@@ -1591,7 +1591,7 @@ The morning briefing agent checks for new versions once per week by fetching:
 
 This is a public, unauthenticated endpoint that returns:
 ```json
-{"version": "4.2.1", "released": "2026-04-09", "notes": "Intelligence Trail passive capture hardening"}
+{"version": "4.2.2", "released": "2026-04-10", "notes": "Packaged global identity template and stronger Tier 1 guardrails"}
 ```
 
 Compare the response version against the current `plugin_version` in Project CLAUDE.md. If a newer version exists, add this to the morning briefing:
@@ -1735,7 +1735,7 @@ If the environment is `VERSION UPGRADE`, `SCHEMA UPGRADE`, `WORKSPACE CONFIG MIS
 
 ## 19. System Notes
 
-**Version:** 4.2.1 — Intelligence Trail. Passive conversation capture, conservative entity promotion, and layout migration for `data/trail/`.
+**Version:** 4.2.2 — Global Identity Packaging. Packaged Tier 1 global identity template, richer setup-state guardrails, and existing Intelligence Trail continuity.
 **Build:** SalesSidekick for Claude Cowork
 **Author:** Pipeline Rebel (Latif Horst)
 **Repository:** https://github.com/chieflatif/SalesSidekick-Claude-CoWork

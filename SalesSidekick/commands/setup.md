@@ -131,7 +131,7 @@ An optional deep personalization session that captures context the system can't 
 
 41. **Update Global CLAUDE.md identity block — automatic.**
 
-This is the most important output of the deep personalization session. Read `/mnt/.claude/CLAUDE.md`, find the `<!-- SALESSIDEKICK-IDENTITY-START/END -->` markers, and replace the content between them with the complete updated identity block using all captured data. Leave all content outside the markers untouched.
+This is the most important output of the deep personalization session. Read `templates/global-identity.md`, populate it with all captured data, then read `/mnt/.claude/CLAUDE.md`, find the `<!-- SALESSIDEKICK-IDENTITY-START/END -->` markers, and replace the content between them with the complete updated block. Leave all content outside the markers untouched.
 
 If auto-write fails, present the block for copy-paste: "I wasn't able to save your settings automatically. Here's the updated block — paste it into your Cowork settings."
 
@@ -174,7 +174,7 @@ I'll take it from there.
 ## Data Read/Write
 
 **Writes:**
-- Updates Global CLAUDE.md identity block (within markers — auto-write)
+- Updates Global CLAUDE.md identity block from `templates/global-identity.md` (within markers — auto-write)
 - Writes company intel to `knowledge-bases/company-intel.md`
 - Writes battlecards to `knowledge-bases/battlecards.md`
 - Updates signal thresholds in Project CLAUDE.md
